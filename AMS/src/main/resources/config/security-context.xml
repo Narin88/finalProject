@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<security:http pattern="/resources/**" security="none" />
+	<!-- <security:http pattern="/resources/**" security="none" />
 	<security:http pattern="/css/**" security="none" />
 	
 	<security:http>
@@ -33,6 +33,6 @@
 					where LOGIN_ID = ?" />
 					<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager> -->
 
 </beans:beans>

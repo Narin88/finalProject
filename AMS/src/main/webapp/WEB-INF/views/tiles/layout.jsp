@@ -11,9 +11,11 @@ div.container {
 	width: 100%;
 	border: 1px solid gray;
 }
-
-header, footer {
-	padding: 1em;
+.mainImg{
+	text-align:center;
+}
+header {
+	height:38px;
 	color: white;
 	background-color: black;
 	clear: left;
@@ -41,15 +43,18 @@ article {
 	border-left: 1px solid gray;
 	padding: 1em;
 	overflow: hidden;
-	min-height: 400px;
+	min-height: 600px;
 }
 </style>
 </head>
 
 <body>
 	<div class="container">
-		<header>
-			<h2>Spring project(ver 1.0)</h2>
+		<div class="mainImg">
+			<h3>이미지 영역</h3>
+		</div>
+		<header>	
+				<h2>Spring project(ver 1.0)</h2>
 		</header>
 		<nav>
 			<tiles:insertAttribute name="header" />
@@ -57,9 +62,6 @@ article {
 		<article>
 			<tiles:insertAttribute name="content"/>
 		</article>
-		<footer>
-			copyright
-		</footer>
 		
 	</div>
 </body>

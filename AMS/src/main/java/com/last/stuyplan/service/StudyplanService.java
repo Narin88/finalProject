@@ -3,6 +3,7 @@ package com.last.stuyplan.service;
 import org.apache.ibatis.annotations.Select;
 
 import com.last.prj.lectureRoom.service.LectureRoomVO;
+import com.last.prj.professor.service.ProfessorVO;
 
 public interface StudyplanService {
 	

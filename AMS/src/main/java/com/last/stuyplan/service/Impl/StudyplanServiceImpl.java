@@ -3,10 +3,10 @@ package com.last.stuyplan.service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.last.lectureRoom.service.LectureRoomVO;
-import com.last.professor.service.ProfessorVO;
-import com.last.studyplan.service.StudyplanService;
-import com.last.studyplan.service.StudyplanVO;
+import com.last.prj.lectureRoom.service.LectureRoomVO;
+import com.last.prj.professor.service.ProfessorVO;
+import com.last.stuyplan.service.StudyplanService;
+import com.last.stuyplan.service.StudyplanVO;
 
 @Service
 public class StudyplanServiceImpl implements StudyplanService {
@@ -14,7 +14,6 @@ public class StudyplanServiceImpl implements StudyplanService {
 	@Autowired
 	StudyPlanMapper map;
 	//수강신청 리스트 불러오기
-	
 
 	//교수 정보 불러오기 
 	
@@ -47,19 +46,4 @@ public class StudyplanServiceImpl implements StudyplanService {
 	public int studyplanUpdate(StudyplanVO vo) {
 		return map.studyplanUpdate(vo);
 	}
-
-	
-	
-	
-	
-	
-			
-			
-			
-			
-	
-
-
-
-
 }

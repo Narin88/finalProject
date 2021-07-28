@@ -3,9 +3,10 @@ package com.last.stuyplan.service.Impl;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.last.lectureRoom.service.LectureRoomVO;
-import com.last.professor.service.ProfessorVO;
+import com.last.prj.lectureRoom.service.LectureRoomVO;
+import com.last.prj.professor.service.ProfessorVO;
 import com.last.stuyplan.service.StudyplanVO;
+
 @Mapper
 public interface StudyPlanMapper {
 	

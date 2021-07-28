@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.last.prj.emp.EmpVO;
-import com.last.prj.emp.mapper.EmpMapper;
 import com.last.prj.emp.service.EmpService;
 
 

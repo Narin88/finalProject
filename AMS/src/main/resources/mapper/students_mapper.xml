@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.students.service.impl.StudentsMap">
+
+	<select id="studentInfo" resultType="StudentsVO">
+		SELECT M.MNAME, A.*
+		FROM MAJOR M, 
+		    (SELECT P.PNAME, S.*
+		    FROM PROFESSOR P, STUDENTS S
+		    WHERE P.MCODE = S.MCODE
+		    AND S.SID = #{sid}
+		    AND P.POSITION ='정교수') A
+		WHERE M.MCODE = A.MCODE
+	</select>
+	
+	<update id="studentUpdate">
+		UPDATE STUDENTS
+		SET PWD = #{pwd}
+		WHERE SID = #{sid}
+	</update>
+</mapper>

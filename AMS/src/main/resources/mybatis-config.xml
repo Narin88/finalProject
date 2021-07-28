@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	<typeAliases>
+		<!-- typeAlias 설정 끝끝끝 -->
+		<package name="com.last"/>
+		<typeAlias type="com.last.prj.emp.EmpVO" alias="emp"/> 
+		<typeAlias type="com.last.prj.professor.service.ProfessorVO" alias="professorVO"/>
+		<typeAlias type="com.last.prj.hw_student.service.hw_studentVO" alias="hw_studentVO"/>
+		<typeAlias type="com.last.prj.hw_professor.service.hw_professorVO" alias=""/>
+	</typeAliases>
+
+</configuration>

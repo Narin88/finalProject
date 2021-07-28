@@ -16,14 +16,15 @@
 		<property name="location" value="classpath:global.properties" />
 	</bean>
 
-	<bean id="dataSourceSpied"
+	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="url" value="${local.url}" />
+		<property name="username" value="${local.username}" />
+		<property name="password" value="${local.password}" />
 	</bean>
-	<bean id="dataSource"
+	
+	<!-- <bean id="dataSource"
 		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />
 		<property name="logFormatter">
@@ -32,7 +33,7 @@
 				<property name="sqlPrefix" value="SQL:::" />
 			</bean>
 		</property>
-	</bean>
+	</bean> -->
 
 	<!-- Transaction Manager 설정 -->
 	<bean id="txManager"

@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.last.prj.emp.EmpVO;
-import com.last.prj.emp.mapper.EmpMapper;
+import com.last.prj.emp.service.impl.EmpMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/config/*-context.xml")

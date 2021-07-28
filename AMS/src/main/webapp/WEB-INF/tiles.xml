@@ -12,7 +12,7 @@ Configuration 2.1//EN"
 	</definition>
 
 	<!-- 사용자 -->
-	<definition name="*/*" extends="userTemplate">
+	<definition name="*/*.tiles" extends="userTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 	

@@ -14,16 +14,26 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div align="center">
+<h2>수강 등록</h2>
+</div>
+
+<div class="modal">
+	<div class="modal_content" title="클릭하면 창이 닫힙니다."> 여기에 모달창 내용을 적어줍니다.<br> 이미지여도 좋고 글이어도 좋습니다.
+	</div>
+</div>
+
+
+
 
 <div id="grid"></div>
 	<script> 
-		var Btn = $('<button>');
 		var clsData = [
 			<c:forEach items="${Lectures }" var="Lec">
 			{
-				lName: '${Lec.lName}', lCode: '${Lec.lCode}', pId: '${Lec.pId}', pName: '${Lec.pName}',
-				grade: '${Lec.grade}', limitCount: '${Lec.limitCount}', dCode: '${Lec.dCode}',
-				division: '${Lec.division}', credit: '${Lec.credit}', Btn: Btn
+				lName: '${Lec.LName}', lCode: '${Lec.LCode}', pId: '${Lec.PId}',
+				grade: '${Lec.grade}', limitCount: '${Lec.limitCount}', dCode: '${Lec.DCode}',
+				division: '${Lec.division}', credit: '${Lec.credit}'
 			},
 			</c:forEach>
 			]; //컬럼DATA
@@ -34,23 +44,26 @@
 			pagination: true,   //페이징 처리
 		    pageOptions: {
 		    	useClient: true,   //페이징 처리
-		    	perPage: 3   //페이징 갯수
+		    	perPage: 10   //페이징 갯수
 		    }
 			,
 			columns: [
 				{header: '강의이름',name: 'lName'},
 				{header: '과목코드',name: 'lCode'},
 				{header: '교수코드',name: 'pId'},
-				{header: '교수이름',name: 'pName'},
 				{header: '학년',name: 'grade'},
 				{header: '정원',name: 'limitCount'},
 				{header: '이수코드',name: 'dCode'},
 				{header: '이수구분',name: 'division'},
 				{header: '학점',name: 'credit'},
-				{header: '기능',name: 'Btn'}
 			], //컬럼갯수
 			data: clsData
 		} );
+			
+		grid.on('dblclick', ev => {
+			console.log('더블클릭!', ev.rowKey);
+			console.log(grid.getRow(ev.rowKey));
+		});
 	</script>
 </body>
 </html>

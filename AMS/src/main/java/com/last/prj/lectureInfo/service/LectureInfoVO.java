@@ -12,4 +12,9 @@ public class LectureInfoVO{
 	private String grade; //학년
 	private int limitCount; //정원
 	private String lName; //강의 이름
+	private String pName; //교수 이름
+	private int credit; //학년
+	private String division; //이수구분
+	
+	
 }

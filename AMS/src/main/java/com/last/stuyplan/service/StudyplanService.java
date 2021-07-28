@@ -2,12 +2,9 @@ package com.last.stuyplan.service;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.last.lectureRoom.service.LectureRoomVO;
-import com.last.professor.service.ProfessorVO;
+import com.last.prj.lectureRoom.service.LectureRoomVO;
 
 public interface StudyplanService {
-	
-	
 	
 	//교수 테이블
 	ProfessorVO professorSelect(ProfessorVO vo);// // 교수 정보 리스트로 가져오기 = 이름 / 전화번호 / 이메일 /

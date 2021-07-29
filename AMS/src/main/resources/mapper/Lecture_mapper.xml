@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.last.prj.lectureInfo.service.impl.LectureInfoMapper">
-	<select id="getLectureInfoList" parameterType="string" resultType="LectureInfoVO">
-		SELECT *
-		FROM LECTURE_INFO_VIEW 
-		where PID = #{pId}
-	</select>
+<mapper namespace="com.last.prj.lecture.service.impl.LectureMapper">
+	<insert id="LectureInsert">
+		insert into lecture(opennum,lnum,pid,lrcode,newlimitcount,lyear,term,book)
+		values(opennum_seq.nextval, #{lNum}, #{pId}, #{lrCode}, #{newLimitCount}, #{lYear}, #{term}, #{book})
+	</insert>
 </mapper>

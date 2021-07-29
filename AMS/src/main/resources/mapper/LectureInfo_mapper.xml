@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.lectureInfo.service.impl.LectureInfoMapper">
+	<select id="getLectureInfoList" parameterType="string" resultType="LectureInfoVO">
+		SELECT *
+		FROM LECTURE_INFO
+		where PID = #{pId}
+	</select>
+</mapper>

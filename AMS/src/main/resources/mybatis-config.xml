@@ -6,6 +6,7 @@
 	<settings>
 		<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting value="VARCHAR" name="jdbcTypeForNull" />
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.last.prj.professor.service.ProfessorVO" alias="professorVO"/>
@@ -15,5 +16,5 @@
 		<!-- typeAlias 설정 끝끝끝 -->
 		<package name="com.last.prj" />
 	</typeAliases>
-
+	
 </configuration>

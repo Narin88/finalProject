@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="frm" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="toDay" class="java.util.Date" />
+<fmt:formatDate value='${toDay}' pattern='yyyy' var="nowDate"/>
 <!DOCTYPE html>
 <html>
 <head>
 <style>
 	#my_offer {
         display: none;
-        width: 60%;
+        width: 80%;
+        height: 40%;	
         padding: 30px 60px;
         background-color: #fefefe;
         border: 1px solid #888;
         border-radius: 3px;
     }
-    #my_offer .modal_close_btn {
+     #my_offer .modal_close_btn {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -21,7 +25,37 @@
     
     .modal-body{
     	font-size: 10pt;
-    }
+    }	
+    
+    .lecutretbl{
+		--bs-table-bg: transparent;
+		--bs-table-striped-color: #212529;
+		--bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+		--bs-table-active-color: #212529;
+		--bs-table-active-bg: rgba(0, 0, 0, 0.1);
+		--bs-table-hover-color: #212529;
+		--bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+		width: 100%;
+	    color: #212529;
+	    vertical-align: top;
+	    border-color: #dee2e6;
+	}
+	th,td{
+		border-color: inherit;
+	    border-style: solid;
+	    border-width: 0;
+	    text-align: center;
+	    padding: 10px; 
+	}
+	input{
+		width: 100px;
+	}
+	.SaveBtn{
+		margin: 10px;
+		width: 100px;
+		height: 40px;
+	}
+	
 </style>
 <meta charset="UTF-8">
 <!-- Toast grid -->
@@ -39,22 +73,41 @@
 <div align="center">
 <h2>수강 등록</h2>
 </div>
-
 <div id="my_offer" align="center">
     <a class="modal_close_btn">닫기</a>
     <div class="modal-body">
-	    Hello!
+	   <h2> 수강 등록 </h2>
+	   <form id = "frm" action="LectureInsert" >
+	   <table class="lecutretbl" id="lecutretbl"  border="1">
+	   		<thead>
+	   		<tr>
+	   			<th>년도</th>
+	   			<th>학기</th>
+	   			<th>강의번호</th>
+	   			<th>강의이름</th>
+	   			<th>교수번호</th>
+	   			<th>정원</th>
+	   			<th>교재</th>
+	   			<th>시간표</th>
+	   			<th>강의실 코드</th>
+	   		</tr>
+	   		</thead>
+	   		
+	   		<tbody></tbody>
+	   </table>
+	   <div align="center">
+	   <button type="submit" class="SaveBtn">수강 등록하기</button>
+	   </div>
+	   </form>
 	</div>
 </div>
-
-
-
 <div id="grid"></div>
 	<script> 
+	//grid start
 		var clsData = [
 			<c:forEach items="${Lectures }" var="Lec">
 			{
-				lName: '${Lec.LName}', lCode: '${Lec.LCode}', pId: '${Lec.PId}',
+				lNum: '${Lec.LNum}', lName: '${Lec.LName}', lCode: '${Lec.LCode}', pId: '${Lec.PId}',
 				grade: '${Lec.grade}', limitCount: '${Lec.limitCount}', dCode: '${Lec.DCode}',
 				division: '${Lec.division}', credit: '${Lec.credit}'
 			},
@@ -71,6 +124,7 @@
 		    }
 			,
 			columns: [
+				{header: '강의번호',name: 'lNum'},
 				{header: '강의이름',name: 'lName'},
 				{header: '과목코드',name: 'lCode'},
 				{header: '교수코드',name: 'pId'},
@@ -82,19 +136,55 @@
 			], //컬럼갯수
 			data: clsData
 		} );
+	//grid end
 			
+	//그리드 이벤트
 		$(function(){
 			grid.on('dblclick', ev => {
-				console.log('더블클릭!', ev.rowKey);
-				var data = grid.getRow(ev.rowKey);
+				//console.log('더블클릭!', ev.rowKey);
+				var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 				showOffer(data);
 			});
 			
 			
 			function showOffer(data) {
 				modal('my_offer');
-				
+				console.log(data.lNum);
 				var lnum = data.lNum;
+				var lcode = data.lCode;
+				var pid = data.pId;
+				var grade = data.grade;
+				var limitCount = data.limitCount;
+				var lname = data.lName;
+				var mcode = data.mCode;
+				var dcode = data.dCode;
+				var division = data.division;
+				var credit = data.credit;
+				
+
+				$("#lecutretbl tbody").empty();
+				$('<tr>')
+				.append($('<td>').html('2021'))
+				.append($('<td>').html($('<select id=\'term\' name=\'term\'>')
+						.append($('<option value=\'1\'>1학기</option>'))
+						.append($('<option value=\'2\'>2학기</option>'))))
+				.append($('<td>').html(lnum))
+				.append($('<td>').html(lname))
+				.append($('<td>').html(pid))
+				.append($('<td>').html($('<input type=\'text\' id=\'newLimitCount\' name=\'newLimitCount\'>').val(limitCount)))
+				.append($('<td>').html($('<input type=\'text\' id=\'book\' name=\'book\'>')))
+				.append($('<td>').html($('<input type=\'text\' id=\'timeTable\' name=\'timeTable\'>')))
+				.append($('<td>').html($('<select id=\'lrCode\' name=\'lrCode\'>')
+					 <c:forEach items="${LR }" var="lr">
+					 .append($('<option value=\'${lr.lrCode}\'>${lr.lrName}</option>'))
+					</c:forEach>
+						))
+				.append($('<input type=\'hidden\' id=\'lYear\' name=\'lYear\'>').val('2021'))
+				.append($('<input type=\'hidden\' id=\'lNum\' name=\'lNum\'>').val(lnum))
+				.append($('<input type=\'hidden\' id=\'pId\' name=\'pId\'>').val(pid))
+				.appendTo("#lecutretbl tbody"); 
+				
+				
 			}
 						
 			function modal(mm) {

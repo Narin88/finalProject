@@ -1,3 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.last.prj.hw_professor.service.impl.hw_professorMap"></mapper>
+<mapper namespace="com.last.prj.hw_professor.service.impl.hw_professorMap">
+	
+	<select id="hw_professorSelectList"  resultType="map">
+		SELECT   i.lname  "lname"
+		        ,l.lyear  "lyear"
+				,l.term	  "term"
+				,l.newlimitcount	"newlimitcount"
+				<!-- ,to_char(p.REGISTER_DATE,'yy년mm월dd일 hh24:mi')	"register_date" -->
+			    ,p.REGISTER_DATE	"register_date"	
+				,p.PPERIOD			"pperiod"
+				,p.REGISTER_FILE	"register_file"
+				,p.PCOMMENT	   	 	"pcomment"
+				,l.pid 				"pid"
+		 FROM  HW_PROFESSOR p, lecture l,lecture_info i
+		where  p.opennum=l.opennum 
+		  and  l.lnum=i.lnum 
+		  and  l.pid='15001014'
+	</select>
+	 <!--  
+	 <select id="hw_professorSelectList" resultType="hw_professorVO">
+	 	select * from hw_professor
+	 </select>
+	-->
+	<select id="hw_submitList" resultType="map">
+	 select      st.sid "sid"
+                ,st.SNAME "sname" 
+                ,s.SUBMIT_FILE "submit_file"  
+                ,s.SUBMIT_DATE "submit_date"
+                ,s.SCOMMENT "scomment"
+                ,s.SCORE "score"
+       from 	hw_student s 
+       join     hw_professor p
+         on     s.register_id=p.register_id
+       join     students st
+         on     s.SUBMIT_SID=st.SID
+      where 	p.register_id=1
+      order by  s.SUBMIT_DATE asc
+	</select>
+</mapper>

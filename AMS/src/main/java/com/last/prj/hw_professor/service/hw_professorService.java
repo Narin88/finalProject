@@ -1,11 +1,14 @@
 package com.last.prj.hw_professor.service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface hw_professorService {
 	
 	//(교수)등록한과제 전체조희
-	List<hw_professorVO> hw_professorSelectList();
+	List<Map<String, Object>> hw_professorSelectList();
+	//(교수)등록한과제 제출한학생목록 전체조회
+	List<Map<String, Object>> hw_submitList();
 	//(교수)등록한과제 조건조회
 	hw_professorVO hw_professorSelect(hw_professorVO vo);
 	//(교수)과제 등록

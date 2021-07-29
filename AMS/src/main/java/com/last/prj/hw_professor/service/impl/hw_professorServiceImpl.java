@@ -1,7 +1,9 @@
 package com.last.prj.hw_professor.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.last.prj.hw_professor.service.hw_professorService;
@@ -10,10 +12,11 @@ import com.last.prj.hw_professor.service.hw_professorVO;
 @Service
 public class hw_professorServiceImpl implements hw_professorService{
 
+	@Autowired
 	hw_professorMap map;
 
 	@Override
-	public List<hw_professorVO> hw_professorSelectList() {
+	public List<Map<String, Object>> hw_professorSelectList() {
 		
 		return map.hw_professorSelectList();
 	}
@@ -40,6 +43,12 @@ public class hw_professorServiceImpl implements hw_professorService{
 	public int hw_professorUpdate(hw_professorVO vo) {
 		
 		return map.hw_professorUpdate(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> hw_submitList() {
+		
+		return map.hw_submitList();
 	}
 	
 	

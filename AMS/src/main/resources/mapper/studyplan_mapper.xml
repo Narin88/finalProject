@@ -1,89 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="egovframework.mapper.com.cmm.co.last.studyplan.map.StudyPlanMapper">
-
-
-	<!-- 
-	lecture 강의명/강의코드//정원/교재 
-	professor 이름/이메일/전화번호 
-	lecture_info_view 이수구분/과목코드/대상학년/학점/개설학과 
-	major_view 전공이름 
-	departments 학과이름
-	-->
-<!-- 조인한거 
-select l.lname, l.lnum, l.newlimitcount, l.book, s.*, p.pname,p.email, p.pphone, m.mname, d.dname, i.grade, i.credit, i.division, i.lcode, r.lrname
-from lecture l, lecture_info_view i, professor p, departments d, study_plan s, major_view m, lecture_room r
-where l.lnum = s.lnum and r.lrcode = l.lrcode and l.lnum = i.lnum and m.mcode = p.mcode and l.pid = p.pid
-and d.dname = '전기전자공학';-->
-
-	<!-- 전공 이수구분 정보 뷰 -->
-	<select id="major_view">
-		select * from major_view
-	</select>
-
-	<!-- 강의 정보 뷰 -->
-	<select id="lecture_info_view">
-		select * from lecture_info_view
-	</select>
-
-
-	<!-- 인서트 -->
-	<insert id="studyplanInsert">
+<?xml version="1.0" encoding="UTF-8"?>		
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">		
+<mapper		
+	namespace="egovframework.mapper.com.cmm.co.last.studyplan.map.StudyPlanMapper">	
+		
+		
+	<!-- lecture 강의명/강의코드//정원/교재 professor 이름/이메일/전화번호 lecture_info_view 이수구분/과목코드/대상학년/학점/개설학과	
+		major_view 전공이름 departments 학과이름 -->
+		
+		
+	<!-- 강의 정보 -->	
+	<select id="studyPlanList">	
+		select v.DIVISION, v.CREDIT, p.pname, p.email,
+		p.PPHONE, l.*, m.DNAME, m.MNAME, r.LRNAME, p.PSTATUS, s.*
+		from lecture_info_view v, LECTURE l, professor p, MAJOR_VIEW m,
+		LECTURE_ROOM r, study_plan s
+		where v.LNUM = l.LNUM
+		and l.pid = p.pid
+		and p.mcode = m.mcode
+		and l.LRCODE = r.LRCODE
+		and l.PID = #{pid}
+	</select>	
+		
+		
+	<!-- 인서트 -->	
+	<insert id="studyplanInsert">	
 		insert into study_plan (w1,
-								w2,
-								w3,
-								w4,
-								w5,
-								w6,
-								w7,
-								w8,
-								w9,
-								w10,
-								w11,
-								w12,
-								w13,
-								w14,
-								w15,
-								w16,
-								lnum
-								lyear,
-								term,
-		   						content
-		   						)
-		values(#{w1},#{w2},#{w3},#{w4},#{w5},#{w6},#{w7},#{w8},#{w9},#{w10},#{w11},#{w12},#{w13},#{w14},#{w15},#{w16},#{lnum},#{lyear},#{term},
-		#{content})
-	</insert>
-
-
-	<!-- 업데이트 -->
-	<update id="studyplanUpdate">
-		update study_plan 
-		   set w1 = #{w1}, 
-		   w2= #{w2}, 
-		   w3 = #{w3}, 
-		   w4 =	#{w4}, 
-		   w5 = #{w5}, 
-		   w6 = #{w6}, 
-		   w7 = #{w7}, 
-		   w8 =	#{w8},
-		   w9 = #{w9}, 
-		   w10 = #{w10}, 
-		   w11 = #{w11}, 
-		   w12 = #{w12}, 
-		   w13 = #{w13}, 
-		   w14 = #{w14}, 
-		   w15 = #{w15},
-		   w16 = #{w16},
-		   lyear = #{lyear},
-		   content = #{content} 
-		   where lnum = #{lunum}
-	</update>
-
-
-
-
-
-
-
-</mapper>
+		w2,
+		w3,
+		w4,
+		w5,
+		w6,
+		w7,
+		w8,
+		w9,
+		w10,
+		w11,
+		w12,
+		w13,
+		w14,
+		w15,
+		w16,
+		opennum,
+		content
+		)
+		values(#{w1},#{w2},#{w3},#{w4},#{w5},#{w6},#{w7},#{w8},#{w9},#{w10},#{w11},#{w12},#{w13},#{w14},#{w15},#{w16},#{opennum},#{content})
+	</insert>	
+		
+		
+	<!-- 업데이트 -->	
+	<update id="studyplanUpdate">	
+		update study_plan
+		set w1 = #{w1},
+		w2= #{w2},
+		w3 = #{w3},
+		w4 = #{w4},
+		w5 = #{w5},
+		w6 = #{w6},
+		w7 = #{w7},
+		w8 = #{w8},
+		w9 = #{w9},
+		w10 = #{w10},
+		w11 = #{w11},
+		w12 = #{w12},
+		w13 = #{w13},
+		w14 = #{w14},
+		w15 = #{w15},
+		w16 = #{w16},
+		content = #{content}
+		where opennum = #{opennum}
+	</update>	
+		
+		
+		
+		
+		
+		
+		
+</mapper>		

@@ -12,7 +12,7 @@ import lombok.ToString;
 public class hw_professorVO {
 	
 	private int registerId;		//과제등록번호
-	private String lNum;		//강의번호
+	private String openNum;		//강의번호
 	private Date registerDate;  //등록날짜
 	private Date pPeriod;		//제출기간
 	private String registerFile;//양식파일

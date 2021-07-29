@@ -14,8 +14,8 @@ public class LectureInfoServiceImpl implements LectureInfoService {
 	LectureInfoMapper LectureDAO;
 	
 	@Override
-	public List<LectureInfoVO> getLectureInfoList() {
-		return LectureDAO.getLectureInfoList();
+	public List<LectureInfoVO> getLectureInfoList(String pId) {
+		return LectureDAO.getLectureInfoList(pId);
 	}
 
 }

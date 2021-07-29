@@ -3,15 +3,20 @@
 <mapper namespace="com.last.prj.students.service.impl.StudentsMap">
 
 	<!-- 학생 본인 정보 조회 -->
-	<select id="studentInfo" resultType="StudentsVO">
-		SELECT M.MNAME, A.*
-		FROM MAJOR M, 
-		    (SELECT P.PNAME, S.*
-		    FROM PROFESSOR P, STUDENTS S
-		    WHERE P.MCODE = S.MCODE
-		    AND S.SID = #{sid}
-		    AND P.POSITION ='정교수') A
-		WHERE M.MCODE = A.MCODE
+	<resultMap type="elseStudents" id="else">
+		<result column = "student_status" property="student_status"/>
+	</resultMap>
+	<select id="studentInfo" resultMap = "else">
+		SELECT M.MNAME, 
+		        P.PNAME,
+		        S.SID, S.SNAME, S.SADDRESS, S.EMAIL, S.SPHONE,
+		        S.ENTER_DATE, S.GRADE, S.TERM, S.SBIRTH, S.SGENDER, S.DISABLED,
+		        FIND_CODE_NAME(300, S.SSTATUS) STUDENT_STATUS
+		FROM MAJOR M, STUDENTS S, PROFESSOR P
+		WHERE M.MCODE = S.MCODE
+		AND S.MCODE = P.MCODE
+		AND P.POSITION = '001'
+		AND S.SID = #{sid}
 	</select>
 	
 	<!-- 학생 본인 성적 조회 -->	
@@ -21,20 +26,18 @@
 		<result column = "term" property = "term"/>
 		<result column = "lname" property = "lname"/>
 		<result column = "lyear" property = "lyear"/>
-		<result column = "dcode" property = "dcode"/>
+		<result column = "division" property = "division"/>
 		<result column = "credit" property = "credit"/>	
 	</resultMap>
 	<select id="scoreView" resultMap="unKnown">
 		SELECT M.TOTAL, M.RANK, 
-		        S.GRADE, 
+		        S.GRADE,
 		        L.LYEAR, L.TERM, I.LNAME,
-		        I.DCODE,
-		        D.CREDIT
-		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I, DIVISION_INFO D
+		        I.CREDIT, FIND_CODE_NAME(100, I.DCODE) DIVISION
+		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I
 		WHERE M.SID = S.SID
 		AND M.OPENNUM = L.OPENNUM
 		AND L.LNUM = I.LNUM
-		AND I.DCODE = D.DCODE
 		AND S.SID = #{sid}
 	</select>
 	

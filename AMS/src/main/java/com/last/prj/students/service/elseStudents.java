@@ -20,8 +20,15 @@ public class elseStudents {
 	private String lyear;	// 강의 생성 년도
 	
 	// lecture_info 테이블 (강의 정보)
-	private String dcode;	// 학과 코드
+	private String division;	// 이수 구분
 	
 	// division_info 테이블 (이수 구분)	
 	private int credit;		// 학점
+	
+	// major 테이블 ( 학과 )
+	private String mname;	// 학과명
+	
+	// common_detail_code ( 공통 상세 코드 )
+	private String student_status;
+	
 }

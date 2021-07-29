@@ -1,4 +1,4 @@
-package com.last.stuyplan.service;
+package com.last.prj.stuyplan.service;
 
 import lombok.Data;
 
@@ -21,8 +21,6 @@ public class StudyplanVO {
 	private String w14;
 	private String w15;
 	private String w16; // 기말고사 주차
-	private String lyear; // 대상학년
-	private int term; // 학기
 	private String content; // 내용
-	private String lnum; // 강의번호
+	private String opennum; // 강의번호
 }

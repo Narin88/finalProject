@@ -27,7 +27,7 @@
 	<select id="scoreView" resultMap="unKnown">
 		SELECT M.TOTAL, M.RANK, 
 		        S.GRADE, 
-		        L.LYEAR, L.TERM, L.LNAME,
+		        L.LYEAR, L.TERM, I.LNAME,
 		        I.DCODE,
 		        D.CREDIT
 		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I, DIVISION_INFO D

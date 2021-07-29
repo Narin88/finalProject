@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.last.students.service.impl.StudentsMap">
+<mapper namespace="com.last.prj.students.service.impl.StudentsMap">
 
+	<!-- 학생 본인 정보 조회 -->
 	<select id="studentInfo" resultType="StudentsVO">
 		SELECT M.MNAME, A.*
 		FROM MAJOR M, 
@@ -13,9 +14,37 @@
 		WHERE M.MCODE = A.MCODE
 	</select>
 	
+	<!-- 학생 본인 성적 조회 -->	
+	<resultMap type="elseStudents" id="unKnown">
+		<result column = "total" property = "total"/>
+		<result column = "rank" property = "rank"/>
+		<result column = "term" property = "term"/>
+		<result column = "lname" property = "lname"/>
+		<result column = "lyear" property = "lyear"/>
+		<result column = "dcode" property = "dcode"/>
+		<result column = "credit" property = "credit"/>	
+	</resultMap>
+	<select id="scoreView" resultMap="unKnown">
+		SELECT M.TOTAL, M.RANK, 
+		        S.GRADE, 
+		        L.LYEAR, L.TERM, I.LNAME,
+		        I.DCODE,
+		        D.CREDIT
+		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I, DIVISION_INFO D
+		WHERE M.SID = S.SID
+		AND M.OPENNUM = L.OPENNUM
+		AND L.LNUM = I.LNUM
+		AND I.DCODE = D.DCODE
+		AND S.SID = #{sid}
+	</select>
+	
+	
+	<!-- 학생 정보 수정 -->
 	<update id="studentUpdate">
 		UPDATE STUDENTS
 		SET PWD = #{pwd}
 		WHERE SID = #{sid}
 	</update>
+	
+	
 </mapper>

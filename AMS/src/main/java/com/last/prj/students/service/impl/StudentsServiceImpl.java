@@ -1,5 +1,7 @@
 package com.last.prj.students.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,13 @@ public class StudentsServiceImpl implements StudentsService {
 		
 		return map.studentUpdate(vo);
 	}
+
+	@Override
+	public List<StudentsVO> scoreView(StudentsVO vo) {
+		// 성적 조회
+		return map.scoreView(vo);
+	}
+	
+	
 
 }

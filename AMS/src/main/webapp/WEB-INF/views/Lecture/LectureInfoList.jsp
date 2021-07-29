@@ -95,7 +95,6 @@
 				modal('my_offer');
 				
 				var lnum = data.lCode;
-				var 
 			}
 						
 			function modal(mm) {

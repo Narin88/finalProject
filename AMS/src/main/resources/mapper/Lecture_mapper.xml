@@ -3,9 +3,7 @@
 <mapper namespace="com.last.prj.lectureInfo.service.impl.LectureInfoMapper">
 	<select id="getLectureInfoList" parameterType="string" resultType="LectureInfoVO">
 		SELECT *
-		FROM LECTURE_INFO_VIEW LI LEFT OUTER JOIN LECTURE L
-		ON LI.LNUM = L.LNUM
-		WHERE OPENNUM IS NULL
-		AND LI.PID = #{pId}
+		FROM LECTURE_INFO_VIEW 
+		where PID = #{pId}
 	</select>
 </mapper>

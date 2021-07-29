@@ -11,8 +11,9 @@
 	
 	<security:http>
 		<security:intercept-url pattern="/top.jsp" access="permitAll()" />
-		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/**" access="permitAll()" />
 		<security:form-login default-target-url="/top.jsp" />
 		<security:logout logout-url="/logout"  logout-success-url="/top.jsp" />
 		<security:csrf disabled="true" />
@@ -22,15 +23,13 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query=
-					"select LOGIN_ID, PASSWORD, 1
-					from T_USER
-					where LOGIN_ID = ?"
+					"select SID, '{noop}' || PWD, 1
+					from role_chk
+					where sid = ?"
 				authorities-by-username-query=			 
-					"select LOGIN_ID, ROLE_NAME
-					from T_ROLE
-					inner join T_USER_ROLE on T_ROLE.ID = T_USER_ROLE.ROLE_ID
-					inner join T_USER on T_USER_ROLE.USER_ID = T_USER.ID
-					where LOGIN_ID = ?" />
+					"select sid, ROLE_NAME
+					from role_chk
+					where sid = ?" />
 					<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager> -->

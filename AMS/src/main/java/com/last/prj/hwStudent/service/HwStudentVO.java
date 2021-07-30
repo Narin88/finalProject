@@ -1,4 +1,4 @@
-package com.last.prj.hw_student.service;
+package com.last.prj.hwStudent.service;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class hw_studentVO {
+public class HwStudentVO {
 
 	private int registerId;	//과제제출 번호
 	private int submitId;	//과제들옥 번호(구분하기위한 PK)

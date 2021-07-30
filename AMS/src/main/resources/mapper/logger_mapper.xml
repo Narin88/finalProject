@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.log.service.impl.LogMapper">
+	<insert id="insertLogger" parameterType="LogVO">
+		INSERT INTO logger (
+							visit_id,
+							visit_ip,
+							visit_time,
+							visit_agent
+							)
+		VALUES (
+				logger_seq.NEXTVAL,
+				#{visitIp},
+				SYSDATE,
+				#{visitAgent}
+				)
+	</insert>
+</mapper>

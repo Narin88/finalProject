@@ -16,8 +16,11 @@
 	<P>The time on the server is ${serverTime}.</P>
 	<div>
 		<form action="uploadTest" method="post" enctype="multipart/form-data">
-			<input type="file" name="file">
-			<input type="file" name="file2"> 
+			<input type="file" name="file"><br />
+			<input type="file" name="file2"> <br />
+			이름: <input type="text" name="name"><br />
+			나이: <input type="text" name="age"><br />
+			성별: <input type="text" name="gender"><br />
 			<input type="submit" value="업로드">
 		</form>
 	</div>

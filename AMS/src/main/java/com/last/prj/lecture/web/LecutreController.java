@@ -17,10 +17,12 @@ public class LecutreController {
 	public String LectureInsert(LectureVO vo, Model model) {
 		
 		int a = Ldao.LectureInsert(vo);
+		String message = "";
 		if(a>0) {
-			System.out.println("등록성공");
+			message = "등록성공";
 		}else
-			System.out.println("등록실패");
+			message = "등록실패";
+		model.addAttribute(message);
 		return "redirect:LectureInfo";
 	}
 }

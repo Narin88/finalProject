@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.last.prj.students.service.impl.StudentsMap">
+<mapper namespace="com.last.prj.students.service.impl.StudentsMapper">
 
 	<!-- 학생 본인 정보 조회 -->
-	<resultMap type="elseStudents" id="else">
-		<result column = "student_status" property="student_status"/>
-	</resultMap>
-	<select id="studentInfo" resultMap = "else">
+	<select id="studentInfo" resultType="StudentsVO">
 		SELECT M.MNAME, 
 		        P.PNAME,
 		        S.SID, S.SNAME, S.SADDRESS, S.EMAIL, S.SPHONE,
@@ -20,16 +17,7 @@
 	</select>
 	
 	<!-- 학생 본인 성적 조회 -->	
-	<resultMap type="elseStudents" id="unKnown">
-		<result column = "total" property = "total"/>
-		<result column = "rank" property = "rank"/>
-		<result column = "term" property = "term"/>
-		<result column = "lname" property = "lname"/>
-		<result column = "lyear" property = "lyear"/>
-		<result column = "division" property = "division"/>
-		<result column = "credit" property = "credit"/>	
-	</resultMap>
-	<select id="scoreView" resultMap="unKnown">
+	<select id="scoreView" resultType="StudentsVO">
 		SELECT M.TOTAL, M.RANK, 
 		        S.GRADE,
 		        L.LYEAR, L.TERM, I.LNAME,
@@ -39,8 +27,51 @@
 		AND M.OPENNUM = L.OPENNUM
 		AND L.LNUM = I.LNUM
 		AND S.SID = #{sid}
+		order by l.lyear, l.term
 	</select>
 	
+	
+	<!-- 학생 본인 수강 신청 과목 조회 -->
+	<select id="appliedLecture" resultType = "StudentsVO">
+		SELECT
+		    I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT,
+		    L.TIMETABLE, L.DIVIDENUM,
+		    P.PNAME, R.LRNAME
+		FROM STUDENTS S, SCORE_MANA M, PROFESSOR P,
+		    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R
+		WHERE S.SID = M.SID
+		AND P.PID = L.PID
+		AND L.PID = I.PID
+		AND L.LRCODE = R.LRCODE
+		AND M.OPENNUM = L.OPENNUM
+		AND I.LNUM = L.LNUM
+		AND L.LYEAR = #{lyear}
+		AND L.TERM = #{term}
+		AND S.SID = #{sid}
+	</select>
+	
+	<!-- 강의 시간표들 조회 -->
+	<select id="lectureLookUp" resultType = "StudentsVO">
+		SELECT I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION,
+		        I.GRADE TARGET, I.CREDIT,
+		        P.PNAME, L.TIMETABLE, L.DIVIDENUM, R.LRNAME
+		FROM LECTURE L, LECTURE_INFO I, LECTURE_ROOM R, PROFESSOR P
+		WHERE P.PID = L.PID
+		AND L.PID = I.PID
+		AND L.LRCODE = R.LRCODE
+		AND L.LYEAR = #{lyear}
+		AND L.TERM = #{term}
+		AND I.DCODE = #{dcode}
+		AND R.LOCATION = #{location}
+		AND L.LNUM = I.LNUM
+	</select>
+	
+	<!-- 교수 정보 보기 -->
+	<select id="professorSelect" resultType="ProfessorVO">
+		SELECT PNAME, EMAIL, PPHONE
+		FROM PROFESSOR
+		WHERE PNAME = #{pname}
+	</select>
 	
 	<!-- 학생 정보 수정 -->
 	<update id="studentUpdate">

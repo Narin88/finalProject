@@ -5,13 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
 
+
+	function goHome() {
+		location.href = 'home2;
+	}
+</script>
 <style>
 div.container {
 	width: 100%;
 	border: 1px solid gray;
 }
-
+div.menu{
+button: type="button";
+ display:  inline-block;
+}
 header, footer {
 	padding: 1em;
 	color: white;
@@ -49,10 +58,12 @@ article {
 <body>
 	<div class="container">
 		<header>
-			<h2>Spring project(ver 1.0)</h2>
+			<a href="#"><img
+					src="${pageContext.request.contextPath }/resources/loginpicture/logo.png"
+					onclick="goHome()"></a>
 		</header>
 		<nav>
-			<tiles:insertAttribute name="header" />
+			<tiles:insertAttribute name="nav" />
 		</nav>
 		<article>
 			<tiles:insertAttribute name="content"/>

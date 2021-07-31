@@ -23,20 +23,6 @@
  }
  </style>
 
-<script type="text/javascript">
-
-function sub(){
-	if(frm.content.value == ""){
-		alert("강의개요를 입력하세요");
-		frm.content.focus();
-		return false;
-	}
-		frm.submit();
-		alert("정상등록 되었습니다");
-	
-}
-
-</script>
 <meta charset="UTF-8">
 <title>강의 계획서 수정</title>
 </head>
@@ -51,10 +37,10 @@ function sub(){
 							
 					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns">
 								<tr width="200" height="100%">
-									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.LName} "></th>
-									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.PName}"> </th>
-									<th ><font size="3">이메일</font></th><th><input type="text"  value="${spList.email}"></th>
-									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" value="${spList.PPhone} " > </th>
+									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.LName} " readonly></th>
+									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.PName}" readonly> </th>
+									<th ><font size="3">이메일</font></th><th><input type="text"  value="${spList.email}" readonly></th>
+									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" value="${spList.PPhone} " readonly > </th>
 								</tr>
 								
 					</table>
@@ -65,31 +51,31 @@ function sub(){
 
 								
 										<tr  width="200">
-												<th><font size="3">수강학과</font></th>	 <th><input type="text" value="${spList.MName}"></th>
-												<th ><font size="3">수강학부</font></th>	 <th><input type="text" value="${spList.DName}"> </th>
-												<th ><font size="3">강의실</font></th>	 <th><input type="text" value="${spList.lrName}" ></th>
-												<th ><font size="3">교재</font></th>	 <th><input type="text" value="${spList.book}"  size=20></th>
+												<th><font size="3">수강학과</font></th>	 <th><input type="text" value="${spList.MName}" readonly></th>
+												<th ><font size="3">수강학부</font></th>	 <th><input type="text" value="${spList.DName}" readonly> </th>
+												<th ><font size="3">강의실</font></th>	 <th><input type="text" value="${spList.lrName}"  readonly></th>
+												<th ><font size="3">교재</font></th>	 <th><input type="text" value="${spList.book}"  size=20 readonly></th>
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20></th> <th><input type="text" value="${spList.dividenum}"  size=20> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20 readonly></th> <th><input type="text" value="${spList.dividenum}"  size=20 readonly> </th>
 											<th></th>
-											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}" ></th>
+											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}"  readonly></th>
 											
 										
 									</tr>
 									<tr>				
 														
-											<th ><font size="3">학점</font></th>	 <th><input type="text" value="${spList.credit}"  size=20></th>
-											<th><font size="3">대상학년</font></th>	 <th><input type="text" value="${spList.grade}"  size=20> </th>
-											<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitCount}"  size=20></th>
-											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="width:200px;" value="${spList.division}" size=20> </th>
+											<th ><font size="3">학점</font></th>	 <th><input type="text" value="${spList.credit}"  size=20 readonly></th>
+											<th><font size="3">대상학년</font></th>	 <th><input type="text" value="${spList.grade}"  size=20 readonly> </th>
+											<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitCount}"  size=20 readonly></th>
+											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="width:200px;" value="${spList.division}" size=20 readonly> </th>
 									</tr>
 									
 					</table>
 	
 		<br/>
-		<form action="studyPlanUpdate" method="post" id="frm">
+
 		<input type="hidden" name="opennum" value="${spList.opennum}">
 					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns">						
 							
@@ -98,7 +84,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="content" rows="3" style="resize: none;width:99%;" >${spList.content}</textarea></td>						
+										<td><textarea name="content" rows="3" style="resize: none;width:99%;" readonly>${spList.content}</textarea></td>						
 									</tr>					
 					</table>
 								
@@ -113,7 +99,7 @@ function sub(){
 											<th>	<p align="left">  &nbsp; 1주차 강의</p></th>
 									</tr>					
 									<tr height="20">					
-										<td><textarea name="w1" rows="3"  style="resize: none;width:99%;">${spList.w1 }</textarea></td>				
+										<td><textarea name="w1" rows="3"  style="resize: none;width:99%;" readonly>${spList.w1 }</textarea></td>				
 									</tr>					
 							
 					<tr></tr>
@@ -123,7 +109,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w2" rows="3"  style="resize: none;width:99%;">${spList.w2}</textarea></td>						
+										<td><textarea name="w2" rows="3"  style="resize: none;width:99%;" readonly>${spList.w2}</textarea></td>						
 									</tr>					
 									
 									<tr></tr>
@@ -135,7 +121,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w3" rows="3"  style="resize: none;width:99%;">${spList.w3}</textarea></td>						
+										<td><textarea name="w3" rows="3"  style="resize: none;width:99%;" readonly>${spList.w3}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -144,7 +130,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w4" rows="3"  style="resize: none;width:99%;">${spList.w4}</textarea></td>						
+										<td><textarea name="w4" rows="3"  style="resize: none;width:99%;" readonly>${spList.w4}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -153,7 +139,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w5" rows="3"  style="resize: none;width:99%;">${spList.w5}</textarea></td>						
+										<td><textarea name="w5" rows="3"  style="resize: none;width:99%;" readonly>${spList.w5}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -162,7 +148,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w6" rows="3"  style="resize: none;width:99%;">${spList.w6}</textarea></td>						
+										<td><textarea name="w6" rows="3"  style="resize: none;width:99%;" readonly>${spList.w6}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -171,7 +157,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w7" rows="3"  style="resize: none;width:99%;">${spList.w7}</textarea></td>						
+										<td><textarea name="w7" rows="3"  style="resize: none;width:99%;" readonly>${spList.w7}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -180,7 +166,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea  placeholder="중간고사 기간" name="w8" rows="3"  style="resize: none;width:99%;">${spList.w8}</textarea></td>						
+										<td><textarea  placeholder="중간고사 기간" name="w8" rows="3"  style="resize: none;width:99%;" readonly>${spList.w8}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -189,7 +175,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w9" rows="3"  style="resize: none;width:99%;">${spList.w9}</textarea></td>						
+										<td><textarea name="w9" rows="3"  style="resize: none;width:99%;" readonly>${spList.w9}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -198,7 +184,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w10" rows="3"  style="resize: none;width:99%;">${spList.w10}</textarea></td>						
+										<td><textarea name="w10" rows="3"  style="resize: none;width:99%;" readonly>${spList.w10}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -207,7 +193,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w11" rows="3"  style="resize: none;width:99%;">${spList.w11}</textarea></td>						
+										<td><textarea name="w11" rows="3"  style="resize: none;width:99%;" readonly>${spList.w11}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -216,7 +202,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w12" rows="3"  style="resize: none;width:99%;">${spList.w12}</textarea></td>						
+										<td><textarea name="w12" rows="3"  style="resize: none;width:99%;" readonly>${spList.w12}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -225,7 +211,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w13" rows="3"  style="resize: none;width:99%;">${spList.w13}</textarea></td>						
+										<td><textarea name="w13" rows="3"  style="resize: none;width:99%;" readonly>${spList.w13}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -234,7 +220,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w14" rows="3"  style="resize: none;width:99%;">${spList.w14}</textarea></td>						
+										<td><textarea name="w14" rows="3"  style="resize: none;width:99%;" readonly>${spList.w14}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -243,7 +229,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w15" rows="3"  style="resize: none;width:99%;">${spList.w15}</textarea></td>						
+										<td><textarea name="w15" rows="3"  style="resize: none;width:99%;" readonly>${spList.w15}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -252,7 +238,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w16" rows="3"  style="resize: none;width:99%;" placeholder="기말고사 기간">${spList.w16}</textarea></td>						
+										<td><textarea name="w16" rows="3"  style="resize: none;width:99%;" placeholder="기말고사 기간" readonly>${spList.w16}</textarea></td>						
 									</tr>					
 									
 									
@@ -263,14 +249,8 @@ function sub(){
 								
 								</table>
 								
-								
-	
-																					<h3 align="center">
-									<button type="button" class="ns" value="submit" onclick="sub()">●등록</button>
-									<input type="reset"  class="ns" value="● 취소" >
-									<input type="button" class="ns" name="back" value="● 뒤로가기" onClick="location.href='studyPlanList'">
 								</h3>
-								</form>
+						
 </div>
 
 

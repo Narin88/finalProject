@@ -12,11 +12,11 @@ import com.last.prj.lectureRoom.service.LectureRoomVO;
 public class LectureRoomServiceImpl implements LectureRoomService{
 
 	@Autowired
-	LectureRoomMapper LRDao;
+	LectureRoomMapper LRmap;
 	
 	@Override
 	public List<LectureRoomVO> getLectureRoom() {
-		return LRDao.getLectureRoom();
+		return LRmap.getLectureRoom();
 	}
 
 

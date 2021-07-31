@@ -18,10 +18,12 @@ public class LectureVO {
 	private String dateStatus; //강의상태
 	private String lName; //강의 이름
 	
-	private String openNum;
-	private String grade;
-	private String division;
-	private String lrName;
+	private String openNum; //강의 등록번호
+	private String grade; //학년
+	private String division; //이수구분
+	private String lrName; //강의실 이름
+	
+	private int enCount; //현재 수강인원
 	
 	private List<LectureVO> updatedRows;
 	private List<LectureVO> deletedRows;

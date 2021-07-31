@@ -1,5 +1,10 @@
 package com.last.prj.scoreMana.service;
 
-public interface ScoreManaService {
+import java.util.List;
 
+import com.last.prj.lecture.service.LectureVO;
+
+public interface ScoreManaService {
+	List<LectureVO> EnrolmentList();
+	
 }

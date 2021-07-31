@@ -54,11 +54,11 @@
 			{header: '년도',name: 'lYear',width: 100}, //년도+학기
 			{header: '학년',name: 'grade',width: 100},
 			{header: '과목명',name: 'lName',width: 200},
-			{header: '교재',name: 'book',width: 200, editor: 'text'},
 			{header: '이수구분',name: 'division',width: 100},
-			{header: '정원',name: 'newLimitCount',width: 80},
 			{header: '강의실',name: 'lrName',width: 80},
-			{header: '시간표',name: 'timeTable',width: 150, editor: 'text'}
+			{header: '시간표',name: 'timeTable',width: 150},
+			{header: '수강신청인원',name: 'enCount',width: 80},
+			{header: '수강정원',name: 'newLimitCount',width: 80}
 		] //컬럼갯수
 	} );
 //grid end

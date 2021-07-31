@@ -11,11 +11,11 @@ import com.last.prj.lectureInfo.service.LectureInfoVO;
 @Service
 public class LectureInfoServiceImpl implements LectureInfoService {
 	@Autowired
-	LectureInfoMapper LectureDAO;
+	LectureInfoMapper Lmap;
 	
 	@Override
 	public List<LectureInfoVO> getLectureInfoList(String pId) {
-		return LectureDAO.getLectureInfoList(pId);
+		return Lmap.getLectureInfoList(pId);
 	}
 
 }

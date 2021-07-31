@@ -10,7 +10,6 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.last.prj.professor.service.ProfessorVO" alias="professorVO"/>
-
 		
 		<!-- typeAlias 설정 끝끝끝 -->
 		<package name="com.last.prj" />

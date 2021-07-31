@@ -33,7 +33,7 @@ public class HomeController {
 		vo.setVisitAgent(map.get("browser"));
 		vo.setVisitCookie(map.get("cookie"));
 		
-		dao.insertLogger(vo);
+//		dao.insertLogger(vo);
 		
 		System.out.println(LogInfo.getInfo(req));
 	
@@ -55,9 +55,9 @@ public class HomeController {
 		return "uploadTest";
 	}
 	
-	@RequestMapping("/goLogin")
-	public String goLogin() {
-		return "login/login";
-	}
+//	@RequestMapping("/goLogin")
+//	public String goLogin() {
+//		return "login/login";
+//	}
 	
 }

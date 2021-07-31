@@ -11,7 +11,7 @@
 	
 	<security:http>
 		<security:intercept-url pattern="/views/login/login.jsp" access="permitAll()" />
-		<security:intercept-url pattern="/views/home.jsp" access="isAuthenticated()" />
+		<security:intercept-url pattern="/views/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" />
 		<security:form-login 
 						login-page="/goLogin"

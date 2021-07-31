@@ -1,68 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+pageEncoding="UTF-8"%> <%@ taglib prefix="tiles"
+uri="http://tiles.apache.org/tags-tiles"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <script type="text/javascript">
 
-<style>
-div.container {
-	width: 100%;
-	border: 1px solid gray;
-}
-.mainImg{
-	text-align:center;
-}
-header {
-	height:38px;
-	color: white;
-	background-color: black;
-	clear: left;
-	text-align: center;
-}
 
-nav {
-	float: left;
-	max-width: 160px;
-	margin: 0;
-	padding: 1em;
-}
+      function goHome() {
+      	location.href = 'home2;
+      }
+    </script>
+    <style>
+      div.container {
+        width: 100%;
+        border: 1px solid gray;
+      }
+      div.menu {
+        button: type= "button";
+        display: inline-block;
+      }
+      header,
+      footer {
+        padding: 1em;
+        color: white;
+        background-color: black;
+        clear: left;
+        text-align: center;
+      }
 
-nav ul {
-	list-style-type: none;
-	padding: 0;
-}
+      nav {
+        float: left;
+        max-width: 160px;
+        margin: 0;
+        padding: 1em;
+      }
 
-nav ul a {
-	text-decoration: none;
-}
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
 
-article {
-	margin-left: 170px;
-	border-left: 1px solid gray;
-	padding: 1em;
-	overflow: hidden;
-	min-height: 600px;
-}
-</style>
-</head>
+      nav ul a {
+        text-decoration: none;
+      }
 
-<body>
-	<div class="container">
-		<div class="mainImg">
-			<h3>이미지 영역</h3>
-		</div>
-		<header>	
-				<h2>Spring project(ver 1.0)</h2>
-		</header>
-		<nav>
-			<tiles:insertAttribute name="header" />
-		</nav>
-		<article>
-			<tiles:insertAttribute name="content"/>
-		</article>
-		
-	</div>
-</body>
+      article {
+        margin-left: 170px;
+        border-left: 1px solid gray;
+        padding: 1em;
+        overflow: hidden;
+        min-height: 600px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="#"
+          ><img
+            src="${pageContext.request.contextPath }/resources/loginpicture/logo.png"
+            onclick="goHome()"
+        /></a>
+      </header>
+      <nav>
+        <tiles:insertAttribute name="nav" />
+      </nav>
+      <article>
+        <tiles:insertAttribute name="content" />
+      </article>
+    </div>
+  </body>
 </html>

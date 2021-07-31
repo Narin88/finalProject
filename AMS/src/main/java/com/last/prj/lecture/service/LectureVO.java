@@ -1,5 +1,7 @@
 package com.last.prj.lecture.service;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +17,12 @@ public class LectureVO {
 	private String divideNum; //분반
 	private String dateStatus; //강의상태
 	private String lName; //강의 이름
+	
+	private String openNum;
+	private String grade;
+	private String division;
+	private String lrName;
+	
+	private List<LectureVO> updatedRows;
+	private List<LectureVO> deletedRows;
 }

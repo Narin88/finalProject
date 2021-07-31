@@ -55,7 +55,13 @@
 		width: 100px;
 		height: 40px;
 	}
-	
+	.pagemove{
+		display: block;
+		color: black;
+	}
+	.tui-grid-cell .tui-grid-cell-content {
+    text-align: center;
+}
 </style>
 <meta charset="UTF-8">
 <!-- Toast grid -->
@@ -71,8 +77,13 @@
 </head>
 <body>
 <div align="center">
-<h2>수강 등록</h2>
+<h2>수강정보</h2>
+<div align="right">
+	<a href="lectureList" class="pagemove">등록된 수강 목록</a>
 </div>
+
+</div>
+<!-- model -->
 <div id="my_offer" align="center">
     <a class="modal_close_btn">닫기</a>
     <div class="modal-body">
@@ -101,6 +112,8 @@
 	   </form>
 	</div>
 </div>
+<!-- model end -->
+
 <div id="grid"></div>
 	<script> 
 	//grid start
@@ -146,7 +159,7 @@
 				showOffer(data);
 			});
 			
-			
+			//모달 start
 			function showOffer(data) {
 				modal('my_offer');
 				console.log(data.lNum);

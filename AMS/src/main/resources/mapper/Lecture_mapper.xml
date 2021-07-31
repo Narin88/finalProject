@@ -5,4 +5,19 @@
 		insert into lecture(opennum,lnum,pid,lrcode,newlimitcount,lyear,term,book)
 		values(opennum_seq.nextval, #{lNum}, #{pId}, #{lrCode}, #{newLimitCount}, #{lYear}, #{term}, #{book})
 	</insert>
+	<select id="LectureList" parameterType="string" resultType="LectureVO">
+	    select l.OPENNUM,l.lnum,l.DIVIDENUM,l.LYEAR,l.TERM, li.GRADE, li.lname, l.BOOK,find_code_name(100,li.dcode) as division,
+	    l.NEWLIMITCOUNT, lr.LRNAME, l.TIMETABLE,  l.DATESTATUS
+	    from lecture l, lecture_info li, LECTURE_ROOM lr
+	    where l.lnum = li.lnum
+	    and l.LRCODE = lr.LRCODE
+	    and l.pid=#{pId}
+	    order by 1
+	</select>
+	<update id="LectureUpdate" parameterType="LectureVO">
+		UPDATE LECTURE SET BOOK = #{book} timetable = #{timeTable} WHERE OPENNUM = #{openNum}
+	</update>
+	<delete id="LectureDelete" parameterType="LectureVO">
+		DELETE FROM LECTURE WHERE OPENNUM = #{openNum}
+	</delete>
 </mapper>

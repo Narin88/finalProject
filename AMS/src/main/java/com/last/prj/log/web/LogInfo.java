@@ -9,9 +9,9 @@ public class LogInfo {
 	public static Map<String, String> getInfo(HttpServletRequest req) {
 		String ip = req.getHeader("X-FORWARED_FOR");
 		String browser = req.getHeader("User-Agent");
-		String referer = req.getHeader("REFERER");
+		String referer = req.getHeader("cookie");
 
-		// proxy 환경일 경우
+		// proxy 환경일 경우ㅌ`
 		if (ip == null || ip.length() == 0) {
 			ip = req.getHeader("Proxy-Client-IP");
 		}
@@ -44,7 +44,7 @@ public class LogInfo {
 
 		info.put("ip", ip);
 		info.put("browser", browser);
-		info.put("referer", referer);
+		info.put("cookie", referer);
 
 		return info;
 	}

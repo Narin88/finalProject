@@ -6,13 +6,15 @@
 							visit_id,
 							visit_ip,
 							visit_time,
-							visit_agent
+							visit_agent,
+							visit_cookie
 							)
 		VALUES (
 				logger_seq.NEXTVAL,
 				#{visitIp},
 				SYSDATE,
-				#{visitAgent}
+				#{visitAgent},
+				#{visitCookie}
 				)
 	</insert>
 </mapper>

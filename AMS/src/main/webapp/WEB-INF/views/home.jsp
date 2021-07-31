@@ -11,9 +11,6 @@
 </head>
 
 <body>
-	<h1>Hello world!</h1>
-
-	<P>The time on the server is ${serverTime}.</P>
 	<div>
 		<form action="uploadTest" method="post" enctype="multipart/form-data">
 			<input type="file" name="file"><br />
@@ -23,6 +20,12 @@
 			성별: <input type="text" name="gender"><br />
 			<input type="submit" value="업로드">
 		</form>
+		<sec:authorize access="isAuthenticated()">
+			로그인 유저 ${user.username}
+		<form action="logout" method="post">
+			<button>로그아웃</button>
+		</form>
+</sec:authorize>
 	</div>
 </body>
 

@@ -1,18 +1,14 @@
 package com.last.prj;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+	import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -29,22 +25,24 @@ public class HomeController {
 	@Autowired
 	private LogService dao;
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
 	@RequestMapping("home")
-	public String home(Locale locale, Model model, HttpServletRequest req) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		model.addAttribute("serverTime", new Date());
-		
+	public String home(HttpServletRequest req, @CookieValue(value="myCooke", required=false) String cookie) {
 		Map<String, String> map = LogInfo.getInfo(req);
-		System.out.println(LogInfo.getInfo(req));
 		LogVO vo = new LogVO();
 		vo.setVisitIp(map.get("ip"));
 		vo.setVisitAgent(map.get("browser"));
+		vo.setVisitCookie(map.get("cookie"));
 		
-//		dao.insertLogger(vo);
-
+		dao.insertLogger(vo);
+		
+		System.out.println(LogInfo.getInfo(req));
+	
+		Enumeration<String> em = req.getHeaderNames();
+		while(em.hasMoreElements()) {
+			String header = (String) em.nextElement();
+			System.out.println(header + ": " + req.getHeader(header));
+		}
+		
 		return "home";
 	}
 
@@ -55,6 +53,11 @@ public class HomeController {
 		System.out.println(vo);
 		
 		return "uploadTest";
+	}
+	
+	@RequestMapping("/goLogin")
+	public String goLogin() {
+		return "login/login";
 	}
 	
 }

@@ -12,6 +12,6 @@ public class LogVO {
 	private int visitId;
 	private String visitIp;
 	private String visitTime;
-	private String visitRefer;
+	private String visitCookie;
 	private String visitAgent;
 }

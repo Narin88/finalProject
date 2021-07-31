@@ -6,16 +6,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- <security:http pattern="/resources/**" security="none" />
+	<security:http pattern="/resources/**" security="none" />
 	<security:http pattern="/css/**" security="none" />
 	
 	<security:http>
-		<security:intercept-url pattern="/top.jsp" access="permitAll()" />
+		<security:intercept-url pattern="/views/login/login.jsp" access="permitAll()" />
+		<security:intercept-url pattern="/views/home.jsp" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
-		<security:intercept-url pattern="/**" access="permitAll()" />
-		<security:form-login default-target-url="/top.jsp" />
-		<security:logout logout-url="/logout"  logout-success-url="/top.jsp" />
+		<security:form-login 
+						login-page="/goLogin"
+						login-processing-url="/logincheck"
+						default-target-url="/home"
+						username-parameter="id"
+						password-parameter="pwd"
+						/>
+		<security:logout logout-url="/logout"  logout-success-url="/goLogin" />
 		<security:csrf disabled="true" />
 	</security:http>
 	
@@ -30,8 +35,8 @@
 					"select sid, ROLE_NAME
 					from role_chk
 					where sid = ?" />
-					<security:password-encoder hash="bcrypt" />
+					<!-- <security:password-encoder hash="bcrypt" /> -->
 		</security:authentication-provider>
-	</security:authentication-manager> -->
+	</security:authentication-manager>
 
 </beans:beans>

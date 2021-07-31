@@ -39,14 +39,14 @@
 //grid start
 
 var clsData = [
-		<c:forEach items="${lectures }" var="lec">
-		{
-			openNum: '${lec.openNum}', lNum: '${lec.LNum}${lec.divideNum}', lYear: '${lec.LYear}-${lec.term}', grade: '${lec.grade}',
-			lName: '${lec.LName}', book: '${lec.book}', division: '${lec.division}',
-			newLimitCount: '${lec.newLimitCount}', lrName: '${lec.lrName}', timeTable: '${lec.timeTable}'
-		},
-		</c:forEach>
-		]; 
+	<c:forEach items="${lectures }" var="lec">{
+		openNum: '${lec.openNum}', lNum: '${lec.LNum}${lec.divideNum}', lYear: '${lec.LYear}-${lec.term}', grade: '${lec.grade}', lName: '${lec.LName}', book: '${lec.book}', division: '${lec.division}', newLimitCount: '${lec.newLimitCount}', lrName: '${lec.lrName}', timeTable: '${lec.timeTable}'
+	}
+	<c:if test='${!empty lec.openNum}'>
+	,
+	</c:if>
+	</c:forEach>
+	]; 
 
 //grid api-source
 	const dataSource = {
@@ -87,16 +87,7 @@ var clsData = [
 			{header: '교재',name: 'book',width: 200, editor: 'text'},
 			{header: '이수구분',name: 'division',width: 100},
 			{header: '정원',name: 'newLimitCount',width: 80},
-			{header: '강의실',name: 'lrName',width: 80, editor: {
-	            type: 'select',
-	            options: {
-	              lrName: [
-	            	<c:forEach items="${lroom }" var="lr">
-	               		{ text: '${lr.lrName}', value: '${lr.lrCode}' },
-	                </c:forEach>
-	              ]
-	            }
-	          }},
+			{header: '강의실',name: 'lrName',width: 80},
 			{header: '시간표',name: 'timeTable',width: 150, editor: 'text'}
 		] //컬럼갯수
 

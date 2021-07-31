@@ -38,12 +38,12 @@ public class LecutreController {
 		return "redirect:LectureInfo";
 	}
 	
-	@RequestMapping("lectureList")
+	@RequestMapping("ProfessorLectureList")
 	public String lectureList(Model model, HttpServletRequest req) {
 		String pId = req.getParameter("id");
 		model.addAttribute("lectures",Ldao.LectureList(pId));
 		model.addAttribute("lroom",LRdao.getLectureRoom());
-		return "Lecture/LectureList.tiles";
+		return "Lecture/ProfessorLectureList.tiles";
 	}
 	
 	@ResponseBody

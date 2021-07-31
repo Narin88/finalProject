@@ -79,7 +79,7 @@
 <div align="center">
 <h2>수강정보</h2>
 <div align="right">
-	<a href="lectureList" class="pagemove">등록된 수강 목록</a>
+	<a href="ProfessorLectureList" class="pagemove">등록된 수강 목록</a>
 </div>
 
 </div>

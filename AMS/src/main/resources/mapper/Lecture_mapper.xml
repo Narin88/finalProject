@@ -20,4 +20,5 @@
 	<delete id="LectureDelete" parameterType="LectureVO">
 		DELETE FROM LECTURE WHERE OPENNUM = #{openNum}
 	</delete>
+	
 </mapper>

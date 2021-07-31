@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.scoreMana.service.impl.ScoreManaMapper">
+	<select id="EnrolmentList" resultType="LectureVO">
+		select l.opennum, l.lnum||l.dividenum as lnum, l.lyear||'-'||l.term as lyear, li.GRADE,
+		       li.lname, find_code_name(100,li.dcode) as division, l.NEWLIMITCOUNT, lr.lrname, l.timetable,
+		       (select count(*) from score_mana where opennum = l.opennum) as encount
+		from lecture l, lecture_info li, lecture_room lr
+		where l.lnum = li.lnum
+		and l.lrcode = lr.lrcode;
+	</select>
+</mapper>

@@ -16,5 +16,5 @@
 		<!-- typeAlias 설정 끝끝끝 -->
 		<package name="com.last.prj" />
 	</typeAliases>
-
+	
 </configuration>

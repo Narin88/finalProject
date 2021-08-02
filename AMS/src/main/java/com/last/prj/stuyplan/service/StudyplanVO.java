@@ -5,6 +5,10 @@ import lombok.Data;
 @Data
 public class StudyplanVO {
 
+	
+	
+	private String pid;
+
 	private String w1; //주차
 	private String w2;
 	private String w3;

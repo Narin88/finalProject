@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://www.springframework.org/security/tags" prefix = "sec" %>
 <!DOCTYPE html>
 <html>
 <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
@@ -90,6 +91,7 @@ function sub(){
 	
 		<br/>
 		<form action="studyPlanUpdate" method="post" id="frm">
+		<sec:csrfInput/>
 		<input type="hidden" name="opennum" value="${spList.opennum}">
 					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns">						
 							

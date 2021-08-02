@@ -13,6 +13,7 @@ public interface StudentsService {
 
 	ProfessorVO professorSelect(ProfessorVO vo);	// 교수 정보 조회
 	
+	StudentsVO selfAuthentication(StudentsVO vo);	// 본인 인증
 	int studentUpdate(StudentsVO vo);				// 학적 수정
 	
 }

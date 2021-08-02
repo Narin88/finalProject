@@ -10,9 +10,11 @@
        			,i.lname "lname"
        			,l.lrcode "lrcode"
        			,i.lcode "lcode"
+       			,(select count(*) from hw_student where register_id=p.register_id) "submitCount"
 				,l.newlimitcount	"newlimitcount" 
 				,p.REGISTER_DATE	"register_date"
 				,p.PPERIOD			"pperiod"
+				,round((p.pperiod-sysdate)*24*60*60,2) "hwstatus"
 				,p.REGISTER_FILE	"register_file"
 				,p.PCOMMENT	   	 	"pcomment"
 				,l.pid 				"pid"
@@ -31,7 +33,7 @@ LEFT OUTER JOIN hw_professor p
       	 <if test="lcode!=null and lcode!=''">
       	 	and lcode=#{lcode}
       	 </if>
-      	 ORDER BY l.lyear asc
+      	 ORDER BY p.pperiod desc
 	</select>
 	<!-- 과제제출한 학생목록 -->
 	<select id="hw_submitList" resultType="map">
@@ -46,7 +48,7 @@ LEFT OUTER JOIN hw_professor p
          on     s.register_id=p.register_id
        join     students st
          on     s.SUBMIT_SID=st.SID
-      where 	p.register_id=1
+      where 	p.register_id=61
       order by  s.SUBMIT_DATE asc
 	</select>
 	<!-- 강의년도 select -->

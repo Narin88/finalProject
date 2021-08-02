@@ -42,7 +42,7 @@ public class HwProfessorController {
 		//강의년도 select
 		List<Map <String , Object>> ySelect = service.hw_ySelect(vo);
 		model.addAttribute("ySelect",ySelect);
-		//강의명 select
+		//강의명 select 
 				List<Map <String , Object>> lName = service.hwLname(vo);
 				model.addAttribute("lName",lName);
 		//해당강의 과제제출 목록

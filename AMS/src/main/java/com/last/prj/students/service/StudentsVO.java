@@ -21,7 +21,7 @@ public class StudentsVO {
 	private Date enterDate;		// 입학일
 	private int grade;			// 학년
 	private String pwd;			// 비밀번호
-	private String sstatus;		// 학적
+	private String sstatus;		// 학생 상태
 	private String sbirth;		// 학생 생년월일
 	private int sgender;		// 학생 성별
 	private int term;			// 학기
@@ -61,4 +61,6 @@ public class StudentsVO {
 	// professor 테이블 ( 교수 )
 	private String pname;		// 교수명
 	
+	// common_detail_code ( 공통 상세 코드 )
+	private String student_status;	// 학생 학적 구분
 }

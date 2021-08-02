@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>본인 확인 페이지</title>
+<title>학생 정보 수정 페이지</title>
 </head>
 <body>
 

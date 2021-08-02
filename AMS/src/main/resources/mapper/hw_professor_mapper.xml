@@ -14,6 +14,7 @@
 				,l.newlimitcount	"newlimitcount" 
 				,p.REGISTER_DATE	"register_date"
 				,p.PPERIOD			"pperiod"
+				,p.register_id "register_id"
 				,round((p.pperiod-sysdate)*24*60*60,2) "hwstatus"
 				,p.REGISTER_FILE	"register_file"
 				,p.PCOMMENT	   	 	"pcomment"
@@ -48,7 +49,7 @@ LEFT OUTER JOIN hw_professor p
          on     s.register_id=p.register_id
        join     students st
          on     s.SUBMIT_SID=st.SID
-      where 	p.register_id=61
+      where 	p.register_id=#{registerId}
       order by  s.SUBMIT_DATE asc
 	</select>
 	<!-- 강의년도 select -->

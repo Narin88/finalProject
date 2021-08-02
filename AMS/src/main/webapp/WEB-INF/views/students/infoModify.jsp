@@ -36,11 +36,11 @@
 		if (nPwd != cPwd) {
 			
 			alert('비밀번호가 일치하지 않습니다!');
-			frm.pwd.focus();
+			frm.pwd.focus();	// 왜 작동 안 함.
 		} else {
 			
 			alert('비밀번호가 변경되었습니다.');
-			frm.submit();
+			frm.submit();		// 왜 작동 안 함.
 		}
 	}
 </script>

@@ -21,11 +21,10 @@ public class StudentsController {
 	////////////////////////////////////////////////////////////
 
 	@RequestMapping("/studentInfo.do")
-	public String studentInfo(StudentsVO vo, Model model) {
+	public String studentInfo(StudentsVO vo, Model model, HttpSession session) {
 		// 학생 정보 조회 페이지로 이동 및 한 학생 정보 조회
 
-		vo.setSid("21002002");	// 세션으로 대체 필요.
-
+		vo.setSid((String) session.getAttribute("id"));
 		model.addAttribute("st", serv.studentInfo(vo));
 		
 		return "students/studentInfo.tiles";
@@ -44,19 +43,18 @@ public class StudentsController {
 	public String confirmingInfo(StudentsVO vo, Model model, HttpSession session) {
 		// 본인 확인 과정 > 학생 정보(비밀번호) 수정 페이지로 이동
 
-		// session id 값 받고 입력받은 아이디 값이랑 비교해야 함.
-
 		String path = null;
+		String realID = (String) session.getAttribute("id");
 		StudentsVO result = serv.selfAuthentication(vo);
-
-		if (result == null) {
-			// 조회 결과가 없으면
+		
+		if (result == null || !realID.equals(vo.getSid())) {
+			// 조회 결과가 없거나, 세션 아이디와 받은 아이디 값이 다를 경우
 
 			path = "students/infoConfirm";
 		} else {
-			// 조회 결과가 있으면
+			// 정보 일치할 경우
 
-			model.addAttribute("st", serv.selfAuthentication(vo));
+			// model.addAttribute("st", result);
 			path = "students/infoModify.tiles";
 		}
 
@@ -65,17 +63,17 @@ public class StudentsController {
 	
 	
 	@RequestMapping("/scoreView")
-	public String scoreView(StudentsVO vo, Model model) {
+	public String scoreView(StudentsVO vo, Model model, HttpSession session) {
 		// 성적 조회 페이지
-		vo.setSid("21002002");	// 세션 받기
 
+		vo.setSid((String) session.getAttribute("id"));
 		model.addAttribute("st", serv.scoreView(vo));
 
 		return "students/studentScoreView.tiles";
 	}
 	
 	@RequestMapping("/appliedLecture")
-	public String appliedLecture(StudentsVO vo, Model model){
+	public String appliedLecture(StudentsVO vo, Model model, HttpSession session){
 		// 수강 신청한(했던) 과목 조회
 
 		// select
@@ -83,7 +81,7 @@ public class StudentsController {
 		vo.setTerm(1);
 		
 		// session
-		vo.setSid("21002002");
+		vo.setSid((String) session.getAttribute("id"));
 		
 		model.addAttribute("st", serv.appliedLecture(vo));
 
@@ -99,7 +97,6 @@ public class StudentsController {
 		// common code
 		vo.setLyear("2021");
 		vo.setTerm(1);
-		
 
 		// select ( if )
 		vo.setDcode("004");
@@ -118,14 +115,12 @@ public class StudentsController {
 	}
 	
 	@RequestMapping("/studentUpdate.do")
-	public String studentUpdate(StudentsVO vo, Model model) {
+	public String studentUpdate(StudentsVO vo, Model model, HttpSession session) {
 		// 학생 정보 수정
 		
 		String path = null;
+		vo.setSid((String) session.getAttribute("id"));
 		int result = serv.studentUpdate(vo);
-
-		vo.setSid("21002002");	// 세션으로 받아야 함.
-		System.out.println("비밀번호 뭐로 받았냐 : " + vo.getPwd());
 
 		if (result != 0) {
 

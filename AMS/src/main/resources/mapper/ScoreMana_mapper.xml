@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.scoreMana.service.impl.ScoreManaMapper">
+	
+	<!-- 유저에 대한 정보 가져오기 -->
+	<select id="StudentSelectinfo" resultType="StudentsVO">
+		SELECT GRADE FROM STUDENTS WHERE SID = #{sId}
+	</select>
+	
+	<!-- 현재 등록된 수강목록조회 -->
 	<select id="EnrolmentList" resultType="LectureVO">
 		select l.opennum, l.lnum||l.dividenum as lnum, l.lyear||'-'||l.term as lyear, li.GRADE,
 		       li.lname, find_code_name(100,li.dcode) as division, l.NEWLIMITCOUNT, lr.lrname, l.timetable,
@@ -8,5 +15,36 @@
 		from lecture l, lecture_info li, lecture_room lr
 		where l.lnum = li.lnum
 		and l.lrcode = lr.lrcode
+		and li.GRADE = #{grade}||'학년'
 	</select>
+	
+	<!-- 수강신청 중복체크 -->
+	<select id ="OverlapCheck" parameterType="ScoreManaVO" resultType="ScoreManaVO">
+		select l.opennum, s.sid from lecture l, SCORE_MANA s
+		where l.OPENNUM = s.OPENNUM
+		AND S.SID = #{sId}
+		AND L.OPENNUM = #{openNum}
+	</select>
+	
+	<!-- 수강취소(삭제) -->
+	<delete id="AjaxEnrolmentDelete" parameterType="ScoreManaVO">
+		delete from score_mana
+		where sid = #{sId}
+		and opennum = #{openNum}
+	</delete>
+	
+	<insert id="AjaxEnrolmentInsert" parameterType="ScoreManaVO">
+		DECLARE
+			v_lnum varchar2(10);
+		begin
+			select DISTINCT l.LNUM
+			into v_lnum
+			from score_mana s, lecture l
+			where s.sid = ${sId}
+			and l.opennum = ${openNum};
+		  
+		  insert into score_mana(sid,opennum,retake)
+		  values (${sId},${openNum},retake_Check(${sId},v_lnum));
+		end;
+	</insert>
 </mapper>

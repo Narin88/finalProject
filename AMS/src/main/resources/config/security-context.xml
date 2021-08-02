@@ -21,7 +21,7 @@
 						password-parameter="pwd"
 						/>
 		<security:logout logout-url="/logout" logout-success-url="/goLogin" />
-		<security:csrf disabled="false" />
+		<security:csrf disabled="true" />
 	</security:http>
 	
 	<security:authentication-manager>

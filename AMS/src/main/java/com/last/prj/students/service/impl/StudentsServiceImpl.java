@@ -49,16 +49,11 @@ public class StudentsServiceImpl implements StudentsService {
 	}
 	
 	@Override
-	public StudentsVO selfAuthentication(StudentsVO vo) {
-		// 본인 인증
-		return map.selfAuthentication(vo);
-	}
-	
-	@Override
 	public int studentUpdate(StudentsVO vo) {
 		// 학생 정보 수정
 		
 		return map.studentUpdate(vo);
 	}
+
 
 }

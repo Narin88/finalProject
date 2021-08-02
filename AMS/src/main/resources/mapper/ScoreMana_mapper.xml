@@ -7,6 +7,6 @@
 		       (select count(*) from score_mana where opennum = l.opennum) as encount
 		from lecture l, lecture_info li, lecture_room lr
 		where l.lnum = li.lnum
-		and l.lrcode = lr.lrcode;
+		and l.lrcode = lr.lrcode
 	</select>
 </mapper>

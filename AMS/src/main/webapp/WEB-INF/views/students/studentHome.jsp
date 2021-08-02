@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>학생 정보 수정 페이지</title>
+<title>로그인했을 떄 첫 화면</title>
 </head>
 <body>
-
+	로그인하면 여기로
 </body>
 </html>

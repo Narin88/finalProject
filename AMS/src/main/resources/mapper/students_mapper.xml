@@ -7,19 +7,18 @@
 		SELECT M.MNAME, 
 		        P.PNAME,
 		        S.SID, S.SNAME, S.SADDRESS, S.EMAIL, S.SPHONE,
-		        S.ENTER_DATE, S.GRADE, S.TERM, S.SBIRTH, S.SGENDER, S.DISABLED,
-		        FIND_CODE_NAME(300, S.SSTATUS) STUDENT_STATUS
+		        S.ENTER_DATE, S.GRADE, (GRADE * TERM) TERM, S.SBIRTH, S.SGENDER, S.DISABLED,
+		        FIND_CODE_NAME(300, S.SSTATUS) SSTATUS
 		FROM MAJOR M, STUDENTS S, PROFESSOR P
 		WHERE M.MCODE = S.MCODE
 		AND S.MCODE = P.MCODE
-		AND P.POSITION = '001'
+		AND P.PID = S.PID
 		AND S.SID = #{sid}
 	</select>
 	
 	<!-- 학생 본인 성적 조회 -->	
 	<select id="scoreView" resultType="StudentsVO">
 		SELECT M.TOTAL, M.RANK, 
-		        S.GRADE,
 		        L.LYEAR, L.TERM, I.LNAME,
 		        I.CREDIT, FIND_CODE_NAME(100, I.DCODE) DIVISION
 		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I
@@ -27,16 +26,15 @@
 		AND M.OPENNUM = L.OPENNUM
 		AND L.LNUM = I.LNUM
 		AND S.SID = #{sid}
-		order by l.lyear, l.term
+		ORDER BY L.LYEAR, L.TERM
 	</select>
 	
 	
 	<!-- 학생 본인 수강 신청 과목 조회 -->
 	<select id="appliedLecture" resultType = "StudentsVO">
 		SELECT
-		    I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT,
-		    L.TIMETABLE, L.DIVIDENUM,
-		    P.PNAME, R.LRNAME
+		    I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, L.TIMETABLE, L.DIVIDENUM,
+   			P.PNAME, R.LRNAME, I.CREDIT
 		FROM STUDENTS S, SCORE_MANA M, PROFESSOR P,
 		    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R
 		WHERE S.SID = M.SID
@@ -48,13 +46,14 @@
 		AND L.LYEAR = #{lyear}
 		AND L.TERM = #{term}
 		AND S.SID = #{sid}
+		ORDER BY I.CREDIT
 	</select>
 	
 	<!-- 강의 시간표들 조회 -->
 	<select id="lectureLookUp" resultType = "StudentsVO">
-		SELECT I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION,
+		SELECT I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, L.DIVIDENUM,
 		        I.GRADE TARGET, I.CREDIT,
-		        P.PNAME, L.TIMETABLE, L.DIVIDENUM, R.LRNAME
+		        P.PNAME, L.TIMETABLE, R.LRNAME
 		FROM LECTURE L, LECTURE_INFO I, LECTURE_ROOM R, PROFESSOR P
 		WHERE P.PID = L.PID
 		AND L.PID = I.PID
@@ -72,6 +71,15 @@
 		FROM PROFESSOR
 		WHERE PNAME = #{pname}
 	</select>
+	
+	<!-- 학생 본인 인증 -->
+	<select id="selfAuthentication" resultType="StudentsVO">
+		SELECT SNAME, PWD
+		FROM STUDENTS
+		WHERE SID = #{sid}
+		AND PWD = #{pwd}
+	</select>
+	
 	
 	<!-- 학생 정보 수정 -->
 	<update id="studentUpdate">

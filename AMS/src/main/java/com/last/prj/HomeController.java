@@ -4,6 +4,7 @@ package com.last.prj;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,7 +32,7 @@ public class HomeController {
 	private LogService dao;
 
 	@RequestMapping("home")
-	public String home(HttpServletRequest req, Model model) {
+	public String home(HttpServletRequest req, Model model, HttpSession session) {
 		// 로그입력
 		Map<String, String> map = LogInfo.getInfo(req);
 		LogVO vo = new LogVO();
@@ -54,6 +55,8 @@ public class HomeController {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		model.addAttribute("user", userDetails.getUsername());
+		//세션 아이디 값 가져오기 
+	    session.setAttribute("id", userDetails.getUsername());
 		
 		return "home";
 	}
@@ -72,4 +75,5 @@ public class HomeController {
 		return "login/login";
 	}
 	
+
 }

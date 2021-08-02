@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix = "sec" %>
 <!DOCTYPE html>
 <html>
 <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
@@ -107,7 +108,8 @@
 					</table>
 	
 		<br/>
-		<form action="studyPlanInsert" method="post" id="frm" name="frm">
+		<form action="studyPlanInsert" method="post" id="frm" name="frm" >
+		<sec:csrfInput/>
 		<input type="hidden" name="opennum" value="${spList.opennum}">
 		
 					<label>#과목개요는 필수 입력 사항입니다</label>

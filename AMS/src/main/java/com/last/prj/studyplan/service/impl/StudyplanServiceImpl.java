@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.last.prj.lectureRoom.service.LectureRoomVO;
-import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.stuyplan.service.StudyplanJoinVO;
 import com.last.prj.stuyplan.service.StudyplanService;
 import com.last.prj.stuyplan.service.StudyplanVO;
@@ -35,7 +33,7 @@ public class StudyplanServiceImpl implements StudyplanService {
 	}
 	// 강의 리스트 불러오기
 	@Override
-	public List<StudyplanJoinVO> studyPlanList() {
+	public List<StudyplanJoinVO> studyPlanList(StudyplanJoinVO vo) {
 		return map.studyPlanList();
 	}
 	//값 받아오기

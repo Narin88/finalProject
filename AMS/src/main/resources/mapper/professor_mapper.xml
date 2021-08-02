@@ -7,4 +7,21 @@
 		PROFESSOR
 		WHERE PID= #{PID}
 	</select>
+	
+	
+	<!-- 강의 정보리스트 -->	
+	<select id="lectureList" resultType="ProfessorLectureVO">	
+		select find_code_name(100, v.dcode) as division, v.CREDIT,v.grade,v.lname, p.pname, p.email,
+		p.PPHONE, l.*, m.DNAME, m.MNAME, r.LRNAME, p.PSTATUS, s.w1, s.w2, s.w3, s.w4, s.w5, s.w6, s.w7, s.w8, s.w9, s.w10, s.w11, s.w12, s.w13, s.w14, s.w15, s.w16,s.content
+		from lecture_info v, LECTURE l, professor p, MAJOR_VIEW m,
+		LECTURE_ROOM r, study_plan s
+		where v.LNUM = l.LNUM
+		and l.pid = p.pid
+     	and l.opennum = s.opennum
+		and p.mcode = m.mcode
+		and l.LRCODE = r.LRCODE
+    	and l.lyear = to_char(sysdate,'YYYY') 
+		and l.PID = #{Pid}
+	</select>	
+	
 </mapper>

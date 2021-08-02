@@ -89,6 +89,7 @@
     <div class="modal-body">
 	   <h2> 수강 등록 </h2>
 	   <form id = "frm" action="LectureInsert" >
+	   <sec:csrfInput/>
 	   <table class="lecutretbl" id="lecutretbl"  border="1">
 	   		<thead>
 	   		<tr>

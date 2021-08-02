@@ -1,9 +1,7 @@
 package com.last.prj.lecture.web;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,8 +37,8 @@ public class LecutreController {
 	}
 	
 	@RequestMapping("ProfessorLectureList")
-	public String lectureList(Model model, HttpServletRequest req) {
-		String pId = req.getParameter("id");
+	public String lectureList(Model model, HttpSession session) {
+		String pId = (String) session.getAttribute("user");
 		model.addAttribute("lectures",Ldao.LectureList(pId));
 		model.addAttribute("lroom",LRdao.getLectureRoom());
 		return "Lecture/ProfessorLectureList.tiles";

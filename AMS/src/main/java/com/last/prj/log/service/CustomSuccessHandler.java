@@ -34,6 +34,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		// 세션ID 등록
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		HttpSession session = request.getSession();
+		
 		session.setAttribute("id", userDetails.getUsername());
 
 		// 로그입력

@@ -25,7 +25,6 @@ public class HomeController {
 //			String header = (String) em.nextElement();
 //			System.out.println(header + ": " + req.getHeader(header));
 //		}
-		
 		return "home";
 	}
 

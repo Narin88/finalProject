@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
@@ -12,6 +11,7 @@
 </head>
 
 <body>
+	<h1>${id }</h1>
 	<div>
 		<form action="uploadTest" method="post" enctype="multipart/form-data">
 			<input type="file" name="file"><br />
@@ -22,7 +22,7 @@
 			<input type="submit" value="업로드">
 		</form>
 		<sec:authorize access="isAuthenticated()">
-			로그인 유저 ${user}
+			로그인 유저 ${id}
 		<form action="logout" method="post">
 			<sec:csrfInput/>
 			<button>로그아웃</button>

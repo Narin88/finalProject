@@ -24,7 +24,7 @@
 		height:500px;
 		}
 		.hwContainer{
-			margin-top:200px;
+			margin-top:150px;
 		}
 		.HwSearch{
 			padding: 1em;
@@ -36,19 +36,11 @@
 </head>
 <body>
 		<div class="box1">	
-
-			
-			<!-- TEST -->
-			
-			
 			<h3> ' ' 교수님 등록한 과제 LIST</h3>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
 			<div class="HwSearch">		
 				<form id="frm" name="frm"  method="post">
-					<input type="hidden" id="ye" name="ye">
-					<input type="hidden" id="te" name="te">
-					<input type="hidden" id="ln" name="ln">
 						<label for="lyear">강의년도:</label>						
 							<select name="lyear" id="lyear">		
 									<option value="">선택 </option>			  
@@ -68,47 +60,25 @@
 							
 						<label for="lcode">강의명:</label>
 							<select name="lcode" id="lcode">
-							<option value="">선택</option>	
+							<option value="">선택 </option>	
 							  <c:forEach items="${lName}" var="lName">
-									  <option value="${lName.lcode }" <c:if test="${lName.lcode==param.lcode }"> selected="selected"</c:if>>${lName.lname } </option>	
+									  <option value="${lName.lcode }" <c:if test="${lName.lcode==param.lcode }"> selected="selected"</c:if>>${lName.lname } </option>
 								 </c:forEach>	 
 							</select>
 						<span> 
-						
-							<button type="button" onclick="selectSubmit();">검색</button>
+							<button type="submit">검색</button>
 							<button type="button" onclick="resetFunction();">초기화</button>
 						</span>
 				 </form>
 			 </div>	
-			 			<script>
-			 				function selectSubmit(){
-			 					var a=$("#lcode option:checked").text();	
-				 				frm.ln.value=a;
-				 				frm.submit();
-			 				}
-			 				
-			 			</script>
-						 <div>					 
-				 			<h4> 			 			
-				 				<c:choose>
-					 				<c:when test="${reName eq '선택'}">
-					 					<span style="color:brown;">'  ${reYear } 년   ${reTerm }  학기  '  </span>로 검색한 결과..
-					 				</c:when>		
-				 					<c:otherwise>
-				 						<span style="color:brown;">'  ${reYear } 년  ${reTerm }  학기   ${reName } '  </span>로 검색한 결과..
-				 					</c:otherwise>
-				 				</c:choose>
-				 			</h4>
-						</div>
-						<div>
-							
-				 		</div>
+			 <div>
+				 	<h4>검색</h4>
+			</div>
 				<br>
-							 <h4>
-								 <c:if test="${reYear eq '' and reTerm eq '' and reName eq '선택' }">
-					 				<span style="color:cornflowerblue;">전체리스트 조회결과</span>
-					 			</c:if>	
-				 			</h4>	
+					<input type="radio" name="ing" value="진행중" checked="checked">진행중
+					<input type="radio" name="end" value="마감">마감
+				<br>
+				<br>
 			
 			<div class="hwTable1">
 				<table BORDER="1" style="width:100%;text-align:center;">
@@ -128,23 +98,10 @@
 					<tr>
 						 <td>${list.lyear }년</td>  <td>${list.term }학기</td>	<td>${list.lname }</td> <td>${list.lrcode }</td>
 						 <td style="text-align:center;"> <span style="color:red;">( ' - ' )</span></td>
-						 <td><fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> </td> 
-						 <td>~<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일 HH시mm분"/>까지 <br>
-						 <!-- 진행중 ,마감 (음수,양수값으로) -->
-						 <c:if test="${list.hwstatus > 0 }">
-						 <span style="color:red;">진행중</span>
-						  </c:if>
-						  <c:if test="${list.hwstatus <= 0}">
-						  <span style="color:blue;">마감</span>
-						  </c:if>
-						 </td> 						
+						 <td><fmt:formatDate value="${list.register_date }" pattern="yy.MM.d H시mm분" /> </td> 
+						 <td>~<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일"/>까지 <br><span style="color:red;">00:00분 남음(예정)</span></td> 
 						 <td>${list.register_file }</td>	       
-						  <td>
-						  <span style="color:red;">${list.submitCount }</span>
-						  /
-						  <span style="font-weight:bold;">${list.newlimitcount }</span>
-						  </td>	
-						  <td> <button>조회</button></td>
+						  <td><span style="color:red;">4</span>/<span style="font-weight:bold;">${list.newlimitcount }</span></td>	<td> <button>조회</button></td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -175,6 +132,25 @@
 				</table>
 			</div>
 		</div>
+		<!-- select 값 가져오는 쿼리 -->
+		<script>
+		
+		var year=$("#hwYears").prop("selectedIndex");
+		$("select[name=hwYears]").change(function(){
+			var result1=($(this).val());
+		//	console.log($("select[name=hwYears] option:selected").text());
+		});
+		var term=$("#hwTerm").prop("selectedIndex");
+		$("select[name=hwTerm]").change(function(){
+			var result2=($(this).val());	
+			frm.hwT.value=result2;
+		});
+		var lname=$("#hwLname").prop("selectedIndex");
+		$("select[name=hwLname]").change(function(){
+			var result3=($(this).val());
+			frm.hwL.value=result3;
+		});
+		</script>
 		<script>
 		function resetFunction(){
 			$("#lyear option:eq(0)").prop("selected",true);

@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <META charset="UTF-8">
 <head> 
 	<title>(교수)과제</title>
@@ -17,7 +17,7 @@
 		.hwTable1{
 		width:100%;
 		border:1px solid gray;
-		height:380px;
+		height:480px;
 		}
 		.hwTable2{
 		width:100%;
@@ -25,7 +25,7 @@
 		height:500px;
 		}
 		.hwContainer{
-			margin-top:200px;
+			margin-top:240px;
 		}
 		.HwSearch{
 			padding: 1em;
@@ -34,6 +34,7 @@
 			border:1px solid gray;
 		}
 	</style>
+	
 </head>
 <body>
 		<div class="box1">	
@@ -146,14 +147,69 @@
 						  /
 						  <span style="font-weight:bold;">${list.newlimitcount }</span>
 						  </td>	
-						  <td> <button>조회</button></td>
+						  <!-- 교수가 올린과제의 제출학생 리스트 출력 -->
+						  <td> 
+						  	<button type="button" id="inquiry" data-id="${list.register_id }">조회</button>
+						  <!-- <button type="button" onclick="inquiry('${list.register_id}')">조회</button> -->			  		  	
+						  </td>
 					</tr>
 					</c:forEach>
 				</table>
+					 <!--  register_id 값을 넘겨서 hw_student에서 중복된값을 가져와서 과제제출 목록리스트 뜨게하기 -->
+						<script>
+					//과제제출 조회요청
+							$(".hwTable1").on("click","#inquiry",function(){
+								$(this).data('id'); //
+								var a= $(this).data('id');
+								console.log(a);
+								$.ajax({
+									type:"post",
+									url:"inquiry",
+									data:{ 
+										registerId :a
+										},
+									dataType:"json",
+									success: function(data){
+										$("tfoot").empty();
+										for(var i of data){
+											$('<tr>')
+											.append($('<td id="sId">').html(i.sid))
+											.append($('<td>').html(i.sname))
+											.append($('<td>').html(i.submit_file))
+											.append($('<td>').html(i.submit_date))
+											.append($('<td id="sc">').html(i.s_comment))
+											.append($('<td>').html(i.score))
+											.append($('<td>').html('<button type="button" onclick="scoreIn();">점수IN</button>'))
+											.appendTo('tfoot');					
+										}			
+									},
+									error: function(error){
+										alert("error");
+									}
+								});
+							});
+					
+					//점수IN
+					function scoreIn(){
+						//
+							var a=$(event.target).closest('tr').find('td').eq(0).text();
+							console.log(a);
+							
+										
+						
+					}
+					
+					</script>
+						
+						 <!--<form id="frm2" name="frm2" method="post">
+						<sec:csrfInput/>
+							<input type="hidden" id="register_id" name="register_id"/>
+						</form>
+					  END -->
 			</div>
 		</div>
 		<div class="hwContainer">
-		<h3> ' ??  ' 조회목록</h3>
+		<h3> 조회목록</h3>
 		<!-- submit_SID값으로 학생정보 가져오기 -->
 			<div class="hwTable2">
 				<table border="1" style="width:100%; text-align:center;">
@@ -161,19 +217,7 @@
 						<th>학생학번</th>	<th>학생이름(SNAME)</th>	 <th>제출파일</th>	
 						<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>
 					</tr>
-					<c:forEach items="${submitList}" var="submitList">
-					<tr>
-						<td>${submitList.sid }</td>	<td>${submitList.sname }</td> <td>${submitList.submit_file }</td>
-						<td><fmt:formatDate value="${submitList.submit_date }" pattern="yy-MM-d HH:mm:s" /></td>	<td>${submitList.scomment }</td>
-						<td > 
-							<c:if test="${submitList.score eq null}">
-								<span style="color:red;">NULL</span>
-							</c:if> 
-								${submitList.score }
-							</td>
-							<td> <button>바튼</button></td>
-					</tr>
-					</c:forEach>
+					<tfoot></tfoot>
 				</table>
 			</div>
 		</div>

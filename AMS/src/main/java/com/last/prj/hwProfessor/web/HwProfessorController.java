@@ -7,10 +7,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.velocity.runtime.directive.Parse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.hwProfessor.service.HwProfessorService;
 import com.last.prj.hwProfessor.service.HwProfessorVO;
@@ -30,24 +34,11 @@ public class HwProfessorController {
 //		if (vo.getTerm()==null ||"".equals(vo.getTerm())) {
 //			vo.setTerm("1");
 //		}
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat format2 = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
-
-		Date time = new Date();
-
-		String time1 = format1.format(time);
-		String time2 = format2.format(time);
-
-		System.out.println(time1);
-		System.out.println(time2);
-		// 검색했을때의 값
+		// 조건 검색했을때의 값
 		String year = req.getParameter("lyear");
 		String term = req.getParameter("term");
 		String lname = req.getParameter("ln");
 
-		System.out.println(term);
-		System.out.println(year);
-		System.out.println(lname);
 		model.addAttribute("reTerm", term);
 		model.addAttribute("reYear", year);
 		model.addAttribute("reName", lname);
@@ -62,11 +53,24 @@ public class HwProfessorController {
 		// 강의명 select
 		List<Map<String, Object>> lName = service.hwLname(vo);
 		model.addAttribute("lName", lName);
-		// 해당강의 과제제출 목록
-		List<Map<String, Object>> submitResult = service.hw_submitList(vo);
-		model.addAttribute("submitList", submitResult);
 
+		
+			
 		return "hw_professor/hw_professorList.tiles";
+			
 	}
 
+	@RequestMapping("inquiry")
+	@ResponseBody
+	public List<Map<String, Object>> inquiry(HttpServletRequest req,Model model,HwProfessorVO vo) {
+		// 해당강의 과제제출 목록
+					//String register_id=req.getParameter("register_id");
+					//vo.setRegisterId(register_id);
+						//	System.out.println(register_id);
+					//List<Map<String, Object>> submitResult = service.hw_submitList(vo);
+					//model.addAttribute("submitList", submitResult);
+		return  service.hw_submitList(vo);
+	}
+		
+		
 }

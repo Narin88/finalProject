@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class HwProfessorVO {
 	
-	private int registerId;		//과제등록번호
+	private String registerId;		//과제등록번호
 	private String opennum;		//강의번호
 	private Date registerDate;  //등록날짜
 	private Date pperiod;		//제출기간

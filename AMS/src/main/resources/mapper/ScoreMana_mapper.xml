@@ -34,17 +34,12 @@
 	</delete>
 	
 	<insert id="AjaxEnrolmentInsert" parameterType="ScoreManaVO">
-		DECLARE
-			v_lnum varchar2(10);
-		begin
-			select DISTINCT l.LNUM
-			into v_lnum
-			from score_mana s, lecture l
-			where s.sid = ${sId}
-			and l.opennum = ${openNum};
-		  
 		  insert into score_mana(sid,opennum,retake)
-		  values (${sId},${openNum},retake_Check(${sId},v_lnum));
-		end;
+		  values (${sId},${openNum},retake_Check(${sId},${openNum}))
 	</insert>
+	
+	<select id="RetakeChek" parameterType="ScoreManaVO" resultType="string">
+	select retake_check(#{sId},#{openNum})
+	from dual
+	</select>
 </mapper>

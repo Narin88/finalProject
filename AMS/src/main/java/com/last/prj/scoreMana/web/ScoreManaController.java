@@ -66,6 +66,7 @@ public class ScoreManaController {
 		return i;
 	}
 	
+	//수강 취소(삭제)
 	@RequestMapping("AjaxEnrolmentDelete")
 	public String AjaxEnrolmentDelete(@RequestParam("openNum") String openNum,Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -85,15 +86,25 @@ public class ScoreManaController {
 		return "redirect:ScoreManaPage";
 	}
 	
+	//수강신청(insert)
 	@RequestMapping("AjaxEnrolmentInsert")
-	public String AjaxEnrolmentInsert(@RequestParam("openNum") String openNum) {
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String sId = userDetails.getUsername();
+	public String AjaxEnrolmentInsert(@RequestParam("openNum") String openNum, HttpSession session) {
+		String sId = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
 		vo.setSId(sId);
 		vo.setOpenNum(openNum);
-		int i = SMdao.AjaxEnrolmentInsert(vo);
-		System.out.println(vo);
+		SMdao.AjaxEnrolmentInsert(vo);
 		return "redirect:ScoreManaPage";
+	}
+	
+	//재이수 확인
+	@RequestMapping("retakeChek")
+	@ResponseBody
+	public String retakeChek(@RequestParam("openNum") String openNum,HttpSession session) {
+		String sId = (String) session.getAttribute("id");
+		ScoreManaVO vo = new ScoreManaVO();
+		vo.setSId(sId);
+		vo.setOpenNum(openNum);
+		return SMdao.RetakeChek(vo);
 	}
 }

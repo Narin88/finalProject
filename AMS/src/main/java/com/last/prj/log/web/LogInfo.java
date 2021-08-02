@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public class LogInfo {
+	
 	public static Map<String, String> getInfo(HttpServletRequest req) {
 		String ip = req.getHeader("X-FORWARED_FOR");
 		String browser = req.getHeader("User-Agent");
@@ -19,7 +20,15 @@ public class LogInfo {
 
 		// 웹로직 서버일 경우
 		if (ip == null || ip.length() == 0) {
-			ip = req.getHeader("Wl-Proxy-Client-IP");
+			ip = req.getHeader("WL-Proxy-Client-IP");
+		}
+		
+		if (ip == null || ip.length() == 0) {
+			ip = req.getHeader("HTTP_CLIENT_IP");
+		}
+		
+		if (ip == null || ip.length() == 0) {
+			ip = req.getHeader("HTTP_X_FORWARDED_FOR");
 		}
 
 		if (ip == null || ip.length() == 0) {

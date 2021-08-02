@@ -1,7 +1,7 @@
 package com.last.prj;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +17,15 @@ import com.last.prj.common.FileUpload;
 public class HomeController {
 
 	@RequestMapping("home")
-	public String home(HttpServletRequest req, Model model, HttpSession session) {
+	public String home() {
+		try {
+			InetAddress inetAddress = InetAddress.getLocalHost();
+			System.out.println(inetAddress.getHostAddress());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
 		
-		// 헤더 종류
-//		Enumeration<String> em = req.getHeaderNames();
-//		while(em.hasMoreElements()) {
-//			String header = (String) em.nextElement();
-//			System.out.println(header + ": " + req.getHeader(header));
-//		}
+		
 		return "home";
 	}
 

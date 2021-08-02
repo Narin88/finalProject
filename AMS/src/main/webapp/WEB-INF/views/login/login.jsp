@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,14 +23,15 @@ pageEncoding="UTF-8"%>
         <!-- Icon -->
         <div class="fadeIn first">
           <img
-            src="http://danielzawadzki.com/codepen/01/icon.svg"
+            src="resources/loginpicture/logo.png"
             id="icon"
-            alt="User Icon"
+            alt="No.M mark"
           />
         </div>
 
         <!-- Login Form -->
         <form action="logincheck" method="post">
+ 		  <sec:csrfInput/>       
           <input
             type="text"
             id="login"

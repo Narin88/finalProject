@@ -7,12 +7,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<security:http pattern="/resources/**" security="none" />
-	<security:http pattern="/css/**" security="none" />
 	
 	<security:http>
-		<security:intercept-url pattern="/views/login/login.jsp" access="permitAll()" />
-		<security:intercept-url pattern="/views/**" access="isAuthenticated()" />
-		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" />
+		<security:intercept-url pattern="/goLogin" access="permitAll()" />
+		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_PRO', 'ROLE_STD')"/>
+		<!-- <security:intercept-url pattern="/WEB-INF/views/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" /> -->
 		<security:form-login 
 						login-page="/goLogin"
 						login-processing-url="/logincheck"
@@ -20,8 +20,8 @@
 						username-parameter="id"
 						password-parameter="pwd"
 						/>
-		<security:logout logout-url="/logout"  logout-success-url="/goLogin" />
-		<security:csrf disabled="true" />
+		<security:logout logout-url="/logout" logout-success-url="/goLogin" />
+		<security:csrf disabled="false" />
 	</security:http>
 	
 	<security:authentication-manager>

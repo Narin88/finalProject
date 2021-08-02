@@ -2,6 +2,7 @@
 <%@ page session="false"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <html>
 
@@ -21,8 +22,9 @@
 			<input type="submit" value="업로드">
 		</form>
 		<sec:authorize access="isAuthenticated()">
-			로그인 유저 ${user.username}
+			로그인 유저 ${user}
 		<form action="logout" method="post">
+			<sec:csrfInput/>
 			<button>로그아웃</button>
 		</form>
 </sec:authorize>

@@ -7,7 +7,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <META charset="UTF-8">
-<head>
+<head> 
 	<title>(교수)과제</title>
 	<style>
 		.box1{

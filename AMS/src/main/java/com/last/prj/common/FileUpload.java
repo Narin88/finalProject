@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class FileUpload {
 	public List<String> uploadTest(MultipartHttpServletRequest request) {
-		String rootUploadDir = "C:" + File.separator + "upload";
+		String rootUploadDir = "C:" + File.separator + "upload"; // 업로드 주소
 
 		File dir = new File(rootUploadDir);
 

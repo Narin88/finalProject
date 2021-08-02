@@ -84,6 +84,5 @@
 		</beans:bean>
 	</interceptors>
 	<!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
-
-
+	
 </beans:beans>

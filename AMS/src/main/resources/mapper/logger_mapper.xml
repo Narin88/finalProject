@@ -10,7 +10,7 @@
 							visit_cookie
 							)
 		VALUES (
-				logger_seq.NEXTVAL,
+				#{visitId},
 				#{visitIp},
 				SYSDATE,
 				#{visitAgent},

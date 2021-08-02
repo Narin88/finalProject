@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -46,6 +47,7 @@
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
 			<div class="HwSearch">		
 				<form id="frm" name="frm"  method="post">
+				<sec:csrfInput/>
 					<input type="hidden" id="ye" name="ye">
 					<input type="hidden" id="te" name="te">
 					<input type="hidden" id="ln" name="ln">

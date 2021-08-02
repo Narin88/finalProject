@@ -10,7 +10,7 @@
 	
 	<security:http>
 		<security:intercept-url pattern="/goLogin" access="permitAll()" />
-		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_PRO', 'ROLE_STD')"/>
+		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_PRO', 'ROLE_STD')" />
 		<!-- <security:intercept-url pattern="/WEB-INF/views/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" /> -->
 		<security:form-login 
@@ -19,8 +19,12 @@
 						default-target-url="/home"
 						username-parameter="id"
 						password-parameter="pwd"
+						authentication-success-handler-ref="customSuccessHandler"
 						/>
-		<security:logout logout-url="/logout" logout-success-url="/goLogin" />
+		<security:logout logout-url="/logout" 
+						 logout-success-url="/goLogin"
+						 invalidate-session="true"
+						  />
 		<security:csrf disabled="false" />
 	</security:http>
 	
@@ -31,12 +35,16 @@
 					"select SID, '{noop}' || PWD, 1
 					from role_chk
 					where sid = ?"
-				authorities-by-username-query=			 
+				authorities-by-username-query=	
 					"select sid, ROLE_NAME
 					from role_chk
 					where sid = ?" />
 					<!-- <security:password-encoder hash="bcrypt" /> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
+	
+	<beans:bean id="customSuccessHandler" class="com.last.prj.log.service.CustomSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/" />
+	</beans:bean>
 
 </beans:beans>

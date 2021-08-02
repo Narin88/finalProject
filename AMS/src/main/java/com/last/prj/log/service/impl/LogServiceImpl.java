@@ -12,8 +12,8 @@ public class LogServiceImpl implements LogService {
 	LogMapper dao;
 
 	@Override
-	public int insertLogger(LogVO vo) {
-		return dao.insertLogger(vo);
+	public void insertLogger(LogVO vo) {
+		dao.insertLogger(vo);
 	}
 	
 }

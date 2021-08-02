@@ -26,14 +26,12 @@
 //grid start
 //grid api-source
 	const dataSource = {
-	  withCredentials: false,  
-	  initialRequest: false,
 	  contentType: 'application/json',
 	  api: {
 		readData: {
 			url: 'EnrolmentList',
 			method: 'GET'
-		},
+		}
 	  }
 	};
 		
@@ -41,7 +39,12 @@
        // GRID 를 보여준다.
 	var grid = new tui.Grid( {
 		el: document.getElementById('grid'),
-		data: dataSource,
+		data: {
+				api:{
+					readData:{ url: 'EnrolmentList',method: 'GET' }
+				}
+		},
+
 		rowHeaders: ['checkbox'],
 		pagination: true,   //페이징 처리
 	    pageOptions: {

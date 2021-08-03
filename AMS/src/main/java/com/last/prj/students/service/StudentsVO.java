@@ -46,6 +46,7 @@ public class StudentsVO {
 	// lecture_info 테이블 (강의 정보)
 	private String division;	// 이수 구분
 	private String dcode;		// 이수 구분 코드
+	private String dname;		// 학과 이름
 	private String target;		// 대상 학년
 	
 	// lecture_room 테이블 ( 강의실 테이블 )

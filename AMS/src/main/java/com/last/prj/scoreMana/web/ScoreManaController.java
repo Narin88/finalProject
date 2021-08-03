@@ -3,11 +3,10 @@ package com.last.prj.scoreMana.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +24,18 @@ public class ScoreManaController {
 	ScoreManaService SMdao;
 	
 	@RequestMapping("ScoreManaPage")
-	public String ScoreManaPage() {
+	public String ScoreManaPage(Model model, HttpSession session) {
+		String sId = (String) session.getAttribute("id");
+		StudentsVO vo = new StudentsVO();
+		vo.setSid(sId);
+		model.addAttribute("student",SMdao.EnrolmentStudent(vo));
 		return "scoreMana/Enrolment.tiles";
 	}
 
 	@RequestMapping("EnrolmentList")
 	@ResponseBody
-	public Map<String, Object> EnrolmentList(){
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String sId = userDetails.getUsername();
+	public Map<String, Object> EnrolmentList(HttpSession session){
+		String sId = (String) session.getAttribute("id");
 		StudentsVO vo = SMdao.StudentSelectinfo(sId);
 		int grade = vo.getGrade();
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -48,12 +50,10 @@ public class ScoreManaController {
 	@RequestMapping("AjaxConfirm")
 	@ResponseBody
 	public int AjaxConfirm(@RequestParam("openNum") String openNum, HttpSession session) {
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String sId = userDetails.getUsername();
+		String sId = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
 		vo.setSId(sId);
 		vo.setOpenNum(openNum);
-		System.out.println(vo.getSId()+"//"+vo.getOpenNum());
 		ScoreManaVO vo2 = SMdao.OverlapCheck(vo);
 		
 		System.out.println(vo2);
@@ -68,9 +68,8 @@ public class ScoreManaController {
 	
 	//수강 취소(삭제)
 	@RequestMapping("AjaxEnrolmentDelete")
-	public String AjaxEnrolmentDelete(@RequestParam("openNum") String openNum,Model model) {
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String sId = userDetails.getUsername();
+	public String AjaxEnrolmentDelete(@RequestParam("openNum") String openNum,Model model, HttpSession session) {
+		String sId = (String) session.getAttribute("id");
 		String message = "";
 		ScoreManaVO vo = new ScoreManaVO();
 		vo.setSId(sId);
@@ -98,13 +97,22 @@ public class ScoreManaController {
 	}
 	
 	//재이수 확인
-	@RequestMapping("retakeChek")
+	@RequestMapping("AjaxRetakeChek")
 	@ResponseBody
-	public String retakeChek(@RequestParam("openNum") String openNum,HttpSession session) {
+	public String AjaxRetakeChek(@RequestParam("openNum") String openNum, HttpSession session) {
 		String sId = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
 		vo.setSId(sId);
 		vo.setOpenNum(openNum);
 		return SMdao.RetakeChek(vo);
+	}
+	
+	@RequestMapping("AjaxcreditCheck")
+	@ResponseBody
+	public int AjaxCreditCheck(HttpSession session) {
+		String sId = (String) session.getAttribute("id");
+		int result = SMdao.AjaxCreditCheck(sId);
+		System.out.println(result);
+		return result;
 	}
 }

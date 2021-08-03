@@ -40,7 +40,7 @@
 
 var clsData = [
 	<c:forEach items="${lectures }" var="lec">{
-		openNum: '${lec.openNum}', lNum: '${lec.LNum}${lec.divideNum}', lYear: '${lec.LYear}-${lec.term}', grade: '${lec.grade}', lName: '${lec.LName}', book: '${lec.book}', division: '${lec.division}', newLimitCount: '${lec.newLimitCount}', lrName: '${lec.lrName}', timeTable: '${lec.timeTable}'
+		openNum: '${lec.openNum}', lNum: '${lec.LNum}-${lec.divideNum}', lYear: '${lec.LYear}-${lec.term}', grade: '${lec.grade}', lName: '${lec.LName}', book: '${lec.book}', division: '${lec.division}', newLimitCount: '${lec.newLimitCount}', lrName: '${lec.lrName}', timeTable: '${lec.timeTable}'
 	}
 	<c:if test='${!empty lec.openNum}'>
 	,

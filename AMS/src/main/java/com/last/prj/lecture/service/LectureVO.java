@@ -18,6 +18,9 @@ public class LectureVO {
 	private String dateStatus; //강의상태
 	private String lName; //강의 이름
 	
+	private int credit; //학점
+	private String dName; //학과이름
+	private String mName; //전공이름
 	private String openNum; //강의 등록번호
 	private String grade; //학년
 	private String division; //이수구분

@@ -1,7 +1,5 @@
 package com.last.prj.students.service;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +16,7 @@ public class StudentsVO {
 	private String saddress;	// 학생 주소
 	private String email;		// 이메일
 	private String sphone;		// 학생 연락처
-	private Date enterDate;		// 입학일
+	private String enterDate;	// 입학일
 	private int grade;			// 학년
 	private String pwd;			// 비밀번호
 	private String sstatus;		// 학적
@@ -60,5 +58,6 @@ public class StudentsVO {
 	
 	// professor 테이블 ( 교수 )
 	private String pname;		// 교수명
+	private String pphone;		// 교수 연락처
 	
 }

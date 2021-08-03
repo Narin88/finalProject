@@ -13,7 +13,7 @@
 		var xhr = new XMLHttpRequest();
 		
 		// 요청 보낼 방식, 주소, 비동기 여부 설정
-		xhr.open('POST', '/infoConfirm.do', true);
+		xhr.open('POST', '/infoConfirm', true);
 		
 		// HTTP 요청 헤더 설정 - POST 방식에 필요
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -42,7 +42,7 @@
 
 <!-- form 태그 추가 사항 있음 -->
 <!-- 
-<form id = "frm" method = "POST" action = "infoConfirm.do">
+<form id = "frm" method = "POST" action = "infoConfirm">
 	<div align = "center">
 		<div class = "idConfirm">
 			<input type = "text" name = "sid" placeholder = "ID">
@@ -85,7 +85,7 @@
 	</div>
 
     <!-- Login Form -->
-	<form action="infoConfirm.do" method="post">
+	<form action="infoConfirm" method="post">
     	<sec:csrfInput/>
 		<input
 	        type="text"

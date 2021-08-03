@@ -20,7 +20,7 @@ public class StudentsController {
 
 	////////////////////////////////////////////////////////////
 
-	@RequestMapping("/studentInfo.do")
+	@RequestMapping("/studentInfo")
 	public String studentInfo(StudentsVO vo, Model model, HttpSession session) {
 		// 학생 정보 조회 페이지로 이동 및 한 학생 정보 조회
 
@@ -39,7 +39,7 @@ public class StudentsController {
 	}
 
 	
-	@RequestMapping("/infoConfirm.do")
+	@RequestMapping("/infoConfirm")
 	public String confirmingInfo(StudentsVO vo, Model model, HttpSession session) {
 		// 본인 확인 과정 > 학생 정보(비밀번호) 수정 페이지로 이동
 
@@ -89,52 +89,55 @@ public class StudentsController {
 	}
 
 	
-
-	@RequestMapping("/lectureLookUp.do")	// do를 적어야 하나 말아야 하나
-	public String lectureLookUp(StudentsVO vo, Model model) {
-		// 강의 시간표들 조회 (수강 신청 과정)
-
-		// common code
-		vo.setLyear("2021");
-		vo.setTerm(1);
-
-		// select ( if )
-		vo.setDcode("004");
-		vo.setLocation("인문대");
-
-		model.addAttribute("lec", serv.lectureLookUp(vo));
-
-		return "students/lectureLookUp.tiles";
-	}
+// 진호 씨랑 겹침 안 해도 됨
+//	@RequestMapping("/lectureLookUp.do")
+//	public String lectureLookUp(StudentsVO vo, Model model) {
+//		// 강의 시간표들 조회 (수강 신청 과정)
+//
+//		// common code
+//		vo.setLyear("2021");
+//		vo.setTerm(1);
+//
+//		// select ( if )
+//		vo.setDcode("004");
+//		vo.setLocation("인문대");
+//
+//		model.addAttribute("lec", serv.lectureLookUp(vo));
+//
+//		return "students/lectureLookUp.tiles";
+//	}
 	
-	@RequestMapping("/professorSelect.do")	// 이게 필요한가? location에 직접 값 넣으면 될 것도 같은데?
-	public ProfessorVO professorSelect(ProfessorVO vo) {
-		// 교수 정보 보기
-		
-		return serv.professorSelect(vo);
-	}
+	// 모달에서 클릭 이벤트 발생시킬 때 사용하려고 했는데 이벤트 발생 페이지에서 교수 정보 다 불러 오면 굳이 필요 없음
+//	@RequestMapping("/professorSelect")
+//	public String professorSelect(ProfessorVO vo, Model model) {
+//		// 교수 정보 보기
+//		
+//		model.addAttribute("prf", serv.professorSelect(vo));
+//		
+//		return "students/appliedLecture";
+//	}
 	
-	@RequestMapping("/studentUpdate.do")
+	@RequestMapping("/studentUpdate")
 	public String studentUpdate(StudentsVO vo, Model model, HttpSession session) {
 		// 학생 정보 수정
 		
 		String path = null;
 		vo.setSid((String) session.getAttribute("id"));
 		int result = serv.studentUpdate(vo);
-
+		
 		if (result != 0) {
 
-			System.out.println("비밀번호 변경 안 됨.");
-
-			path = "students/infoModify.tiles";
-		} else {
-
 			System.out.println("비밀번호 변경됨.");
-
+			
 			serv.studentUpdate(vo);
-
+			
 			model.addAttribute("st", serv.studentInfo(vo));
 			path = "students/studentInfo.tiles";			
+		} else {
+
+			System.out.println("비밀번호 변경 안 됨.");
+			
+			path = "students/infoModify.tiles";
 		}
 
 		return path;

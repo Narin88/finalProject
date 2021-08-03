@@ -4,7 +4,7 @@
 
 <title>정보 수정 페이지</title>
 
-<form id = "frm" method = "POST" action = "studentUpdate.do">
+<form name = "frmPwd" method = "POST" action = "studentUpdate">
 
 	<!-- form 태그 안에 추가해야 함 -->
 	<sec:csrfInput/>
@@ -36,11 +36,11 @@
 		if (nPwd != cPwd) {
 			
 			alert('비밀번호가 일치하지 않습니다!');
-			frm.pwd.focus();	// 왜 작동 안 함.
+			document.frmPwd.pwd.focus();	// 왜 작동 안 함.
 		} else {
 			
 			alert('비밀번호가 변경되었습니다.');
-			frm.submit();		// 왜 작동 안 함.
+			document.frmPwd.submit();		// 왜 작동 안 함.
 		}
 	}
 </script>

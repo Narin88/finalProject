@@ -47,7 +47,7 @@
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
 			<div class="HwSearch">		
-				<form id="frm" name="frm"  method="post">
+				<form id="frmHw" name="frmHw"  method="post">
 				<sec:csrfInput/>
 					<input type="hidden" id="ye" name="ye">
 					<input type="hidden" id="te" name="te">
@@ -86,8 +86,8 @@
 			 			<script>
 			 				function selectSubmit(){
 			 					var a=$("#lcode option:checked").text();	
-				 				frm.ln.value=a;
-				 				frm.submit();
+				 				frmHw.ln.value=a;
+				 				frmHw.submit();
 			 				}
 			 				
 			 			</script>
@@ -128,7 +128,8 @@
 						<th> 조희</th>
 					</tr>
 					<c:forEach items="${result}" var="list">
-					<tr>
+					<c:set var="count" value="${count +1 }"></c:set>
+					<tr id="trSelect"><!--${count }  -->
 						 <td>${list.lyear }년</td>  <td>${list.term }학기</td>	<td>${list.lname }</td> <td>${list.lrcode }</td>
 						 <td style="text-align:center;"> <span style="color:red;">( ' - ' )</span></td>
 						 <td><fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> </td> 
@@ -149,39 +150,49 @@
 						  </td>	
 						  <!-- 교수가 올린과제의 제출학생 리스트 출력 -->
 						  <td> 
-						  	<button type="button" id="inquiry" data-id="${list.register_id }">조회</button>
+						  	<button type="button" id="inquiry" onclick="test();" data-id="${list.register_id}" data-num="${list.opennum }">조회</button>
 						  <!-- <button type="button" onclick="inquiry('${list.register_id}')">조회</button> -->			  		  	
 						  </td>
 					</tr>
 					</c:forEach>
 				</table>
 					 <!--  register_id 값을 넘겨서 hw_student에서 중복된값을 가져와서 과제제출 목록리스트 뜨게하기 -->
+						<!-- 클릭시 클릭한 것 강조표시 -->
 						<script>
+							function test(){
+								var a=($(event.target).closest('tr').attr('id')); //해당 부모의 아이디를 가져온다
+								console.log(a);
+								document.getElementById(a).style.backgroundColor="white";
+								document.getElementById(a).style.backgroundColor="beige";
+							}
 					//과제제출 조회요청
 							$(".hwTable1").on("click","#inquiry",function(){
 								$(this).data('id'); //
 								var a= $(this).data('id');
+								var b= $(this).data('num');
 								console.log(a);
+								console.log(b);
 								$.ajax({
 									type:"post",
 									url:"inquiry",
 									data:{ 
-										registerId :a
+										registerId :a,
+										opennum :b
 										},
 									dataType:"json",
 									success: function(data){
 										$("tfoot").empty();
 										for(var i of data){
-											$('<tr>')
-											.append($('<td id="sId">').html(i.sid))
-											.append($('<td>').html(i.sname))
+											$('<tr >')
+											.append($('<td id="sId">').html(i.submitSid))
+											.append($('<td>').html(i.name))
 											.append($('<td>').html(i.submit_file))
 											.append($('<td>').html(i.submit_date))
 											.append($('<td id="sc">').html(i.s_comment))
 											.append($('<td>').html(i.score))
-											.append($('<td>').html('<button type="button" onclick="scoreIn();">점수IN</button>'))
-											.appendTo('tfoot');					
-										}			
+											.append($('<td>').html('<input type="text" id="scoreIn" style="width:80px;"><button id="scoreBtn" type="button" onclick="scoreIn();">IN</button>'))
+											.appendTo('tfoot');			
+										}
 									},
 									error: function(error){
 										alert("error");
@@ -192,9 +203,13 @@
 					//점수IN
 					function scoreIn(){
 						//
-							var a=$(event.target).closest('tr').find('td').eq(0).text();
-							console.log(a);
-							
+							//var a=$(event.target).closest('tr').find('td').eq(0).text();
+							//var b=$('#scoreIn').val();
+							//var c=$('#scoreBtn').prev().val();
+							$(".hwTable2").on("click","#scoreBtn","#scoreIn",function(){
+								var c=$(this).attr('id');
+								console.log(c);
+					});
 										
 						
 					}
@@ -210,6 +225,7 @@
 		</div>
 		<div class="hwContainer">
 		<h3> 조회목록</h3>
+		<h4 style="color:brown;"> 해당목록</h4>
 		<!-- submit_SID값으로 학생정보 가져오기 -->
 			<div class="hwTable2">
 				<table border="1" style="width:100%; text-align:center;">
@@ -226,7 +242,7 @@
 			$("#lyear option:eq(0)").prop("selected",true);
 			$("#term option:eq(0)").prop("selected",true);
 			$("#lcode option:eq(0)").prop("selected",true);
-			frm.submit();
+			frmHw.submit();
 		}
 		</script>
 </body>

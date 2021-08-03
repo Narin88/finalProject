@@ -27,4 +27,6 @@ public class LectureVO {
 	
 	private List<LectureVO> updatedRows;
 	private List<LectureVO> deletedRows;
+	
+	private List<LectureVO> Listview;
 }

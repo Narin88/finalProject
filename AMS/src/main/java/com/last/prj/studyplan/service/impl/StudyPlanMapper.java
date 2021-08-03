@@ -14,7 +14,7 @@ public interface StudyPlanMapper {
 
 	
 	//강의 리스트
-	public List<StudyplanJoinVO> studyPlanList();
+	public List<StudyplanJoinVO> studyPlanList(StudyplanJoinVO vo);
 
 	// 강의 계획서 내용
 	public int studyplanInsert(StudyplanVO vo); // 강의 계획서 등록하기

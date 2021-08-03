@@ -24,15 +24,18 @@
         
     
     </script>
-    <script type="text/javascript">
+    <script>
  
     function sub(){
-    	if(frm.content.value == ""){
+    	
+    
+    	
+    	if(frm2.content.value == ""){
     		alert("강의개요를 입력하세요");
-    		frm.content.focus();
+    		frm2.content.focus();
     		return false;
     	}
-    		frm.submit();
+    		frm2.submit();
     		alert("정상등록 되었습니다");
     	
     }
@@ -91,7 +94,7 @@
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20></th> <th><input type="text" value="${spList.dividenum}"  size=20> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20></th> <th>-<input type="text" value="${spList.dividenum}"  size=20> </th>
 											<th></th>
 											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}" ></th>
 											
@@ -108,7 +111,7 @@
 					</table>
 	
 		<br/>
-		<form action="studyPlanInsert" method="post" id="frm" name="frm" >
+		<form action="studyPlanInsert" method="post" id="frm2" name="frm2" >
 		<sec:csrfInput/>
 		<input type="hidden" name="opennum" value="${spList.opennum}">
 		
@@ -291,7 +294,7 @@
 	
 																					<h3 align="center">
 								
-									<button type="button" class="ns" value="submit" onclick="sub()">●등록</button>
+									<button type="button" class="ns" onclick="sub()">●등록</button>
 									<input type="reset"  class="ns" value="● 취소" >
 									<input type="button" class="ns" name="back" value="● 뒤로가기" onClick="location.href='studyPlanList'">
 								</h3>

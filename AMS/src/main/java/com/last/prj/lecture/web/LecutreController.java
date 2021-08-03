@@ -58,4 +58,7 @@ public class LecutreController {
 		Ldao.LectureDelete(vo);
 		return 0;
 	}
+	
+	
+	
 }

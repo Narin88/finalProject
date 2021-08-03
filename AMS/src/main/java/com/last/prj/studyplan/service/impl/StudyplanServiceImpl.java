@@ -34,7 +34,7 @@ public class StudyplanServiceImpl implements StudyplanService {
 	// 강의 리스트 불러오기
 	@Override
 	public List<StudyplanJoinVO> studyPlanList(StudyplanJoinVO vo) {
-		return map.studyPlanList();
+		return map.studyPlanList(vo);
 	}
 	//값 받아오기
 	@Override

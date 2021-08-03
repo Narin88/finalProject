@@ -35,7 +35,7 @@
 				<c:choose>
 					<c:when test="${empty s.content}">
 						{
-							lYear:'${s.LYear}', term:'${s.term}', lName: '${s.LName}', LNum: '${s.LNum}${s.dividenum}', PName: '${s.PName}',
+							lYear:'${s.LYear}', term:'${s.term}', lName: '${s.LName}', LNum: '${s.LNum}-${s.dividenum}', PName: '${s.PName}',
 							MName:'${s.MName}',DName: '${s.DName}', grade: '${s.grade}', 학점: '${s.credit}',
 							division: '${s.division}', credit: '${s.credit}', 
 							Btn: '<button  onclick=location.href="studyPlanInsertPage?opennum=${s.opennum}">등록</button>'

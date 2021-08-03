@@ -190,7 +190,7 @@
 											.append($('<td>').html(i.submit_date))
 											.append($('<td id="sc">').html(i.s_comment))
 											.append($('<td>').html(i.score))
-											.append($('<td>').html('<input type="text" id="scoreIn" style="width:80px;"><button id="scoreBtn" type="button" onclick="scoreIn();">IN</button>'))
+											.append($('<td>').html('<input type="text" id="scoreIn" style="width:80px;"><b" tutton id="scoreBtnype="button" onclick="scoreIn();">IN</button>'))
 											.appendTo('tfoot');			
 										}
 									},

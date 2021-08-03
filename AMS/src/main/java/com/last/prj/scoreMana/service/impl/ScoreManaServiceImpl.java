@@ -40,5 +40,10 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	public int AjaxEnrolmentInsert(ScoreManaVO vo) {
 		return SMmap.AjaxEnrolmentInsert(vo);
 	}
+
+	@Override
+	public String RetakeChek(ScoreManaVO vo) {
+		return SMmap.RetakeChek(vo);
+	}
 	
 }

@@ -82,18 +82,19 @@ $(function(){
 		var enCount = data.enCount;
 		var limit = data.newLimitCount;
 		var opennum = data.openNum;
+		var lname = data.lname;
 		console.log(data);
 		//조건 검사
 		
-		if(enCount>=limit){ 
-			alert("수강정원이 마감되었습니다.");
-		}else{
+		if(enCount>=limit){ //정원 초과시
+			alert("수강정원이 마감되었습니다."); 
+		}else{ 
 			$.ajax({
 				url: 'AjaxConfirm',
 				type:'POST',
 				data: {openNum: opennum},
 				success: function(result){
-					 if(result>0){ 
+					 if(result>0){ //이미 등록된 수강일 경우
 						var con1 = confirm('이미 수강신청 되었습니다. 취소하시겠습니까?')
 						if(con1){ //수강 취소(삭제)
 							location.href='AjaxEnrolmentDelete?openNum='+opennum
@@ -101,8 +102,30 @@ $(function(){
 							return false;
 						}
 					}
-					 else{
-							location.href='AjaxEnrolmentInsert?openNum='+opennum
+					 else{ //중복x -> 재이수 확인
+						 $.ajax({
+							 url: 'retakeChek',
+							 type: 'GET',
+							 data: {openNum: opennum},
+						 success: function(result){
+							if(result=='001'){
+								var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
+								if(con){
+									location.href='AjaxEnrolmentInsert?openNum='+opennum
+								}else{
+									return false;
+									}
+								}
+							else{
+								var con = confirm('강의번호 '+opennum+'의 과목 '+lname+' 신청하시겠습니까?')
+									if(con){
+										location.href='AjaxEnrolmentInsert?openNum='+opennum
+									}else{
+										return false;
+									}
+								}
+							}
+						 })
 					 }
 				},
 				error:function(){}

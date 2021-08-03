@@ -11,4 +11,5 @@ public interface ScoreManaService {
 	int AjaxEnrolmentDelete(ScoreManaVO vo);
 	StudentsVO StudentSelectinfo(String sId);
 	int AjaxEnrolmentInsert(ScoreManaVO vo);
+	String RetakeChek(ScoreManaVO vo);
 }

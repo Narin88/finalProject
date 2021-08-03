@@ -47,6 +47,7 @@ LEFT OUTER JOIN hw_professor p
 	 		,to_char(se.submit_date,'yyyy.mm.dd hh24:mi') "submit_date"
 	 		,se.scomment "s_comment"
 	 		,se.score "score" 
+	 		,se.register_id "registerId"
 	   FROM
 			   		(SELECT hp.register_id AS "hp.regid", sm.* 
 		      		   FROM hw_professor hp 
@@ -98,7 +99,7 @@ fir LEFT OUTER JOIN
      </select>
      
      <!-- 점수 IN -->
-     <update id="scoreIn">
+     <update id="hwScoreIn">
      	UPDATE 
      			hw_student 
      	   SET  score=#{score} 

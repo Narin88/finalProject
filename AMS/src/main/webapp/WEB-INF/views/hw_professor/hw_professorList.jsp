@@ -161,7 +161,6 @@
 						<script>
 							function test(){
 								var a=($(event.target).closest('tr').attr('id')); //해당 부모의 아이디를 가져온다
-								console.log(a);
 								document.getElementById(a).style.backgroundColor="white";
 								document.getElementById(a).style.backgroundColor="beige";
 							}
@@ -170,8 +169,6 @@
 								$(this).data('id'); //
 								var a= $(this).data('id');
 								var b= $(this).data('num');
-								console.log(a);
-								console.log(b);
 								$.ajax({
 									type:"post",
 									url:"inquiry",
@@ -182,16 +179,24 @@
 									dataType:"json",
 									success: function(data){
 										$("tfoot").empty();
+										$('<button type="button" onclick="noSubmit();">미제출자확인</button>')
+										.appendTo('.noSubmit');
 										for(var i of data){
-											$('<tr >')
-											.append($('<td id="sId">').html(i.submitSid))
+											$('<tr id="tr1">')
+											.append($('<td>').html(i.submitSid))		
 											.append($('<td>').html(i.name))
 											.append($('<td>').html(i.submit_file))
 											.append($('<td>').html(i.submit_date))
-											.append($('<td id="sc">').html(i.s_comment))
+											.append($('<td>').html(i.s_comment))
 											.append($('<td>').html(i.score))
-											.append($('<td>').html('<input type="text" id="scoreIn" style="width:80px;"><b" tutton id="scoreBtnype="button" onclick="scoreIn();">IN</button>'))
-											.appendTo('tfoot');			
+											.append($('<td id="sc">').html())	
+											.append($('<td id="scIn">').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="text" class="scoreIn" style="width:80px;"><button type="button" class="scoreBtn" onclick="scoreIn();">IN</button>'))										
+											.appendTo('tfoot');
+											//if(('#setRid')!=null){
+											//	console.log('b');		
+											//	console.log(a);
+											//}
+											
 										}
 									},
 									error: function(error){
@@ -201,31 +206,43 @@
 							});
 					
 					//점수IN
-					function scoreIn(){
-						//
-							//var a=$(event.target).closest('tr').find('td').eq(0).text();
-							//var b=$('#scoreIn').val();
-							//var c=$('#scoreBtn').prev().val();
-							$(".hwTable2").on("click","#scoreBtn","#scoreIn",function(){
-								var c=$(this).attr('id');
-								console.log(c);
-					});
-										
-						
+					function scoreIn(){	
+					    	$(".scoreBtn").on("click", function(){
+					       		var a=$(this).prev().val();			       		
+					       		frmScoreIn.score.value=a;
+					       		var b=$(event.target).closest('tr').find('td').eq(0).html();
+								frmScoreIn.submitSid.value=b;
+								var c=$(this).prev().prev().val();
+								frmScoreIn.registerId.value=c;
+								frmScoreIn.submit();
+					    });
+							
 					}
+							
+							//var b=$('#scoreIn').val();`
+							//var c=$('.scoreIn').val();
+							//var a=$(event.target).closest('tr').find('td').eq(0).html();
+						
+			
 					
 					</script>
 						
-						 <!--<form id="frm2" name="frm2" method="post">
-						<sec:csrfInput/>
-							<input type="hidden" id="register_id" name="register_id"/>
-						</form>
-					  END -->
+			
 			</div>
 		</div>
 		<div class="hwContainer">
 		<h3> 조회목록</h3>
 		<h4 style="color:brown;"> 해당목록</h4>
+		<div class="noSubmit">
+			<!--미제출자확인 function  -->
+			<script>
+				function noSubmit(){
+					if(('#setRid').value==null){
+						document.getElementById("setRid").style.backgroudColor="red";
+					}
+				}
+			</script>
+		</div>
 		<!-- submit_SID값으로 학생정보 가져오기 -->
 			<div class="hwTable2">
 				<table border="1" style="width:100%; text-align:center;">
@@ -237,6 +254,15 @@
 				</table>
 			</div>
 		</div>
+		
+		<!--과제제출한 학생리스트 점수in 값 저장  -->
+		<form id="frmScoreIn" method="post" action="scoreIn">
+		<sec:csrfInput/>
+			<input type="hidden" id="registerId" name="registerId">
+			<input type="hidden" id="score" name="score">
+			<input type="hidden" id="submitSid" name="submitSid">
+		</form>
+		<!-- 검색조건 초기화 function -->
 		<script>
 		function resetFunction(){
 			$("#lyear option:eq(0)").prop("selected",true);

@@ -14,7 +14,8 @@ public interface HwProfessorMap {
 	//강의년도,강의학기,강의명(강의코드) 로 검색했는 결과LIST
 	List<Map<String, Object>> hwSearchList(HwProfessorVO vo);
 	
-	
+	//과제 학생점수 IN
+		int hwScoreIn(HwProfessorVO vo);
 	
 	//(교수)등록한과제 전체조희
 	List<Map<String, Object>> hw_professorSelectList(HwProfessorVO vo);

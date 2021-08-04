@@ -1,9 +1,11 @@
 package com.last.prj.stuyplan.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.last.prj.hwProfessor.service.HwProfessorVO;
 import com.last.prj.lectureRoom.service.LectureRoomVO;
 import com.last.prj.professor.service.ProfessorVO;
 
@@ -19,4 +21,12 @@ public interface StudyplanService {
 	public StudyplanJoinVO selectresult(StudyplanJoinVO vo);// 값 하나 받아오기
 
 	public StudyplanJoinVO readOnly(StudyplanJoinVO vo);//	// 강의 계획서 읽기전용 (학생)
+	
+	
+    //강의명 select
+	List<Map<String, Object>> Lname(StudyplanJoinVO vo);
+	//강의년도 select
+	List<Map<String, Object>> ySelect(StudyplanJoinVO vo);
+	
+	
 }

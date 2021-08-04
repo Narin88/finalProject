@@ -2,6 +2,10 @@ package com.last.prj.studyplan.web;
 
 
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +29,25 @@ public class StudyplanController {
 
 	// 내 강의 리스트 출력하기
 	@RequestMapping("studyPlanList")
-	public String studyplanList(Model model,HttpSession session) {
+	public String studyplanList(Model model,HttpSession session,HttpServletRequest req, StudyplanJoinVO vo2) {
+		
+		String year = req.getParameter("lyear");
+		String term = req.getParameter("term");
+		String lname = req.getParameter("ln");
+
+		model.addAttribute("reTerm", term);
+		model.addAttribute("reYear", year);
+		model.addAttribute("reName", lname);
+
+		// System.out.println(result);
+		// 강의년도 select
+		List<Map<String, Object>> ySelect = dao.ySelect(vo2);
+		model.addAttribute("ySelect", ySelect);
+		// 강의명 select
+		List<Map<String, Object>> lName = dao.Lname(vo2);
+		model.addAttribute("lName", lName);
+
+		
 		
 	
 	

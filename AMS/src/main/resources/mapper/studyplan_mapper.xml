@@ -102,6 +102,32 @@
 		</select>
 		
 		
+			<!-- 강의년도 select -->
+	<select id="ySelect" resultType="map">
+		SELECT  
+	          distinct l.lyear "lyear"
+			  FROM  lecture  l
+	      LEFT OUTER JOIN hw_professor p
+	      ON   p.OPENNUM=l.OPENNUM
+	      JOIN lecture_info i
+	      on l.lnum=i.LNUM
+	      WHERE l.pid=#{pid}
+	   ORDER BY l.lyear asc
+     </select>
+     <!-- 강의명 select -->
+	<select id="Lname" resultType="map">
+		SELECT  
+	          distinct i.lname "lname"
+	          		 , i.lcode "lcode"
+			  FROM  lecture  l
+	      LEFT OUTER JOIN hw_professor p
+	      ON   p.OPENNUM=l.OPENNUM
+	      JOIN lecture_info i
+	      on l.lnum=i.LNUM
+	      WHERE l.pid=#{pid}
+	      </select>
 		
 		
+		
+	
 </mapper>		

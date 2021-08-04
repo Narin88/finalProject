@@ -22,9 +22,12 @@ public class LectureVO {
 	private String dName; //학과이름
 	private String mName; //전공이름
 	private String openNum; //강의 등록번호
-	private String grade; //학년
+	private int grade; //학년
 	private String division; //이수구분
 	private String lrName; //강의실 이름
+	
+	private String seach; //검색해야될 내용
+	private String seachgubun; //검색할카테고리
 	
 	private int enCount; //현재 수강인원
 	

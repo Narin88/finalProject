@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.scoreMana.service.ScoreManaService;
 import com.last.prj.scoreMana.service.ScoreManaVO;
 import com.last.prj.students.service.StudentsVO;
@@ -37,15 +38,17 @@ public class ScoreManaController {
 	@ResponseBody
 	public Map<String, Object> EnrolmentList(HttpSession session,@RequestBody Map<String,String> map){
 		String sId = (String) session.getAttribute("id");
-		String opts = map.get("opts");
-		System.out.println("================================="+opts);
 		
-		StudentsVO vo = SMdao.StudentSelectinfo(sId);
-		int grade = vo.getGrade();
+		StudentsVO vo = SMdao.StudentSelectinfo(sId); //학생의 학년 가져오기
+		
+		LectureVO lvo = new LectureVO();
+		lvo.setSeach(map.get("seach"));
+		lvo.setSeachgubun(map.get("seachgubun"));
+		lvo.setGrade(vo.getGrade());
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		data.put("result", true);
-		datas.put("contents", SMdao.EnrolmentList(grade));
+		datas.put("contents", SMdao.EnrolmentList(lvo));
 		data.put("data", datas);
 		return data;
 	}
@@ -116,6 +119,9 @@ public class ScoreManaController {
 	public int AjaxCreditCheck(HttpSession session) {
 		String sId = (String) session.getAttribute("id");
 		int result = SMdao.AjaxCreditCheck(sId);
+		if(result==100) {
+			result=0;
+		}
 		System.out.println(result);
 		return result;
 	}

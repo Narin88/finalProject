@@ -19,7 +19,7 @@
 	
 	<!-- 현재 등록된 수강목록조회 -->
 	<select id="EnrolmentList" resultType="LectureVO">
-		select l.opennum, l.lnum||l.dividenum as lnum, l.lyear||'-'||l.term as lyear, li.GRADE,
+		select l.opennum, l.lnum||'-'||l.dividenum as lnum, l.lyear||'-'||l.term as lyear, li.GRADE,
 		       li.lname, li.CREDIT, mv.dname, mv.mname, find_code_name(100,li.dcode) as division, 
           		l.NEWLIMITCOUNT, lr.lrname, l.timetable, (select count(*) from score_mana where opennum = l.opennum) as encount
 		from lecture l, lecture_info li, lecture_room lr, MAJOR_VIEW mv
@@ -27,7 +27,17 @@
     	and mv.MCODE = li.MCODE
 		and l.lrcode = lr.lrcode
 		and l.lyear = to_char(sysdate,'RRRR')
-		and li.GRADE =	#{grade}||'학년'
+		and li.GRADE =	#{grade}
+		<if test="seach != null and seach != ''">
+			<choose>
+				<when test="seachgubun == 'lnum'">
+					and li.lnum like '%${seach}%'
+				</when>
+				<when test="seachgubun == 'lname'">
+					and li.lname like '%${seach}%'
+				</when>
+			</choose>
+		</if>
 	</select>
 
 	<!-- 수강신청 중복체크 -->
@@ -59,7 +69,7 @@
 	
 	<!-- 학생 현재학점 -->
 	<select id="AjaxCreditCheck" parameterType="string" resultType="int">
-		select sum(li.CREDIT)
+		select nvl(sum(li.CREDIT),100)
 		from students s, score_mana sm, lecture_info li, lecture l
 		where s.sid = sm.sid
 		and li.LNUM = l.LNUM

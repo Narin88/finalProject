@@ -17,8 +17,8 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	ScoreManaMapper SMmap;
 
 	@Override
-	public List<LectureVO> EnrolmentList(int grade) {
-		return SMmap.EnrolmentList(grade);
+	public List<LectureVO> EnrolmentList(LectureVO vo) {
+		return SMmap.EnrolmentList(vo);
 	}
 
 	@Override

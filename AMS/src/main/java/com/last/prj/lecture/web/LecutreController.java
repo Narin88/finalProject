@@ -41,6 +41,7 @@ public class LecutreController {
 	@ResponseBody
 	@RequestMapping(value="lectureUpdate", method = RequestMethod.PUT)
 	public int lectureUpdate(@RequestBody LectureVO vo) {
+		System.out.println(vo);
 		Ldao.LectureUpdate(vo);
 		return 0;
 	}

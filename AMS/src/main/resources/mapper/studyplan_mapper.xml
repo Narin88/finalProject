@@ -118,7 +118,6 @@
 	<select id="Lname" resultType="map">
 		SELECT  
 	          distinct i.lname "lname"
-	          		 , i.lcode "lcode"
 			  FROM  lecture  l
 	      LEFT OUTER JOIN hw_professor p
 	      ON   p.OPENNUM=l.OPENNUM

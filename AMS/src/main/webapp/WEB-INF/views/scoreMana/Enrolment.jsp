@@ -9,6 +9,31 @@
 .tui-grid-cell .tui-grid-cell-content {
    text-align: center;
 }
+.tbl{
+	width: 80%;
+	border-spacing: 0;
+    border-collapse: collapse;
+}
+.infotitle{
+	border-bottom: 1px solid #dedede !important;
+    color: #212121;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    height: 50px;
+}
+.info{
+	border-bottom: 1px solid #dedede !important;
+    color: #212121;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    color: darkgray;
+    }
+.seachbox{
+	margin-bottom: 5px;
+}
 </style>
 <!-- Toast grid -->
 	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
@@ -24,19 +49,20 @@
 <div align="center">
 	<h2>수강 신청</h2>
 	<div align="center">
-		<table id="tbl">
+		<table id="tbl" class="tbl">
 			<tr>
-				<td>년도/학기</td><td>${student.lyear }/${student.target }</td>
-				<td>학번</td><td>${student.sid }</td>
-				<td>성명</td><td>${student.sname }</td>
+				<td class = "infotitle">년도/학기</td><td class = "info">${student.lyear }/${student.target }</td>
+				<td class = "infotitle">학번</td><td class = "info">${student.sid }</td>
+				<td class = "infotitle">성명</td><td class = "info">${student.sname }</td>
 			</tr>
 			<tr>
-				<td>학과</td><td>${student.dname }</td>
-				<td>학년</td><td>${student.grade }</td>
-				<td>인정학기</td><td>${student.grade * student.term }</td>
+				<td class = "infotitle">학과</td><td class = "info">${student.dname }</td>
+				<td class = "infotitle">학년</td><td class = "info">${student.grade }</td>
+				<td class = "infotitle">인정학기</td>
+				<td class = "info">${(student.grade*2) - (2-student.term) }</td>
 			</tr>
-			<tr>
-				<td colspan="3">신청가능학점</td><td colspan="3" id="credit"></td>
+			<tr >
+				<td colspan="3" class = "infotitle">신청가능학점</td><td colspan="3" id="credit" class = "info"></td>
 			</tr>
 		</table>
 	</div>
@@ -45,8 +71,14 @@
 		수강신청은 더블클릭 하셔야 신청이 됩니다. 
 	</div>
 </div>
-<input type="text" id="seach" name="seach">
-<button type="button" onclick="getList()">검색</button>
+<div class="seachbox" align="right">
+	<select id="seachgubun">
+		<option value="lname">과목명</option>
+		<option value="lnum">과목번호</option>
+	</select>
+	<input type="text" id="seach" name="seach">
+	<button type="button" onclick="getList()">검색</button>
+</div>
 <div id="grid"></div>
 
  
@@ -60,6 +92,7 @@ $(function(){
 		type: 'GET',
 		success: function(result){
 			$('#credit').append(20-result);
+			console.log(20-result);
 		}
 	})
 })
@@ -96,10 +129,11 @@ $(function(){
 		] //컬럼갯수
 	} );
     function getList(){
-    	
-    	var opts = {opts:$('#seach').val()};
-    	console.log(opts);
-    	grid.readData(1,opts,true);
+    	var seachgubun = $('#seachgubun').val()
+    	console.log(seachgubun);
+    	var seach = {seach:$('#seach').val(), seachgubun: seachgubun};
+    	console.log(seach);
+    	grid.readData(1,seach,true);
     }
     //grid 이벤트
 	grid.on('dblclick', ev => {
@@ -115,10 +149,7 @@ $(function(){
 		//조건 검사
 		
 
-		
-		if(enCount>=limit){ //정원 초과시
-			alert("수강정원이 마감되었습니다."); 
-		}else{
+
 			$.ajax({
 				url: 'AjaxConfirm',
 				type:'POST',
@@ -134,6 +165,9 @@ $(function(){
 						}
 					}
 					 else{ //중복x -> 재이수 확인
+						if(enCount>=limit){ //정원 초과시
+							alert("수강정원이 마감되었습니다."); 
+						}
 						 var remain = $('#credit').html();
 					 		console.log(remain,credit);
 							if(remain-credit<0){
@@ -166,7 +200,6 @@ $(function(){
 					 }
 				}
 			});
-		}
 	});
 
 

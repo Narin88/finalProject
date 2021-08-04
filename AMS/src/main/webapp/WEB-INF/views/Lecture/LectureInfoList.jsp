@@ -121,7 +121,7 @@
 		var clsData = [
 			<c:forEach items="${Lectures }" var="Lec">
 			{
-				lNum: '${Lec.LNum}', lName: '${Lec.LName}', lCode: '${Lec.LCode}', pId: '${Lec.PId}',
+				lNum: '${Lec.LNum}', lName: '${Lec.LName}', pId: '${Lec.PId}',
 				grade: '${Lec.grade}', limitCount: '${Lec.limitCount}', dCode: '${Lec.DCode}',
 				division: '${Lec.division}', credit: '${Lec.credit}'
 			},
@@ -140,7 +140,6 @@
 			columns: [
 				{header: '강의번호',name: 'lNum'},
 				{header: '강의이름',name: 'lName'},
-				{header: '과목코드',name: 'lCode'},
 				{header: '교수코드',name: 'pId'},
 				{header: '학년',name: 'grade'},
 				{header: '정원',name: 'limitCount'},

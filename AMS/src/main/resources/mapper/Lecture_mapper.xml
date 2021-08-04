@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.lecture.service.impl.LectureMapper">
 	<insert id="LectureInsert">
-		insert into lecture(opennum,lnum,pid,lrcode,newlimitcount,lyear,term,book,dividenum)
-		values(opennum_seq.nextval, #{lNum}, #{pId}, #{lrCode}, #{newLimitCount}, #{lYear}, #{term}, #{book},divide_class(#{lNum},#{term}))
+		insert into lecture(opennum,lnum,pid,lrcode,newlimitcount,lyear,term,book,dividenum,timetable)
+		values(opennum_seq.nextval, #{lNum}, #{pId}, #{lrCode}, #{newLimitCount}, #{lYear}, #{term}, #{book},divide_class(#{lNum},#{term}),#{timeTable})
 	</insert>
 	
 	<select id="LectureList" parameterType="string" resultType="LectureVO">
@@ -16,7 +16,7 @@
 	    order by 1
 	</select>
 	<update id="LectureUpdate" parameterType="LectureVO">
-		UPDATE LECTURE SET BOOK = #{book} timetable = #{timeTable} WHERE OPENNUM = #{openNum}
+		UPDATE LECTURE SET BOOK = #{book}, timetable = #{timeTable} WHERE OPENNUM = #{openNum}
 	</update>
 	<delete id="LectureDelete" parameterType="LectureVO">
 		DELETE FROM LECTURE WHERE OPENNUM = #{openNum}

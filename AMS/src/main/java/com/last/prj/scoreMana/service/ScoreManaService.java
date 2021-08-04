@@ -7,7 +7,7 @@ import com.last.prj.students.service.StudentsVO;
 
 public interface ScoreManaService {
 	StudentsVO EnrolmentStudent(StudentsVO vo); 
-	List<LectureVO> EnrolmentList(int grade);
+	List<LectureVO> EnrolmentList(LectureVO vo);
 	ScoreManaVO OverlapCheck(ScoreManaVO vo);
 	int AjaxEnrolmentDelete(ScoreManaVO vo);
 	StudentsVO StudentSelectinfo(String sId);

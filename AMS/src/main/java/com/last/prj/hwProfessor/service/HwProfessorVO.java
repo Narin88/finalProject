@@ -21,5 +21,7 @@ public class HwProfessorVO {
 	private String lyear;		//강의년도
 	private String term;		//강의학기
 	private String lcode;		//강의코드
+	private String submitSid;	//학생번호
+	private String score;		//점수
 	}
 

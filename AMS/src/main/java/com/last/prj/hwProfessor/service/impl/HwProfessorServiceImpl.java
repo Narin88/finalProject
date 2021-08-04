@@ -69,6 +69,11 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 		
 		return map.hwSearchList(vo);
 	}
+
+	@Override
+	public int hwScoreIn(HwProfessorVO vo) {
+		return map.hwScoreIn(vo);
+	}
 	
 	
 }

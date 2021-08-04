@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.hwProfessor.service.impl.HwProfessorMap">
 	 
-	<!-- 강의등록 리스트조회 -->
+	<!-- 등록한 과제 리스트조회 -->
 	<select id="hw_professorSelectList"  resultType="map">
 	 SELECT  
           		 l.lyear  "lyear"
@@ -10,8 +10,9 @@
        			,i.lname "lname"
        			,l.lrcode "lrcode"
        			,i.lcode "lcode"
+       			,p.opennum "opennum"
        			,(select count(*) from hw_student where register_id=p.register_id) "submitCount"
-				,l.newlimitcount	"newlimitcount" 
+				,( select count(*)from score_mana	sm where sm.opennum=p.opennum)	"newlimitcount" 
 				,p.REGISTER_DATE	"register_date"
 				,p.PPERIOD			"pperiod"
 				,p.register_id "register_id"
@@ -21,10 +22,11 @@
 				,l.pid 				"pid"
 	   FROM     lecture  l
 LEFT OUTER JOIN hw_professor p
-         ON        p.OPENNUM=l.OPENNUM
+         ON      p.OPENNUM=l.OPENNUM
        JOIN     lecture_info i
          ON     l.lnum=i.LNUM
       WHERE l.pid=#{pid}
+       and not 	register_id IS null
       	<if test="lyear!=null and lyear!=''">
       	 	and lyear=#{lyear}
       	 </if>
@@ -38,20 +40,31 @@ LEFT OUTER JOIN hw_professor p
 	</select>
 	<!-- 과제제출한 학생목록 -->
 	<select id="hw_submitList" resultType="map">
-	 select      st.sid "sid"
-                ,st.SNAME "sname" 
-                ,s.SUBMIT_FILE "submit_file"  
-                ,s.SUBMIT_DATE "submit_date"
-                ,s.SCOMMENT "scomment"
-                ,s.SCORE "score"
-       from 	hw_student s 
-       join     hw_professor p
-         on     s.register_id=p.register_id
-       join     students st
-         on     s.SUBMIT_SID=st.SID
-      where 	p.register_id=#{registerId}
-      order by  s.SUBMIT_DATE asc
+	 SELECT 
+	 		 idn.id "submitSid"
+	 		,idn.name "name"
+	 		,se.submit_file "submit_file"
+	 		,to_char(se.submit_date,'yyyy.mm.dd hh24:mi') "submit_date"
+	 		,se.scomment "s_comment"
+	 		,se.score "score" 
+	 		,se.register_id "registerId"
+	   FROM
+			   		(SELECT hp.register_id AS "hp.regid", sm.* 
+		      		   FROM hw_professor hp 
+		   			   LEFT OUTER JOIN score_mana sm
+     					 ON hp.opennum = sm.opennum WHERE sm.opennum = #{opennum}
+     					 )
+fir LEFT OUTER JOIN 
+					(SELECT hs.*, idn.name FROM hw_professor hp, hw_student hs, id_name idn 
+ 					  WHERE hp.register_id = hs.register_id 
+					    AND hp.register_id = #{registerId}
+ 					    AND idn.id = hs.submit_sid )se 
+ 	 	 ON fir.sid = se.submit_sid
+ 	 	 	,id_name idn
+ 	  WHERE fir.sid = idn.id
+   ORDER BY se.submit_date asc
 	</select>
+	
 	<!-- 강의년도 select -->
 	<select id="hw_ySelect" resultType="map">
 		SELECT  
@@ -85,7 +98,14 @@ LEFT OUTER JOIN hw_professor p
       	 -->
      </select>
      
-     
+     <!-- 점수 IN -->
+     <update id="hwScoreIn">
+     	UPDATE 
+     			hw_student 
+     	   SET  score=#{score} 
+     	 WHERE  submit_sid=#{submitSid}
+     	   AND  register_id=#{registerId}
+     </update>
      <!-- 강의년도/강의학기/강의코드로 검색한 결과값 
      <select id="hwSearchList"  resultType="map">
 	 SELECT  

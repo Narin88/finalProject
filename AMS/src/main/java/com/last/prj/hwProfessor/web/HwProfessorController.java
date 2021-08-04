@@ -72,5 +72,11 @@ public class HwProfessorController {
 		return  service.hw_submitList(vo);
 	}
 		
-		
+	@RequestMapping("scoreIn")
+	public String scoreIn(HwProfessorVO vo){
+		System.out.println(vo.getSubmitSid());
+		System.out.println(vo.getScore());
+		service.hwScoreIn(vo);
+		return "redirect:hwList";
+	}
 }

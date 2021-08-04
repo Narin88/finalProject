@@ -25,20 +25,14 @@ public class LecutreController {
 	
 	@RequestMapping("LectureInsert")
 	public String LectureInsert(LectureVO vo, Model model) {
-		
-		int a = Ldao.LectureInsert(vo);
-		String message = "";
-		if(a>0) {
-			message = "등록성공";
-		}else
-			message = "등록실패";
-		model.addAttribute(message);
-		return "redirect:LectureInfo";
+		Ldao.LectureInsert(vo);
+
+		return "redirect:studyPlanList";
 	}
 	
 	@RequestMapping("ProfessorLectureList")
 	public String lectureList(Model model, HttpSession session) {
-		String pId = (String) session.getAttribute("user");
+		String pId = (String) session.getAttribute("id");
 		model.addAttribute("lectures",Ldao.LectureList(pId));
 		model.addAttribute("lroom",LRdao.getLectureRoom());
 		return "Lecture/ProfessorLectureList.tiles";

@@ -45,5 +45,15 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	public String RetakeChek(ScoreManaVO vo) {
 		return SMmap.RetakeChek(vo);
 	}
+
+	@Override
+	public int AjaxCreditCheck(String sId) {
+		return SMmap.AjaxCreditCheck(sId);
+	}
+
+	@Override
+	public StudentsVO EnrolmentStudent(StudentsVO vo) {
+		return SMmap.EnrolmentStudent(vo);
+	}
 	
 }

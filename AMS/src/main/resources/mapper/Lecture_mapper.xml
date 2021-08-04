@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.lecture.service.impl.LectureMapper">
 	<insert id="LectureInsert">
-		insert into lecture(opennum,lnum,pid,lrcode,newlimitcount,lyear,term,book)
-		values(opennum_seq.nextval, #{lNum}, #{pId}, #{lrCode}, #{newLimitCount}, #{lYear}, #{term}, #{book})
+		insert into lecture(opennum,lnum,pid,lrcode,newlimitcount,lyear,term,book,dividenum)
+		values(opennum_seq.nextval, #{lNum}, #{pId}, #{lrCode}, #{newLimitCount}, #{lYear}, #{term}, #{book},divide_class(#{lNum},#{term}))
 	</insert>
+	
 	<select id="LectureList" parameterType="string" resultType="LectureVO">
 	    select l.OPENNUM,l.lnum,l.DIVIDENUM,l.LYEAR,l.TERM, li.GRADE, li.lname, l.BOOK,find_code_name(100,li.dcode) as division,
 	    l.NEWLIMITCOUNT, lr.LRNAME, l.TIMETABLE,  l.DATESTATUS

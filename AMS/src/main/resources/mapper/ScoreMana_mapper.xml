@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.scoreMana.service.impl.ScoreManaMapper">
+	<!-- 학생 정보 -->
+	<select id="EnrolmentStudent" parameterType="StudentsVO" resultType="StudentsVO">
+		select s.sid, s.sname, m.dname, s.grade, to_char(sysdate,'RRRR') as lyear, s.term,
+     			case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
+           		else 2
+            	end as target
+		from students s, major_view m
+		where s.mcode = m.MCODE
+		and s.sid = #{sid}
+	</select>
 	
-	<!-- 유저에 대한 정보 가져오기 -->
+	<!-- 유저에 대한 학년 가져오기 -->
 	<select id="StudentSelectinfo" resultType="StudentsVO">
 		SELECT GRADE FROM STUDENTS WHERE SID = #{sId}
 	</select>
@@ -10,14 +20,16 @@
 	<!-- 현재 등록된 수강목록조회 -->
 	<select id="EnrolmentList" resultType="LectureVO">
 		select l.opennum, l.lnum||l.dividenum as lnum, l.lyear||'-'||l.term as lyear, li.GRADE,
-		       li.lname, find_code_name(100,li.dcode) as division, l.NEWLIMITCOUNT, lr.lrname, l.timetable,
-		       (select count(*) from score_mana where opennum = l.opennum) as encount
-		from lecture l, lecture_info li, lecture_room lr
+		       li.lname, li.CREDIT, mv.dname, mv.mname, find_code_name(100,li.dcode) as division, 
+          		l.NEWLIMITCOUNT, lr.lrname, l.timetable, (select count(*) from score_mana where opennum = l.opennum) as encount
+		from lecture l, lecture_info li, lecture_room lr, MAJOR_VIEW mv
 		where l.lnum = li.lnum
+    	and mv.MCODE = li.MCODE
 		and l.lrcode = lr.lrcode
-		and li.GRADE = #{grade}||'학년'
+		and l.lyear = to_char(sysdate,'RRRR')
+		and li.GRADE =	#{grade}||'학년'
 	</select>
-	
+
 	<!-- 수강신청 중복체크 -->
 	<select id ="OverlapCheck" parameterType="ScoreManaVO" resultType="ScoreManaVO">
 		select l.opennum, s.sid from lecture l, SCORE_MANA s
@@ -33,13 +45,26 @@
 		and opennum = #{openNum}
 	</delete>
 	
+	<!-- 수강신청 -->
 	<insert id="AjaxEnrolmentInsert" parameterType="ScoreManaVO">
 		  insert into score_mana(sid,opennum,retake)
 		  values (${sId},${openNum},retake_Check(${sId},${openNum}))
 	</insert>
 	
+	<!-- 재수강 체크 -->
 	<select id="RetakeChek" parameterType="ScoreManaVO" resultType="string">
 	select retake_check(#{sId},#{openNum})
 	from dual
+	</select>
+	
+	<!-- 학생 현재학점 -->
+	<select id="AjaxCreditCheck" parameterType="string" resultType="int">
+		select sum(li.CREDIT)
+		from students s, score_mana sm, lecture_info li, lecture l
+		where s.sid = sm.sid
+		and li.LNUM = l.LNUM
+		and l.OPENNUM = sm.OPENNUM
+		and s.sid = #{sId}
+		and l.lyear = to_char(sysdate,'RRRR')
 	</select>
 </mapper>

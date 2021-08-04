@@ -20,8 +20,7 @@ public class LectureInfoController {
 	
 	@RequestMapping("LectureInfo")
 	public String LectureInfo(Model model, HttpSession session) {
-		//String pId = (String) session.getAttribute("id");
-		String pId = (String) session.getAttribute("user");
+		String pId = (String) session.getAttribute("id");
 		model.addAttribute("Lectures",Lidao.getLectureInfoList(pId));
 		model.addAttribute("LR",LRdao.getLectureRoom());
 		return "Lecture/LectureInfoList.tiles";

@@ -23,6 +23,23 @@
 <body>
 <div align="center">
 	<h2>수강 신청</h2>
+	<div align="center">
+		<table id="tbl">
+			<tr>
+				<td>년도/학기</td><td>${student.lyear }/${student.target }</td>
+				<td>학번</td><td>${student.sid }</td>
+				<td>성명</td><td>${student.sname }</td>
+			</tr>
+			<tr>
+				<td>학과</td><td>${student.dname }</td>
+				<td>학년</td><td>${student.grade }</td>
+				<td>인정학기</td><td>${student.grade * student.term }</td>
+			</tr>
+			<tr>
+				<td colspan="3">신청가능학점</td><td colspan="3" id="credit"></td>
+			</tr>
+		</table>
+	</div>
 	<div>
 		<h3>수강신청 주의사항</h3>
 		수강신청은 더블클릭 하셔야 신청이 됩니다. 
@@ -33,25 +50,22 @@
  
 <script>
 $(function(){
-//grid start
-//grid api-source
-	const dataSource = {
-	  contentType: 'application/json',
-	  api: {
-		readData: {
-			url: 'EnrolmentList',
-			method: 'GET'
+	//학생 학점 체크
+	$.ajax({
+		url: 'AjaxcreditCheck',
+		type: 'GET',
+		success: function(result){
+			$('#credit').append(20-result);
 		}
-	  }
-	};
-		
-		
+	})
+	
+//grid start
        // GRID 를 보여준다.
 	var grid = new tui.Grid( {
 		el: document.getElementById('grid'),
 		data: {
 				api:{
-					readData:{ url: 'EnrolmentList',method: 'GET' }
+					readData:{ url: 'EnrolmentList',method: 'POST' }
 				}
 		},
 		pagination: true,   //페이징 처리
@@ -65,6 +79,9 @@ $(function(){
 			{header: '년도',name: 'lyear',width: 100}, //년도+학기
 			{header: '학년',name: 'grade',width: 100},
 			{header: '과목명',name: 'lname',width: 200},
+			{header: '학점',name: 'credit',width: 200},
+			{header: '학과',name: 'dname',width: 200},
+			{header: '전공',name: 'mname',width: 200},
 			{header: '이수구분',name: 'division',width: 100},
 			{header: '강의실',name: 'lrName',width: 80},
 			{header: '시간표',name: 'timeTable',width: 150},
@@ -83,17 +100,21 @@ $(function(){
 		var limit = data.newLimitCount;
 		var opennum = data.openNum;
 		var lname = data.lname;
+		var credit = data.credit;
 		console.log(data);
 		//조건 검사
 		
+
+		
 		if(enCount>=limit){ //정원 초과시
 			alert("수강정원이 마감되었습니다."); 
-		}else{ 
+		}else{
 			$.ajax({
 				url: 'AjaxConfirm',
 				type:'POST',
 				data: {openNum: opennum},
 				success: function(result){
+					
 					 if(result>0){ //이미 등록된 수강일 경우
 						var con1 = confirm('이미 수강신청 되었습니다. 취소하시겠습니까?')
 						if(con1){ //수강 취소(삭제)
@@ -103,12 +124,18 @@ $(function(){
 						}
 					}
 					 else{ //중복x -> 재이수 확인
+						 var remain = $('#credit').html();
+					 		console.log(remain,credit);
+							if(remain-credit<0){
+								alert('20학점을 초과하였습니다.');
+								return false;
+							}
 						 $.ajax({
-							 url: 'retakeChek',
-							 type: 'GET',
+							 url: 'AjaxRetakeChek',
+							 type: 'POST',
 							 data: {openNum: opennum},
 						 success: function(result){
-							if(result=='001'){
+							if(result=='001'){ //insert
 								var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
 								if(con){
 									location.href='AjaxEnrolmentInsert?openNum='+opennum
@@ -116,7 +143,7 @@ $(function(){
 									return false;
 									}
 								}
-							else{
+							else{ //insert
 								var con = confirm('강의번호 '+opennum+'의 과목 '+lname+' 신청하시겠습니까?')
 									if(con){
 										location.href='AjaxEnrolmentInsert?openNum='+opennum
@@ -127,8 +154,7 @@ $(function(){
 							}
 						 })
 					 }
-				},
-				error:function(){}
+				}
 			});
 		}
 	});

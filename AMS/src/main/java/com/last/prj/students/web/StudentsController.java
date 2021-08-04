@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.students.service.StudentsService;
 import com.last.prj.students.service.StudentsVO;
 
@@ -89,23 +88,22 @@ public class StudentsController {
 	}
 
 	
-// 진호 씨랑 겹침 안 해도 됨
-//	@RequestMapping("/lectureLookUp.do")
-//	public String lectureLookUp(StudentsVO vo, Model model) {
-//		// 강의 시간표들 조회 (수강 신청 과정)
-//
-//		// common code
-//		vo.setLyear("2021");
-//		vo.setTerm(1);
-//
-//		// select ( if )
-//		vo.setDcode("004");
-//		vo.setLocation("인문대");
-//
-//		model.addAttribute("lec", serv.lectureLookUp(vo));
-//
-//		return "students/lectureLookUp.tiles";
-//	}
+	@RequestMapping("/lectureLookUp")
+	public String lectureLookUp(StudentsVO vo, Model model) {
+		// 강의 시간표들 조회 (수강 신청 과정)
+
+		// common code
+		vo.setLyear("2021");
+		vo.setTerm(1);
+
+		// select ( if )
+		vo.setDcode("004");
+		vo.setLocation("인문대");
+
+		model.addAttribute("lec", serv.lectureLookUp(vo));
+
+		return "students/lectureLookUp.tiles";
+	}
 	
 	// 모달에서 클릭 이벤트 발생시킬 때 사용하려고 했는데 이벤트 발생 페이지에서 교수 정보 다 불러 오면 굳이 필요 없음
 //	@RequestMapping("/professorSelect")

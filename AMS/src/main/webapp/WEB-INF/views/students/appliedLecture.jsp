@@ -39,9 +39,10 @@
 	}
 	
 	th,td{
+		border: 1;
 		border-color: inherit;
 	    border-style: solid;
-	    border-width: 0;
+	    /*border-width: 0;*/
 	    text-align: center;
 	    padding: 10px; 
 	}
@@ -66,6 +67,10 @@
 <div align = "center">
 	<h2>수강 신청된 강의 리스트</h2>
 	<div id = "grid"></div>
+	<div class = "total">
+		<div class = "scheduleTime"></div>
+		<div id = "scheduleShow"></div>
+	</div>
 </div>
 
 <!-- 모달 뷰-->
@@ -95,7 +100,7 @@
 		
 		<c:forEach items = "${st}" var = "st">{
 			
-			lnum 		: '${st.lnum}' + '${st.dividenum}',
+			lnum 		: '${st.lnum}' +'-' + '${st.dividenum}',
 			lname 		: '${st.lname}',
 			division 	: '${st.division}',
 			credit 		: '${st.credit}',
@@ -235,4 +240,39 @@
 		};
 
 	});
+</script>
+<script>
+	document.addEventListener("DOMContentLoaded", function(){
+		
+		let sTable = $('<table />').attr('border', '1');
+		sTable.append(addTitle());
+		
+		for(let i = 1; i < 11; i++){
+			
+			let tr = $('<tr />');
+			
+			for(let j = 1; j < 6; j++){
+				
+				tr.append($('<td id =  "jackpot'+ i + '-' + j +'"/>'));
+			}
+
+			sTable.append(tr);
+		}
+		 
+		$('#scheduleShow').append(sTable);
+	});
+	
+	function addTitle() {
+		
+		let title = $('<tr />');
+		title.append(
+       		$('<th />').html('월'),
+       		$('<th />').html('화'),
+       		$('<th />').html('수'),
+       		$('<th />').html('목'),
+       		$('<th />').html('금'),	
+		);
+		
+		return title;
+	};
 </script>

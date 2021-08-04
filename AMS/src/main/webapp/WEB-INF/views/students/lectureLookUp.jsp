@@ -2,17 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-<!-- 겹침 폐기 -->
-
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
 		text-align: center;
@@ -44,7 +33,7 @@
 		
 		<c:forEach items = "${lec}" var = "lec">{
 			
-			lnum 		: '${lec.lnum}' + '${lec.dividenum}',
+			lnum 		: '${lec.lnum}' + '-' + '${lec.dividenum}',
 			lname 		: '${lec.lname}',
 			division 	: '${lec.division}',
 			credit 		: '${lec.credit}',

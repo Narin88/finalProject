@@ -35,6 +35,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 
 		<!-- Spring Security -->
 		<dependency>
@@ -79,6 +85,13 @@
 			<groupId>com.jfinal</groupId>
 			<artifactId>cos</artifactId>
 			<version>2020.4</version>
+		</dependency>
+
+		<!-- javax.mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
 		</dependency>
 
 		<!-- commons-fileupload -->

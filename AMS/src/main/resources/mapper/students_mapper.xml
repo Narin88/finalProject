@@ -88,5 +88,11 @@
 		WHERE SID = #{sid}
 	</update>
 	
+	<!-- 이메일 학번 체크 -->
+	<select id="chkSidEmail" parameterType="StudentsVO" resultType="StudentsVO">
+		SELECT *
+		FROM students
+		WHERE sid = #{sid} AND email = #{email}
+	</select>
 	
 </mapper>

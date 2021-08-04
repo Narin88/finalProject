@@ -51,7 +51,7 @@ pageEncoding="UTF-8"%>
 
         <!-- Remind Passowrd -->
         <div id="formFooter">
-          <a class="underlineHover" href="#">Forgot Password?</a>
+          <a class="underlineHover" href="forgetPwd">Forgot Password?</a>
         </div>
       </div>
     </div>

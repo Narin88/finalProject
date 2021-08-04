@@ -62,4 +62,11 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.studentUpdate(vo);
 	}
 
+
+	@Override
+	public StudentsVO chkSidEmail(StudentsVO vo) {
+		// 비밀번호 변경 학번 이메일 체크
+		return map.chkSidEmail(vo);
+	}
+
 }

@@ -10,6 +10,7 @@
 	
 	<security:http>
 		<security:intercept-url pattern="/goLogin" access="permitAll()" />
+		<security:intercept-url pattern="/forget*" access="permitAll()" />
 		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_PRO', 'ROLE_STD')" />
 		<!-- <security:intercept-url pattern="/WEB-INF/views/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" /> -->

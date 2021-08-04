@@ -10,7 +10,7 @@ pageEncoding="UTF-8" %>
 <li>=</li>
 
 
-<li><a href="<%=request.getContextPath() %>/stdentInfo.do">학적관리</a></li>
+<li><a href="<%=request.getContextPath() %>/studentInfo.do">학적관리</a></li>
 <li><a href="<%=request.getContextPath() %>/scoreView" >영구성적 조회</a></li>
 </ul>
 
@@ -25,7 +25,7 @@ pageEncoding="UTF-8" %>
 <li>=</li>
 
 
-<li><a href="<%=request.getContextPath() %>/stdentInfo.do">학적관리</a></li>
+<li><a href="<%=request.getContextPath() %>/studentInfo.do">학적관리</a></li>
 <li><a href="<%=request.getContextPath() %>/scoreView" >영구성적 조회</a></li>
 </ul>
 
@@ -34,7 +34,7 @@ pageEncoding="UTF-8" %>
 <li><a href="<%=request.getContextPath() %>/appliedLecture">나의 수강 확인</a></li>
 <li><a href="<%=request.getContextPath() %>/#" >학기 시간표 조회#</a></li>
 <li><a href="<%=request.getContextPath() %>/lectureLookUp.do" >강의 시간표 조회</a></li>
-<li><a href="<%=request.getContextPath() %>/EnrolmentList">수강신청</a></li>
+<li><a href="<%=request.getContextPath() %>/ScoreManaPage">수강신청</a></li>
 <li><a href="<%=request.getContextPath() %>/#">수강꾸러미 신청#</a></li>
 </ul>
 <ul>

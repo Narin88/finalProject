@@ -2,6 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
+<!-- 겹침 폐기 -->
 
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
@@ -39,7 +49,7 @@
 			division 	: '${lec.division}',
 			credit 		: '${lec.credit}',
 			target 		: '${lec.target}',
-			pname		: '<a href = "professorSelect.do?pname=${lec.pname}">${lec.pname}</a>',
+			pname		: '<a href = "professorSelect?pname=${lec.pname}">${lec.pname}</a>',
 			<!-- 교수 이름 클릭시 모달창 띄우고 교수 정보 불러오기 -->
 			<!-- 페이지 넘어가면 안 되는데 a 링크 태우나? -->
 			timetable 	: '${lec.timetable}',
@@ -79,21 +89,21 @@
 		el: document.getElementById('grid'),
 		data: dataSource,
 		//rowHeaders: ['checkbox'],
-		pagination: false,		//페이징 처리
+		/* pagination: false,		//페이징 처리
 	    pageOptions: {
 	    	useClient: false,	//페이징 처리
 	    	perPage: 10   		//페이징 갯수
 	    }
-		,
+		, */
 		columns: [
-			{header: '강의코드', name: 'lnum', width: 100},
-			{header: '강의명', name: 'lname', width: 100},
-			{header: '이수구분', name: 'division', width: 100},
-			{header: '학점', name: 'credit', width: 100},
-			{header: '대상학년', name: 'target', width: 200},
-			{header: '교수', name: 'pname', width: 200},
-			{header: '강의시간', name: 'timetable', width: 100},
-			{header: '강의실', name: 'lrname', width: 100}
+			{header: '강의코드', name: 'lnum'},
+			{header: '강의명', name: 'lname'},
+			{header: '이수구분', name: 'division'},
+			{header: '학점', name: 'credit'},
+			{header: '대상학년', name: 'target'},
+			{header: '교수', name: 'pname'},
+			{header: '강의시간', name: 'timetable'},
+			{header: '강의실', name: 'lrname'}
 		] //컬럼갯수
 		
 	});

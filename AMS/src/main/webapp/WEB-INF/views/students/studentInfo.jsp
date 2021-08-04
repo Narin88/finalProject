@@ -75,19 +75,31 @@
 		</tr>
 		<tr>
 			<th width="100"><font size="3">성별</font></th>
-				<c:if test = "${st.sgender eq 2 }">
-					<td width="100">여자</td>
-				</c:if>
-				<c:if test = "${st.sgender eq 1 }">
-					<td width="100">남자</td>
-				</c:if>
+			<td width="100">
+				<c:choose>
+					<c:when test = "${st.sgender eq 2 }">
+						여자
+					</c:when>
+					<c:when test = "${st.sgender eq 1 }">
+						남자
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+			</td>
 			<th width="100"><font size="3">전형</font></th>
-				<c:if test = "${st.disabled eq 'y' }">
-					<td width="100">특별</td>
-				</c:if>
-				<c:if test = "${st.disabled eq 'n' }">
-					<td width="100">일반</td>
-				</c:if>
+			<td width="100">
+				<c:choose>
+					<c:when test = "${st.disabled eq 'y' }">
+						특별
+					</c:when>
+					<c:when test = "${st.disabled eq 'n' }">
+						일반
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+			</td>
 			<th width="100"><font size="3">학적</font></th>		<td width="100">${st.sstatus} </td>
 		</tr>
 	</table>

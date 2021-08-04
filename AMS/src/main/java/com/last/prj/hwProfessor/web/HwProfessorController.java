@@ -48,6 +48,8 @@ public class HwProfessorController {
 		model.addAttribute("result", result);
 		// System.out.println(result);
 		// 강의년도 select
+		String defaultYear="2021";
+		vo.setLyear(defaultYear);
 		List<Map<String, Object>> ySelect = service.hw_ySelect(vo);
 		model.addAttribute("ySelect", ySelect);
 		// 강의명 select

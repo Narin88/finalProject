@@ -12,20 +12,17 @@
 	<title>(교수)과제</title>
 	<style>
 		.box1{
+		padding:1em;
 		height:500px;
 		}
 		.hwTable1{
 		width:100%;
 		border:1px solid gray;
-		height:480px;
+		height:300px;
 		}
-		.hwTable2{
-		width:100%;
-		border:1px solid gray;
-		height:500px;
-		}
+
 		.hwContainer{
-			margin-top:240px;
+			    margin-top: 100px;
 		}
 		.HwSearch{
 			padding: 1em;
@@ -33,16 +30,108 @@
 		    width: 570px;
 			border:1px solid gray;
 		}
+		
+			.menu01 {
+				height: 30px;
+			    margin-top: -30px;
+			    padding: 1em;
+			    margin-left: -40px;
+				}
+				.menu01 ul li{
+					list-style-type:none;
+					float:left;			
+					margin-left:20px;
+					font-weight:bold;		
+				}
+		 .trC{
+		 background-color:white;
+		 }
+		 .modalBtn{ 
+		  border-radius: 1em;
+		    background-color: lightpink;
+		    color: white;
+		    padding-left: 2em;
+		    padding-right: 2em;
+		    padding-top: 8px;
+		    padding-bottom: 5px;
+		    font-size: 20px;
+		    border: none;
+		}	
+		.modal_close{
+			    border-radius: 1em;
+			    background-color: darkslategrey;
+			    color: white;
+			    font-family: sans-serif;
+			    font-weight: bold;
+			    padding-left: 1.5em;
+			    padding-right: 1.5em;
+			    padding-top: 8px;
+			    padding-bottom: 8px;
+			    font-size: 20px;
+			    border: none;
+		}	
+		.modal{ 
+		 position: absolute;
+		    width: 80%;
+		    height: 600px;
+		    background: rgba(0,0,0,0.6);
+		}
+		.modal_container{
+			
+		}
+		.modal_head{
+			height:100px;
+			border:1px solid black;
+		}
+		.modal_content{
+			height:450px;
+		
+		}
+		.modal_footer{
+		
+   		 margin-left: 700px;		
+		}
 	</style>
-	
+		<!-- 모달 -->
+					<script>
+					$(function(){ 
+						  $(".modalBtn").click(function(){
+						    $(".modal").fadeIn();
+						  });
+						  
+						  $(".modal_close").click(function(){
+						    $(".modal").fadeOut();
+						  });
+						  
+						});
+					</script>
 </head>
 <body>
-		<div class="box1">	
-
-			
+			<div class="menu01">		
+				<ul>
+					<li><button type="button" class="modalBtn" onclick="modalFunction();" >Update</button></li>
+				</ul>
+					
+					<div class="modal" style="display:none;">
+					  <div class="modal_container" > 		
+					  		<div class="modal_head">
+					  		
+					  		</div>
+					  		
+					  		<div class="modal_content">
+					  		
+					  		</div>
+					  		
+					  		<div class="modal_footer">
+					  			<button type="button" class="modal_close">CLOSE</button>
+					  		</div>
+					  </div>
+					</div>
+				
+			</div>
+		<div class="box1">			
 			<!-- TEST -->
-			
-			
+			<ul></ul>
 			<h3> ' ' 교수님 등록한 과제 LIST</h3>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
@@ -52,13 +141,13 @@
 					<input type="hidden" id="ye" name="ye">
 					<input type="hidden" id="te" name="te">
 					<input type="hidden" id="ln" name="ln">
+					  
 						<label for="lyear">강의년도:</label>						
-							<select name="lyear" id="lyear">		
-									<option value="">선택 </option>			  
+							<select name="lyear" id="lyear">			
+									<option value="2021" selected="selected">2021</option>  
 								<c:forEach items="${ySelect}" var="ySelect">
-									
-									  <option value="${ySelect.lyear }"  <c:if test="${ySelect.lyear==param.lyear }"> selected="selected"</c:if>    >${ySelect.lyear }</option>
-									  
+									  <option value="${ySelect.lyear }"	<c:if test="${ySelect.lyear==param.lyear }"> selected="selected"</c:if>>${ySelect.lyear }</option>
+									 
 								 </c:forEach>	 
 							</select>
 								
@@ -69,11 +158,13 @@
 							  <option value="2" <c:if test="${param.term==2 }"> selected="selected"</c:if>>2학기</option>
 							</select>
 							
-						<label for="lcode">강의명:</label>
-							<select name="lcode" id="lcode">
+						<label for="lnum">강의명:</label>
+							<select name="lnum" id="lnum">
 							<option value="">선택</option>	
 							  <c:forEach items="${lName}" var="lName">
-									  <option value="${lName.lcode }" <c:if test="${lName.lcode==param.lcode }"> selected="selected"</c:if>>${lName.lname } </option>	
+									  <option value="${lName.lnum }" 
+									  <c:if test="${lName.lnum==param.lnum }"> selected="selected"</c:if>
+									  > ${lName.lname } </option>	
 								 </c:forEach>	 
 							</select>
 						<span> 
@@ -85,7 +176,7 @@
 			 </div>	
 			 			<script>
 			 				function selectSubmit(){
-			 					var a=$("#lcode option:checked").text();	
+			 					var a=$("#lnum option:checked").text();	
 				 				frmHw.ln.value=a;
 				 				frmHw.submit();
 			 				}
@@ -98,7 +189,7 @@
 					 					<span style="color:brown;">'  ${reYear } 년   ${reTerm }  학기  '  </span>로 검색한 결과..
 					 				</c:when>		
 				 					<c:otherwise>
-				 						<span style="color:brown;">'  ${reYear } 년  ${reTerm }  학기   ${reName } '  </span>로 검색한 결과..
+				 						<span style="color:brown;">'Default : 2021  ${reYear } 년  ${reTerm }  학기   ${reName } '  </span>로 검색한 결과..
 				 					</c:otherwise>
 				 				</c:choose>
 				 			</h4>
@@ -107,11 +198,7 @@
 							
 				 		</div>
 				<br>
-							 <h4>
-								 <c:if test="${reYear eq '' and reTerm eq '' and reName eq '선택' }">
-					 				<span style="color:cornflowerblue;">전체리스트 조회결과</span>
-					 			</c:if>	
-				 			</h4>	
+
 			
 			<div class="hwTable1">
 				<table BORDER="1" style="width:100%;text-align:center;">
@@ -159,13 +246,16 @@
 					 <!--  register_id 값을 넘겨서 hw_student에서 중복된값을 가져와서 과제제출 목록리스트 뜨게하기 -->
 						<!-- 클릭시 클릭한 것 강조표시 -->
 						<script>
-							function test(){
-								var a=($(event.target).closest('tr').attr('id')); //해당 부모의 아이디를 가져온다
-								document.getElementById(a).style.backgroundColor="white";
-								document.getElementById(a).style.backgroundColor="beige";
-							}
-					//과제제출 조회요청
+					//과제제출 조회요청(클릭시)
 							$(".hwTable1").on("click","#inquiry",function(){
+								//$(event.target).closest('tr').toggleClass("trC");	
+								//tr클래스 css적용되어있는것을 삭제한후
+								$(".trC").css("backgroundColor", "white");
+								$(".trC").removeClass("trC");
+								//클릭한 값의 css를 추가한다.
+								$(event.target).closest('tr').addClass("trC");
+								$('.trC').css("backgroundColor","beige");
+								//$(event.target).closest('tr').removeClass("trC");
 								$(this).data('id'); //
 								var a= $(this).data('id');
 								var b= $(this).data('num');
@@ -177,20 +267,49 @@
 										opennum :b
 										},
 									dataType:"json",
-									success: function(data){
-										$("tfoot").empty();
-										$('<button type="button" onclick="noSubmit();">미제출자확인</button>')
-										.appendTo('.noSubmit');
-										for(var i of data){
-											$('<tr id="tr1">')
+									success: function(data){		
+										$("tfoot").empty();		
+										$(".noSubmit").empty();
+										//$('<form name="selectFrm" id="selectFrm">')
+										$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;margin-top: 20px;">')
+										.append($('<option value="submitAll">전체보기</option>'))
+										.append($(' <option value="submit">제출자</option>'))
+										.append($('<option value="noSubmit">미제출자</option>">'))
+										.append($('</select>>'))	
+										.appendTo('.noSubmit');		
+										//$('</form>')
+										$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
+											for(var i of data){
+											var a="";
+											var c="";
+											var d="";
+											var e="";
+											var f="";
+											//과제 미제출자일때 조건
+											if(! i.registerId  ){
+												a=' class="unsubmit"';
+												b=' style="visibility:hidden;"';
+												c=' colspan="6" style="color:red;"';
+												d=' style="display:none;"'
+												e=' 과제 미제출자';
+												
+											}else{								
+													a=' class="submit"';	
+													f=' style="background-color: lavender;"'
+											}
+											//submit_file undefined hide
+											if(! i.submit_file ){
+												i.submit_file="";
+											}
+											$('<tr id="tr1"'+a+'>')
 											.append($('<td>').html(i.submitSid))		
-											.append($('<td>').html(i.name))
-											.append($('<td>').html(i.submit_file))
-											.append($('<td>').html(i.submit_date))
-											.append($('<td>').html(i.s_comment))
-											.append($('<td>').html(i.score))
-											.append($('<td id="sc">').html())	
-											.append($('<td id="scIn">').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="text" class="scoreIn" style="width:80px;"><button type="button" class="scoreBtn" onclick="scoreIn();">IN</button>'))										
+											.append($('<td '+f+'>').html(i.name))
+											.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
+											.append($('<td'+d+'>').html(i.submit_date))
+											.append($('<td'+d+'>').html(i.s_comment))
+											.append($('<td'+d+'>').html(i.score))
+											.append($('<td id="sc"'+d+'>').html())	
+											.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
 											.appendTo('tfoot');
 											//if(('#setRid')!=null){
 											//	console.log('b');		
@@ -207,15 +326,26 @@
 					
 					//점수IN
 					function scoreIn(){	
-					    	$(".scoreBtn").on("click", function(){
-					       		var a=$(this).prev().val();			       		
-					       		frmScoreIn.score.value=a;
-					       		var b=$(event.target).closest('tr').find('td').eq(0).html();
-								frmScoreIn.submitSid.value=b;
-								var c=$(this).prev().prev().val();
-								frmScoreIn.registerId.value=c;
-								frmScoreIn.submit();
-					    });
+					    	//$(".scoreBtn").on("click", function(){
+					       		//var a=$(this).prev().val();
+					       		var a=$(event.target).prev().val();	
+					       		if(a>20){
+					       			alert('20점미만 입력가능');
+					       		}else{
+						       		frmScoreIn.score.value=a;
+						       			var b=$(event.target).closest('tr').find('td').eq(0).html();
+						       			var d=$(event.target).closest('tr').find('td').eq(1).html();
+									frmScoreIn.submitSid.value=b;
+										var c=$(event.target).prev().prev().val();
+									frmScoreIn.registerId.value=c;
+									if(confirm('* '+d+' *'+" 학생 \n 점수 :      [ "+a+" ]  점 "+"입력하시겠습니까?")==true){
+										frmScoreIn.submit();
+									}else{
+										return false;
+									}
+								
+					       		}
+					    //});
 							
 					}
 							
@@ -232,13 +362,20 @@
 		</div>
 		<div class="hwContainer">
 		<h3> 조회목록</h3>
-		<h4 style="color:brown;"> 해당목록</h4>
 		<div class="noSubmit">
-			<!--미제출자확인 function  -->
+		
+			<!-- select option  -->
 			<script>
-				function noSubmit(){
-					if(('#setRid').value==null){
-						document.getElementById("setRid").style.backgroudColor="red";
+				function check(e){
+				if(e.value=="submitAll"){
+						$('.unsubmit').show();
+						$('.submit').show();
+					}else if(e.value=="submit"){
+						$('.submit').show();
+						$('.unsubmit').hide();
+					}else if(e.value=="noSubmit"){
+						$('.submit').hide();
+						$('.unsubmit').show();
 					}
 				}
 			</script>
@@ -262,12 +399,20 @@
 			<input type="hidden" id="score" name="score">
 			<input type="hidden" id="submitSid" name="submitSid">
 		</form>
+			<!-- 점수 IN MEXLENGTH -->
+			<script>
+			function maxLengthCheck(object){
+			    if (object.value.length > object.maxLength){
+			      object.value = object.value.slice(0, object.maxLength);
+			    }    
+			  }
+			</script>
 		<!-- 검색조건 초기화 function -->
 		<script>
 		function resetFunction(){
 			$("#lyear option:eq(0)").prop("selected",true);
 			$("#term option:eq(0)").prop("selected",true);
-			$("#lcode option:eq(0)").prop("selected",true);
+			$("#lnum option:eq(0)").prop("selected",true);
 			frmHw.submit();
 		}
 		</script>

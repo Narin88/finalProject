@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,8 +35,11 @@ public class ScoreManaController {
 
 	@RequestMapping("EnrolmentList")
 	@ResponseBody
-	public Map<String, Object> EnrolmentList(HttpSession session){
+	public Map<String, Object> EnrolmentList(HttpSession session,@RequestBody Map<String,String> map){
 		String sId = (String) session.getAttribute("id");
+		String opts = map.get("opts");
+		System.out.println("================================="+opts);
+		
 		StudentsVO vo = SMdao.StudentSelectinfo(sId);
 		int grade = vo.getGrade();
 		Map<String, Object> data = new HashMap<String, Object>();

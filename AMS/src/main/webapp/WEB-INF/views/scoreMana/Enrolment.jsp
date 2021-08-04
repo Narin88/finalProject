@@ -45,12 +45,16 @@
 		수강신청은 더블클릭 하셔야 신청이 됩니다. 
 	</div>
 </div>
+<input type="text" id="seach" name="seach">
+<button type="button" onclick="getList()">검색</button>
 <div id="grid"></div>
 
  
 <script>
+
 $(function(){
 	//학생 학점 체크
+	
 	$.ajax({
 		url: 'AjaxcreditCheck',
 		type: 'GET',
@@ -58,7 +62,7 @@ $(function(){
 			$('#credit').append(20-result);
 		}
 	})
-	
+})
 //grid start
        // GRID 를 보여준다.
 	var grid = new tui.Grid( {
@@ -66,31 +70,37 @@ $(function(){
 		data: {
 				api:{
 					readData:{ url: 'EnrolmentList',method: 'POST' }
-				}
+				},
+		contentType: 'application/json'
 		},
+
 		pagination: true,   //페이징 처리
 	    pageOptions: {
 	    	useClient: true,   //페이징 처리
 	    	perPage: 10   //페이징 갯수
 	    },
 		columns: [
-			{header: '강의등록번호',name: 'openNum', width: 100},
+			{header: '등록번호',name: 'openNum', width: 100},
 			{header: '강의번호',name: 'lnum', width: 100}, //강의번호+분반
 			{header: '년도',name: 'lyear',width: 100}, //년도+학기
-			{header: '학년',name: 'grade',width: 100},
-			{header: '과목명',name: 'lname',width: 200},
-			{header: '학점',name: 'credit',width: 200},
-			{header: '학과',name: 'dname',width: 200},
-			{header: '전공',name: 'mname',width: 200},
+			{header: '학년',name: 'grade',width: 90},
+			{header: '과목명',name: 'lname',width: 100},
+			{header: '학점',name: 'credit',width: 100},
+			{header: '학과',name: 'dname',width: 100},
+			{header: '전공',name: 'mname',width: 100},
 			{header: '이수구분',name: 'division',width: 100},
-			{header: '강의실',name: 'lrName',width: 80},
-			{header: '시간표',name: 'timeTable',width: 150},
-			{header: '수강신청인원',name: 'enCount',width: 80},
+			{header: '강의실',name: 'lrName',width: 90},
+			{header: '시간표',name: 'timeTable',width: 100},
+			{header: '신청인원',name: 'enCount',width: 100},
 			{header: '수강정원',name: 'newLimitCount',width: 80}
 		] //컬럼갯수
 	} );
-    
-       
+    function getList(){
+    	
+    	var opts = {opts:$('#seach').val()};
+    	console.log(opts);
+    	grid.readData(1,opts,true);
+    }
     //grid 이벤트
 	grid.on('dblclick', ev => {
 		//console.log('더블클릭!', ev.rowKey);
@@ -158,8 +168,8 @@ $(function(){
 			});
 		}
 	});
-    
-})
+
+
 //grid end
 
 

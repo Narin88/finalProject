@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix = "sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +22,12 @@
 	text-align: center;
 	align-content: center;
 }
+	.HwSearch{
+			padding: 1em;
+		    border-radius: 3em;
+		    width: 570px;
+			border:1px solid gray;
+		}
 </style>
 <title>내 강의 목록</title>
 </head>
@@ -30,78 +35,48 @@
 
 			
 			<!-- TEST -->
-			
-			
 			<h3> 강의 계획서</h3>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
 			<div class="HwSearch">		
 				<form id="frm" name="frm"  method="post">
 				<sec:csrfInput/>
-					<input type="hidden" id="ye" name="ye">
-					<input type="hidden" id="te" name="te">
-					<input type="hidden" id="ln" name="ln">
-						<label for="lyear">년도:</label>						
-							<select name="lyear" id="lyear">		
+				
+						<label>년도:</label>						
+							<select name="lYear" id="lYear">		
 									<option value="">선택 </option>			  
 								<c:forEach items="${ySelect}" var="ySelect">
-									
-									  <option value="${ySelect.lyear }"  <c:if test="${ySelect.lyear==param.lyear }"> selected="selected"</c:if>    >${ySelect.lyear }</option>
-									  
+									  <option value="${ySelect.LYear }"  <c:if test="${ySelect.LYear}"> selected="selected"</c:if> >${ySelect.LYear }</option>
 								 </c:forEach>	 
 							</select>
 								
-						<label for="term">강의학기:</label>
+					<label for="term">강의학기:</label>
 							<select name="term" id="term">
 							  <option value="">선택</option>	
-							  <option value="1" <c:if test="${param.term==1 }"> selected="selected"</c:if>>1학기</option>
-							  <option value="2" <c:if test="${param.term==2 }"> selected="selected"</c:if>>2학기</option>
-							</select>
+							 <option value="1"  <c:if test="${term eq 1}"> selected=	"selected"</c:if>>1학기</option>
+							  <option value="2" <c:if test="${term eq 2}"> selected="selected"</c:if>>2학기</option> 
+						</select> 
 							
-						<label for="lcode">강의명:</label>
-							<select name="lcode" id="lcode">
-							<option value="">선택</option>	
-							  <c:forEach items="${lName}" var="lName">
-									  <option value="${lName.lcode }" <c:if test="${lName.lcode==param.lcode }"> selected="selected"</c:if>>${lName.lname } </option>	
-								 </c:forEach>	 
-							</select>
-						<span> 
+						
+		 				<span> 
 						
 							<button type="button" onclick="selectSubmit();">검색</button>
 							<button type="button" onclick="resetFunction();">초기화</button>
-						</span>
+						</span> 
 				 </form>
 			 </div>	
 			 			<script>
 			 				function selectSubmit(){
-			 					var a=$("#lcode option:checked").text();	
-				 				frm.ln.value=a;
-				 				frm.submit();
+			 					frm.submit();
 			 				}
 			 				
 			 			</script>
-						 <div>					 
-				 			<h4> 			 			
-				 				<c:choose>
-					 				<c:when test="${reName eq '선택'}">
-					 					<span style="color:brown;">'  ${reYear } 년   ${reTerm }  학기  '  </span>로 검색한 결과..
-					 				</c:when>		
-				 					<c:otherwise>
-				 						<span style="color:brown;">'  ${reYear } 년  ${reTerm }  학기   ${reName } '  </span>로 검색한 결과..
-				 					</c:otherwise>
-				 				</c:choose>
-				 			</h4>
-						</div>
+					
 						<div>
 							
 				 		</div>
 				<br>
-							 <h4>
-								 <c:if test="${reYear eq '' and reTerm eq '' and reName eq '선택' }">
-					 				<span style="color:cornflowerblue;">전체리스트 조회결과</span>
-					 			</c:if>	
-				 			</h4>	
-				 			
+						
 				 			
 				 			
 	<div></div>
@@ -159,70 +134,7 @@
 			data: clsData
 		} );
 	</script>
-	<script>
 	
-	const rowCnt = 10;
-	const columnCnt = 7;
-
-	document.write('<table border="1">');
-	for (let i = 0; i < rowCnt; i++) {
-	  document.write('<tr>');
-	  for (let j = 0; j < columnCnt; j++)  {
-	    document.write('<td>');
-	    document.write(i + ", " + j);
-	    document.write('</td>');
-	  }
-	  document.write('</tr>')
-	}
-	document.write('</table>');
-	
-	
-	
-	                 for(let i = 0; i < result.length; i++){
-                      
-                      let tr = $('<tr />');
-                
-                      tr.append(
-                         $('<td />').append($('<input type = "text" disabled id = "dName'+i+'">').val(result[i].dName)),
-                         $('<td />').append($('<input type = "text" id = "species'+i+'">').val(result[i].species)),
-                         $('<td />').append($('<input type = "text" id = "age'+i+'">').val(result[i].age)),
-                         $('<td />').append($('<input type = "text" id = "dColor'+i+'">').val(result[i].dColor)),
-                         $('<td />').append($('<input type = "text" id = "dSize'+i+'">').val(result[i].dSize)),
-                         $('<td />').html(modifyBtn)
-                      );
-                      
-                      sTable.append(tr);
-                   }
-                   
-                   $('#show').append(sTable);
-                },
-                </script>
-
-	<TABLE border="1" width="133" bgcolor="lime">
-
-		<%
-		for (int i = 1; i < 10; i++) {
-		%>
-
-		<TR>
-
-			<%
-			for (int j = 1; j < 7; j++) {
-			%>
-
-			<TD><%=(j + "*" + i + "=" + i * j)%></TD>
-
-			<%
-			}
-			%>
-
-		</TR>
-
-		<%
-		}
-		%>
-
-	</table>
 
 </body>
 </html>

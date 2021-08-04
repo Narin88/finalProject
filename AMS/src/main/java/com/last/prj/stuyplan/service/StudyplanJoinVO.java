@@ -14,7 +14,7 @@ public class StudyplanJoinVO {
 	private String mName; // 전공이름
 	private String pStaus;//교수 상태 
 	private String lYear;//년도
-	private String term;//학기
+	private int term;//학기
 	private String schedule;//강의 시간
 	private String dividenum;//강의 구분코드
 	private String book;//교재

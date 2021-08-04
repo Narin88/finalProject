@@ -2,8 +2,6 @@ package com.last.prj.studyplan.web;
 
 
 
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.last.prj.hwStudent.service.HwStudentVO;
 import com.last.prj.students.service.StudentsVO;
 import com.last.prj.stuyplan.service.StudyplanJoinVO;
 import com.last.prj.stuyplan.service.StudyplanService;
@@ -29,32 +26,17 @@ public class StudyplanController {
 
 	// 내 강의 리스트 출력하기
 	@RequestMapping("studyPlanList")
-	public String studyplanList(Model model,HttpSession session,HttpServletRequest req, StudyplanJoinVO vo2) {
-		
-		String year = req.getParameter("lyear");
-		String term = req.getParameter("term");
-		String lname = req.getParameter("ln");
+	public String studyplanList(Model model,HttpSession session,HttpServletRequest req, StudyplanJoinVO vo) {
 
-		model.addAttribute("reTerm", term);
-		model.addAttribute("reYear", year);
-		model.addAttribute("reName", lname);
-
-		// System.out.println(result);
-		// 강의년도 select
-		List<Map<String, Object>> ySelect = dao.ySelect(vo2);
-		model.addAttribute("ySelect", ySelect);
-		// 강의명 select
-		List<Map<String, Object>> lName = dao.Lname(vo2);
-		model.addAttribute("lName", lName);
-
-		
-		
-	
-	
-		StudyplanJoinVO vo = new StudyplanJoinVO();
 		vo.setPid((String)session.getAttribute("id"));
+		
+		model.addAttribute("ySelect", dao.ySelect(vo));
+		System.out.println("결과 : " + dao.ySelect(vo));
+//		String term = req.getParameter("term");
+//		model.addAttribute("reTerm", term);
+
 		model.addAttribute("spList", dao.studyPlanList(vo));
-	
+		System.out.println("tq" + dao.studyPlanList(vo));
 		return "studyplan/studyplanlist.tiles";
 	}
 
@@ -62,6 +44,8 @@ public class StudyplanController {
 	@RequestMapping("selectresult")
 	public String selectresult(Model model, StudyplanJoinVO vo) {
 		model.addAttribute("spList", dao.studyPlanList(vo));
+		StudyplanJoinVO vo2 = (StudyplanJoinVO) dao.studyPlanList(vo);
+		model.addAttribute("term", vo2.getTerm());
 		
 		return null;
 	}

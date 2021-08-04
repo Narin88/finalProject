@@ -2,6 +2,10 @@ package com.last.prj.studyplan.web;
 
 
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +29,30 @@ public class StudyplanController {
 
 	// 내 강의 리스트 출력하기
 	@RequestMapping("studyPlanList")
-	public String studyplanList(Model model,HttpSession session) {
+	public String studyplanList(Model model,HttpSession session,HttpServletRequest req, StudyplanJoinVO vo2) {
+		
+		String year = req.getParameter("lyear");
+		String term = req.getParameter("term");
+		String lname = req.getParameter("ln");
 
+		model.addAttribute("reTerm", term);
+		model.addAttribute("reYear", year);
+		model.addAttribute("reName", lname);
+
+		// System.out.println(result);
+		// 강의년도 select
+		List<Map<String, Object>> ySelect = dao.ySelect(vo2);
+		model.addAttribute("ySelect", ySelect);
+		// 강의명 select
+		List<Map<String, Object>> lName = dao.Lname(vo2);
+		model.addAttribute("lName", lName);
+
+		
+		
 	
 	
 		StudyplanJoinVO vo = new StudyplanJoinVO();
 		vo.setPid((String)session.getAttribute("id"));
-		System.out.println(vo.getPid());
 		model.addAttribute("spList", dao.studyPlanList(vo));
 	
 		return "studyplan/studyplanlist.tiles";
@@ -50,17 +71,16 @@ public class StudyplanController {
 	public String studyplanInsertPage(Model model, StudyplanJoinVO vo,HttpSession session){
 		vo.setPid((String)session.getAttribute("id"));
 		model.addAttribute("spList", dao.selectresult(vo));
-		
-		System.out.println(dao.selectresult(vo));
+	
 			return "studyplan/studyplaninsert.tiles";
 		}
 
 	
 	@RequestMapping("studyPlanInsert")
 	public String studyplanInsert(Model model, StudyplanJoinVO vo, StudyplanVO vo2,HttpSession session) {
-		vo.setPid((String)session.getAttribute("id"));
-		dao.studyplanInsert(vo2);
-		return "studyplan/redirect:studyPlanInsertPage?opennum="+vo.getOpennum();
+		vo2.setPid((String)session.getAttribute("id"));
+		model.addAttribute("spList",dao.studyplanInsert(vo2));
+		return "redirect:studyPlanUpdatePage?opennum="+vo2.getOpennum();
 	}
 					
 
@@ -68,7 +88,7 @@ public class StudyplanController {
 	// 강의 계획서 수정하기
 	@RequestMapping("/studyPlanUpdatePage")
 	public String studyPlanUpdatePage(Model model, StudyplanVO vo, StudyplanJoinVO vo2,HttpSession session) {
-		vo.setPid((String)session.getAttribute("id"));
+		vo2.setPid((String)session.getAttribute("id"));
 		model.addAttribute("spList", dao.selectresult(vo2));
 		return  "studyplan/studyplanupdate.tiles";
 	}

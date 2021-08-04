@@ -27,12 +27,12 @@
 <script type="text/javascript">
 
 function sub(){
-	if(frm.content.value == ""){
+	if(frm2.content.value == ""){
 		alert("강의개요를 입력하세요");
-		frm.content.focus();
+		frm2.content.focus();
 		return false;
 	}
-		frm.submit();
+		frm2.submit();
 		alert("정상등록 되었습니다");
 	
 }
@@ -73,7 +73,7 @@ function sub(){
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20></th> <th><input type="text" value="${spList.dividenum}"  size=20> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20></th> <th>- <input type="text" value="${spList.dividenum}"  size=20> </th>
 											<th></th>
 											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}" ></th>
 											
@@ -90,7 +90,7 @@ function sub(){
 					</table>
 	
 		<br/>
-		<form action="studyPlanUpdate" method="post" id="frm">
+		<form action="studyPlanUpdate" method="post" id="frm2">
 		<sec:csrfInput/>
 		<input type="hidden" name="opennum" value="${spList.opennum}">
 					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns">						

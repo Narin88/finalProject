@@ -1,10 +1,12 @@
 package com.last.prj.studyplan.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.last.prj.hwProfessor.service.HwProfessorVO;
 import com.last.prj.lectureRoom.service.LectureRoomVO;
 import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.stuyplan.service.StudyplanJoinVO;
@@ -14,7 +16,7 @@ public interface StudyPlanMapper {
 
 	
 	//강의 리스트
-	public List<StudyplanJoinVO> studyPlanList();
+	public List<StudyplanJoinVO> studyPlanList(StudyplanJoinVO vo);
 
 	// 강의 계획서 내용
 	public int studyplanInsert(StudyplanVO vo); // 강의 계획서 등록하기
@@ -25,4 +27,10 @@ public interface StudyPlanMapper {
 
 	public StudyplanJoinVO readOnly(StudyplanJoinVO vo);//	// 강의 계획서 읽기전용 (학생)
 
+	//강의명 select
+		List<Map<String, Object>> Lname(StudyplanJoinVO vo);
+		//강의년도 select
+		List<Map<String, Object>> ySelect(StudyplanJoinVO vo);
+		
+	
 }

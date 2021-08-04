@@ -16,17 +16,63 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<style>
-	.tui-grid-cell .tui-grid-cell-content {
-	    text-align: center;
-		align-content: center; 
-	}
-	</style>
+<style>
+.tui-grid-cell .tui-grid-cell-content {
+	text-align: center;
+	align-content: center;
+}
+.container2{
+
+}
+.wrap{
+
+}
+.grid{
+width: 110px;
+height: 80px;
+border:  1px solid black;
+}
+.tablehead{
+border:  1px solid black;
+width: 770px;
+height: 100px;
+}
+.tbody{
+border:  1px solid black;
+}
+table{
+border:  1px solid black;
+}
+th tr td{
+border:  1px solid black;
+}
+th.blank{
+width: 40px;
+height: 20px;
+
+}
+.time{
+width: 130px;
+border-bottom:  1px solid black;
+
+}
+.hours{
+
+}
+.hour{
+width: 50px;
+height: 800px;
+border-bottom:  1px solid black;
+
+}
+</style>
+<script>
+    var _timetableGridInfo = [{"no":"1A","rows":[96,102],"hidden":false},{"no":"1B","rows":[102,108],"hidden":false},{"no":"2A","rows":[108,114],"hidden":false},{"no":"2B","rows":[114,120],"hidden":false},{"no":"3A","rows":[120,126],"hidden":false},{"no":"3B","rows":[126,132],"hidden":false},{"no":"4A","rows":[132,138],"hidden":false},{"no":"4B","rows":[138,144],"hidden":false},{"no":"5A","rows":[144,150],"hidden":false},{"no":"5B","rows":[150,156],"hidden":false},{"no":"6A","rows":[156,162],"hidden":false},{"no":"6B","rows":[162,168],"hidden":false},{"no":"7A","rows":[168,174],"hidden":false},{"no":"7B","rows":[174,180],"hidden":false},{"no":"8A","rows":[180,186],"hidden":false},{"no":"8B","rows":[186,192],"hidden":false},{"no":"9A","rows":[192,198],"hidden":false},{"no":"9B","rows":[198,204],"hidden":false},{"no":"10A","rows":[204,210],"hidden":false},{"no":"10B","rows":[210,216],"hidden":false},{"no":"11","rows":[216,226],"hidden":false},{"no":"12","rows":[226,236],"hidden":false},{"no":"13","rows":[236,246],"hidden":false},{"no":"14","rows":[246,256],"hidden":false},{"no":"15","rows":[256,266],"hidden":false},{"no":"16","rows":[266,276],"hidden":false},{"no":"","rows":[276,288],"hidden":false}];
+    </script>
 <title>내 강의 목록</title>
 </head>
 <body>
-	<div>
-	</div>
+	<div></div>
 	<div id="grid"></div>
 	<script> 
 		var Btn = $('<button>');
@@ -81,5 +127,7 @@
 			data: clsData
 		} );
 	</script>
+
 </body>
+
 </html>

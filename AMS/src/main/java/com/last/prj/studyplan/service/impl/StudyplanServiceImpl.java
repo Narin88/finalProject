@@ -1,9 +1,10 @@
 package com.last.prj.studyplan.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 
 import com.last.prj.stuyplan.service.StudyplanJoinVO;
@@ -34,7 +35,7 @@ public class StudyplanServiceImpl implements StudyplanService {
 	// 강의 리스트 불러오기
 	@Override
 	public List<StudyplanJoinVO> studyPlanList(StudyplanJoinVO vo) {
-		return map.studyPlanList();
+		return map.studyPlanList(vo);
 	}
 	//값 받아오기
 	@Override
@@ -46,6 +47,19 @@ public class StudyplanServiceImpl implements StudyplanService {
 	public StudyplanJoinVO readOnly(StudyplanJoinVO vo) {
 		return map.readOnly(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> Lname(StudyplanJoinVO vo) {
+		// TODO Auto-generated method stub
+		return map.Lname(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> ySelect(StudyplanJoinVO vo) {
+		// TODO Auto-generated method stub
+		return map.ySelect(vo);
+	}
+
 
 	
 	

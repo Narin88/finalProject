@@ -58,7 +58,7 @@
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20 readonly></th> <th><input type="text" value="${spList.dividenum}"  size=20 readonly> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20 readonly></th> <th>- <input type="text" value="${spList.dividenum}"  size=20 readonly> </th>
 											<th></th>
 											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}"  readonly></th>
 											

@@ -4,7 +4,7 @@
 
 	<!-- 학생 본인 정보 조회 -->
 	<select id="studentInfo" resultType="StudentsVO">
-		SELECT M.MNAME, 
+		SELECT M.MNAME, m.dname,
 		        P.PNAME,
 		        S.SID, S.SNAME, S.SADDRESS, S.EMAIL,
 		        SUBSTR(S.SPHONE, 1, 3) || '-' || SUBSTR(S.SPHONE, 4, 4) || '-' || SUBSTR(S.SPHONE, 7, 4) SPHONE,
@@ -12,23 +12,24 @@
                 S.GRADE, GRADE * 2 - (2-TERM) TERM, S.SGENDER, S.DISABLED,
                 SUBSTR(S.SBIRTH, 1, 4) || '/' || SUBSTR(S.SBIRTH, 5, 2) || '/' || SUBSTR(S.SBIRTH, 7, 2) SBIRTH,
 		        FIND_CODE_NAME(300, S.SSTATUS) SSTATUS
-		FROM MAJOR M, STUDENTS S, PROFESSOR P
+		FROM major_view m, STUDENTS S, PROFESSOR P
 		WHERE M.MCODE = S.MCODE
 		AND S.MCODE = P.MCODE
 		AND P.PID = S.PID
-		AND S.SID = #{sid}
+		AND S.SID = ${sid}
 	</select>
 	
 	<!-- 학생 본인 성적 조회 -->	
 	<select id="scoreView" resultType="StudentsVO">
-		SELECT M.TOTAL, M.RANK, 
+		SELECT M.*, 
 		        L.LYEAR, L.TERM, I.LNAME,
-		        I.CREDIT, FIND_CODE_NAME(100, I.DCODE) DIVISION
-		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I
+		        I.CREDIT, FIND_CODE_NAME(100, I.DCODE) DIVISION, p.pname
+		FROM SCORE_MANA M, STUDENTS S, LECTURE L, LECTURE_INFO I, professor p
 		WHERE M.SID = S.SID
 		AND M.OPENNUM = L.OPENNUM
 		AND L.LNUM = I.LNUM
 		AND S.SID = #{sid}
+        AND p.pid = I.pid
 		ORDER BY L.LYEAR, L.TERM
 	</select>
 	

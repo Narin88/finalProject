@@ -1,5 +1,7 @@
 package com.last.prj.log.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class LogServiceImpl implements LogService {
 	@Override
 	public void insertLogger(LogVO vo) {
 		dao.insertLogger(vo);
+	}
+
+	@Override
+	public List<LogVO> selectListLogger() {
+		return dao.selectListLogger();
 	}
 	
 }

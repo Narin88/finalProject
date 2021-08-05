@@ -39,6 +39,7 @@
 							class="form-control" name="authNum" type="text" id="authNum"
 							placeholder="인증번호를 입력하세요"/>
 					</div>
+					<input type="hidden" name="sid" value="${sid }" />
 				</div>
 				<div class="card-footer">
 					<button class="btn btn-success" type="button" onclick="authCheck('${num}')">인증하기</button>

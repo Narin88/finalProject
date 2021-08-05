@@ -1,6 +1,8 @@
 package com.last.prj.students.web;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,16 @@ public class StudentsController {
 		// 학생 정보 조회 페이지로 이동 및 한 학생 정보 조회
 
 		vo.setSid((String) session.getAttribute("id"));
+		
+		// 학생정보
 		model.addAttribute("st", serv.studentInfo(vo));
+		
+		// list 갯수
+		List<StudentsVO> list = serv.scoreView(vo);
+		model.addAttribute("count", list.size());
+		
+		// 시험점수
+		model.addAttribute("score", serv.scoreView(vo));
 		
 		return "students/studentInfo.tiles";
 	}

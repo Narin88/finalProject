@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.common.FileUpload;
+import com.last.prj.log.service.LogService;
 import com.last.prj.students.service.StudentsService;
 import com.last.prj.students.service.StudentsVO;
 
@@ -33,7 +34,10 @@ import com.last.prj.students.service.StudentsVO;
 @Controller
 public class HomeController {
 	@Autowired
-	private StudentsService ssdao;
+	private StudentsService studentsService;
+	
+	@Autowired
+	private LogService logService;
 
 	@RequestMapping("home")
 	public String home() {
@@ -71,7 +75,8 @@ public class HomeController {
 
 	// 인증번호 인증
 	@RequestMapping("forgetPwdAut")
-	public String forgetPwdAut(@RequestParam("email") String email, @RequestParam("sname") String sname, Model model) {
+	public String forgetPwdAut(@RequestParam("email") String email, @RequestParam("sname") String sname,
+							   @RequestParam("sid") String sid, Model model) {
 		Random random = new Random();
 		String user = "dlrjatk2@gmail.com";
 		String pwd = "!xotn71202703!";
@@ -117,6 +122,7 @@ public class HomeController {
 		}
 
 		model.addAttribute("num", num);
+		model.addAttribute("sid", sid);
 
 		return "login/forgetPwdAut";
 	}
@@ -128,12 +134,36 @@ public class HomeController {
 		vo.setSid(sid);
 		vo.setEmail(email);
 
-		return ssdao.chkSidEmail(vo);
+		return studentsService.chkSidEmail(vo);
 	}
 	
 	// 비밀번호 변경페이지
 	@RequestMapping("forgetPwdNew")
-	public String forgetPwdNew() {
+	public String forgetPwdNew(@RequestParam("sid") String sid, Model model) {
+		model.addAttribute("sid", sid);
+		
 		return "login/forgetPwdNew";
+	}
+	
+	// 비밀번호 변경
+	@RequestMapping("forgetNewPwd")
+	@ResponseBody
+	public String forgetNewPwd(@RequestParam("pwd") String pwd, @RequestParam("sid") String sid, StudentsVO vo) {
+		vo.setSid(sid);
+		vo.setPwd(pwd);
+		
+		if (studentsService.studentUpdate(vo) > 0) {
+			return "yes";
+		} else {
+			return "no";
+		}
+	}
+	
+	// log리스트
+	@RequestMapping("logList")
+	public String logList(Model model) {
+		model.addAttribute("logList", logService.selectListLogger());
+		
+		return "log/logList.tiles";
 	}
 }

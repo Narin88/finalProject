@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 public class LogVO {
 	private String visitId;
+	private String visitName;
 	private String visitIp;
 	private String visitTime;
 	private String visitCookie;

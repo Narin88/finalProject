@@ -30,8 +30,13 @@ public class StudentsVO {
 	// 아래는 students 테이블 외의 값을 받아오기 위한 변수
 
 	// score_mana 테이블 ( 성적 관리 & 수강 등록 )
+	private int middlescore;	// 중간고사 점수
+	private int finalscore;		// 기말고사 점수
+	private int homework;		// 과제
+	private int attendancescore;// 출석 점수
 	private int total;			// 총점
 	private String rank;		// 등급
+	private String retake;		// 재수강여부 001수강 002재수강
 	
 	// lecture 테이블 ( 강의 개설 )
 //		private int term;		// 학기

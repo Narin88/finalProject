@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.log.service.impl.LogMapper">
+	<resultMap type="LogVO" id="asLogName">
+		<result property="visitId" column="사용자ID" />
+		<result property="visitName" column="사용자이름" />
+		<result property="visitIp" column="사용자IP" />
+		<result property="visitTime" column="방문시간" />
+		<result property="visitAgent" column="사용브라우저" />
+		<result property="visitCookie" column="쿠키값" />
+	</resultMap>
+
 	<insert id="insertLogger" parameterType="LogVO">
 		INSERT INTO logger (
 							visit_id,
@@ -17,4 +26,9 @@
 				#{visitCookie}
 				)
 	</insert>
+	
+	<select id="selectListLogger" resultType="LogVO" resultMap="asLogName">
+		SELECT *
+		FROM lg
+	</select>
 </mapper>

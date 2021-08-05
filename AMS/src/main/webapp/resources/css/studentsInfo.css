@@ -1,0 +1,30 @@
+.bigDiv {
+  display: flex;
+  width: 85%;
+  height: 170px;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+}
+
+.bigDiv2 {
+	width: 85%;
+	margin: 0 auto;
+}
+
+.infoImg {
+	width: 120px;
+	height: 170px; /* 4:3 */
+	border: 1px solid black;
+}
+
+
+th {
+	text-align: left;
+	width: 120px;
+	height: 56.5px;
+}
+
+td {
+	text-align: center;
+	width: 150px;
+}

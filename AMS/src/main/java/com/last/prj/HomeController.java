@@ -78,8 +78,8 @@ public class HomeController {
 	public String forgetPwdAut(@RequestParam("email") String email, @RequestParam("sname") String sname,
 							   @RequestParam("sid") String sid, Model model) {
 		Random random = new Random();
-		String user = "dlrjatk2@gmail.com";
-		String pwd = "!xotn71202703!";
+		String user = "gmail아이디";
+		String pwd = "gmail비밀번호";
 
 		int num = random.nextInt(999999);
 		String toEmail = email;

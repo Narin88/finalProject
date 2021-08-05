@@ -1,4 +1,4 @@
-package com.last.prj.log.service;
+package com.last.prj.common;
 
 import java.io.IOException;
 import java.util.Map;
@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
+import com.last.prj.log.service.LogService;
 import com.last.prj.log.web.LogInfo;
 
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

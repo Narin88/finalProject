@@ -44,7 +44,7 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
-	<beans:bean id="customSuccessHandler" class="com.last.prj.log.service.CustomSuccessHandler">
+	<beans:bean id="customSuccessHandler" class="com.last.prj.common.CustomSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/" />
 	</beans:bean>
 

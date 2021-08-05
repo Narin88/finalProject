@@ -45,8 +45,6 @@
 	}
 </style>
 
-
-
 <div class="shape">
 	
 	<label>학생정보 확인</label>						
@@ -104,10 +102,10 @@
 		</tr>
 	</table>
 		
-<div class = "btnGroup">
-	<button id ="pageMoveBtn">정보 수정하기</button>
-</div>
-
+	<div class = "btnGroup">
+		<button id ="pageMoveBtn">정보 수정하기</button>
+	</div>
+	
 </div>
 
 
@@ -122,6 +120,9 @@
 	}
 	
 </script>
+
+
+
 
 
 

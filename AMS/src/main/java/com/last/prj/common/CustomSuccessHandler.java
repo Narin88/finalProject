@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 import com.last.prj.log.service.LogService;
+import com.last.prj.log.service.LogVO;
 import com.last.prj.log.web.LogInfo;
 
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

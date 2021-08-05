@@ -24,9 +24,9 @@ public interface StudyplanService {
 	
 	
     //강의명 select
-	List<Map<String, Object>> Lname(StudyplanJoinVO vo);
+	public List<StudyplanJoinVO>Lname(StudyplanJoinVO vo);
 	//강의년도 select
-	List<Map<String, Object>> ySelect(StudyplanJoinVO vo);
+	public List<StudyplanJoinVO> ySelect(StudyplanJoinVO vo);
 	
 	
 }

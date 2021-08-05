@@ -49,18 +49,18 @@ public class StudyplanServiceImpl implements StudyplanService {
 	}
 
 	@Override
-	public List<Map<String, Object>> Lname(StudyplanJoinVO vo) {
-		// TODO Auto-generated method stub
+	public List<StudyplanJoinVO> Lname(StudyplanJoinVO vo) {
+	
 		return map.Lname(vo);
 	}
 
 	@Override
-	public List<Map<String, Object>> ySelect(StudyplanJoinVO vo) {
-		// TODO Auto-generated method stub
+	public List<StudyplanJoinVO> ySelect(StudyplanJoinVO vo) {
+	
 		return map.ySelect(vo);
 	}
-
-
+	
+	
 	
 	
 	

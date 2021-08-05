@@ -16,13 +16,13 @@
 		height:500px;
 		}
 		.hwTable1{
+		margin-top:70px;
 		width:100%;
-		border:1px solid gray;
 		height:300px;
 		}
 
 		.hwContainer{
-			    margin-top: 100px;
+
 		}
 		.HwSearch{
 			padding: 1em;
@@ -30,7 +30,9 @@
 		    width: 570px;
 			border:1px solid gray;
 		}
-		
+		.tui-grid-cell .tui-grid-cell-content {
+    text-align: center;
+}
 			.menu01 {
 				height: 30px;
 			    margin-top: -30px;
@@ -46,6 +48,10 @@
 		 .trC{
 		 background-color:white;
 		 }
+		 
+		 
+		 
+		 
 		 .modalBtn{ 
 		  border-radius: 1em;
 		    background-color: lightpink;
@@ -57,82 +63,76 @@
 		    font-size: 20px;
 		    border: none;
 		}	
-		.modal_close{
-			    border-radius: 1em;
-			    background-color: darkslategrey;
-			    color: white;
-			    font-family: sans-serif;
-			    font-weight: bold;
-			    padding-left: 1.5em;
-			    padding-right: 1.5em;
-			    padding-top: 8px;
-			    padding-bottom: 8px;
-			    font-size: 20px;
-			    border: none;
-		}	
-		.modal{ 
-		 position: absolute;
-		    width: 80%;
-		    height: 600px;
-		    background: rgba(0,0,0,0.6);
+		.modalBtn2{ 
+		  border-radius: 1em;
+		    background-color: lightpink;
+		    color: white;
+		    padding-left: 2em;
+		    padding-right: 2em;
+		    padding-top: 8px;
+		    padding-bottom: 5px;
+		    font-size: 20px;
+		    border: none;
 		}
-		.modal_container{
-			
-		}
-		.modal_head{
-			height:100px;
-			border:1px solid black;
-		}
-		.modal_content{
-			height:450px;
-		
-		}
-		.modal_footer{
-		
-   		 margin-left: 700px;		
-		}
+		 /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 70%;
+    		height: 500px; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
 	</style>
-		<!-- 모달 -->
-					<script>
-					$(function(){ 
-						  $(".modalBtn").click(function(){
-						    $(".modal").fadeIn();
-						  });
-						  
-						  $(".modal_close").click(function(){
-						    $(".modal").fadeOut();
-						  });
-						  
-						});
-					</script>
+	<!-- Toast grid -->
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+	<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+	<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 			<div class="menu01">		
 				<ul>
-					<li><button type="button" class="modalBtn" onclick="modalFunction();" >Update</button></li>
-				</ul>
+					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
+					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
 					
-					<div class="modal" style="display:none;">
-					  <div class="modal_container" > 		
-					  		<div class="modal_head">
-					  		
-					  		</div>
-					  		
-					  		<div class="modal_content">
-					  		
-					  		</div>
-					  		
-					  		<div class="modal_footer">
-					  			<button type="button" class="modal_close">CLOSE</button>
-					  		</div>
-					  </div>
-					</div>
+				</ul>
+			
 				
 			</div>
 		<div class="box1">			
 			<!-- TEST -->
 			<ul></ul>
-			<h3> ' ' 교수님 등록한 과제 LIST</h3>	
+			<h3> ' ' 교수님 과제조회</h3>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
 			<div class="HwSearch">		
@@ -182,7 +182,8 @@
 			 				}
 			 				
 			 			</script>
-						 <div>					 
+						 <div>		
+						 <br><br>			 
 				 			<h4> 			 			
 				 				<c:choose>
 					 				<c:when test="${reName eq '선택'}">
@@ -198,55 +199,280 @@
 							
 				 		</div>
 				<br>
-
+			
 			
 			<div class="hwTable1">
-				<table BORDER="1" style="width:100%;text-align:center;">
-					<tr>
-						<th>강의년도</th>	
-						<th>강의학기</th>	
-						<th>강의명</th> 
-						<th>강의실코드</th>
-						<th>과제제목</th>		
-						<th>등록날짜</th> 
-						<th>과제기간</th>		
-						<th>양식파일</th>			
-						<th>제출현황</th>	
-						<th> 조희</th>
-					</tr>
-					<c:forEach items="${result}" var="list">
-					<c:set var="count" value="${count +1 }"></c:set>
-					<tr id="trSelect"><!--${count }  -->
-						 <td>${list.lyear }년</td>  <td>${list.term }학기</td>	<td>${list.lname }</td> <td>${list.lrcode }</td>
-						 <td style="text-align:center;"> <span style="color:red;">( ' - ' )</span></td>
-						 <td><fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> </td> 
-						 <td>~<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일 HH시mm분"/>까지 <br>
-						 <!-- 진행중 ,마감 (음수,양수값으로) -->
-						 <c:if test="${list.hwstatus > 0 }">
-						 <span style="color:red;">진행중</span>
-						  </c:if>
-						  <c:if test="${list.hwstatus <= 0}">
-						  <span style="color:blue;">마감</span>
-						  </c:if>
-						 </td> 						
-						 <td>${list.register_file }</td>	       
-						  <td>
-						  <span style="color:red;">${list.submitCount }</span>
-						  /
-						  <span style="font-weight:bold;">${list.newlimitcount }</span>
-						  </td>	
-						  <!-- 교수가 올린과제의 제출학생 리스트 출력 -->
-						  <td> 
-						  	<button type="button" id="inquiry" onclick="test();" data-id="${list.register_id}" data-num="${list.opennum }">조회</button>
-						  <!-- <button type="button" onclick="inquiry('${list.register_id}')">조회</button> -->			  		  	
-						  </td>
-					</tr>
-					</c:forEach>
-				</table>
+	 
+		    <!-- The Modal -->
+		    <div id="myModal" class="modal">
+		 
+		      <!-- Modal content -->
+		      <div class="modal-content">
+		        <span class="close">&times;</span>                                                               
+			<div class="hwContainer">
+								<h3> 조회목록</h3>
+								<div class="noSubmit">
+								
+									<!-- select option  -->
+									<script>
+										function check(e){
+										if(e.value=="submitAll"){
+												$('.unsubmit').show();
+												$('.submit').show();
+											}else if(e.value=="submit"){
+												$('.submit').show();
+												$('.unsubmit').hide();
+											}else if(e.value=="noSubmit"){
+												$('.submit').hide();
+												$('.unsubmit').show();
+											}
+										}
+									</script>
+								</div>
+								<!-- submit_SID값으로 학생정보 가져오기 -->
+													<table border="1" style="width:100%; text-align:center;">
+															<tr>
+																<th>학생학번</th>	<th>학생이름(SNAME)</th>	 <th>제출파일</th>	
+																<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>
+															</tr>
+															<tfoot></tfoot>
+														</table>
+								</div>
+		       	
+		      </div>
+		 
+		    </div>
+			<!-- MODAL HTML END-->
+			
+			<!-- MODAL SCRIPT -->
+			
+			<script>
+			  // Get the modal
+	        var modal = document.getElementById('myModal');
+	 
+	        // Get the button that opens the modal
+	        var btn = document.getElementById("myBtn");
+	 
+	        // Get the <span> element that closes the modal
+	        var span = document.getElementsByClassName("close")[0];                                          
+	 
+	        // When the user clicks on the button, open the modal 
+	       // btn.onclick = function() {
+	        	$(".hwTable1").on("click","#inquiry",function(){
+	            modal.style.display = "block";
+	            $(this).data('id'); //
+				var a= $(this).data('id');
+				var b= $(this).data('num');
+				$.ajax({
+					type:"post",
+					url:"inquiry",
+					data:{ 
+						registerId :a,
+						opennum :b
+						},
+					dataType:"json",
+					success: function(data){		
+						$("tfoot").empty();		
+						$(".noSubmit").empty();
+						//$('<form name="selectFrm" id="selectFrm">')
+						$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;margin-top: 20px;">')
+						.append($('<option value="submitAll">전체보기</option>'))
+						.append($(' <option value="submit">제출자</option>'))
+						.append($('<option value="noSubmit">미제출자</option>">'))
+						.append($('</select>>'))	
+						.appendTo('.noSubmit');		
+						//$('</form>')
+						$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
+							for(var i of data){
+							var a="";
+							var c="";
+							var d="";
+							var e="";
+							var f="";
+							//과제 미제출자일때 조건
+							if(! i.registerId  ){
+								a=' class="unsubmit"';
+								b=' style="visibility:hidden;"';
+								c=' colspan="6" style="color:red;"';
+								d=' style="display:none;"'
+								e=' 과제 미제출자';
+								
+							}else{								
+									a=' class="submit"';	
+									f=' style="background-color: lavender;"'
+							}
+							//submit_file undefined hide
+							if(! i.submit_file ){
+								i.submit_file="";
+							}
+							$('<tr id="tr1"'+a+'>')
+							.append($('<td>').html(i.submitSid))		
+							.append($('<td '+f+'>').html(i.name))
+							.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
+							.append($('<td'+d+'>').html(i.submit_date))
+							.append($('<td'+d+'>').html(i.s_comment))
+							.append($('<td'+d+'>').html(i.score))
+							.append($('<td id="sc"'+d+'>').html())	
+							.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
+							.appendTo('tfoot');
+							//if(('#setRid')!=null){
+							//	console.log('b');		
+							//	console.log(a);
+							//}
+							
+						}
+					},
+					error: function(error){
+						alert("error");
+					}
+				});
+	        });
+	 
+	        // When the user clicks on <span> (x), close the modal
+	        span.onclick = function() {
+	            modal.style.display = "none";
+	        }
+	 
+	        // When the user clicks anywhere outside of the modal, close it
+	        window.onclick = function(event) {
+	            if (event.target == modal) {
+	                modal.style.display = "none";
+	            }
+	        }
+
+			</script>
+			
+			<!-- model end -->
+			<div id="grid" ></div>
+			<script>
+					  		//grid start
+					  		
+					  				var clsData = [
+								<c:forEach items="${result }" var="list">
+								{
+									lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
+									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> ',
+									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일 HH시mm분"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
+									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }">조회</button> '
+								},
+								</c:forEach>
+								]; //컬럼DATA	
+
+					  		
+					  	       // GRID 를 보여준다.
+					  			var grid = new tui.Grid( {
+									el: document.getElementById('grid'),
+									pagination: true,   //페이징 처리
+								    pageOptions: {
+								    	useClient: true,   //페이징 처리
+								    	perPage: 10   //페이징 갯수
+								    }
+									,
+					  			columns: [
+					  				{header: '강의년도',name: 'lyear',width:100},
+					  				{header: '학기',name: 'lterm',width:60}, //강의번호+분반
+					  				{header: '강의명',name: 'lname',width:90}, //년도+학기
+					  				{header: '강의실',name: 'lrcode',width:80},
+					  				{header: '교수코멘트',name: 'pcomment'},
+					  				{header: '등록날짜',name: 'register_date',width:140},
+					  				{header: '과제기간',name: 'pperiod',width:220},
+					  				{header: '양식파일',name: 'register_file',width:200},
+					  				{header: '제출현황',name: 'submitCount',width:120},
+					  				{header: '조회',name: 'inquiryBtn',width:120}
+					  			], //컬럼갯수
+					  			data: clsData
+					  		} );
+						
+								
+							
+								
+					  			</script>
+					
+					<!-- 과제 클릭시 해당과제제출 학생리스트 출력 
+					<script>
+					$(".hwTable1").on("click","#inquiry",function(){
+						
+
+						$(this).data('id'); //
+						var a= $(this).data('id');
+						var b= $(this).data('num');
+						$.ajax({
+							type:"post",
+							url:"inquiry",
+							data:{ 
+								registerId :a,
+								opennum :b
+								},
+							dataType:"json",
+							success: function(data){		
+								$("tfoot").empty();		
+								$(".noSubmit").empty();
+								//$('<form name="selectFrm" id="selectFrm">')
+								$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;margin-top: 20px;">')
+								.append($('<option value="submitAll">전체보기</option>'))
+								.append($(' <option value="submit">제출자</option>'))
+								.append($('<option value="noSubmit">미제출자</option>">'))
+								.append($('</select>>'))	
+								.appendTo('.noSubmit');		
+								//$('</form>')
+								$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
+									for(var i of data){
+									var a="";
+									var c="";
+									var d="";
+									var e="";
+									var f="";
+									//과제 미제출자일때 조건
+									if(! i.registerId  ){
+										a=' class="unsubmit"';
+										b=' style="visibility:hidden;"';
+										c=' colspan="6" style="color:red;"';
+										d=' style="display:none;"'
+										e=' 과제 미제출자';
+										
+									}else{								
+											a=' class="submit"';	
+											f=' style="background-color: lavender;"'
+									}
+									//submit_file undefined hide
+									if(! i.submit_file ){
+										i.submit_file="";
+									}
+									$('<tr id="tr1"'+a+'>')
+									.append($('<td>').html(i.submitSid))		
+									.append($('<td '+f+'>').html(i.name))
+									.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
+									.append($('<td'+d+'>').html(i.submit_date))
+									.append($('<td'+d+'>').html(i.s_comment))
+									.append($('<td'+d+'>').html(i.score))
+									.append($('<td id="sc"'+d+'>').html())	
+									.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
+									.appendTo('tfoot');
+									//if(('#setRid')!=null){
+									//	console.log('b');		
+									//	console.log(a);
+									//}
+									
+								}
+							},
+							error: function(error){
+								alert("error");
+							}
+						});
+					});
+					
+					});
+					</script>-->
+					  			
+					  			
+					  			
+				
+				
 					 <!--  register_id 값을 넘겨서 hw_student에서 중복된값을 가져와서 과제제출 목록리스트 뜨게하기 -->
 						<!-- 클릭시 클릭한 것 강조표시 -->
-						<script>
-					//과제제출 조회요청(클릭시)
+						 <script>
+					<!--//과제제출 조회요청(클릭시)
 							$(".hwTable1").on("click","#inquiry",function(){
 								//$(event.target).closest('tr').toggleClass("trC");	
 								//tr클래스 css적용되어있는것을 삭제한후
@@ -323,7 +549,7 @@
 									}
 								});
 							});
-					
+					-->
 					//점수IN
 					function scoreIn(){	
 					    	//$(".scoreBtn").on("click", function(){
@@ -360,37 +586,7 @@
 			
 			</div>
 		</div>
-		<div class="hwContainer">
-		<h3> 조회목록</h3>
-		<div class="noSubmit">
 		
-			<!-- select option  -->
-			<script>
-				function check(e){
-				if(e.value=="submitAll"){
-						$('.unsubmit').show();
-						$('.submit').show();
-					}else if(e.value=="submit"){
-						$('.submit').show();
-						$('.unsubmit').hide();
-					}else if(e.value=="noSubmit"){
-						$('.submit').hide();
-						$('.unsubmit').show();
-					}
-				}
-			</script>
-		</div>
-		<!-- submit_SID값으로 학생정보 가져오기 -->
-			<div class="hwTable2">
-				<table border="1" style="width:100%; text-align:center;">
-					<tr>
-						<th>학생학번</th>	<th>학생이름(SNAME)</th>	 <th>제출파일</th>	
-						<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>
-					</tr>
-					<tfoot></tfoot>
-				</table>
-			</div>
-		</div>
 		
 		<!--과제제출한 학생리스트 점수in 값 저장  -->
 		<form id="frmScoreIn" method="post" action="scoreIn">
@@ -418,3 +614,48 @@
 		</script>
 </body>
 </html>
+<!-- 
+<!--  
+				
+				<table BORDER="1" style="width:100%;text-align:center;">
+					<tr>
+						<th>강의년도</th>	
+						<th>강의학기</th>	
+						<th>강의명</th> 
+						<th>강의실코드</th>
+						<th>과제제목</th>		
+						<th>등록날짜</th> 
+						<th>과제기간</th>		
+						<th>양식파일</th>			
+						<th>제출현황</th>	
+						<th> 조희</th>
+					</tr>
+					<c:forEach items="${result}" var="list">
+					<c:set var="count" value="${count +1 }"></c:set>
+					<tr id="trSelect">
+						 <td>${list.lyear }년</td>  <td>${list.term }학기</td>	<td>${list.lname }</td> <td>${list.lrcode }</td>
+						 <td style="text-align:center;"> <span style="color:red;">( ' - ' )</span></td>
+						 <td><fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> </td> 
+						 <td>~<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일 HH시mm분"/>까지 <br>
+						 <!-- 진행중 ,마감 (음수,양수값으로) 
+						 <c:if test="${list.hwstatus > 0 }">
+						 <span style="color:red;">진행중</span>
+						  </c:if>
+						  <c:if test="${list.hwstatus <= 0}">
+						  <span style="color:blue;">마감</span>
+						  </c:if>
+						 </td> 						
+						 <td>${list.register_file }</td>	       
+						  <td>
+						  <span style="color:red;">${list.submitCount }</span>
+						  /
+						  <span style="font-weight:bold;">${list.newlimitcount }</span>
+						  </td>	
+						  <!-- 교수가 올린과제의 제출학생 리스트 출력 
+						  <td> 
+						  			  	
+						  </td>
+					</tr>
+					</c:forEach>
+				</table>
+				-->

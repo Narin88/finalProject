@@ -29,4 +29,7 @@ public interface HwProfessorMap {
 	int hw_professorDelete(HwProfessorVO vo);
 	//(교수)등록한 과제 정보 수정
 	int hw_professorUpdate(HwProfessorVO vo);
+	
+	//교수 등록할 과제조회
+	List<Map<String, Object>> hwPfInsertSelect(HwProfessorVO vo);
 }

@@ -75,5 +75,8 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 		return map.hwScoreIn(vo);
 	}
 	
-	
+	@Override
+	public List<Map<String, Object>> hwPfInsertSelect(HwProfessorVO vo) {
+		return map.hwPfInsertSelect(vo);
+	}
 }

@@ -27,29 +27,7 @@
     	font-size: 10pt;
     }	
     
-    .lecutretbl{
-		--bs-table-bg: transparent;
-		--bs-table-striped-color: #212529;
-		--bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-		--bs-table-active-color: #212529;
-		--bs-table-active-bg: rgba(0, 0, 0, 0.1);
-		--bs-table-hover-color: #212529;
-		--bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-		width: 100%;
-	    color: #212529;
-	    vertical-align: top;
-	    border-color: #dee2e6;
-	}
-	th,td{
-		border-color: inherit;
-	    border-style: solid;
-	    border-width: 0;
-	    text-align: center;
-	    padding: 10px; 
-	}
-	input{
-		width: 100px;
-	}
+
 	.SaveBtn{
 		margin: 10px;
 		width: 100px;

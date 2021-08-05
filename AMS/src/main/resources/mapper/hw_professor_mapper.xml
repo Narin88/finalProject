@@ -9,7 +9,7 @@
 				,l.term	  "term"
        			,i.lname "lname"
        			,l.lrcode "lrcode"
-       			,i.lcode "lcode"
+       			,i.lnum "lnum"
        			,p.opennum "opennum"
        			,(select count(*) from hw_student where register_id=p.register_id) "submitCount"
 				,( select count(*)from score_mana	sm where sm.opennum=p.opennum)	"newlimitcount" 
@@ -27,14 +27,17 @@ LEFT OUTER JOIN hw_professor p
          ON     l.lnum=i.LNUM
       WHERE l.pid=#{pid}
        and not 	register_id IS null
+       	<if test="lyear==null and lyear!=''">
+       		and lyear=2021
+       	</if>
       	<if test="lyear!=null and lyear!=''">
       	 	and lyear=#{lyear}
       	 </if>
       	  <if test="term!=null and term!=''">
       	 	and term=#{term}
       	 </if>
-      	 <if test="lcode!=null and lcode!=''">
-      	 	and lcode=#{lcode}
+      	 <if test="lnum!=null and lnum!=''">
+      	 	and l.lnum=#{lnum}
       	 </if>
       	 ORDER BY p.pperiod desc
 	</select>
@@ -75,13 +78,14 @@ fir LEFT OUTER JOIN
 	      JOIN lecture_info i
 	      on l.lnum=i.LNUM
 	      WHERE l.pid=#{pid}
+	      and l.lyear!=2021
 	   ORDER BY l.lyear asc
      </select>
      <!-- 강의명 select -->
 	<select id="hwLname" resultType="map">
 		SELECT  
 	          distinct i.lname "lname"
-	          		 , i.lcode "lcode"
+	          		 , i.lnum "lnum"
 			  FROM  lecture  l
 	      LEFT OUTER JOIN hw_professor p
 	      ON   p.OPENNUM=l.OPENNUM

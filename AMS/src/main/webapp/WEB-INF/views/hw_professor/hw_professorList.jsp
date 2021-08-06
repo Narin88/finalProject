@@ -11,6 +11,10 @@
 <head> 
 	<title>(교수)과제</title>
 	<style>
+	.tui-grid-border-line-top {
+    border: none;
+    }
+		
 		.box1{
 		padding:1em;
 		height:500px;
@@ -27,7 +31,7 @@
 		.HwSearch{
 			padding: 1em;
 		    border-radius: 3em;
-		    width: 570px;
+		    width: 700px;
 			border:1px solid gray;
 		}
 		.tui-grid-cell .tui-grid-cell-content {
@@ -35,7 +39,6 @@
 }
 			.menu01 {
 				height: 30px;
-			    margin-top: -30px;
 			    padding: 1em;
 			    margin-left: -40px;
 				}

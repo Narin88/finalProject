@@ -24,7 +24,7 @@ public interface HwProfessorMap {
 	//(교수)등록한과제 조건조회
 	HwProfessorVO hw_professorSelect(HwProfessorVO vo);
 	//(교수)과제 등록
-	int hw_professorInsert(HwProfessorVO vo);
+	int hwPfInsert(HwProfessorVO vo);
 	//(교수)등록한 과제 삭제
 	int hw_professorDelete(HwProfessorVO vo);
 	//(교수)등록한 과제 정보 수정

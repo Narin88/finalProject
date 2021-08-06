@@ -27,11 +27,7 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 		return map.hw_professorSelect(vo);
 	}
 
-	@Override
-	public int hw_professorInsert(HwProfessorVO vo) {
-		
-		return map.hw_professorInsert(vo);
-	}
+	
 
 	@Override
 	public int hw_professorDelete(HwProfessorVO vo) {
@@ -78,5 +74,11 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 	@Override
 	public List<Map<String, Object>> hwPfInsertSelect(HwProfessorVO vo) {
 		return map.hwPfInsertSelect(vo);
+	}
+
+	@Override
+	public int hwPfInsert(HwProfessorVO vo) {
+	
+		return map.hwPfInsert(vo);
 	}
 }

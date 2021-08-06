@@ -22,7 +22,7 @@
 	text-align: center;
 	align-content: center;
 }
-	.HwSearch{
+	.HwSearch23{
 			padding: 1em;
 		    border-radius: 3em;
 		    width: 570px;
@@ -38,7 +38,7 @@
 			<h3> 강의 계획서</h3>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
-			<div class="HwSearch">		
+			<div class="HwSearch23">		
 				<form id="frm" name="frm"  method="post">
 				<sec:csrfInput/>
 				

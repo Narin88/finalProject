@@ -7,18 +7,18 @@
 <head>
 
 <style>
- .container2{
+ .container23{
  	width: 1200px;
  	border: 1px solid black;
  	margin: 40px;
  	padding: 30px;
 }
- .innercontainer{
+ .innercontainer23{
  	align : center;
 	width: 100%;
 	
  }
- .ns{
+ .ns23{
  font-family: 'Noto Sans KR', sans-serif;
  align: center;
  }
@@ -42,15 +42,15 @@ function sub(){
 <title>강의 계획서 수정</title>
 </head>
 <body>
-<div class="container2">
-	<h1 align="center" class="ns">강 의 계 획 서</h1>
+<div class="container23">
+	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
 	<p>${spList.LYear}년도 ${spList.term} 학기</p>
 	
-<div class="innercontainer">
+<div class="innercontainer23">
 
 							
-					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns">
+					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 								<tr width="200" height="100%">
 									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.LName} "></th>
 									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.PName}"> </th>
@@ -62,7 +62,7 @@ function sub(){
 		
 		<br/>
 
-					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns">
+					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 
 								
 										<tr  width="200">
@@ -93,7 +93,7 @@ function sub(){
 		<form action="studyPlanUpdate" method="post" id="frm2">
 		<sec:csrfInput/>
 		<input type="hidden" name="opennum" value="${spList.opennum}">
-					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns">						
+					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns23">						
 							
 									<tr>					
 											<th>	<p align="left"> &nbsp; 1. 교과목 개요</p></th>
@@ -106,8 +106,8 @@ function sub(){
 								
 		<br/>
 		<br/>
-					<label class="ns">3. 주차별 강의 진행 과정 <span style="color:#aaa;"> (최대 300자) </span></label>
-					<table width="100%"  bgcolor="#d2d2d2" class="ns">						
+					<label class="ns23">3. 주차별 강의 진행 과정 <span style="color:#aaa;"> (최대 300자) </span></label>
+					<table width="100%"  bgcolor="#d2d2d2" class="ns23">						
 							
 							<br/>
 							
@@ -268,9 +268,9 @@ function sub(){
 								
 	
 																					<h3 align="center">
-									<button type="button" class="ns" value="submit" onclick="sub()">●등록</button>
-									<input type="reset"  class="ns" value="● 취소" >
-									<input type="button" class="ns" name="back" value="● 뒤로가기" onClick="location.href='studyPlanList'">
+									<button type="button" class="ns23" value="submit" onclick="sub()">●등록</button>
+									<input type="reset"  class="ns23" value="● 취소" >
+									<input type="button" class="ns23" name="back" value="● 뒤로가기" onClick="location.href='studyPlanList'">
 								</h3>
 								</form>
 </div>

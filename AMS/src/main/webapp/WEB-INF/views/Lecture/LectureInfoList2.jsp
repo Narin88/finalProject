@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="frm" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:useBean id="toDay" class="java.util.Date" />
-
+<fmt:formatDate value='${toDay}' pattern='yyyy' var="nowDate"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,13 +73,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
-<!-- PDF처리 -->
-<script type = "text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script> 
-<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-<script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -92,15 +84,9 @@
 
 </div>
 <!-- model -->
-
 <div id="my_offer" align="center">
-
-<button id="createpdf">
-  pdf 생성
-</button>
-
     <a class="modal_close_btn">닫기</a>
-    <div class="modal-body" id="pdfwrap">
+    <div class="modal-body">
 	   <h2> 수강 등록 </h2>
 	   <form id = "frm" action="LectureInsert" >
 	   <sec:csrfInput/>
@@ -186,7 +172,7 @@
 				var mcode = data.mCode;
 				var dcode = data.dCode;
 				var division = data.division;
-				var credit = `credit;
+				var credit = data.credit;
 				
 
 				$("#lecutretbl tbody").empty();
@@ -267,35 +253,5 @@
 
 		
 	</script>
-	
-	<!-- PDF 스크립트 -->
-	<script>
-	
-$('#createpdf').click(function() {
-	  //pdf_wrap을 canvas객체로 변환
-/* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
-	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
-	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
-	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
-	    doc.save('LecturePlan-file.pdf'); //pdf저장
-	    alert('클릭됨');
-	  }); */
-	  
-	  html2canvas($('#pdfwrap')[0]).then(function (canvas) {
-		  var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
-		  var doc = new jsPDF('p', 'mm', 'a4'); 
-		  var imgData = canvas.toDataURL('image/png'); 
-		  var imgWidth = 210; 
-		  var pageHeight = 295; 
-		  var imgHeight = canvas.height * imgWidth / canvas.width; 
-		  var heightLeft = imgHeight; 
-		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
-		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
-		  alert('클릭됨');
-	  });
-
-	});
-	
-</script>
 </body>
 </html>

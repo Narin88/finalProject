@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.preenrolment.service.impl.PreEnrolmentMapper">
+	
+	<select id="PreStudentSelect" resultType="StudentsVO" parameterType="string">
+		select * from students where sId = #{sId}
+	</select>
+	
+	<select id="preLectureList" resultType="PreEnrolmentVO" parameterType="StudentsVO">
+		<![CDATA[
+		select l.lnum, li.lname, li.credit, FIND_CODE_NAME(100, li.dcode) as division,
+        l.TIMETABLE||' / '||lr.LRNAME as timeTable,
+        case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
+             when retake_Check(#{sid},l.opennum) = '002' then 'N'
+             end as reTake
+		from lecture_info li, LECTURE l, lecture_room lr
+		where li.LNUM = l.LNUM
+		and l.LRCODE = lr.LRCODE
+		and l.lyear = to_char(sysdate,'RRRR')
+		and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <= 08  then 1
+		           		else 2 end
+		and li.GRADE = #{grade}
+		
+		]]>
+	</select>
+</mapper>

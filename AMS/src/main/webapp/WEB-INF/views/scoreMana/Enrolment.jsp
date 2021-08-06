@@ -43,7 +43,7 @@
 	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
-<title>Insert title here</title>
+<title>수강신청 :: No.M University</title>
 </head>
 <body>
 <div align="center">

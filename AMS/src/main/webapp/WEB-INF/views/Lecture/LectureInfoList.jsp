@@ -73,11 +73,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<title>Insert title here</title>
+<title>강의 등록 :: No.M University</title>
 </head>
 <body>
 <div align="center">
-<h2>수강정보</h2>
+<h2>수강 등록</h2>
 <div align="right">
 	<a href="ProfessorLectureList" class="pagemove">등록된 수강 목록</a>
 </div>

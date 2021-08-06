@@ -1,6 +1,8 @@
 package com.last.prj.lecture.web;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.lecture.service.LectureService;
 import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.lectureRoom.service.LectureRoomService;
+import com.last.prj.scoreMana.service.ScoreManaVO;
 
 @Controller
 public class LecutreController {
@@ -53,7 +57,15 @@ public class LecutreController {
 		Ldao.LectureDelete(vo);
 		return 0;
 	}
-	
-	
+	@ResponseBody
+	@RequestMapping("ScoreStudentList")
+	public List<ScoreManaVO> ScoreStudentList(@RequestParam("openNum") String opennum) {
+		System.out.println(opennum);
+		List<ScoreManaVO> smvo = Ldao.ScoreStudentList(opennum);
+		for(ScoreManaVO vo2: smvo) {
+			System.out.println(vo2.toString());
+		}
+		return smvo;
+	}
 	
 }

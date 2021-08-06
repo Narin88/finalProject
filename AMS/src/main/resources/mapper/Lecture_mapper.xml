@@ -22,4 +22,15 @@
 		DELETE FROM LECTURE WHERE OPENNUM = #{openNum}
 	</delete>
 	
+	<select id="ScoreStudentList" parameterType="string" resultType="ScoreManaVO">
+		SELECT SM.SID, S.SNAME,MV.MNAME,S.EMAIL,
+			   substr(S.SPHONE,1,3)||'-'||substr(S.SPHONE,4,4)||'-'||substr(S.SPHONE,8) as sphone,
+		       CASE WHEN S.SGENDER = 1 THEN '남자'
+		            WHEN S.SGENDER = 2 THEN '여자'
+		        END AS sGender, UPPER(S.DISABLED) AS disabled
+		FROM SCORE_MANA SM, STUDENTS S, MAJOR_VIEW MV
+		WHERE SM.SID = S.SID
+		AND S.MCODE = MV.MCODE
+		AND SM.OPENNUM = #{opennum}
+	</select>
 </mapper>

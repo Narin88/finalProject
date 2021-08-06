@@ -36,7 +36,7 @@ public class StudyplanController {
 //		model.addAttribute("reTerm", term);
 
 		model.addAttribute("spList", dao.studyPlanList(vo));
-		System.out.println("tq" + dao.studyPlanList(vo));
+		System.out.println("qq" + dao.studyPlanList(vo));
 		return "studyplan/studyplanlist.tiles";
 	}
 
@@ -85,20 +85,23 @@ public class StudyplanController {
 		return "redirect:studyPlanUpdatePage?opennum="+vo.getOpennum();
 	}
 	//읽기전용
-	@RequestMapping("/readOnly")
-	public String studyplanReadonlyPage(Model model, StudyplanJoinVO vo,HttpSession session) {
-		vo.setPid((String)session.getAttribute("id"));
-		model.addAttribute("spList", dao.selectresult(vo));
-		return "studyplan/studyplanreadonly.tiles";
-	}
+	
+	/*
+	 * @RequestMapping("/readOnly") public String studyplanReadonlyPage(Model model,
+	 * StudyplanJoinVO vo,HttpSession session) {
+	 * vo.setPid((String)session.getAttribute("id"));
+	 * model.addAttribute("spList",dao.selectresult(vo)); return
+	 * "studyplan/studyplanreadonly.tiles"; }
+	 */
+	 
 	
 	// 강의 계획서 수정하기
-	@RequestMapping("/readOnly2")
-	public String studyplanReadonlyPage(Model model, StudyplanVO vo, StudyplanJoinVO vo2,HttpSession session) {
-		vo2.setPid((String)session.getAttribute("id"));
-		model.addAttribute("spList", dao.selectresult(vo2));
-		return  "studyplan/studyplanreadonly.tiles";
-	}
+
+	 @RequestMapping("/readOnly2") public String studyplanReadonlyPage(Model
+	 model, StudyplanVO vo, StudyplanJoinVO vo2,HttpSession session) {
+	 vo2.setPid((String)session.getAttribute("id")); model.addAttribute("spList",
+	  dao.selectresult(vo2)); return "studyplan/studyplanreadonly.tiles"; }
+
 	
 	//홈2
 	@RequestMapping("/home2")

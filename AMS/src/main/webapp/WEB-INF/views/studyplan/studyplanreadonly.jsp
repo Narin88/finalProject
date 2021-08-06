@@ -4,80 +4,110 @@
 <html>
 <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 <head>
+<script type = "text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <style>
- .container2{
+ .container23{
  	width: 1200px;
  	border: 1px solid black;
  	margin: 40px;
  	padding: 30px;
 }
- .innercontainer{
+ .innercontainer23{
  	align : center;
 	width: 100%;
 	
  }
- .ns{
+ .ns23{
  font-family: 'Noto Sans KR', sans-serif;
  align: center;
  }
+ textarea{
+ word-break: break-all;
+}
+ 
+
  </style>
 
 <meta charset="UTF-8">
 <title>강의 계획서 수정</title>
 </head>
 <body>
-<div class="container2">
-	<h1 align="center" class="ns">강 의 계 획 서</h1>
+
+<button id="createpdf">
+  pdf 생성
+</button>
+
+<script>
+var str = document.getElementById("textarea").value;
+str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+document.getElementById("text").innerHTML = str;
+
+var str = $("#textarea").val();
+str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+$("#text").html(str);
+
+
+$('textarea').each(function() {
+    if(!$(this).hasClass('d-none')){
+        $(this).replaceWith("<div contenteditable=\"true\">"+$(this).html()+"</div>")
+    }
+});
+
+
+</script>
+<div class="container23" id="pdfwrap">
+	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
 	<p>${spList.LYear}년도 ${spList.term} 학기</p>
 	
-<div class="innercontainer">
+<div class="innercontainer23">
 
-							
-					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns">
+					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 								<tr width="200" height="100%">
-									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.LName} " readonly></th>
-									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.PName}" readonly> </th>
-									<th ><font size="3">이메일</font></th><th><input type="text"  value="${spList.email}" readonly></th>
-									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" value="${spList.PPhone} " readonly > </th>
+									<th><font size="3">교과목 명</font></th>	 <th><input type="text" style="height:25px;" value="${spList.LName}" readonly> </th>
+									<th ><font size="3">담당교수</font></th>	 <th><input type="text" style="height:25px;" value="${spList.PName}" readonly> </th>
+									<th ><font size="3">이메일</font></th><th><input type="text" style="height:25px;" value="${spList.email}" readonly> </th>
+									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" style="height:25px;" value="${spList.PPhone} " readonly> </th>
 								</tr>
 								
 					</table>
 		
 		<br/>
 
-					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns">
+					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 
 								
-										<tr  width="200">
-												<th><font size="3">수강학과</font></th>	 <th><input type="text" value="${spList.MName}" readonly></th>
-												<th ><font size="3">수강학부</font></th>	 <th><input type="text" value="${spList.DName}" readonly> </th>
-												<th ><font size="3">강의실</font></th>	 <th><input type="text" value="${spList.lrName}"  readonly></th>
-												<th ><font size="3">교재</font></th>	 <th><input type="text" value="${spList.book}"  size=20 readonly></th>
+										<tr>
+												<th><font size="3">수강학과</font></th>	 <th><input type="text" style="height:25px;" value="${spList.MName} " readonly></th>
+												<th ><font size="3">수강학부</font></th>	 <th><input type="text" style="height:25px;" value="${spList.DName} " readonly></th>
+												<th ><font size="3">강의실</font></th>	 <th><input type="text" style="height:25px;" value="${spList.lrName} " readonly></th>
+												<th ><font size="3">교재</font></th>	 <th><input type="text" style="height:25px;" value="${spList.book} " readonly></th>
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20 readonly></th> <th>- <input type="text" value="${spList.dividenum}"  size=20 readonly> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" style="height:25px;" value="${spList.LNum} " readonly></th><th>- <input type="text" style="height:25px;" value="${spList.dividenum}" readonly> </th>
 											<th></th>
-											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}"  readonly></th>
+											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="height:25px;width:95.5%;" value="${spList.schedule}" readonly></th>
 											
 										
 									</tr>
 									<tr>				
 														
-											<th ><font size="3">학점</font></th>	 <th><input type="text" value="${spList.credit}"  size=20 readonly></th>
-											<th><font size="3">대상학년</font></th>	 <th><input type="text" value="${spList.grade}"  size=20 readonly> </th>
-											<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitCount}"  size=20 readonly></th>
-											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="width:200px;" value="${spList.division}" size=20 readonly> </th>
+											<th ><font size="3">학점</font></th>	 <th><input type="text" style="height:25px;" value="${spList.credit}" readonly></th>
+											<th><font size="3">대상학년</font></th>	 <th><input type="text" style="height:25px;" value="${spList.grade}" readonly></th>
+											<th ><font size="3">정원</font></th>	 <th><input type="text" style="height:25px;" value="${spList.newlimitCount}" readonly></th>
+											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="height:25px;" value="${spList.division}"readonly> </th>
 									</tr>
 									
 					</table>
-	
+				</div>
 		<br/>
 
 		<input type="hidden" name="opennum" value="${spList.opennum}">
-					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns">						
+					<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns23">						
 							
 									<tr>					
 											<th>	<p align="left"> &nbsp; 1. 교과목 개요</p></th>
@@ -89,9 +119,8 @@
 					</table>
 								
 		<br/>
-		<br/>
-					<label class="ns">3. 주차별 강의 진행 과정 <span style="color:#aaa;"> (최대 300자) </span></label>
-					<table width="100%"  bgcolor="#d2d2d2" class="ns">						
+					<label class="ns23">3. 주차별 강의 진행 과정 <span style="color:#aaa;"> (최대 300자) </span></label>
+					<table width="100%"  bgcolor="#d2d2d2" class="ns23">						
 							
 							<br/>
 							
@@ -99,7 +128,7 @@
 											<th>	<p align="left">  &nbsp; 1주차 강의</p></th>
 									</tr>					
 									<tr height="20">					
-										<td><textarea name="w1" rows="3"  style="resize: none;width:99%;" readonly>${spList.w1 }</textarea></td>				
+										<td><textarea name="w1" rows="3"  style="resize: none;width:99%;"wrap="hard" readonly>${spList.w1 }</textarea></td>				
 									</tr>					
 							
 					<tr></tr>
@@ -109,7 +138,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w2" rows="3"  style="resize: none;width:99%;" readonly>${spList.w2}</textarea></td>						
+										<td><textarea name="w2" rows="3"  style="resize: none;width:99%;"wrap="hard" readonly>${spList.w2}</textarea></td>						
 									</tr>					
 									
 									<tr></tr>
@@ -249,7 +278,7 @@
 								
 								</table>
 								
-								</h3>
+					
 						
 </div>
 
@@ -258,6 +287,33 @@
 </div>
 
 </body>
+<script>
+$('#createpdf').click(function() {
+	  //pdf_wrap을 canvas객체로 변환
+/* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
+	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+	    doc.save('LecturePlan-file.pdf'); //pdf저장
+	    alert('클릭됨');
+	  }); */
+	  
+	  html2canvas($('#pdfwrap')[0]).then(function (canvas) {
+		  var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
+		  var doc = new jsPDF('p', 'mm', 'a4'); 
+		  var imgData = canvas.toDataURL('image/png'); 
+		  var imgWidth = 210; 
+		  var pageHeight = 295; 
+		  var imgHeight = canvas.height * imgWidth / canvas.width; 
+		  var heightLeft = imgHeight; 
+		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
+		  alert('클릭됨');
+	  });
+
+	});
+	
+</script>
 </html>
 
 

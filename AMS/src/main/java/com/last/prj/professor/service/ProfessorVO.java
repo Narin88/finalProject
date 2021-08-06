@@ -19,4 +19,5 @@ public class ProfessorVO {
 	private String pbirth;
 	private String pgender;
 	
+	
 }

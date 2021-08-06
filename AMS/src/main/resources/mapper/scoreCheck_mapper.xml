@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.scoreCheck.service.impl.ScoreCheckMapper">
+
+	<select id="ScoreCheckLectureList"  parameterType="LectureVO"  resultType="LectureVO">
+	    select l.OPENNUM,l.lnum,l.DIVIDENUM,l.LYEAR,l.TERM, li.GRADE, li.lname, l.BOOK,find_code_name(100,li.dcode) as division,
+	    l.NEWLIMITCOUNT, lr.LRNAME, l.TIMETABLE,  l.DATESTATUS
+	    from lecture l, lecture_info li, LECTURE_ROOM lr
+	    where l.lnum = li.lnum
+	    and l.LRCODE = lr.LRCODE
+	    and l.pid=#{pId} 	
+	    order by 1
+	</select>
+
+	<select id="ScoreCheckLectureStudent" parameterType="ScoreManaVO" resultType="ScoreManaVO">
+				select i.sid, i.sname, i.email,i.grade,i.disabled, i.sphone,
+		    	l.lnum, l.opennum,
+		    	f.lname, p.pid
+				from students i, lecture l, lecture_info f,professor p,SCORE_MANA s
+				where l.lnum =  f.lnum
+		        and p.pid = l.pid
+		        and p.pid = #{pid}
+		        and s.OPENNUM = l.OPENNUM
+	
+	</select>
+	
+	
+	<select id="collectresult" parameterType="LectureVO" resultType="LectureVO">
+			        select l.OPENNUM,l.lnum,l.DIVIDENUM,l.LYEAR,l.TERM, li.GRADE, li.lname, l.BOOK,find_code_name(100,li.dcode) as division,
+				    l.NEWLIMITCOUNT, lr.LRNAME, l.TIMETABLE,  l.DATESTATUS
+				    from lecture l, lecture_info li, LECTURE_ROOM lr
+				    where l.lnum = li.lnum
+				    and l.LRCODE = lr.LRCODE
+				    and l.pid=#{pId} 	
+				    
+	</select>
+	
+	<!-- 등록 업데이트 -->
+	<update id="ScoreInsert" parameterType="ScoreManaVO">
+			update set SCORE_MANA
+		    middlescore = #{middlescore},
+            finalscore = #{finalscore},
+            homework = #{homework},
+            attendancescore = #{attendancescore},
+            total = #{total},
+            rank = #{rank}
+            where pid = #{pid}
+	</update>
+</mapper>

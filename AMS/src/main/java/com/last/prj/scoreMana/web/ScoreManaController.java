@@ -28,9 +28,9 @@ public class ScoreManaController {
 	
 	@RequestMapping("ScoreManaPage")
 	public String ScoreManaPage(Model model, HttpSession session) {
-		String sId = (String) session.getAttribute("id");
+		String sid = (String) session.getAttribute("id");
 		StudentsVO vo = new StudentsVO();
-		vo.setSid(sId);
+		vo.setSid(sid);
 		model.addAttribute("student",SMdao.EnrolmentStudent(vo));
 		return "scoreMana/Enrolment.tiles";
 	}
@@ -38,9 +38,9 @@ public class ScoreManaController {
 	@RequestMapping("EnrolmentList")
 	@ResponseBody
 	public Map<String, Object> EnrolmentList(HttpSession session,@RequestBody Map<String,String> map){
-		String sId = (String) session.getAttribute("id");
+		String sid = (String) session.getAttribute("id");
 		
-		StudentsVO vo = SMdao.StudentSelectinfo(sId); //학생의 학년 가져오기
+		StudentsVO vo = SMdao.StudentSelectinfo(sid); //학생의 학년 가져오기
 		
 		LectureVO lvo = new LectureVO();
 		lvo.setSeach(map.get("seach"));
@@ -57,11 +57,11 @@ public class ScoreManaController {
 	//중복 수강체크
 	@RequestMapping("AjaxConfirm")
 	@ResponseBody
-	public int AjaxConfirm(@RequestParam("openNum") String openNum, HttpSession session) {
-		String sId = (String) session.getAttribute("id");
+	public int AjaxConfirm(@RequestParam("opennum") String opennum, HttpSession session) {
+		String sid = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sid);
+		vo.setOpennum(opennum);
 		ScoreManaVO vo2 = SMdao.OverlapCheck(vo);
 		
 		System.out.println(vo2);
@@ -76,12 +76,12 @@ public class ScoreManaController {
 	
 	//수강 취소(삭제)
 	@RequestMapping("AjaxEnrolmentDelete")
-	public String AjaxEnrolmentDelete(@RequestParam("openNum") String openNum,Model model, HttpSession session) {
-		String sId = (String) session.getAttribute("id");
+	public String AjaxEnrolmentDelete(@RequestParam("opennum") String opennum,Model model, HttpSession session) {
+		String sid = (String) session.getAttribute("id");
 		String message = "";
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sid);
+		vo.setOpennum(opennum);
 		
 		int i = SMdao.AjaxEnrolmentDelete(vo);
 			if(i>0) {
@@ -95,11 +95,11 @@ public class ScoreManaController {
 	
 	//수강신청(insert)
 	@RequestMapping("AjaxEnrolmentInsert")
-	public String AjaxEnrolmentInsert(@RequestParam("openNum") String openNum, HttpSession session) {
-		String sId = (String) session.getAttribute("id");
+	public String AjaxEnrolmentInsert(@RequestParam("opennum") String opennum, HttpSession session) {
+		String sid = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sid);
+		vo.setOpennum(opennum);
 		SMdao.AjaxEnrolmentInsert(vo);
 		return "redirect:ScoreManaPage";
 	}
@@ -107,19 +107,19 @@ public class ScoreManaController {
 	//재이수 확인
 	@RequestMapping("AjaxRetakeChek")
 	@ResponseBody
-	public String AjaxRetakeChek(@RequestParam("openNum") String openNum, HttpSession session) {
-		String sId = (String) session.getAttribute("id");
+	public String AjaxRetakeChek(@RequestParam("opennum") String opennum, HttpSession session) {
+		String sid = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sid);
+		vo.setOpennum(opennum);
 		return SMdao.RetakeChek(vo);
 	}
 	
 	@RequestMapping("AjaxcreditCheck")
 	@ResponseBody
 	public int AjaxCreditCheck(HttpSession session) {
-		String sId = (String) session.getAttribute("id");
-		int result = SMdao.AjaxCreditCheck(sId);
+		String sid = (String) session.getAttribute("id");
+		int result = SMdao.AjaxCreditCheck(sid);
 		if(result==100) {
 			result=0;
 		}

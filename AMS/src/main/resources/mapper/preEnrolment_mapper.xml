@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="preLectureList" resultType="PreEnrolmentVO" parameterType="StudentsVO">
-		<![CDATA[
+		
 		select l.lnum, li.lname, li.credit, FIND_CODE_NAME(100, li.dcode) as division,
         l.TIMETABLE||' / '||lr.LRNAME as timeTable,
         case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
@@ -17,10 +17,28 @@
 		where li.LNUM = l.LNUM
 		and l.LRCODE = lr.LRCODE
 		and l.lyear = to_char(sysdate,'RRRR')
-		and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <= 08  then 1
+		and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM')<![CDATA[<=]]>08  then 1
 		           		else 2 end
 		and li.GRADE = #{grade}
-		
-		]]>
+		and opennum not in (select opennum from preenrolment where sid = #{sid})
+		<if test="dcode != 'defaultV' and dcode != null">
+			<choose>
+				<when test="mcode != 'defaultV' and dcode != null">
+					and dcode = #{dcode}
+					and mcode = #{mcode}
+				</when>
+				<otherwise>
+					and dcode = #{dcode}
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="preDepartments" resultType="PreEnrolmentVO">
+		select * from departments
+	</select>
+	
+	<select id="getMajorList" resultType="PreEnrolmentVO" parameterType="PreEnrolmentVO">
+		select * from major where dcode = #{dcode}
 	</select>
 </mapper>

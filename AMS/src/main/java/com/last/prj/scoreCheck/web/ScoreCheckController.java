@@ -19,7 +19,7 @@ ScoreCheckService dao;
 //과목 리스트 출력
 @RequestMapping("ScoreCheckLectureList")
 public String ScoreCheckLectureList(Model model, HttpSession session,LectureVO vo) {
-	vo.setPId((String)session.getAttribute("id"));
+	vo.setPid((String)session.getAttribute("id"));
 	
 	model.addAttribute("lectures",dao.ScoreCheckLectureList(vo));
 	System.out.println("============================="+vo);

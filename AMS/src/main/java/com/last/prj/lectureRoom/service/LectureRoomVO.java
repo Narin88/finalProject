@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class LectureRoomVO {
-	private String lrCode; //강의실 코드
+	private String lrcode; //강의실 코드
 	private String location; //강의실 건물
-	private int seatNum; //강의실 좌석수
-	private String lrName; //강의실 이름
+	private int seatnum; //강의실 좌석수
+	private String lrname; //강의실 이름
 }

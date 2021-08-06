@@ -33,51 +33,69 @@
 
 
 <div id="grid"></div>
-	<script> 
-	//grid start
-		var clsData = [
-			<c:forEach items="${Lectures }" var="Lec">
-			{
-				lNum: '${Lec.LNum}', lName: '${Lec.LName}', pId: '${Lec.PId}',
-				grade: '${Lec.grade}', limitCount: '${Lec.limitCount}', dCode: '${Lec.DCode}',
-				division: '${Lec.division}', credit: '${Lec.credit}'
-			},
-			</c:forEach>
-			]; //컬럼DATA
 
-        // GRID 를 보여준다.
-		var grid = new tui.Grid( {
-			el: document.getElementById('grid'),
-			pagination: true,   //페이징 처리
-		    pageOptions: {
-		    	useClient: true,   //페이징 처리
-		    	perPage: 10   //페이징 갯수
-		    }
+
+<script> 
+
+//grid start
+
+	let open = [];
+
+	 $(function(){
+		grid.on('dblclick', ev => {
+				   var data = grid.getRow(ev.rowKey);
+				   var open = data.opennum;
+
+				   location.href ="ScoreCheckLectureStudent?opennum="+open; 
+		}); 
+	 });
+	 
+		var clsData = [
+			<c:forEach items="${lectures }" var="lec">{
+				opennum: '${lec.opennum}', lnum: '${lec.lnum}-${lec.dividenum}', lyear: '${lec.lyear}', grade: '${lec.grade}', lname: '${lec.lname}', book: '${lec.book}', division: '${lec.division}', newlimitcount: '${lec.newlimitcount}', lrname: '${lec.lrname}', timetable: '${lec.timetable}'
+			}
+			<c:if test='${!empty lec.opennum}'>
 			,
-			columns: [
-				{header: '강의번호',name: 'lNum'},
-				{header: '강의이름',name: 'lName'},
-				{header: '교수코드',name: 'pId'},
-				{header: '학년',name: 'grade'},
-				{header: '정원',name: 'limitCount'},
-				{header: '이수코드',name: 'dCode'},
-				{header: '이수구분',name: 'division'},
-				{header: '학점',name: 'credit'},
-			], //컬럼갯수
-			data: clsData
-		} );
+			</c:if>
+			</c:forEach>
+			]; 
+
+		
+       // GRID 를 보여준다.
+	var grid = new tui.Grid( {
+		el: document.getElementById('grid'),
+		data: clsData,
+		rowHeaders: ['checkbox'],
+		pagination: true,   //페이징 처리
+	    pageOptions: {
+	    	useClient: true,   //페이징 처리
+	    	perPage: 10   //페이징 갯수
+	    }
+		,
+		columns: [
+			{header: '강의등록번호',name: 'opennum', width: 150},
+			{header: '강의번호',name: 'lnum', width: 150}, //강의번호+분반
+			{header: '년도',name: 'lyear',width: 150}, //년도+학기
+			{header: '학년',name: 'grade',width: 150},
+			{header: '과목명',name: 'lname',width: 250},
+			{header: '교재',name: 'book',width: 250},
+			{header: '이수구분',name: 'division',width: 150},
+			{header: '정원',name: 'newlimitcount',width: 130},
+			{header: '강의실',name: 'lrname',width: 100},
+			{header: '시간표',name: 'timetable',width: 150}
+		] //컬럼갯수
+
+	} );
+       
+
+//grid end
+
 	//grid end
 	
-		</script>
-<script>
 
 //그리드 이벤트
-	$(function(){
-		grid.on('click', ev => {
-			console.log('더블클릭!', ev.rowKey);
-			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
-			location.href="/ScoreCheckLectureStudent";
-		});
+
 </script>
+
 </body>
 </html>

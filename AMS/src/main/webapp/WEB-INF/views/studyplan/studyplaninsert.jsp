@@ -141,7 +141,7 @@
 											<th>	<p align="left"> &nbsp;  1주차 강의</p></th>
 									</tr>					
 									<tr height="20">					
-										<td><textarea name="w1" rows="3"  style="resize: none;width:99%;"></textarea></td>				
+										<td><textarea name="w1"  id="limit"  rows="3"  style="resize: none;width:99%;"></textarea></td>				
 									</tr>					
 							
 					<tr></tr>
@@ -151,7 +151,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w2" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w2" id="limit"  rows="3"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									
 									<tr></tr>
@@ -163,7 +163,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w3" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w3" id="limit"  rows="3"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -172,7 +172,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w4" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w4"  id="limit" rows="3"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -181,7 +181,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w5" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w5"  id="limit" rows="3"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -190,7 +190,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w6" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w6" id="limit"  rows="3"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -199,7 +199,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w7" rows="3"  style="resize: none;width:99%;"></textarea></td></tr>					
+										<td><textarea name="w7"  id="limit" rows="3"  style="resize: none;width:99%;"></textarea></td></tr>					
 									<tr></tr>
 										
 									<tr>					
@@ -207,7 +207,7 @@
 									</tr>					
 														
 									<tr height="20">					
-												<td><textarea placeholder="중간고사 기간" name="w16" rows="3"  style="resize: none;width:99%;"></textarea></td>				
+												<td><textarea placeholder="중간고사 기간" name="w16" id="limit"  rows="3"  style="resize: none;width:99%;"></textarea></td>				
 									
 									<tr></tr>
 										
@@ -216,7 +216,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w9" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w9" rows="3" id="limit"   style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -225,7 +225,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w10" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w10" rows="3"  id="limit"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -234,7 +234,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w11" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w11" rows="3" id="limit"   style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -243,7 +243,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w12" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w12" rows="3"  id="limit"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -252,7 +252,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w13" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w13" rows="3" id="limit"   style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -261,7 +261,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w14" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w14" rows="3" id="limit"   style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -270,7 +270,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w15" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea name="w15" rows="3"  id="limit"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -279,7 +279,7 @@
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea placeholder="기말고사 기간" name="w16" rows="3"  style="resize: none;width:99%;"></textarea></td>						
+										<td><textarea placeholder="기말고사 기간" name="w16" id="limit"  rows="3"  style="resize: none;width:99%;"></textarea></td>						
 									</tr>					
 									
 									

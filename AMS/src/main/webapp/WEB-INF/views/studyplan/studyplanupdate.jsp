@@ -38,6 +38,21 @@ function sub(){
 }
 
 </script>
+ <script>
+ 
+    $(document).ready(function() {
+        $('#limit').on('keyup', function() {
+            $('#limit_cnt').html("("+$(this).val().length+" / 150)");
+ 
+            if($(this).val().length > 150) {
+                $(this).val($(this).val().substring(0, 150));
+                $('#limit_cnt').html("(150 / 150)");
+            }
+        });
+    });
+        
+    
+    </script>
 <meta charset="UTF-8">
 <title>강의 계획서 수정</title>
 </head>
@@ -100,7 +115,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="content" rows="3" style="resize: none;width:99%;" >${spList.content}</textarea></td>						
+										<td><textarea name="content" rows="3" id="limit"  style="resize: none;width:99%;" >${spList.content}</textarea></td>						
 									</tr>					
 					</table>
 								
@@ -115,7 +130,7 @@ function sub(){
 											<th>	<p align="left">  &nbsp; 1주차 강의</p></th>
 									</tr>					
 									<tr height="20">					
-										<td><textarea name="w1" rows="3"  style="resize: none;width:99%;">${spList.w1 }</textarea></td>				
+										<td><textarea name="w1" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w1 }</textarea></td>				
 									</tr>					
 							
 					<tr></tr>
@@ -125,7 +140,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w2" rows="3"  style="resize: none;width:99%;">${spList.w2}</textarea></td>						
+										<td><textarea name="w2" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w2}</textarea></td>						
 									</tr>					
 									
 									<tr></tr>
@@ -137,7 +152,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w3" rows="3"  style="resize: none;width:99%;">${spList.w3}</textarea></td>						
+										<td><textarea name="w3" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w3}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -146,7 +161,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w4" rows="3"  style="resize: none;width:99%;">${spList.w4}</textarea></td>						
+										<td><textarea name="w4" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w4}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -155,7 +170,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w5" rows="3"  style="resize: none;width:99%;">${spList.w5}</textarea></td>						
+										<td><textarea name="w5" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w5}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -164,7 +179,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w6" rows="3"  style="resize: none;width:99%;">${spList.w6}</textarea></td>						
+										<td><textarea name="w6" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w6}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -173,7 +188,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w7" rows="3"  style="resize: none;width:99%;">${spList.w7}</textarea></td>						
+										<td><textarea name="w7" rows="3"   id="limit"  style="resize: none;width:99%;">${spList.w7}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -182,7 +197,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea  placeholder="중간고사 기간" name="w8" rows="3"  style="resize: none;width:99%;">${spList.w8}</textarea></td>						
+										<td><textarea  placeholder="중간고사 기간" name="w8"  id="limit"  rows="3"  style="resize: none;width:99%;">${spList.w8}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -191,7 +206,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w9" rows="3"  style="resize: none;width:99%;">${spList.w9}</textarea></td>						
+										<td><textarea name="w9" rows="3"   id="limit"  style="resize: none;width:99%;">${spList.w9}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -200,7 +215,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w10" rows="3"  style="resize: none;width:99%;">${spList.w10}</textarea></td>						
+										<td><textarea name="w10" rows="3"   id="limit"  style="resize: none;width:99%;">${spList.w10}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -209,7 +224,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w11" rows="3"  style="resize: none;width:99%;">${spList.w11}</textarea></td>						
+										<td><textarea name="w11" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w11}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -218,7 +233,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w12" rows="3"  style="resize: none;width:99%;">${spList.w12}</textarea></td>						
+										<td><textarea name="w12" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w12}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -227,7 +242,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w13" rows="3"  style="resize: none;width:99%;">${spList.w13}</textarea></td>						
+										<td><textarea name="w13" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w13}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -236,7 +251,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w14" rows="3"  style="resize: none;width:99%;">${spList.w14}</textarea></td>						
+										<td><textarea name="w14" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w14}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -245,7 +260,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w15" rows="3"  style="resize: none;width:99%;">${spList.w15}</textarea></td>						
+										<td><textarea name="w15" rows="3"  id="limit"   style="resize: none;width:99%;">${spList.w15}</textarea></td>						
 									</tr>					
 									<tr></tr>
 										
@@ -254,7 +269,7 @@ function sub(){
 									</tr>					
 														
 									<tr height="20">					
-										<td><textarea name="w16" rows="3"  style="resize: none;width:99%;" placeholder="기말고사 기간">${spList.w16}</textarea></td>						
+										<td><textarea name="w16" rows="3"  id="limit"   style="resize: none;width:99%;" placeholder="기말고사 기간">${spList.w16}</textarea></td>						
 									</tr>					
 									
 									

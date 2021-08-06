@@ -60,8 +60,8 @@ public class ScoreManaController {
 	public int AjaxConfirm(@RequestParam("openNum") String openNum, HttpSession session) {
 		String sId = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sId);
+		vo.setOpennum(openNum);
 		ScoreManaVO vo2 = SMdao.OverlapCheck(vo);
 		
 		System.out.println(vo2);
@@ -80,8 +80,8 @@ public class ScoreManaController {
 		String sId = (String) session.getAttribute("id");
 		String message = "";
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sId);
+		vo.setOpennum(openNum);
 		
 		int i = SMdao.AjaxEnrolmentDelete(vo);
 			if(i>0) {
@@ -98,8 +98,8 @@ public class ScoreManaController {
 	public String AjaxEnrolmentInsert(@RequestParam("openNum") String openNum, HttpSession session) {
 		String sId = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sId);
+		vo.setOpennum(openNum);
 		SMdao.AjaxEnrolmentInsert(vo);
 		return "redirect:ScoreManaPage";
 	}
@@ -110,8 +110,8 @@ public class ScoreManaController {
 	public String AjaxRetakeChek(@RequestParam("openNum") String openNum, HttpSession session) {
 		String sId = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSId(sId);
-		vo.setOpenNum(openNum);
+		vo.setSid(sId);
+		vo.setOpennum(openNum);
 		return SMdao.RetakeChek(vo);
 	}
 	

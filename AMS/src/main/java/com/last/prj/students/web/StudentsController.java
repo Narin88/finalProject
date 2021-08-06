@@ -1,46 +1,78 @@
 package com.last.prj.students.web;
 
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.professor.service.ProfessorService;
+import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.students.service.StudentsService;
 import com.last.prj.students.service.StudentsVO;
+
 
 @Controller
 public class StudentsController {
 
 	@Autowired
-	private StudentsService serv;
+	private StudentsService stService;
+	
+	@Autowired
+	private ProfessorService pfService;
 
 	////////////////////////////////////////////////////////////
 
 	@RequestMapping("/studentInfo")
-	public String studentInfo(StudentsVO vo, Model model, HttpSession session) {
+	public String studentInfo(StudentsVO svo, Model model, HttpSession session, ProfessorVO pvo) {
 		// 학생 정보 조회 페이지로 이동 및 한 학생 정보 조회
 
-		vo.setSid((String) session.getAttribute("id"));
+		svo.setSid((String) session.getAttribute("id"));
 		
 		// 학생정보
-		model.addAttribute("st", serv.studentInfo(vo));
+		model.addAttribute("st", stService.studentInfo(svo));
 		
-		// list 갯수
-		List<StudentsVO> list = serv.scoreView(vo);
-		model.addAttribute("count", list.size());
+		pvo.setPid(stService.studentInfo(svo).getPid());
+		// 지도교수 정보
+		model.addAttribute("pro", pfService.professorSelect(pvo));
 		
-		// 시험점수
-		model.addAttribute("score", serv.scoreView(vo));
+//		// list 갯수
+//		List<StudentsVO> list = stService.scoreView(vo);
+//		model.addAttribute("count", list.size());
+//		
+//		// 시험점수
+//		model.addAttribute("score", stService.scoreView(vo));
 		
 		return "students/studentInfo.tiles";
 	}
 	
+	// grid api 값 받아오기
+	@RequestMapping("scoreGetList")
+	@ResponseBody
+	public Map<String, Object> scoreGetList(HttpSession session, @RequestBody Map<String, String> map, StudentsVO vo) {
+		vo.setSid((String) session.getAttribute("id"));
+		
+		if (map.get("year") != null) {
+			vo.setLyear((String)map.get("year"));
+			vo.setTerm(Integer.parseInt(map.get("term")));
+		}
+		
+		// 시험점수 리스트 보내주기
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", stService.scoreView(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
 	
 	@RequestMapping("/infoConfirmPage")
 	public String infoConfirm() {
@@ -56,7 +88,7 @@ public class StudentsController {
 
 		String path = null;
 		String realID = (String) session.getAttribute("id");
-		StudentsVO result = serv.selfAuthentication(vo);
+		StudentsVO result = stService.selfAuthentication(vo);
 		
 		if (result == null || !realID.equals(vo.getSid())) {
 			// 조회 결과가 없거나, 세션 아이디와 받은 아이디 값이 다를 경우
@@ -78,7 +110,7 @@ public class StudentsController {
 		// 성적 조회 페이지
 
 		vo.setSid((String) session.getAttribute("id"));
-		model.addAttribute("st", serv.scoreView(vo));
+		model.addAttribute("st", stService.scoreView(vo));
 
 		return "students/studentScoreView.tiles";
 	}
@@ -94,7 +126,7 @@ public class StudentsController {
 		// session
 		vo.setSid((String) session.getAttribute("id"));
 		
-		model.addAttribute("st", serv.appliedLecture(vo));
+		model.addAttribute("st", stService.appliedLecture(vo));
 
 		return "students/appliedLecture.tiles";
 	}
@@ -112,7 +144,7 @@ public class StudentsController {
 		vo.setDcode("004");
 		vo.setLocation("인문대");
 
-		model.addAttribute("lec", serv.lectureLookUp(vo));
+		model.addAttribute("lec", stService.lectureLookUp(vo));
 
 		return "students/lectureLookUp.tiles";
 	}
@@ -122,7 +154,7 @@ public class StudentsController {
 //	public String professorSelect(ProfessorVO vo, Model model) {
 //		// 교수 정보 보기
 //		
-//		model.addAttribute("prf", serv.professorSelect(vo));
+//		model.addAttribute("prf", stService.professorSelect(vo));
 //		
 //		return "students/appliedLecture";
 //	}
@@ -133,15 +165,15 @@ public class StudentsController {
 		
 		String path = null;
 		vo.setSid((String) session.getAttribute("id"));
-		int result = serv.studentUpdate(vo);
+		int result = stService.studentUpdate(vo);
 		
 		if (result != 0) {
 
 			System.out.println("비밀번호 변경됨.");
 			
-			serv.studentUpdate(vo);
+			stService.studentUpdate(vo);
 			
-			model.addAttribute("st", serv.studentInfo(vo));
+			model.addAttribute("st", stService.studentInfo(vo));
 			path = "students/studentInfo.tiles";			
 		} else {
 

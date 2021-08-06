@@ -18,13 +18,18 @@
 }
 
 
-th {
+.bigDiv th {
 	text-align: left;
 	width: 120px;
 	height: 56.5px;
 }
 
-td {
+.bigDIv td {
 	text-align: center;
 	width: 150px;
+}
+
+.proInfo th{
+	text-align: center;
+	background-color: rgb(214, 216, 219);
 }

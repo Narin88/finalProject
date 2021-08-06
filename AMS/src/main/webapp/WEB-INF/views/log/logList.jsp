@@ -24,8 +24,8 @@
       var clsData = [
         <c:forEach items="${logList }" var="log">
         {
-          visitId: '${log.visitId}', visitName: '${log.visitName}', visitIp: '${log.visitIp}', visitTime: '${log.visitTime}',
-          visitAgent: '${log.visitAgent}', visitCookie: '${log.visitCookie}'
+          visitId: '${log.visitid}', visitName: '${log.visitname}', visitIp: '${log.visitip}', visitTime: '${log.visittime}',
+          visitAgent: '${log.visitagent}', visitCookie: '${log.visitcookie}'
         },
         </c:forEach>
         ]; //컬럼DATA
@@ -41,12 +41,12 @@
           scrollX: true,
           scrollY: true,
         columns: [
-          {header: '사용자ID',name: 'visitId', align: "center", width: 250, filter: {type: "text"}},
-          {header: '사용자이름',name: 'visitName', align: "center", width: 250, filter: {type: "text"}},
-          {header: '사용자IP',name: 'visitIp', align: "center", width: 250},
-          {header: '방문시간',name: 'visitTime', align: "center", width: 250, filter: {type: "date"}},
-          {header: '사용브라우저',name: 'visitAgent', align: "center", width: 250},
-          {header: '쿠키값',name: 'visitCookie', align: "center"},
+          {header: '사용자ID',name: 'visitid', align: "center", width: 250, filter: {type: "text"}},
+          {header: '사용자이름',name: 'visitname', align: "center", width: 250, filter: {type: "text"}},
+          {header: '사용자IP',name: 'visitip', align: "center", width: 250},
+          {header: '방문시간',name: 'visittime', align: "center", width: 250, filter: {type: "date"}},
+          {header: '사용브라우저',name: 'visitagent', align: "center", width: 250},
+          {header: '쿠키값',name: 'visitcookie', align: "center"},
         ], //컬럼갯수
         data: clsData
       });

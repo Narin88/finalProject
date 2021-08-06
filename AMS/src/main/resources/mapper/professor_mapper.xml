@@ -5,7 +5,7 @@
 	<select id="professorSelect" parameterType="professorVO" resultType="professorVO">
 		SELECT * FROM 
 		PROFESSOR
-		WHERE PID= #{PID}
+		WHERE PID= #{pid}
 	</select>
 	
 	
@@ -21,7 +21,7 @@
 		and p.mcode = m.mcode
 		and l.LRCODE = r.LRCODE
     	and l.lyear = to_char(sysdate,'YYYY') 
-		and l.PID = #{Pid}
+		and l.PID = #{pid}
 	</select>	
 	
 </mapper>

@@ -106,7 +106,7 @@ $(function(){
 		$.ajax({
 			url:'ScoreStudentList',
 			type: 'GET',
-			data: {openNum: opennum},
+			data: {opennum: openNum},
 			success: function(result){
 				StudentList(result);
 			}

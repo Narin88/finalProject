@@ -8,7 +8,7 @@
 	    from lecture l, lecture_info li, LECTURE_ROOM lr
 	    where l.lnum = li.lnum
 	    and l.LRCODE = lr.LRCODE
-	    and l.pid=#{pId} 	
+	    and l.pid=#{pid} 	
 	    order by 1
 	</select>
 
@@ -19,8 +19,9 @@
 				from students i, lecture l, lecture_info f,professor p,SCORE_MANA s
 				where l.lnum =  f.lnum
 		        and p.pid = l.pid
+		        and l.opennum = s.opennum
 		        and p.pid = #{pid}
-		        and s.OPENNUM = l.OPENNUM
+		        and s.OPENNUM = #{opennum}
 	
 	</select>
 	
@@ -31,19 +32,19 @@
 				    from lecture l, lecture_info li, LECTURE_ROOM lr
 				    where l.lnum = li.lnum
 				    and l.LRCODE = lr.LRCODE
-				    and l.pid=#{pId} 	
+				    and l.pid=#{pid} 	
 				    
 	</select>
 	
 	<!-- 등록 업데이트 -->
 	<update id="ScoreInsert" parameterType="ScoreManaVO">
-			update set SCORE_MANA
+			update SCORE_MANA set
 		    middlescore = #{middlescore},
             finalscore = #{finalscore},
             homework = #{homework},
             attendancescore = #{attendancescore},
             total = #{total},
             rank = #{rank}
-            where pid = #{pid}
+            where opennum = #{opennum}
 	</update>
 </mapper>

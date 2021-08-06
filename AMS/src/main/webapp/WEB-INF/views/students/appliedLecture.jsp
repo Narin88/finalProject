@@ -44,7 +44,8 @@
 	    border-style: solid;
 	    /*border-width: 0;*/
 	    text-align: center;
-	    padding: 10px; 
+	    padding: 10px;
+	    width: 150px;
 	}
 
 	.tui-grid-cell .tui-grid-cell-content {
@@ -92,10 +93,30 @@
 </div>
 <!-- 모달 끝 -->
 
+<!-- 히든 -->
+<%-- <div id = "hiddenData">
+	<c:forEach items = "${st }" var = "hi" varStatus = "seq">
+		<input type = "hidden" id = "hidden_lname${seq.count }" value = "${hi.lname }">
+		<input type = "hidden" id = "hidden_timetable${seq.count }" value = "${hi.timetable }">
+		<input type = "hidden" id = "hidden_lrname${seq.count }" value = "${hi.lrname }">
+	</c:forEach>
+</div> --%>
+
 <script>
-
+	
+	// 강의 시간을 한 문자로 묶기(ex : 월1화2...)
+	let totaltime = "";
+	let getValue = [];
+ 	<c:forEach items = "${st}" var = "st">
+		//totaltime += '${st.timetable}'
+		getValue["${st.timetable }"] = ['${st.lname}','${st.lrname}' ];
+	</c:forEach>
+	console.log("밸류 : " ,getValue);	
+	
+		
+	////////////////////////////////////
+	
 // 그리드
-
 	var lecData = [
 		
 		<c:forEach items = "${st}" var = "st">{
@@ -242,18 +263,89 @@
 	});
 </script>
 <script>
+
 	document.addEventListener("DOMContentLoaded", function(){
 		
 		let sTable = $('<table />').attr('border', '1');
 		sTable.append(addTitle());
 		
-		for(let i = 1; i < 11; i++){
+		let week = [
+			"",
+			"",
+			"월",
+			"화",
+			"수",
+			"목",
+			"금"
+		];
+		
+		let timeseq =[
+			"1교시" + "<br>" + "09:00 ~ 10:00",
+			"2교시" + "<br>" + "09:00 ~ 10:00",
+			"3교시" + "<br>" + "09:00 ~ 10:00",
+			"4교시" + "<br>" + "09:00 ~ 10:00",
+			"5교시" + "<br>" + "09:00 ~ 10:00",
+			"6교시" + "<br>" + "09:00 ~ 10:00",
+			"7교시" + "<br>" + "09:00 ~ 10:00",
+			"8교시" + "<br>" + "09:00 ~ 10:00",
+			"9교시" + "<br>" + "09:00 ~ 10:00"
+		];
+		
+		for(let i = 1; i < 10; i++){
 			
 			let tr = $('<tr />');
 			
-			for(let j = 1; j < 6; j++){
+			for(let j = 1; j < 7; j++){
 				
-				tr.append($('<td id =  "jackpot'+ i + '-' + j +'"/>'));
+			//	console.log("위크 : " + week[j] + i);
+			//	console.log("토탈 : " + totaltime.indexOf(week[j] + i));
+				/* 
+				let time = null;
+				let lec = null;
+				let room = null;
+				try {
+					// for문 반복 횟수보다 아이디가 부족할 경우 value 없다고 에러뜸
+					
+					time = document.getElementById('hidden_timetable' + i).value;
+					lec = document.getElementById('hidden_lname' + i).value;
+					room = document.getElementById('hidden_lrname' + i).value;
+				} catch (e) {
+					console.log(e);
+				}
+				 */
+				// console.log('시간 : ' + time);
+				// console.log('강의명 : ' + lec);
+				// console.log('장소 : ' + room);
+				
+// 테이블 높이 일정하게 css 먹이기
+
+
+				if (j == 1){
+					// 테이블 첫 번째 자리에 강의 시간 집어넣기
+					
+					tr.append($('<td id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i - 1]));
+	
+				} else {
+					
+					let curTime = week[j] + i;
+					//console.log("컬타임 : " + curTime);
+					
+					//과목찾기
+					let lectureName = "";
+					for(lectureTime in getValue){
+						
+						if(lectureTime.indexOf(curTime) != -1){
+							lectureName = getValue[lectureTime][0] + "<br>" + lectureTime + "<br>" + getValue[lectureTime][1];
+						}
+					}
+					console.log(lectureName);					
+						
+					// 강의 집어넣기
+					tr.append($('<td id =  "jackpot'+ i+ '-' + j + '"/>').html(lectureName));
+					
+				}
+				
+				
 			}
 
 			sTable.append(tr);
@@ -266,6 +358,7 @@
 		
 		let title = $('<tr />');
 		title.append(
+	       	$('<th />').html(''),
        		$('<th />').html('월'),
        		$('<th />').html('화'),
        		$('<th />').html('수'),

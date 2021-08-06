@@ -11,6 +11,7 @@
        			,l.lrcode "lrcode"
        			,i.lnum "lnum"
        			,p.opennum "opennum"
+       			,p.PCOMMENT "pcomment"
        			,(select count(*) from hw_student where register_id=p.register_id) "submitCount"
 				,( select count(*)from score_mana	sm where sm.opennum=p.opennum)	"newlimitcount" 
 				,p.REGISTER_DATE	"register_date"
@@ -141,4 +142,22 @@ LEFT OUTER JOIN hw_professor p
       	 ORDER BY l.term asc
 	</select>
 	-->
+	
+	
+	<select id="hwPfInsertSelect" resultType="map">
+		 SELECT  
+          		 l.lyear  "lyear"
+				,l.term	  "term"
+       			,i.lname "lname"
+       			,l.lrcode "lrcode"
+       			,i.lnum "lnum"
+       			,p.opennum "opennum"
+				,l.pid 				"pid"
+			   FROM     lecture  l
+		LEFT OUTER JOIN hw_professor p
+		         ON      p.OPENNUM=l.OPENNUM
+		       JOIN     lecture_info i
+		         ON     l.lnum=i.LNUM
+		      WHERE l.pid=#{pid}
+	</select>
 </mapper>

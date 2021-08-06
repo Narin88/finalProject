@@ -17,7 +17,6 @@ public class LectureVO {
 	private String dividenum; //분반
 	private String datestatus; //강의상태
 	private String lname; //강의 이름
-
 	private int credit; //학점
 	private String dname; //학과이름
 	private String mname; //전공이름

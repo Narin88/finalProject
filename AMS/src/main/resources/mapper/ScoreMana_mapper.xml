@@ -14,7 +14,7 @@
 	
 	<!-- 유저에 대한 학년 가져오기 -->
 	<select id="StudentSelectinfo" resultType="StudentsVO">
-		SELECT GRADE FROM STUDENTS WHERE SID = #{sId}
+		SELECT GRADE FROM STUDENTS WHERE SID = #{sid}
 	</select>
 	
 	<!-- 현재 등록된 수강목록조회 -->
@@ -44,26 +44,26 @@
 	<select id ="OverlapCheck" parameterType="ScoreManaVO" resultType="ScoreManaVO">
 		select l.opennum, s.sid from lecture l, SCORE_MANA s
 		where l.OPENNUM = s.OPENNUM
-		AND S.SID = #{sId}
-		AND L.OPENNUM = #{openNum}
+		AND S.SID = #{sid}
+		AND L.OPENNUM = #{opennum}
 	</select>
 	
 	<!-- 수강취소(삭제) -->
 	<delete id="AjaxEnrolmentDelete" parameterType="ScoreManaVO">
 		delete from score_mana
-		where sid = #{sId}
-		and opennum = #{openNum}
+		where sid = #{sid}
+		and opennum = #{opennum}
 	</delete>
 	
 	<!-- 수강신청 -->
 	<insert id="AjaxEnrolmentInsert" parameterType="ScoreManaVO">
 		  insert into score_mana(sid,opennum,retake)
-		  values (${sId},${openNum},retake_Check(${sId},${openNum}))
+		  values (${sid},${opennum},retake_check(${sid},${opennum}))
 	</insert>
 	
 	<!-- 재수강 체크 -->
 	<select id="RetakeChek" parameterType="ScoreManaVO" resultType="string">
-	select retake_check(#{sId},#{openNum})
+	select retake_check(#{sid},#{opennum})
 	from dual
 	</select>
 	
@@ -74,7 +74,7 @@
 		where s.sid = sm.sid
 		and li.LNUM = l.LNUM
 		and l.OPENNUM = sm.OPENNUM
-		and s.sid = #{sId}
+		and s.sid = #{sid}
 		and l.lyear = to_char(sysdate,'RRRR')
 	</select>
 </mapper>

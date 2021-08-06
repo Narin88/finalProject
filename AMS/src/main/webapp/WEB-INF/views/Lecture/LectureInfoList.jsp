@@ -152,8 +152,8 @@ uri="http://www.springframework.org/security/tags" %>
       	var clsData = [
       		<c:forEach items="${Lectures }" var="Lec">
       		{
-      			lNum: '${Lec.LNum}', lName: '${Lec.LName}', pId: '${Lec.PId}',
-      			grade: '${Lec.grade}', limitCount: '${Lec.limitCount}', dCode: '${Lec.DCode}',
+      			lnum: '${Lec.lnum}', lname: '${Lec.lname}', pid: '${Lec.pid}',
+      			grade: '${Lec.grade}', limitcount: '${Lec.limitcount}', dcode: '${Lec.dcode}',
       			division: '${Lec.division}', credit: '${Lec.credit}'
       		},
       		</c:forEach>
@@ -169,12 +169,12 @@ uri="http://www.springframework.org/security/tags" %>
       	    }
       		,
       		columns: [
-      			{header: '강의번호',name: 'lNum'},
-      			{header: '강의이름',name: 'lName'},
-      			{header: '교수코드',name: 'pId'},
+      			{header: '강의번호',name: 'lnum'},
+      			{header: '강의이름',name: 'lname'},
+      			{header: '교수코드',name: 'pid'},
       			{header: '학년',name: 'grade'},
-      			{header: '정원',name: 'limitCount'},
-      			{header: '이수코드',name: 'dCode'},
+      			{header: '정원',name: 'limitcount'},
+      			{header: '이수코드',name: 'dcode'},
       			{header: '이수구분',name: 'division'},
       			{header: '학점',name: 'credit'},
       		], //컬럼갯수
@@ -193,17 +193,17 @@ uri="http://www.springframework.org/security/tags" %>
       		//모달 start
       		function showOffer(data) {
       			modal('my_offer');
-      			console.log(data.lNum);
-      			var lnum = data.lNum;
-      			var lcode = data.lCode;
-      			var pid = data.pId;
+      			console.log(data.lnum);
+      			var lnum = data.lnum;
+      			var lcode = data.lcode;
+      			var pid = data.pid;
       			var grade = data.grade;
-      			var limitCount = data.limitCount;
-      			var lname = data.lName;
-      			var mcode = data.mCode;
-      			var dcode = data.dCode;
+      			var limitCount = data.limitcount;
+      			var lname = data.lname;
+      			var mcode = data.mcode;
+      			var dcode = data.dcode;
       			var division = data.division;
-      			var credit = `credit;
+      			var credit = credit;
 
 
       			$("#lecutretbl tbody").empty();
@@ -215,17 +215,17 @@ uri="http://www.springframework.org/security/tags" %>
       			.append($('<td>').html(lnum))
       			.append($('<td>').html(lname))
       			.append($('<td>').html(pid))
-      			.append($('<td>').html($('<input type=\'text\' id=\'newLimitCount\' name=\'newLimitCount\'>').val(limitCount)))
+      			.append($('<td>').html($('<input type=\'text\' id=\'newlimitcount\' name=\'newlimitcount\'>').val(limitCount)))
       			.append($('<td>').html($('<input type=\'text\' id=\'book\' name=\'book\'>')))
-      			.append($('<td>').html($('<input type=\'text\' id=\'timeTable\' name=\'timeTable\'>')))
-      			.append($('<td>').html($('<select id=\'lrCode\' name=\'lrCode\'>')
+      			.append($('<td>').html($('<input type=\'text\' id=\'timetable\' name=\'timetable\'>')))
+      			.append($('<td>').html($('<select id=\'lrcode\' name=\'lrcode\'>')
       				 <c:forEach items="${LR }" var="lr">
-      				 .append($('<option value=\'${lr.lrCode}\'>${lr.lrName}</option>'))
+      				 .append($('<option value=\'${lr.lrcode}\'>${lr.lrname}</option>'))
       				</c:forEach>
       					))
-      			.append($('<input type=\'hidden\' id=\'lYear\' name=\'lYear\'>').val('2021'))
-      			.append($('<input type=\'hidden\' id=\'lNum\' name=\'lNum\'>').val(lnum))
-      			.append($('<input type=\'hidden\' id=\'pId\' name=\'pId\'>').val(pid))
+      			.append($('<input type=\'hidden\' id=\'lyear\' name=\'lyear\'>').val('2021'))
+      			.append($('<input type=\'hidden\' id=\'lnum\' name=\'lnum\'>').val(lnum))
+      			.append($('<input type=\'hidden\' id=\'pid\' name=\'pid\'>').val(pid))
       			.appendTo("#lecutretbl tbody");
 
 

@@ -4,6 +4,6 @@
 	<select id="getLectureInfoList" parameterType="string" resultType="LectureInfoVO">
 		SELECT LNUM,GRADE,LIMITCOUNT,LNAME,DCODE,CREDIT,PID, FIND_CODE_NAME(100,DCODE) as division
 		FROM LECTURE_INFO
-		where PID = #{pId}
+		where PID = #{pid}
 	</select>
 </mapper>

@@ -23,6 +23,16 @@ public class PreEnrolmentServiceImpl implements PreEnrolmentService{
 	public List<PreEnrolmentVO> preLectureList(StudentsVO vo) {
 		return Pmap.preLectureList(vo);
 	}
+
+	@Override
+	public List<PreEnrolmentVO> preDepartments() {
+		return Pmap.preDepartments();
+	}
+
+	@Override
+	public List<PreEnrolmentVO> getMajorList(PreEnrolmentVO vo) {
+		return Pmap.getMajorList(vo);
+	}
 	
 
 }

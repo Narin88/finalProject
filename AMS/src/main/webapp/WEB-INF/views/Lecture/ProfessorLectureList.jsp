@@ -195,9 +195,11 @@ $(function(){
 
 var clsData = [
 	<c:forEach items="${lectures }" var="lec">{
-		openNum: '${lec.openNum}', lNum: '${lec.LNum}-${lec.divideNum}', lYear: '${lec.LYear}-${lec.term}', grade: '${lec.grade}', lName: '${lec.LName}', book: '${lec.book}', division: '${lec.division}', newLimitCount: '${lec.newLimitCount}', lrName: '${lec.lrName}', timeTable: '${lec.timeTable}'
+		opennum: '${lec.opennum}', lnum: '${lec.lnum}-${lec.dividenum}', lyear: '${lec.lyear}-${lec.term}', grade: '${lec.grade}',
+		lname: '${lec.lname}', book: '${lec.book}', division: '${lec.division}', newlimitcount: '${lec.newlimitcount}', lrname: '${lec.lrname}',
+		timetable: '${lec.timetable}'
 	}
-	<c:if test='${!empty lec.openNum}'>
+	<c:if test='${!empty lec.opennum}'>
 	,
 	</c:if>
 	</c:forEach>
@@ -234,16 +236,16 @@ var clsData = [
 	    }
 		,
 		columns: [
-			{header: '강의등록번호',name: 'openNum', width: 100},
-			{header: '강의번호',name: 'lNum', width: 100}, //강의번호+분반
-			{header: '년도',name: 'lYear',width: 100}, //년도+학기
+			{header: '강의등록번호',name: 'opennum', width: 100},
+			{header: '강의번호',name: 'lnum', width: 100}, //강의번호+분반
+			{header: '년도',name: 'lyear',width: 100}, //년도+학기
 			{header: '학년',name: 'grade',width: 100},
-			{header: '과목명',name: 'lName',width: 200},
+			{header: '과목명',name: 'lname',width: 200},
 			{header: '교재',name: 'book',width: 200, editor: 'text'},
 			{header: '이수구분',name: 'division',width: 100},
-			{header: '정원',name: 'newLimitCount',width: 80},
-			{header: '강의실',name: 'lrName',width: 80},
-			{header: '시간표',name: 'timeTable',width: 150, editor: 'text'}
+			{header: '정원',name: 'newlimitcount',width: 80},
+			{header: '강의실',name: 'lrname',width: 80},
+			{header: '시간표',name: 'timetable',width: 150, editor: 'text'}
 		] //컬럼갯수
 
 	} );

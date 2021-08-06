@@ -113,7 +113,7 @@ $(function(){
 	    	perPage: 10   //페이징 갯수
 	    },
 		columns: [
-			{header: '등록번호',name: 'openNum', width: 100},
+			{header: '등록번호',name: 'opennum', width: 100},
 			{header: '강의번호',name: 'lnum', width: 100}, //강의번호+분반
 			{header: '년도',name: 'lyear',width: 100}, //년도+학기
 			{header: '학년',name: 'grade',width: 90},
@@ -122,10 +122,10 @@ $(function(){
 			{header: '학과',name: 'dname',width: 100},
 			{header: '전공',name: 'mname',width: 100},
 			{header: '이수구분',name: 'division',width: 100},
-			{header: '강의실',name: 'lrName',width: 90},
-			{header: '시간표',name: 'timeTable',width: 100},
-			{header: '신청인원',name: 'enCount',width: 100},
-			{header: '수강정원',name: 'newLimitCount',width: 80}
+			{header: '강의실',name: 'lrname',width: 90},
+			{header: '시간표',name: 'timetable',width: 100},
+			{header: '신청인원',name: 'encount',width: 100},
+			{header: '수강정원',name: 'newlimitcount',width: 80}
 		] //컬럼갯수
 	} );
     function getList(){
@@ -140,9 +140,9 @@ $(function(){
 		//console.log('더블클릭!', ev.rowKey);
 		var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 		
-		var enCount = data.enCount;
-		var limit = data.newLimitCount;
-		var opennum = data.openNum;
+		var encount = data.encount;
+		var limit = data.newlimitcount;
+		var opennum = data.opennum;
 		var lname = data.lname;
 		var credit = data.credit;
 		console.log(data);
@@ -153,19 +153,19 @@ $(function(){
 			$.ajax({
 				url: 'AjaxConfirm',
 				type:'POST',
-				data: {openNum: opennum},
+				data: {opennum: opennum},
 				success: function(result){
 					
 					 if(result>0){ //이미 등록된 수강일 경우
 						var con1 = confirm('이미 수강신청 되었습니다. 취소하시겠습니까?')
 						if(con1){ //수강 취소(삭제)
-							location.href='AjaxEnrolmentDelete?openNum='+opennum
+							location.href='AjaxEnrolmentDelete?opennum='+opennum
 						}else{
 							return false;
 						}
 					}
 					 else{ //중복x -> 재이수 확인
-						if(enCount>=limit){ //정원 초과시
+						if(encount>=limit){ //정원 초과시
 							alert("수강정원이 마감되었습니다."); 
 						}
 						 var remain = $('#credit').html();
@@ -177,12 +177,12 @@ $(function(){
 						 $.ajax({
 							 url: 'AjaxRetakeChek',
 							 type: 'POST',
-							 data: {openNum: opennum},
+							 data: {opennum: opennum},
 						 success: function(result){
 							if(result=='001'){ //insert
 								var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
 								if(con){
-									location.href='AjaxEnrolmentInsert?openNum='+opennum
+									location.href='AjaxEnrolmentInsert?opennum='+opennum
 								}else{
 									return false;
 									}
@@ -190,7 +190,7 @@ $(function(){
 							else{ //insert
 								var con = confirm('강의번호 '+opennum+'의 과목 '+lname+' 신청하시겠습니까?')
 									if(con){
-										location.href='AjaxEnrolmentInsert?openNum='+opennum
+										location.href='AjaxEnrolmentInsert?opennum='+opennum
 									}else{
 										return false;
 									}

@@ -160,4 +160,19 @@ LEFT OUTER JOIN hw_professor p
 		         ON     l.lnum=i.LNUM
 		      WHERE l.pid=#{pid}
 	</select>
+	
+	<insert id="hwPfInsert">
+		INSERT 
+		  INTO hw_professor
+		VALUES (
+					 register_seq.nextval
+					,#{opennum}
+					,sysdate
+					,#{pperiod}
+					,#{registerFile}
+					,#{pcomment}
+				)
+		
+		  
+	</insert>
 </mapper>

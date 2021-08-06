@@ -99,18 +99,31 @@ public class HwProfessorController {
 	//교수 과제 등록
 	@RequestMapping("hwPfInsert")
 	public String hwPfInsert(HwProfessorVO vo,Model model) {
-		vo.setPid("99003013");
+				vo.setPid("99003013");
 				// 해당교수 과제 목록
 				List<Map<String, Object>> result = service.hwPfInsertSelect(vo);
 				System.out.println(result);
+				model.addAttribute("result",result);
 				// 강의년도 select
+				SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd");
 				
+				Date time = new Date();	
 				
+				String time1=format1.format(time);
+				System.out.println(time1);
+				model.addAttribute("today",time1);
 				
 				//List<Map<String, Object>> list =service.hwPfInsertSelect(vo);
 				//System.out.println(list);
 				//model.addAttribute("list",list);
 		return "hw_professor/hw_professorInsert.tiles";
+	}
+	
+	@RequestMapping("hwInsertForm")
+	public String hwInsertFrm(HwProfessorVO vo,HttpServletRequest req) {
+	System.out.println(vo);
+			//service.hwPfInsert(vo);
+		return "redirect:hwPfInsert";
 	}
 	
 }

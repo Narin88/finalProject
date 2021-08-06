@@ -2,6 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<!-- 
+
+할 일
+
+1. 컬럼 추가
+	- 순번
+	- 정원
+	
+2. 컬럼 출력 순서 및 양식 통일
+
+3. 검색기 만들기
+	- 이수구분(교양, 전공, ...)
+	- 개설년도
+	- 캠퍼스 (위치)
+	- 요일 및 교시
+
+4. 클릭 이벤트
+	- 교과목 누르면 강의 계호획서 보이기
+	- 담당 교수 이름 누르면 교수 정보 보이기
+	- 강의 만족도 (미)
+
+ -->
+
+
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
 		text-align: center;

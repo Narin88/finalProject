@@ -1,94 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!-- 
+
+
+할 일
+
+1. 테이블 높이 일정하도록 css 먹이기
+
+
+
+ -->
+
 
 <style>
+#my_offer {
+	display: none;
+	width: 80%;
+	height: 40%;
+	padding: 30px 60px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 3px;
+}
 
-	#my_offer {
-        display: none;
-        width: 80%;
-        height: 40%;	
-        padding: 30px 60px;
-        background-color: #fefefe;
-        border: 1px solid #888;
-        border-radius: 3px;
-    }
-    
-     #my_offer .modal_close_btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .modal-body{
-    	font-size: 10pt;
-    }	
-    
-    .professorInfo{
-		--bs-table-bg: transparent;
-		--bs-table-striped-color: #212529;
-		--bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-		--bs-table-active-color: #212529;
-		--bs-table-active-bg: rgba(0, 0, 0, 0.1);
-		--bs-table-hover-color: #212529;
-		--bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-		width: 100%;
-	    color: #212529;
-	    vertical-align: top;
-	    border-color: #dee2e6;
-	}
-	
-	th,td{
-		border: 1;
-		border-color: inherit;
-	    border-style: solid;
-	    /*border-width: 0;*/
-	    text-align: center;
-	    padding: 10px;
-	    width: 150px;
-	}
+#my_offer .modal_close_btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
 
-	.tui-grid-cell .tui-grid-cell-content {
-		text-align: center;
-	}
+.modal-body {
+	font-size: 10pt;
+}
+
+.professorInfo { -
+	-bs-table-bg: transparent; -
+	-bs-table-striped-color: #212529; -
+	-bs-table-striped-bg: rgba(0, 0, 0, 0.05); -
+	-bs-table-active-color: #212529; -
+	-bs-table-active-bg: rgba(0, 0, 0, 0.1); -
+	-bs-table-hover-color: #212529; -
+	-bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+	width: 100%;
+	color: #212529;
+	vertical-align: top;
+	border-color: #dee2e6;
+}
+
+th, td {
+	border: 1;
+	border-color: inherit;
+	border-style: solid;
+	/*border-width: 0;*/
+	text-align: center;
+	padding: 10px;
+	width: 150px;
+}
+
+.tui-grid-cell .tui-grid-cell-content {
+	text-align: center;
+}
 </style>
 
 <!-- Toast grid -->
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<script type="text/javascript"
+	src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+<script
+	src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 <title>수강 신청된 과목 확인</title>
 
-<div align = "center">
+<div align="center">
 	<h2>수강 신청된 강의 리스트</h2>
-	<div id = "grid"></div>
-	<div class = "total">
-		<div class = "scheduleTime"></div>
-		<div id = "scheduleShow"></div>
+	<div id="grid"></div>
+	<div class="total">
+		<div class="scheduleTime"></div>
+		<div id="scheduleShow"></div>
 	</div>
 </div>
 
 <!-- 모달 뷰-->
 <div id="my_offer" align="center">
-    <a class="modal_close_btn">닫기</a>
-    <div class="modal-body">
-	   <h2> 교수 정보 </h2>
-	   <table class="professorInfo" id="professorInfo"  border="1">
-	   		<thead>
-	   		<tr>
-	   			<th>교수명</th>
-	   			<th>이메일</th>
-	   			<th>연락처</th>
-	   		</tr>
-	   		</thead>
-	   		<tbody></tbody>
-	   </table>
+	<a class="modal_close_btn">닫기</a>
+	<div class="modal-body">
+		<h2>교수 정보</h2>
+		<table class="professorInfo" id="professorInfo" border="1">
+			<thead>
+				<tr>
+					<th>교수명</th>
+					<th>이메일</th>
+					<th>연락처</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
 	</div>
 </div>
 <!-- 모달 끝 -->
@@ -103,16 +121,17 @@
 </div> --%>
 
 <script>
+	let colorArr = ['red', 'blue', 'yellow', 'green', 'orange', 'purple'];
+	//let totaltime = "";
 	
 	// 강의 시간을 한 문자로 묶기(ex : 월1화2...)
-	let totaltime = "";
 	let getValue = [];
- 	<c:forEach items = "${st}" var = "st">
+ 	<c:forEach items = "${st}" var = "st" varStatus = "seq">
 		//totaltime += '${st.timetable}'
-		getValue["${st.timetable }"] = ['${st.lname}','${st.lrname}' ];
+		getValue["${st.timetable }"] = ['${st.lname}','${st.lrname}', colorArr[${seq.index}]];
 	</c:forEach>
-	console.log("밸류 : " ,getValue);	
 	
+	//console.log("밸류 : " ,getValue);	
 		
 	////////////////////////////////////
 	
@@ -121,6 +140,7 @@
 		
 		<c:forEach items = "${st}" var = "st">{
 			
+			// 이 페이지 실질적 데이터
 			lnum 		: '${st.lnum}' +'-' + '${st.dividenum}',
 			lname 		: '${st.lname}',
 			division 	: '${st.division}',
@@ -128,8 +148,12 @@
 			timetable 	: '${st.timetable}',
 			lrname 		: '${st.lrname}',
 			pname 		: '${st.pname}',
+			
+			// 필요에 의한 값 땡겨오기.
 			email		: '${st.email}',
-			pphone		: '${st.pphone}'
+			pphone		: '${st.pphone}',
+			pid			: '${st.pid}',
+			opennum		: '${st.opennum}'
 		}
 		<c:if test='${!empty st.lnum}'>
 		,
@@ -139,7 +163,7 @@
 	
 // 그리드 api-source
 
-	const dataSource = {
+	/* const dataSource = {
 		
 		withCredentials	: false,
 		initialRequest	: false,
@@ -154,14 +178,14 @@
 			}
 		}
 		
-	};
+	}; */
 
 
 // 그리드를 보여준다
 	var grid = new tui.Grid({
 		
 		el: document.getElementById('grid'),
-		data: dataSource,
+		data: lecData,
 		//rowHeaders: ['checkbox'],
 		/* pagination: false,		//페이징 처리
 	    pageOptions: {
@@ -192,7 +216,23 @@
 		grid.on('click', ev =>{
 			
 			var data = grid.getRow(ev.rowKey);
-			showOffer(data);
+			
+			if (ev.columnName == "pname") {
+				
+				showOffer(data);
+			}
+			
+			if (ev.columnName == "lname"){
+				
+				// 쿼리에 필요한 값 적용시키기
+				let pid 	= data.pid;
+				let opennum = data.opennum;
+				
+				console.log("pid 값 : " + pid);
+				console.log("opennum 값 : " + opennum);
+				
+				location.href = "/readOnly2?pid=" + pid + "&opennum=" + opennum;
+			}
 		});
 	
 		function showOffer(data) {
@@ -264,8 +304,25 @@
 </script>
 <script>
 
+	// 테이블에 타이틀 추가하기 기능
+	function addTitle() {
+		
+		let title = $('<tr />');
+		title.append(
+	       	$('<th />').html(''),
+	   		$('<th />').html('월'),
+	   		$('<th />').html('화'),
+	   		$('<th />').html('수'),
+	   		$('<th />').html('목'),
+	   		$('<th />').html('금')
+		);
+		
+		return title;
+	};
+
 	document.addEventListener("DOMContentLoaded", function(){
 		
+		// 테이블 생성
 		let sTable = $('<table />').attr('border', '1');
 		sTable.append(addTitle());
 		
@@ -317,12 +374,10 @@
 				// console.log('강의명 : ' + lec);
 				// console.log('장소 : ' + room);
 				
-// 테이블 높이 일정하게 css 먹이기
-
-
 				if (j == 1){
 					// 테이블 첫 번째 자리에 강의 시간 집어넣기
 					
+					// td에 아이디값 안 줘도 될 듯? 
 					tr.append($('<td id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i - 1]));
 	
 				} else {
@@ -332,19 +387,19 @@
 					
 					//과목찾기
 					let lectureName = "";
+					let tColor = "";
 					for(lectureTime in getValue){
-						
 						if(lectureTime.indexOf(curTime) != -1){
+							tColor = " style = 'background-color:"+getValue[lectureTime][2]+"'";
 							lectureName = getValue[lectureTime][0] + "<br>" + lectureTime + "<br>" + getValue[lectureTime][1];
 						}
 					}
-					console.log(lectureName);					
+					//console.log(lectureName);					
 						
 					// 강의 집어넣기
-					tr.append($('<td id =  "jackpot'+ i+ '-' + j + '"/>').html(lectureName));
+					tr.append($('<td '+ tColor +' id =  "jackpot'+ i+ '-' + j + '"/>').html(lectureName));
 					
 				}
-				
 				
 			}
 
@@ -354,18 +409,4 @@
 		$('#scheduleShow').append(sTable);
 	});
 	
-	function addTitle() {
-		
-		let title = $('<tr />');
-		title.append(
-	       	$('<th />').html(''),
-       		$('<th />').html('월'),
-       		$('<th />').html('화'),
-       		$('<th />').html('수'),
-       		$('<th />').html('목'),
-       		$('<th />').html('금'),	
-		);
-		
-		return title;
-	};
 </script>

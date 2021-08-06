@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.last.prj.lecture.service.LectureService;
 import com.last.prj.lecture.service.LectureVO;
+import com.last.prj.scoreMana.service.ScoreManaVO;
 
 @Service
 public class LectureServiceImpl implements LectureService{
@@ -38,6 +39,12 @@ public class LectureServiceImpl implements LectureService{
 			Lmap.LectureDelete(vo.getDeletedRows().get(i));
 		}
 		return 0;
+	}
+
+	@Override
+	public List<ScoreManaVO> ScoreStudentList(String opennum) {
+		
+		return Lmap.ScoreStudentList(opennum);
 	}
 
 }

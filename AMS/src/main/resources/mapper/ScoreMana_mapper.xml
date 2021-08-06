@@ -4,7 +4,7 @@
 	<!-- 학생 정보 -->
 	<select id="EnrolmentStudent" parameterType="StudentsVO" resultType="StudentsVO">
 		select s.sid, s.sname, m.dname, s.grade, to_char(sysdate,'RRRR') as lyear, s.term,
-     			case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
+     			case when to_char(sysdate,'MM') <![CDATA[ >= ]]> 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
            		else 2
             	end as target
 		from students s, major_view m

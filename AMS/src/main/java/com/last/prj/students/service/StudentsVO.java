@@ -39,12 +39,13 @@ public class StudentsVO {
 	private String retake;		// 재수강여부 001수강 002재수강
 	
 	// lecture 테이블 ( 강의 개설 )
-//		private int term;		// 학기
+//	private int term;			// 학기
 	private String lnum;		// 강의 번호
 	private String lname;		// 강의명
 	private String lyear;		// 강의 생성 년도
 	private String dividenum;	// 분반
 	private String timetable;	// 강의 시간(대략적) ex) 월1, 화2
+	private String opennum;		// 강의 고유 번호
 	
 	// lecture_info 테이블 (강의 정보)
 	private String division;	// 이수 구분
@@ -65,5 +66,6 @@ public class StudentsVO {
 	// professor 테이블 ( 교수 )
 	private String pname;		// 교수명
 	private String pphone;		// 교수 연락처
+	
 	
 }

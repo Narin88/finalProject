@@ -41,7 +41,7 @@
 </button>
 
 <script>
-var str = document.getElementById("textarea").value;
+/* var str = document.getElementById("textarea").value;
 str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
 document.getElementById("text").innerHTML = str;
 
@@ -49,7 +49,7 @@ var str = $("#textarea").val();
 str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
 $("#text").html(str);
 
-
+ */
 $('textarea').each(function() {
     if(!$(this).hasClass('d-none')){
         $(this).replaceWith("<div contenteditable=\"true\">"+$(this).html()+"</div>")

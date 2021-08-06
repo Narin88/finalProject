@@ -86,21 +86,25 @@ public class StudyplanController {
 	}
 	//읽기전용
 	
-	/*
-	 * @RequestMapping("/readOnly") public String studyplanReadonlyPage(Model model,
-	 * StudyplanJoinVO vo,HttpSession session) {
-	 * vo.setPid((String)session.getAttribute("id"));
-	 * model.addAttribute("spList",dao.selectresult(vo)); return
-	 * "studyplan/studyplanreadonly.tiles"; }
-	 */
-	 
-	
-	// 강의 계획서 수정하기
+//	/*
+//	 * @RequestMapping("/readOnly") public String studyplanReadonlyPage(Model model,
+//	 * StudyplanJoinVO vo,HttpSession session) {
+//	 * vo.setPid((String)session.getAttribute("id"));
+//	 * model.addAttribute("spList",dao.selectresult(vo)); return
+//	 * "studyplan/studyplanreadonly.tiles"; }
+//	 */
 
-	 @RequestMapping("/readOnly2") public String studyplanReadonlyPage(Model
-	 model, StudyplanVO vo, StudyplanJoinVO vo2,HttpSession session) {
-	 vo2.setPid((String)session.getAttribute("id")); model.addAttribute("spList",
-	  dao.selectresult(vo2)); return "studyplan/studyplanreadonly.tiles"; }
+	 @RequestMapping("/readOnly2")
+	 public String studyplanReadonlyPage(Model model, StudentsVO vo , StudyplanJoinVO vo2) {
+		 
+		 // 페이지에서 학생에게서 받은 정보들을 대입 
+		 vo2.setPid(vo.getPid());
+		 vo2.setOpennum(vo.getOpennum());
+		 
+		 model.addAttribute("spList", dao.selectresult(vo2));
+		 
+		 return "studyplan/studyplanreadonly.tiles";
+	}
 
 	
 	//홈2

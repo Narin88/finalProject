@@ -35,8 +35,11 @@
  <button onclick="getSeach()">검색</button>
 </div>
 <div id="grid"></div>
+<div id="preEnrol"></div>
 
 <script>
+//첫 번쨰 그리드
+$
 var grid = new tui.Grid( {
 	el: document.getElementById('grid'),
 	data: {
@@ -60,6 +63,28 @@ var grid = new tui.Grid( {
 		{header: '재수강 여부',name: 'retake',width: 100}
 	] //컬럼갯수
 } );
+
+///두 번쨰 그리드
+var preEnrol = new tui.Grid( {
+	el: document.getElementById('preEnrol'),
+	data: {
+			api:{
+				readData:{ url: 'enrolmentpackage',method: 'POST' }
+			},
+	contentType: 'application/json'
+	},
+
+	columns: [
+		{header: '강의번호',name: 'lnum'},
+		{header: '과목명',name: 'lname'}, //강의번호+분반
+		{header: '학점',name: 'credit'}, //년도+학기
+		{header: '이수구분',name: 'division'},
+		{header: '강의시간/강의실',name: 'timetable'},
+		{header: '재수강 여부',name: 'retake'}
+	] //컬럼갯수
+} );
+
+//검색 함수
 function getSeach(){
 	var major = $('#major').val();
 	var depart = $('#depart').val();
@@ -68,7 +93,7 @@ function getSeach(){
 	grid.readData(1,seachD,true);
 }
 
-
+//검색 컬럼변화
 $("#depart").change(function(){
 	var depart = $(this).val();
 	var major;

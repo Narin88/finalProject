@@ -30,6 +30,7 @@ public class PreEnrolmentController {
 		return "preenrolment/PreEnrolmentList.tiles";
 	}
 	
+	//첫 번쨰 그리드 수강 내역
 	@PostMapping("PreEnrolmentList")
 	@ResponseBody
 	public Map<String,Object> PreEnrolmentList(HttpSession session, @RequestBody Map<String,String> maps){
@@ -46,9 +47,23 @@ public class PreEnrolmentController {
 		return map;
 	}
 	
+	// 전공목록 가져오기
 	@GetMapping("getMajorList")
 	@ResponseBody
 	List<PreEnrolmentVO> getMajorList(PreEnrolmentVO vo){
 		return Pdao.getMajorList(vo);
+	}
+	
+	//두 번째 그리드 수강꾸러미 내역
+	@PostMapping("enrolmentpackage")
+	@ResponseBody
+	public Map<String, Object> enrolmentpackage(HttpSession session){
+		String sid = (String) session.getAttribute("id");
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> maps = new HashMap<String, Object>();
+		map.put("result", true);
+		maps.put("contents", Pdao.enrolmentpackage(sid));
+		map.put("data", maps);
+		return map;
 	}
 }

@@ -8,11 +8,11 @@
 	
 	<select id="preLectureList" resultType="PreEnrolmentVO" parameterType="StudentsVO">
 		
-		select l.lnum, li.lname, li.credit, FIND_CODE_NAME(100, li.dcode) as division,
+		select l.LNUM||'-'||l.dividenum as lnum, li.lname, li.credit, FIND_CODE_NAME(100, li.dcode) as division,
         l.TIMETABLE||' / '||lr.LRNAME as timeTable,
         case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
              when retake_Check(#{sid},l.opennum) = '002' then 'N'
-             end as reTake
+             end as retake
 		from lecture_info li, LECTURE l, lecture_room lr
 		where li.LNUM = l.LNUM
 		and l.LRCODE = lr.LRCODE
@@ -40,5 +40,18 @@
 	
 	<select id="getMajorList" resultType="PreEnrolmentVO" parameterType="PreEnrolmentVO">
 		select * from major where dcode = #{dcode}
+	</select>
+	
+	<select id="enrolmentpackage" resultType="PreEnrolmentVO" parameterType="string">
+		select l.LNUM||'-'||l.dividenum as lnum, li.lname,li.credit,
+				find_code_name(100,li.dcode) as division, l.TIMETABLE||' / '||lr.LRNAME as timetable, 
+				case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
+					 when retake_Check(#{sid},l.opennum) = '002' then 'N'
+				end as retake
+		FROM PREENROLMENT P, LECTURE L, LECTURE_INFO LI, LECTURE_ROOM LR
+		WHERE P.OPENNUM = L.OPENNUM
+		AND L.LNUM = LI.LNUM
+		AND L.LRCODE = LR.LRCODE
+		AND P.SID = #{sid}
 	</select>
 </mapper>

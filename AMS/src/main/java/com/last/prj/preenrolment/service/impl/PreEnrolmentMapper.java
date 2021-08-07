@@ -10,4 +10,5 @@ public interface PreEnrolmentMapper {
 	List<PreEnrolmentVO> preLectureList(StudentsVO vo);
 	List<PreEnrolmentVO> preDepartments();
 	List<PreEnrolmentVO> getMajorList(PreEnrolmentVO vo);
+	List<PreEnrolmentVO> enrolmentpackage(String sid);
 }

@@ -1,3 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.last.prj.hwStudent.service.impl.HwStudentMap"></mapper>
+<mapper namespace="com.last.prj.hwStudent.service.impl.HwStudentMap">
+	<!-- 학생이 수강중인 강의목록 조회 -->
+	<select id="hwSLectureList" resultType="map">
+		SELECT 	   m.mname "mname" 
+			      ,lf.lname "lname"
+			      ,l.lyear "lyear"
+			      ,l.term "term"
+			      ,l.schedule "schedule"
+			      ,l.lrcode "lrcode" 
+			      ,p.pname "pname"
+		  FROM	  score_mana sc 
+	 LEFT JOIN	  lecture l 
+	 		ON 	  sc.opennum=l.opennum 
+	 	  JOIN    lecture_info lf 
+	 	    ON    l.lnum=lf.lnum
+          JOIN    major m 
+            ON    m.mcode= lf.mcode
+          JOIN    professor p 
+            ON    l.pid=p.pid
+	 	 WHERE 	  sc.sid=#{sid}	
+	 	   AND 	  l.datestatus='수강중'
+	</select>
+	<!-- 해당강의 과제 조회했을때  -->
+	<select id="hwsSelectList" resultType="map">
+		SELECT 		 lf.lname	"lname"
+					,l.lyear	"lyear"
+					,l.term		"term"
+					,hw.pcomment	"pcomment"
+					,hw.pperiod		"pperiod"
+					,hw.register_date	"registerDate"
+					,hw.register_id		"registerId"
+					,l.opennum			"opennum"
+					,round((hw.pperiod-sysdate)*24*60*60,2) "hwstatus"
+					,(select count(*) from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "submitCheck"
+					,(select hs.score from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "score"
+		  FROM 		lecture l 
+		  JOIN      lecture_info lf
+			ON      l.lnum=lf.lnum
+		  JOIN      hw_professor hw
+        	ON      l.opennum=hw.opennum
+		 WHERE      l.opennum=#{opennum}
+	</select>
+</mapper>

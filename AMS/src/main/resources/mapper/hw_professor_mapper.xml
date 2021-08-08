@@ -47,6 +47,7 @@ LEFT OUTER JOIN hw_professor p
 	 SELECT 
 	 		 idn.id "submitSid"
 	 		,idn.name "name"
+	 		,se.submit_id "submitId"
 	 		,se.submit_file "submit_file"
 	 		,to_char(se.submit_date,'yyyy.mm.dd hh24:mi') "submit_date"
 	 		,se.scomment "s_comment"
@@ -111,39 +112,23 @@ fir LEFT OUTER JOIN
      	 WHERE  submit_sid=#{submitSid}
      	   AND  register_id=#{registerId}
      </update>
-     <!-- 강의년도/강의학기/강의코드로 검색한 결과값 
-     <select id="hwSearchList"  resultType="map">
-	 SELECT  
-          		 l.lyear  "lyear"
-				,l.term	  "term"
-       			,i.lname "lname"
-       			,l.lrcode "lrcode"
-				,l.newlimitcount	"newlimitcount" 
-				,p.REGISTER_DATE	"register_date"
-				,p.PPERIOD			"pperiod"
-				,p.REGISTER_FILE	"register_file"
-				,p.PCOMMENT	   	 	"pcomment"
-				,l.pid 				"pid"
-	   FROM     lecture  l
-LEFT OUTER JOIN hw_professor p
-         ON        p.OPENNUM=l.OPENNUM
-       JOIN     lecture_info i
-         ON     l.lnum=i.LNUM
-      WHERE l.pid=#{pid}
-      	  <if test="lyear!=null and lyear!=''">
-      	 	and lyear=#{lyear}
-      	 </if>
-      	  <if test="term!=null and term!=''">
-      	 	and term=#{term}
-      	 </if>
-      	 <if test="lcode!=null and lcode!=''">
-      	 	and lcode=#{lcode}
-      	 </if>
-      	 ORDER BY l.term asc
-	</select>
-	-->
+     
+     <!-- 제출학생 파일 삭제 -->
+     <delete id="hwSubmitDel">
+     	DELETE 
+          FROM	hw_student
+         WHERE submit_id=${submitId}
+          	
+     </delete>
 	
-	
+	<!-- 제출학생 파일 전체삭제 -->
+	<delete id="submitDelAll" >
+		DELETE
+		  FROM	hw_student
+		 WHERE register_id=#{registerId}
+		  
+	</delete>
+	<!-- 등록페이지/ 과제등록가능한 교수 강의목록 -->
 	<select id="hwPfInsertSelect" resultType="map">
 		 SELECT  
           		 l.lyear  "lyear"
@@ -160,7 +145,7 @@ LEFT OUTER JOIN hw_professor p
 		         ON     l.lnum=i.LNUM
 		      WHERE l.pid=#{pid}
 	</select>
-	
+	<!-- 교수 과제 등록 -->
 	<insert id="hwPfInsert">
 		INSERT 
 		  INTO hw_professor
@@ -171,8 +156,22 @@ LEFT OUTER JOIN hw_professor p
 					,#{pperiod}
 					,#{registerFile}
 					,#{pcomment}
-				)
-		
+				)	
 		  
 	</insert>
+	<!-- 교수가 등록한 과제삭제 -->
+	<delete id="hwPfDel">
+		DELETE
+		  FROM hw_professor
+		 WHERE register_id={registerId}	
+	</delete>
+	
+	
+	<!-- 교수 과제 정보변경 -->
+	<update id="hwUpdate">
+		UPDATE	hw_professor
+		   SET  pperiod=#{pperiod}
+		   	   ,pcomment=#{pcomment}
+		 WHERE register_id=#{registerId}
+	</update>
 </mapper>

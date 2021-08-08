@@ -29,7 +29,15 @@ public interface HwProfessorService {
 	//(교수)등록한 과제 정보 수정
 	int hw_professorUpdate(HwProfessorVO vo);
 	
+	//학생이 등록한 과제 삭제
+	int hwSubmitDel(HwProfessorVO vo);
+	//학생이 등록한 과제 전체삭제
+	int submitDelAll(HwProfessorVO vo);
 	
+	//교수가 등록한 과제삭제
+	int hwPfDel(HwProfessorVO vo);
+	//교수가 등록한 과제변경
+	int hwUpdate(HwProfessorVO vo);
 	//교수 등록할 과제조회
 	List<Map<String, Object>> hwPfInsertSelect(HwProfessorVO vo);
 }

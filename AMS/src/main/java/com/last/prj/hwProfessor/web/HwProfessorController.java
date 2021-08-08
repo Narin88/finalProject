@@ -116,7 +116,8 @@ public class HwProfessorController {
 				//List<Map<String, Object>> list =service.hwPfInsertSelect(vo);
 				//System.out.println(list);
 				//model.addAttribute("list",list);
-		return "hw_professor/hw_professorInsert.tiles";
+		
+				return "hw_professor/hw_professorInsert.tiles";
 	}
 	
 	@RequestMapping("hwInsertForm")
@@ -126,4 +127,35 @@ public class HwProfessorController {
 		return "redirect:hwPfInsert";
 	}
 	
+	@RequestMapping("hwSubmitDel")
+	@ResponseBody
+	public int hwSubmitDel(HwProfessorVO vo) {
+		
+		return service.hwSubmitDel(vo);
+	}
+	//학생 제출한과제 전체삭제
+	@RequestMapping("submitDelAll")
+	public String submitDelAll(HwProfessorVO vo) {
+		
+		service.submitDelAll(vo);
+		return "redirect:hwList"; 
+	}
+	
+	//교수가 등록한 과제삭제
+	@RequestMapping("hwPfDel")
+	public String hwPfDel(HwProfessorVO vo) {
+		int r=service.hwPfDel(vo);
+		if(r!=0) {
+			System.out.println("success");
+		}else {
+			System.out.println("fail");
+		}
+		return "redirect:hwList";
+	}
+	
+	@RequestMapping("hwUpdate")
+	public String hwUpdate(HwProfessorVO vo) {
+		int r=service.hwUpdate(vo);
+		return "redirect:hwList";
+	}
 }

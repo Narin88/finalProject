@@ -81,4 +81,28 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 	
 		return map.hwPfInsert(vo);
 	}
+
+	@Override
+	public int hwSubmitDel(HwProfessorVO vo) {
+		
+		return map.hwSubmitDel(vo);
+	}
+
+	@Override
+	public int submitDelAll(HwProfessorVO vo) {
+		
+		return map.submitDelAll(vo);
+	}
+
+	@Override
+	public int hwPfDel(HwProfessorVO vo) {
+		
+		return map.hwPfDel(vo);
+	}
+
+	@Override
+	public int hwUpdate(HwProfessorVO vo) {
+	
+		return map.hwUpdate(vo);
+	}
 }

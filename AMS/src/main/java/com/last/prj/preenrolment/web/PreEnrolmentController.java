@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.preenrolment.service.PreEnrolmentService;
@@ -65,5 +66,23 @@ public class PreEnrolmentController {
 		maps.put("contents", Pdao.enrolmentpackage(sid));
 		map.put("data", maps);
 		return map;
+	}
+	
+
+	@GetMapping("preEnrolmentlimitCheck")
+	@ResponseBody
+	public int preEnrolmentlimitCheck(HttpSession session) {	
+		String sid = (String) session.getAttribute("id");	
+		return Pdao.preEnrolmentlimitCheck(sid);
+	}
+	
+	@PostMapping("preEnrolmentinsert")
+	@ResponseBody
+	public Map<String, Object> preEnrolmentinsert(@RequestBody List<PreEnrolmentVO> vo, HttpSession session){
+		String sid = (String) session.getAttribute("id");
+		
+		System.out.println("=============================="+vo);
+		
+		return null;
 	}
 }

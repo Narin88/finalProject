@@ -10,20 +10,20 @@ import lombok.ToString;
 public class StudentsVO {
 
 	private String sid;			// 학번
-	private String mcode;		// 학과
+	private String mcode;		// 전공
 	private String sname;		// 학생 이름
 	private String pid;			// 담당 교수 아이디
 	private String saddress;	// 학생 주소
 	private String email;		// 이메일
 	private String sphone;		// 학생 연락처
 	private String enterDate;	// 입학일
-	private int grade;			// 학년
 	private String pwd;			// 비밀번호
 	private String sstatus;		// 학적
 	private String sbirth;		// 학생 생년월일
+	private String disabled;	// 장애 여부
+	private int grade;			// 학년
 	private int sgender;		// 학생 성별
 	private int term;			// 학기
-	private String disabled;	// 장애 여부
 	
 	
 	
@@ -49,9 +49,9 @@ public class StudentsVO {
 	
 	// lecture_info 테이블 (강의 정보)
 	private String division;	// 이수 구분
-	private String dcode;		// 이수 구분 코드
-	private String dname;		// 학과 이름
+	private String dcode;		// 학과 코드 => 이수 구분(교양, 전공)을 위한 코드 ~> 이수 구분, 학과명 동시에 뽑으려고 할 때 where절에서 같이 걸려서 원하는 결과를 못 얻네?
 	private String target;		// 대상 학년
+	private int limitcount;		// 최대 수용 인원 
 	
 	// lecture_room 테이블 ( 강의실 테이블 )
 	private String lrname;		// 강의실명
@@ -61,11 +61,14 @@ public class StudentsVO {
 	private int credit;			// 학점
 	
 	// major 테이블 ( 학과 )
-	private String mname;		// 학과명
+	private String mname;		// 전공명
+	
+	// major_view ( 학과 뷰 )
+	private String dname;		// 학과 이름
 	
 	// professor 테이블 ( 교수 )
 	private String pname;		// 교수명
 	private String pphone;		// 교수 연락처
-	
+
 	
 }

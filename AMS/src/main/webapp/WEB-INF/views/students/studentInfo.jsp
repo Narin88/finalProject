@@ -11,24 +11,12 @@
 <title>학사정보</title>
 
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
-
-<!-- toast 캘린더 -->
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
-<!-- If you use the default popups, use this. -->
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
-<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
-<script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
-<script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
-<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
-<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
-
 </head>
 <body>
 	<div>
 		<div class="bigDiv">
 			<div>
-				<img src="resources/image/students/st1.png" alt="증명사진"
-					class="infoImg" />
+				<img src="resources/image/students/st1.png" alt="증명사진" class="infoImg" />
 			</div>
 			<div>
 				<table class="table table-bordered">
@@ -72,9 +60,11 @@
 		<div class="bigDiv2">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#score">시험점수</a></li>
+					<a class="nav-link active" data-toggle="tab" href="#score">시험점수</a>
+				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#proInfo">지도교수정보</a></li>
+					<a class="nav-link" data-toggle="tab" href="#pro">지도교수정보</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>
 				</li>
@@ -100,7 +90,7 @@
 					</div>
 					<div id="scoreGrid"></div>
 				</div>
-				<div class="tab-pane fade" id="proInfo">
+				<div class="tab-pane fade" id="pro">
 					<div class="proInfo">
 						<table class="table table-bordered">
 							<tr>
@@ -132,12 +122,9 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4" align="center"><b>시간표</b></td>
+								<td colspan="4" align="center" id="showTimeSchedule"><b>시간표</b></td>
 							</tr>
-							<tr>
-								<td colspan="4">
-									<div id="timeSchedule" style="height: 800px;"></div>
-								</td>
+							<tr id="addActive">
 							</tr>
 						</table>
 					</div>
@@ -217,16 +204,95 @@
     	grid.readData(1, data, true);
     }
     
-    // 토스트 캘린더 시작
-    var calendar = new Calendar('#timeSchedule', {
-		defaultView: 'month',
-		taskView: true,
-	  	template: {
-	    monthDayname: function(dayname) {
-	    	return '<span class="calendar-week-dayname-name">' + dayname.label + '</span>';
-	    	}
-	  	}
-	});
-	</script>
+    $("#showTimeSchedule").on("click", function() {
+    	console.log($("#addActive").attr("class"));
+    	
+    	if (typeof $("#addActive").attr("class") === "undefined" || $("#addActive").attr("class") == null || $("#addActive").attr("class") == "") {
+    		$("#addActive").attr("class", "timeActive");
+    		
+    		$("#addActive").append("<td colspan='4'><div id='timeSchedule'></div></td>");
+    		
+    		// 풀 캘린더 시작
+    	   	 var calendarEl = document.getElementById('timeSchedule');
+    	             var calendar = new FullCalendar.Calendar(calendarEl, {
+    	           	  height: "800px",
+    	           	  expandRows: true, // 화면에 맞게 높이 재설정
+    	           	  slotMinTime: '08:30', // Day 캘린더에서 시작 시간
+    	           	  slotMaxTime: '18:30', // Day 캘린더에서 종료 시간
+    	           	  // 해더에 표시할 툴바
+    	           	  headerToolbar: {
+    	           	  left: 'prev,next today',
+    	           	  center: 'title',
+    	           	  right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    	           	  },
+    	           	  initialView: 'timeGridWeek', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+    	           	  nowIndicator: true, // 현재 시간 마크
+    	           	  events: [
+    	           		  {
+    	           		  title: 'All Day Event',
+    	           		  start: '2021-08-05',
+    	           		  },
+    	           		  {
+    	           		  title: 'Long Event',
+    	           		  start: '2021-08-05',
+    	           		  end: '2021-08-10'
+    	           		  },
+    	           		  {
+    	           		  groupId: 999,
+    	           		  title: 'Repeating Event',
+    	           		  start: '2021-08-09T16:00:00'
+    	           		  },
+    	           		  {
+    	           		  groupId: 999,
+    	           		  title: 'Repeating Event',
+    	           		  start: '2021-08-16T16:00:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Conference',
+    	           		  start: '2021-08-11',
+    	           		  end: '2021-08-13'
+    	           		  },
+    	           		  {
+    	           		  title: 'Meeting',
+    	           		  start: '2021-08-12T10:30:00',
+    	           		  end: '2021-08-12T12:30:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Lunch',
+    	           		  start: '2021-08-12T12:00:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Meeting',
+    	           		  start: '2021-08-12T14:30:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Happy Hour',
+    	           		  start: '2021-08-12T17:30:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Dinner',
+    	           		  start: '2021-08-12T20:00:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Birthday Party',
+    	           		  start: '2021-08-13T07:00:00'
+    	           		  },
+    	           		  {
+    	           		  title: 'Click for Google',
+    	           		  url: 'http://google.com/', // 클릭시 해당 url로 이동
+    	           		  start: '2021-08-28'
+    	           		  }
+    	           		  ]
+
+    	             });
+    	             calendar.render();
+    	} else {
+    		console.log($(".timeActive").children().remove());
+    		$("#addActive").removeClass();
+    	}
+    	
+    
+    })
+</script>
 </body>
 </html>

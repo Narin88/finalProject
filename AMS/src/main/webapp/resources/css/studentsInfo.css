@@ -17,16 +17,15 @@
 	border: 1px solid black;
 }
 
+.bigDiv td {
+	text-align: center;
+	width: 150px;
+}
 
 .bigDiv th {
 	text-align: left;
 	width: 120px;
 	height: 56.5px;
-}
-
-.bigDIv td {
-	text-align: center;
-	width: 150px;
 }
 
 .proInfo th{

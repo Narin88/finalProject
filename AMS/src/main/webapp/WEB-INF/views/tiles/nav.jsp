@@ -32,6 +32,7 @@ pageEncoding="UTF-8" %>
 <ul>
 <li><a href="<%=request.getContextPath() %>/professorSelect.do" >학생이 교수 정보 확인 페이지 @</a></li>
 <li><a href="<%=request.getContextPath() %>/appliedLecture">나의 수강 확인</a></li>
+<li><a href="<%=request.getContextPath() %>/Evaluation">강의평가</a></li>
 <li><a href="<%=request.getContextPath() %>/#" >학기 시간표 조회#</a></li>
 <li><a href="<%=request.getContextPath() %>/lectureLookUp.do" >전체 강의 시간표 조회</a></li>
 <li><a href="<%=request.getContextPath() %>/ScoreManaPage">수강신청</a></li>

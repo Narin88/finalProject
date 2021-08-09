@@ -34,24 +34,33 @@
  </select>
  <button onclick="getSeach()">검색</button>
 </div>
+<div align="right">
+	<button id="createBtn">등록</button>
+</div>
 <div id="grid"></div>
+<div id="preEnrol"></div>
 
 <script>
-var grid = new tui.Grid( {
+//첫 번쨰 그리드
+$(document).ready(function() {
+var grid = new tui.Grid({
 	el: document.getElementById('grid'),
 	data: {
+			contentType: 'application/json',
 			api:{
-				readData:{ url: 'PreEnrolmentList',method: 'POST' }
-			},
-	contentType: 'application/json'
+				readData:{ url: 'PreEnrolmentList',method: 'POST' },
+				createData:{ url: 'PreEnrolmentInsert', method: 'POST'}
+			}
 	},
-
+	
+	rowHeaders: ['checkbox'],
 	pagination: true,   //페이징 처리
     pageOptions: {
     	useClient: true,   //페이징 처리
     	perPage: 10   //페이징 갯수
     },
 	columns: [
+		{header: '등록번호',name: 'opennum'},
 		{header: '강의번호',name: 'lnum', width: 100},
 		{header: '과목명',name: 'lname', width: 100}, //강의번호+분반
 		{header: '학점',name: 'credit',width: 100}, //년도+학기
@@ -59,7 +68,52 @@ var grid = new tui.Grid( {
 		{header: '강의시간/강의실',name: 'timetable',width: 100},
 		{header: '재수강 여부',name: 'retake',width: 100}
 	] //컬럼갯수
+});
+
+///두 번쨰 그리드
+var preEnrol = new tui.Grid( {
+	el: document.getElementById('preEnrol'),
+	data: {
+			api:{
+				readData:{ url: 'enrolmentpackage',method: 'POST' }
+			},
+	contentType: 'application/json'
+	},
+	columns: [
+		{header: '강의번호',name: 'lnum'},
+		{header: '과목명',name: 'lname'}, //강의번호+분반
+		{header: '학점',name: 'credit'}, //년도+학기
+		{header: '이수구분',name: 'division'},
+		{header: '강의시간/강의실',name: 'timetable'},
+		{header: '재수강 여부',name: 'retake'}
+	] //컬럼갯수
 } );
+
+$('#createBtn').click(function(){
+	var indata = grid.getCheckedRows();
+	$.ajax({
+		url:'preEnrolmentlimitCheck',
+		type: 'GET',
+		success: function(result){
+			if(result+indata.length > 5){
+				alert('수강꾸러미는 5과목만 신청할수 있습니다.');
+			}else{
+				$.ajax({
+					url:'preEnrolmentinsert',
+					type:'POST',
+					data: JSON.stringify(indata),
+					contentType: 'application/json',
+					success: function(){
+						
+					}
+				})
+			}
+		}
+	})
+});
+
+
+//검색 함수
 function getSeach(){
 	var major = $('#major').val();
 	var depart = $('#depart').val();
@@ -68,7 +122,7 @@ function getSeach(){
 	grid.readData(1,seachD,true);
 }
 
-
+//검색 컬럼변화
 $("#depart").change(function(){
 	var depart = $(this).val();
 	var major;
@@ -91,7 +145,7 @@ $("#depart").change(function(){
 		})
 	}
 })
-
+});
 
 
 

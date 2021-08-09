@@ -34,17 +34,17 @@
         	AND L.lyear = #{lyear}
         	AND L.term = #{term}
         </if>
-		ORDER BY L.LYEAR, L.TERM
+		ORDER BY L.LYEAR, L.TERM DESC
 	</select>
 	
 	<!-- 학생 본인 수강 신청 과목 조회 -->
 	<select id="appliedLecture" resultType = "StudentsVO">
 		SELECT
-		    I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION,
-            L.TIMETABLE, L.DIVIDENUM,L.OPENNUM,
+		    I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT,
+            L.TIMETABLE, L.DIVIDENUM, L.OPENNUM,
    			P.PNAME, P.EMAIL, P.PID,
    			SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4) PPHONE,
-   			R.LRNAME, I.CREDIT
+   			R.LRNAME
 		FROM STUDENTS S, SCORE_MANA M, PROFESSOR P,
 		    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R
 		WHERE S.SID = M.SID
@@ -56,23 +56,41 @@
 		AND L.LYEAR = #{lyear}
 		AND L.TERM = #{term}
 		AND S.SID = #{sid}
-		ORDER BY I.CREDIT
+		ORDER BY I.CREDIT DESC
 	</select>
 	
 	<!-- 강의 시간표들 조회 -->
 	<select id="lectureLookUp" resultType = "StudentsVO">
-		SELECT I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, L.DIVIDENUM,
-		        I.GRADE TARGET, I.CREDIT,
-		        P.PNAME, L.TIMETABLE, R.LRNAME
-		FROM LECTURE L, LECTURE_INFO I, LECTURE_ROOM R, PROFESSOR P
+		SELECT 
+			I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.GRADE TARGET, I.CREDIT, I.LIMITCOUNT, 
+		    P.PNAME, P.EMAIL, P.PID, 
+		    SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4) PPHONE, 
+		    L.TIMETABLE, L.DIVIDENUM, L.OPENNUM,
+		    R.LRNAME, 
+		    MV.MNAME, MV.DNAME
+		FROM LECTURE L, LECTURE_INFO I, LECTURE_ROOM R, PROFESSOR P, MAJOR_VIEW MV
 		WHERE P.PID = L.PID
 		AND L.PID = I.PID
 		AND L.LRCODE = R.LRCODE
-		AND L.LYEAR = #{lyear}
+		AND L.LYEAR = TO_CHAR(SYSDATE,'RRRR')
 		AND L.TERM = #{term}
-		AND I.DCODE = #{dcode}
-		AND R.LOCATION = #{location}
 		AND L.LNUM = I.LNUM
+		AND MV.MCODE = I.MCODE
+		<choose>
+			<when test = "dname != null and dname != ''">
+				AND MV.DNAME = #{dname} -->
+			</when>
+			<when test = "mcode != null and mcode != ''">
+				AND I.MCODE = #{mcode}
+			</when>
+			<when test = "location != null and location != ''">
+				AND R.LOCATION = #{location}
+			</when>
+			<when test = "grade != null and grade != ''">
+				AND I.GRADE = #{grade}
+			</when>
+		</choose>
+		ORDER BY I.CREDIT DESC, I.LNAME
 	</select>
 	
 	<!-- 교수 정보 보기 -->

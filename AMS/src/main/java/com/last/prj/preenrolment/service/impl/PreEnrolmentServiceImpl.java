@@ -33,6 +33,16 @@ public class PreEnrolmentServiceImpl implements PreEnrolmentService{
 	public List<PreEnrolmentVO> getMajorList(PreEnrolmentVO vo) {
 		return Pmap.getMajorList(vo);
 	}
+
+	@Override
+	public List<PreEnrolmentVO> enrolmentpackage(String sid) {
+		return Pmap.enrolmentpackage(sid);
+	}
+
+	@Override
+	public int preEnrolmentlimitCheck(String sid) {
+		return Pmap.preEnrolmentlimitCheck(sid);
+	}
 	
 
 }

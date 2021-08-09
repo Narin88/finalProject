@@ -6,11 +6,30 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <META charset="UTF-8">
 <head> 
 	<title>(교수)과제</title>
 	<style>
+	.noSubmit2{ 
+		text-align:center;
+		margin:auto;
+		background-color:aliceblue;
+ 		 border-collapse: collapse;
+		  border-radius: 10px;
+ 		border-style: hidden;
+  		box-shadow: 0 0 0 0.1px #000;
+    border: none;
+		
+	}
+	.noSubmit2 th{					
+	}
+	.noSubmit3{
+		text-align:center;
+		margin:auto;
+	}
+	.noSubmit3 th{
+		color:red;
+	}
 	.tui-grid-border-line-top {
     border: none;
     }
@@ -51,10 +70,6 @@
 		 .trC{
 		 background-color:white;
 		 }
-		 
-		 
-		 
-		 
 		 .modalBtn{ 
 		  border-radius: 1em;
 		    background-color: lightpink;
@@ -65,9 +80,9 @@
 		    padding-bottom: 5px;
 		    font-size: 20px;
 		    border: none;
-		}	
-		.modalBtn2{ 
-		  border-radius: 1em;
+	     	}	
+		  .modalBtn2{ 
+		    border-radius: 1em;
 		    background-color: lightpink;
 		    color: white;
 		    padding-left: 2em;
@@ -77,6 +92,7 @@
 		    font-size: 20px;
 		    border: none;
 		}
+		
 		 /* The Modal (background) */
         .modal {
             display: none; /* Hidden by default */
@@ -113,6 +129,41 @@
             text-decoration: none;
             cursor: pointer;
         }
+         /* The Modal (background) */
+        .modal2 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content2 {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+    		height: 300px; /* Could be more or less, depending on screen size */                          
+         }
+         .close2 {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close2:hover,
+        .close2:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
 	</style>
 	<!-- Toast grid -->
 	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
@@ -121,6 +172,12 @@
 	<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
 	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+	<!--  -->
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 			<div class="menu01">		
@@ -132,10 +189,9 @@
 			
 				
 			</div>
-		<div class="box1">			
-			<!-- TEST -->
-			<ul></ul>
-			<h3> ' ' 교수님 과제조회</h3>	
+		<div class="box1">				
+		<br>
+			<h5> ' ' 교수님 과제조회</h5>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
 			<div class="HwSearch">		
@@ -205,17 +261,16 @@
 			
 			
 			<div class="hwTable1">
-	 
+	 		
 		    <!-- The Modal -->
 		    <div id="myModal" class="modal">
 		 
 		      <!-- Modal content -->
-		      <div class="modal-content">
-		        <span class="close">&times;</span>                                                               
+		      <div class="modal-content">                                                             
 			<div class="hwContainer">
-								<h3> 조회목록</h3>
+							 <span class="close">&times;</span>  
 								<div class="noSubmit">
-								
+
 									<!-- select option  -->
 									<script>
 										function check(e){
@@ -232,14 +287,19 @@
 										}
 									</script>
 								</div>
+							
 								<!-- submit_SID값으로 학생정보 가져오기 -->
+								 <br>
 													<table border="1" style="width:100%; text-align:center;">
 															<tr>
+																<!--  <th>전체선택 <input type="checkbox" id="ck_all"></th>-->
 																<th>학생학번</th>	<th>학생이름(SNAME)</th>	 <th>제출파일</th>	
-																<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>
+																<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>		<th>삭제</th>
 															</tr>
 															<tfoot></tfoot>
 														</table>
+														<br>
+														<!-- <button type="button" id="delete" style="margin-left: 480px;">선택삭제</button> -->
 								</div>
 		       	
 		      </div>
@@ -247,10 +307,62 @@
 		    </div>
 			<!-- MODAL HTML END-->
 			
-			<!-- MODAL SCRIPT -->
 			
+			<!-- The Modal -->
+		    <div id="myModal2" class="modal2">
+		 
+		      <!-- Modal content -->
+		      <div class="modal-content2">      
+		      <span class="close2">&times;</span>                                                         
+			<div class="hwContainer">
+								<div class="" style="border-radius:10px;">
+									<table border="1" class="noSubmit2" >
+						
+									</table>
+								</div>
+								<form action="hwUpdate" id="udFrm" name="udFrm" method="post">
+								<sec:csrfInput/>
+								<input type="hidden" id="pperiod" name="pperiod">
+								<input type="hidden" id="pcomment" name="pcomment">
+								<input type="hidden" id="registerId" name="registerId">
+								<div class="" style="    margin-top: 60px;">
+									<table border="1" class="noSubmit3" >
+						
+									</table>
+								</div>
+								</form>
+							</div>
+		       	
+		      </div>
+		 
+		    </div>
+			<!-- MODAL HTML END-->
+			
+		
 			<script>
-			  // Get the modal
+			$(document).ready(function(){
+			    //체크박스 전체 선탣&해제
+			    $('#ck_all').click(function(){
+			         if($("#ck_all").prop("checked")){
+			            $("input[type=checkbox]").prop("checked",true); 
+			        }else{
+			            $("input[type=checkbox]").prop("checked",false); 
+			        }
+			    });
+			    
+			    $('#delete').click(function(){
+			            $("input[name=checkRow]:checked").each(function(){
+			            	 var tr_value =$(this).val();
+			            	 console.log(tr_value);        
+			            });
+			        
+			    });
+			});
+			
+			
+			
+			
+			// Get the modal
 	        var modal = document.getElementById('myModal');
 	 
 	        // Get the button that opens the modal
@@ -265,7 +377,14 @@
 	            modal.style.display = "block";
 	            $(this).data('id'); //
 				var a= $(this).data('id');
+				submitDelAll.registerId.value=a;
 				var b= $(this).data('num');
+				
+				var count=$(this).data('count');
+				console.log(count);
+				
+				
+				var checkVal=0;
 				$.ajax({
 					type:"post",
 					url:"inquiry",
@@ -274,32 +393,38 @@
 						opennum :b
 						},
 					dataType:"json",
-					success: function(data){		
+					success: function(data){							
 						$("tfoot").empty();		
 						$(".noSubmit").empty();
 						//$('<form name="selectFrm" id="selectFrm">')
-						$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;margin-top: 20px;">')
+						$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;">')
 						.append($('<option value="submitAll">전체보기</option>'))
 						.append($(' <option value="submit">제출자</option>'))
 						.append($('<option value="noSubmit">미제출자</option>">'))
-						.append($('</select>>'))	
+						.append($('</select>>'))		
 						.appendTo('.noSubmit');		
 						//$('</form>')
 						$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
+						if(count > 0){
+						$('<button type="button" id="hwDeleteAll" style="float: right;margin-right: 50px;" onclick="submitDelFuc();">전체삭제</button>').appendTo('.noSubmit');
+						}
 							for(var i of data){
 							var a="";
 							var c="";
 							var d="";
 							var e="";
 							var f="";
+							//제출자일때 checkval 증가변수 
+							if(i.registerId){
+								checkVal++;
+							}
 							//과제 미제출자일때 조건
 							if(! i.registerId  ){
 								a=' class="unsubmit"';
 								b=' style="visibility:hidden;"';
-								c=' colspan="6" style="color:red;"';
+								c=' colspan="7" style="color:red;"';
 								d=' style="display:none;"'
 								e=' 과제 미제출자';
-								
 							}else{								
 									a=' class="submit"';	
 									f=' style="background-color: lavender;"'
@@ -308,7 +433,8 @@
 							if(! i.submit_file ){
 								i.submit_file="";
 							}
-							$('<tr id="tr1"'+a+'>')
+							$('<tr id="tr1"'+a+' data-tr_value="'+checkVal+'">')
+							//.append($('<td><input '+d+' type="checkbox" name="checkRow" value="'+checkVal+'"></td>'))
 							.append($('<td>').html(i.submitSid))		
 							.append($('<td '+f+'>').html(i.name))
 							.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
@@ -317,6 +443,7 @@
 							.append($('<td'+d+'>').html(i.score))
 							.append($('<td id="sc"'+d+'>').html())	
 							.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
+							.append($('<td'+d+'>').html('<button type="button" onclick="hwDeleteFunc('+i.submitId+');">삭제</button>'))
 							.appendTo('tfoot');
 							//if(('#setRid')!=null){
 							//	console.log('b');		
@@ -331,6 +458,11 @@
 				});
 	        });
 	 
+	        	
+	        	
+	        	
+	        	
+	        	
 	        // When the user clicks on <span> (x), close the modal
 	        span.onclick = function() {
 	            modal.style.display = "none";
@@ -342,12 +474,50 @@
 	                modal.style.display = "none";
 	            }
 	        }
-
+			
+	        //과제제출 학생 모든데이터삭제
+	        function submitDelFuc(){
+	        var a=submitDelAll.registerId.value;
+	        //	;
+	        	console.log(a);
+	        	
+	        	if(confirm("전체 데이터를 삭제하시겠습니까?")==true){
+					alert("삭제되었습니다");
+	        		submitDelAll.submit()
+				}else{
+					return false;
+				}
+			
+	        }
+	        
+			//과제제출 학생 삭제 FUNCTION
+			function hwDeleteFunc(a){
+				$.ajax({
+				type:"post",
+				url:"hwSubmitDel",
+				data:{
+					submitId: a
+		
+				},
+				dataType:"JSON",
+				success:function(){
+					alert("삭제 되었습니다");
+					location.reload();
+				}
+				
+				});
+				
+				
+			}
+			
+			
 			</script>
 			
-			<!-- model end -->
+		
+			
 			<div id="grid" ></div>
 			<script>
+			
 					  		//grid start
 					  		
 					  				var clsData = [
@@ -355,9 +525,11 @@
 								{
 									lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
 									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> ',
-									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일 HH시mm분"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
 									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
-									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }">조회</button> '
+									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
+									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.opennum }">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
+										,updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="${list.pperiod}" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}">변경</button>'
 								},
 								</c:forEach>
 								]; //컬럼DATA	
@@ -377,182 +549,187 @@
 					  				{header: '학기',name: 'lterm',width:60}, //강의번호+분반
 					  				{header: '강의명',name: 'lname',width:90}, //년도+학기
 					  				{header: '강의실',name: 'lrcode',width:80},
-					  				{header: '교수코멘트',name: 'pcomment'},
+					  				{header: '과제제목',name: 'pcomment'},
 					  				{header: '등록날짜',name: 'register_date',width:140},
 					  				{header: '과제기간',name: 'pperiod',width:220},
-					  				{header: '양식파일',name: 'register_file',width:200},
+					  				{header: '양식파일',name: 'register_file',width:100},
 					  				{header: '제출현황',name: 'submitCount',width:120},
-					  				{header: '조회',name: 'inquiryBtn',width:120}
+					  				{header: '조회',name: 'inquiryBtn',width:120},
+					  				{header: '삭제',name: 'deleteBtn',width:120},
+					  				{header: '변경',name: 'updateBtn',width:120}
 					  			], //컬럼갯수
 					  			data: clsData
 					  		} );
 						
 								
-							
+					  			grid.on('dblclick', ev => {
+					        		//console.log('더블클릭!', ev.rowKey);
+					        		var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
+					        		
+					        		
+					        		console.log(data); 	
+					        	});
 								
 					  			</script>
-					
-					<!-- 과제 클릭시 해당과제제출 학생리스트 출력 
-					<script>
-					$(".hwTable1").on("click","#inquiry",function(){
-						
+				<script>
+				
 
-						$(this).data('id'); //
-						var a= $(this).data('id');
-						var b= $(this).data('num');
-						$.ajax({
-							type:"post",
-							url:"inquiry",
-							data:{ 
-								registerId :a,
-								opennum :b
-								},
-							dataType:"json",
-							success: function(data){		
-								$("tfoot").empty();		
-								$(".noSubmit").empty();
-								//$('<form name="selectFrm" id="selectFrm">')
-								$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;margin-top: 20px;">')
-								.append($('<option value="submitAll">전체보기</option>'))
-								.append($(' <option value="submit">제출자</option>'))
-								.append($('<option value="noSubmit">미제출자</option>">'))
-								.append($('</select>>'))	
-								.appendTo('.noSubmit');		
-								//$('</form>')
-								$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
-									for(var i of data){
-									var a="";
-									var c="";
-									var d="";
-									var e="";
-									var f="";
-									//과제 미제출자일때 조건
-									if(! i.registerId  ){
-										a=' class="unsubmit"';
-										b=' style="visibility:hidden;"';
-										c=' colspan="6" style="color:red;"';
-										d=' style="display:none;"'
-										e=' 과제 미제출자';
-										
-									}else{								
-											a=' class="submit"';	
-											f=' style="background-color: lavender;"'
-									}
-									//submit_file undefined hide
-									if(! i.submit_file ){
-										i.submit_file="";
-									}
-									$('<tr id="tr1"'+a+'>')
-									.append($('<td>').html(i.submitSid))		
-									.append($('<td '+f+'>').html(i.name))
-									.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
-									.append($('<td'+d+'>').html(i.submit_date))
-									.append($('<td'+d+'>').html(i.s_comment))
-									.append($('<td'+d+'>').html(i.score))
-									.append($('<td id="sc"'+d+'>').html())	
-									.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
-									.appendTo('tfoot');
-									//if(('#setRid')!=null){
-									//	console.log('b');		
-									//	console.log(a);
-									//}
-									
-								}
-							},
-							error: function(error){
-								alert("error");
-							}
-						});
-					});
+		
+
+					$(".hwTable1").on("click","#updateBtn",function(){
+						// Get the modal
+						var a=$(this).data('id');
+						var b=$(this).data('id2');
+						var c=$(this).data('id3');
+						var d=$(this).data('id4');
+						var e=$(this).data('id5');
+						var f=$(this).data('id6');
+						var g=$(this).data('id7');
+						udFrm.registerId.value=a;
+					console.log(b);
 					
-					});
-					</script>-->
-					  			
-					  			
-					  			
-				
-				
-					 <!--  register_id 값을 넘겨서 hw_student에서 중복된값을 가져와서 과제제출 목록리스트 뜨게하기 -->
-						<!-- 클릭시 클릭한 것 강조표시 -->
-						 <script>
-					<!--//과제제출 조회요청(클릭시)
-							$(".hwTable1").on("click","#inquiry",function(){
-								//$(event.target).closest('tr').toggleClass("trC");	
-								//tr클래스 css적용되어있는것을 삭제한후
-								$(".trC").css("backgroundColor", "white");
-								$(".trC").removeClass("trC");
-								//클릭한 값의 css를 추가한다.
-								$(event.target).closest('tr').addClass("trC");
-								$('.trC').css("backgroundColor","beige");
-								//$(event.target).closest('tr').removeClass("trC");
-								$(this).data('id'); //
-								var a= $(this).data('id');
-								var b= $(this).data('num');
-								$.ajax({
-									type:"post",
-									url:"inquiry",
-									data:{ 
-										registerId :a,
-										opennum :b
-										},
-									dataType:"json",
-									success: function(data){		
-										$("tfoot").empty();		
-										$(".noSubmit").empty();
-										//$('<form name="selectFrm" id="selectFrm">')
-										$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;margin-top: 20px;">')
-										.append($('<option value="submitAll">전체보기</option>'))
-										.append($(' <option value="submit">제출자</option>'))
-										.append($('<option value="noSubmit">미제출자</option>">'))
-										.append($('</select>>'))	
-										.appendTo('.noSubmit');		
-										//$('</form>')
-										$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
-											for(var i of data){
-											var a="";
-											var c="";
-											var d="";
-											var e="";
-											var f="";
-											//과제 미제출자일때 조건
-											if(! i.registerId  ){
-												a=' class="unsubmit"';
-												b=' style="visibility:hidden;"';
-												c=' colspan="6" style="color:red;"';
-												d=' style="display:none;"'
-												e=' 과제 미제출자';
-												
-											}else{								
-													a=' class="submit"';	
-													f=' style="background-color: lavender;"'
-											}
-											//submit_file undefined hide
-											if(! i.submit_file ){
-												i.submit_file="";
-											}
-											$('<tr id="tr1"'+a+'>')
-											.append($('<td>').html(i.submitSid))		
-											.append($('<td '+f+'>').html(i.name))
-											.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
-											.append($('<td'+d+'>').html(i.submit_date))
-											.append($('<td'+d+'>').html(i.s_comment))
-											.append($('<td'+d+'>').html(i.score))
-											.append($('<td id="sc"'+d+'>').html())	
-											.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
-											.appendTo('tfoot');
-											//if(('#setRid')!=null){
-											//	console.log('b');		
-											//	console.log(a);
-											//}
-											
-										}
-									},
-									error: function(error){
-										alert("error");
-									}
-								});
-							});
-					-->
+					var dateStr=String(b);
+					console.log(dateStr);	
+					var year=dateStr.substring(0,4);
+				//	console.log(year);
+					var month=dateStr.substring(5,7);
+					//console.log(month);
+					var day=dateStr.substring(8,10);
+				//	console.log(day);
+					var resultDate=year+month+day;	
+						
+					
+				        var modal = document.getElementById('myModal2');
+				 
+				        // Get the button that opens the modal
+				        var btn = document.getElementById("myBtn2");
+				 
+				        // Get the <span> element that closes the modal
+				        var span = document.getElementsByClassName("close2")[0];  
+					
+					  // When the user clicks on <span> (x), close the modal
+			        span.onclick = function() {
+			            modal.style.display = "none";
+			        }
+			 
+			        // When the user clicks anywhere outside of the modal, close it
+			        window.onclick = function(event) {
+			            if (event.target == modal) {
+			                modal.style.display = "none";
+			            }
+			        }
+		            modal.style.display = "block";
+						$('.noSubmit2').empty();
+						$('<tr class="updateTr">')
+						.append($('<th width="100px;">강의년도</th>'))
+						.append($('<th width="80px;">학기</th>'))
+						.append($('<th width="170px;">강의명</th>'))
+						.append($('<th width="200px;">제출기간</th>'))
+						.append($('<th  width="250px;">과제제목</th>'))
+						.append($('<th  width="170px;">양식파일</th>'))
+					
+						.append($('</tr>'))
+						.appendTo('.noSubmit2');	
+						$('<tr>')
+						.append($('<td>'+e+'</td>'))
+						.append($('<td>'+f+'</td>'))
+						.append($('<td>'+g+'</td>'))
+						.append($('<td>'+b+'</td>'))	
+						.append($('<td>'+c+'</td>'))
+						.append($('<td>'+d+'</td>'))
+						.appendTo('.noSubmit2');		
+						
+						
+						
+						
+						
+						$('.noSubmit3').empty();
+						$('<tr class="updateTr">')
+						.append($('<th width="200px;">제출기간</th>'))
+						.append($('<th  width="250px;">과제제목</th>'))
+						.append($('<th  width="170px;">양식파일</th>'))
+					
+						.append($('</tr>'))
+						.appendTo('.noSubmit3');	
+						$('<tr>')	
+						.append($('<td class="dateTd"><input type="text" id="startDate"  value="'+resultDate+'" disabled></td>'))	
+						.append($('<td class="pcommentTd"><input tpye="text" id="pcoId" value="'+c+'" disabled></td>'))
+						.append($('<td class="fileTd"><input type="file" id="fileId"></td>'))
+						.append($('<td><button type="button" onclick="updateSubmit();">변경</button></td>'))
+						.append($('<td class="updateReset"><button type="button">취소</button></td>'))
+						.appendTo('.noSubmit3');		
+		            
+						
+						$('.dateTd').on("click", function(){
+			            	$('#startDate').attr("disabled",false);
+			            	$('#startDate').attr("value",null);
+			            });
+						$('.pcommentTd').on("dblclick", function(){
+			            	$('#pcoId').attr("disabled",false);
+			            	
+			            });
+						
+						$('.updateReset').on("click", function(){
+			            	$('#startDate').attr("disabled",true);
+			            	$('#startDate').attr("value",resultDate);
+			            	$('#pcoId').attr("disabled",true);
+			            	$('#pcoId').attr("value",c);
+			            });
+						
+						$.datepicker.setDefaults($.datepicker.regional['ko']); 
+			            $( "#startDate" ).datepicker({
+			                // changeMonth: true, 
+			                 //changeYear: true,
+			                // nextText: '다음 달',
+			                 //prevText: '이전 달', 
+			                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+			                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+			                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			                 dateFormat: "yymmdd",
+			                 minDate:0,
+			                 maxDate: 30,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+			                 onClose: function( selectedDate ) {    
+			                      //시작일(startDate) datepicker가 닫힐때
+			                      //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+			                     $("#endDate").datepicker( "option", "minDate", selectedDate);
+			                 }    
+			 
+			            });
+			            
+			           
+			            
+				});
+					function updateSubmit(){
+					
+						var a=$('#startDate').val();	
+						var year=a.substring(0,4);
+						var month=a.substring(4,6);
+						var day=a.substring(6,8);
+						var resultDate=year+'-'+month+'-'+day;
+						
+						var date= new Date(resultDate);
+					//	var year=a.substring(0,4);
+					//	console.log(year);
+					//	var month=a.substring(5,7);
+						//console.log(month);
+					//	var day=a.substring(8,10);
+					//	console.log(day);
+					//	var resultDate=year+'-'+month+'-'+day;
+						//console.log(resultDate);
+						var date= new Date(resultDate);
+						
+						console.log(date);
+						udFrm.pperiod.value=date;
+						
+	
+					var b=$("#pcoId").val();
+					udFrm.pcomment.value=b;
+					console.log(b);
+					
+					udFrm.submit();
+				}
+					
 					//점수IN
 					function scoreIn(){	
 					    	//$(".scoreBtn").on("click", function(){
@@ -589,8 +766,10 @@
 			
 			</div>
 		</div>
-		
-		
+		<!-- 과제제출한 학생 전체데이터 삭제 -->
+		<form id="submitDelAll"  method="post" action="submitDelAll">
+			<input type="hidden" id="registerId" name="registerId">
+		</form>
 		<!--과제제출한 학생리스트 점수in 값 저장  -->
 		<form id="frmScoreIn" method="post" action="scoreIn">
 		<sec:csrfInput/>
@@ -617,48 +796,3 @@
 		</script>
 </body>
 </html>
-<!-- 
-<!--  
-				
-				<table BORDER="1" style="width:100%;text-align:center;">
-					<tr>
-						<th>강의년도</th>	
-						<th>강의학기</th>	
-						<th>강의명</th> 
-						<th>강의실코드</th>
-						<th>과제제목</th>		
-						<th>등록날짜</th> 
-						<th>과제기간</th>		
-						<th>양식파일</th>			
-						<th>제출현황</th>	
-						<th> 조희</th>
-					</tr>
-					<c:forEach items="${result}" var="list">
-					<c:set var="count" value="${count +1 }"></c:set>
-					<tr id="trSelect">
-						 <td>${list.lyear }년</td>  <td>${list.term }학기</td>	<td>${list.lname }</td> <td>${list.lrcode }</td>
-						 <td style="text-align:center;"> <span style="color:red;">( ' - ' )</span></td>
-						 <td><fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> </td> 
-						 <td>~<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일 HH시mm분"/>까지 <br>
-						 <!-- 진행중 ,마감 (음수,양수값으로) 
-						 <c:if test="${list.hwstatus > 0 }">
-						 <span style="color:red;">진행중</span>
-						  </c:if>
-						  <c:if test="${list.hwstatus <= 0}">
-						  <span style="color:blue;">마감</span>
-						  </c:if>
-						 </td> 						
-						 <td>${list.register_file }</td>	       
-						  <td>
-						  <span style="color:red;">${list.submitCount }</span>
-						  /
-						  <span style="font-weight:bold;">${list.newlimitcount }</span>
-						  </td>	
-						  <!-- 교수가 올린과제의 제출학생 리스트 출력 
-						  <td> 
-						  			  	
-						  </td>
-					</tr>
-					</c:forEach>
-				</table>
-				-->

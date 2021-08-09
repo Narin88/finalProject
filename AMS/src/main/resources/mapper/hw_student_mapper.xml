@@ -10,6 +10,7 @@
 			      ,l.schedule "schedule"
 			      ,l.lrcode "lrcode" 
 			      ,p.pname "pname"
+			      ,l.opennum "opennum"
 		  FROM	  score_mana sc 
 	 LEFT JOIN	  lecture l 
 	 		ON 	  sc.opennum=l.opennum 
@@ -42,4 +43,44 @@
         	ON      l.opennum=hw.opennum
 		 WHERE      l.opennum=#{opennum}
 	</select>
+	
+	<!-- 학생이 해당 강의의 과제들중 하나의 과제 select-->
+	<select id="hwSOneSelect" resultType="map">
+		SELECT  register_file "registerFile"
+			   ,register_Id  "registerId"
+			   ,opennum "opennum"
+			   ,register_date "registerDate"
+			   ,pperiod "pperiod"
+			   ,pcomment "pcomment"
+		  FROM hw_professor
+		 WHERE register_id=#{registerId}
+		   AND opennum=#{opennum}
+	</select>
+	
+	<!-- 학생이 과제제출 -->
+	<insert id="hwSSubmit">
+		INSERT 
+		  INTO hw_student(register_id
+		  				 ,submit_id
+		  				 ,submit_sid
+		  		<!--      ,submit_file -->
+		  				 ,submit_date
+		  				 ,scomment
+		  				 ) 
+       	VALUES (    #{registerId}
+       			    ,submit_seq.nextval
+       			    ,#{submitSid}
+       		<!--  	    ,#{submitFile}-->
+       			    ,sysdate
+       			    ,#{scomment}
+       			    )
+	</insert>
+	
+	<!-- 학생이 과제제출한것에 수정을할때 삭제후 다시 -->
+	<delete id="deleteHwS">
+	 DELETE
+	   FROM hw_student 
+	  WHERE submit_sid=#{sid}
+	    AND register_id=#{registerId}
+	</delete>
 </mapper>

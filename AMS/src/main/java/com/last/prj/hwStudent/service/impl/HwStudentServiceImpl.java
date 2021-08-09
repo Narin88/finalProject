@@ -50,6 +50,24 @@ public class HwStudentServiceImpl implements HwStudentService{
 	
 		return map.hwsSelectList(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> hwSOneSelect(HwStudentVO vo) {
+	
+		return map.hwSOneSelect(vo);
+	}
+
+	@Override
+	public int hwSSubmit(HwStudentVO vo) {
+	
+		return map.hwSSubmit(vo);
+	}
+
+	@Override
+	public int deleteHwS(HwStudentVO vo) {
+
+		return map.deleteHwS(vo);
+	}
 	
 	
 }

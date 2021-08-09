@@ -131,7 +131,7 @@ fir LEFT OUTER JOIN
 	<!-- 등록페이지/ 과제등록가능한 교수 강의목록 -->
 	<select id="hwPfInsertSelect" resultType="map">
 		 SELECT  
-          		 l.lyear  "lyear"
+          		distinct l.lyear  "lyear"
 				,l.term	  "term"
        			,i.lname "lname"
        			,l.lrcode "lrcode"
@@ -154,7 +154,7 @@ fir LEFT OUTER JOIN
 					,#{opennum}
 					,sysdate
 					,#{pperiod}
-					,#{registerFile}
+			       ,#{registerFile}
 					,#{pcomment}
 				)	
 		  

@@ -94,7 +94,7 @@
 		}
 		
 		 /* The Modal (background) */
-        .modal {
+        .modalEE {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
@@ -114,7 +114,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 70%;
-    		height: 500px; /* Could be more or less, depending on screen size */                          
+    		height: 700px; /* Could be more or less, depending on screen size */                          
         }
         /* The Close Button */
         .close {
@@ -180,6 +180,8 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
+
+
 			<div class="menu01">		
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
@@ -263,7 +265,7 @@
 			<div class="hwTable1">
 	 		
 		    <!-- The Modal -->
-		    <div id="myModal" class="modal">
+		    <div id="myModal" class="modalEE">
 		 
 		      <!-- Modal content -->
 		      <div class="modal-content">                                                             
@@ -291,11 +293,13 @@
 								<!-- submit_SID값으로 학생정보 가져오기 -->
 								 <br>
 													<table border="1" style="width:100%; text-align:center;">
+															<!--
 															<tr>
-																<!--  <th>전체선택 <input type="checkbox" id="ck_all"></th>-->
+																
 																<th>학생학번</th>	<th>학생이름(SNAME)</th>	 <th>제출파일</th>	
 																<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>		<th>삭제</th>
 															</tr>
+															-->
 															<tfoot></tfoot>
 														</table>
 														<br>
@@ -405,7 +409,47 @@
 						.appendTo('.noSubmit');		
 						//$('</form>')
 						$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
-						if(count > 0){
+						var clsData = [
+							<c:forEach items="${result }" var="list">
+							{
+								lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
+								lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> ',
+								pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+								, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
+								,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
+								,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.opennum }">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
+									,updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="${list.pperiod}" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}">변경</button>'
+							},
+							</c:forEach>
+							]; //컬럼DATA	
+
+				  		
+				  	       // GRID 를 보여준다.
+				  			var grid = new tui.Grid( {
+								el: document.getElementById('grid'),
+								pagination: true,   //페이징 처리
+							    pageOptions: {
+							    	useClient: true,   //페이징 처리
+							    	perPage: 10   //페이징 갯수
+							    }
+								,
+				  			columns: [
+				  				{header: '강의년도',name: 'lyear',width:100},
+				  				{header: '학기',name: 'lterm',width:60}, //강의번호+분반
+				  				{header: '강의명',name: 'lname',width:90}, //년도+학기
+				  				{header: '강의실',name: 'lrcode',width:80},
+				  				{header: '과제제목',name: 'pcomment'},
+				  				{header: '등록날짜',name: 'register_date',width:140},
+				  				{header: '과제기간',name: 'pperiod',width:220},
+				  				{header: '양식파일',name: 'register_file',width:100},
+				  				{header: '제출현황',name: 'submitCount',width:120},
+				  				{header: '조회',name: 'inquiryBtn',width:120},
+				  				{header: '삭제',name: 'deleteBtn',width:120},
+				  				{header: '변경',name: 'updateBtn',width:120}
+				  			], //컬럼갯수
+				  			data: clsData
+				  		} );
+						/*if(count > 0){
 						$('<button type="button" id="hwDeleteAll" style="float: right;margin-right: 50px;" onclick="submitDelFuc();">전체삭제</button>').appendTo('.noSubmit');
 						}
 							for(var i of data){
@@ -445,12 +489,9 @@
 							.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
 							.append($('<td'+d+'>').html('<button type="button" onclick="hwDeleteFunc('+i.submitId+');">삭제</button>'))
 							.appendTo('tfoot');
-							//if(('#setRid')!=null){
-							//	console.log('b');		
-							//	console.log(a);
-							//}
+
 							
-						}
+						}*/
 					},
 					error: function(error){
 						alert("error");

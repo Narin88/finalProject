@@ -37,6 +37,7 @@ pageEncoding="UTF-8" %>
 <li><a href="<%=request.getContextPath() %>/lectureLookUp.do" >전체 강의 시간표 조회</a></li>
 <li><a href="<%=request.getContextPath() %>/ScoreManaPage">수강신청</a></li>
 <li><a href="<%=request.getContextPath() %>/#">수강꾸러미 신청#</a></li>
+<li><a href="<%=request.getContextPath() %>/hwStudent">과제페이지</a></li>
 </ul>
 <ul>
 

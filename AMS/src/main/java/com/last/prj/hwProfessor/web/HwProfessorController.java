@@ -123,7 +123,7 @@ public class HwProfessorController {
 	@RequestMapping("hwInsertForm")
 	public String hwInsertFrm(HwProfessorVO vo,HttpServletRequest req) {
 	System.out.println(vo);
-			//service.hwPfInsert(vo);
+			service.hwPfInsert(vo);
 		return "redirect:hwPfInsert";
 	}
 	

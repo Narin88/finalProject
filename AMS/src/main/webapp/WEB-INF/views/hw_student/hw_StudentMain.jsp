@@ -13,11 +13,43 @@
 		.tui-grid-cell .tui-grid-cell-content {
     text-align: center;
 }
+.menu01 {
+				width:100%;
+				height: 80px;
+			    padding: 1em;
+			    margin-left: -40px;
+				}
+				.menu01 ul li{
+					list-style-type:none;
+					float:left;			
+					margin-left:20px;
+					font-weight:bold;		
+				}
+				.modalBtn{ 
+				margin-left: -30px;
+		  border-radius: 1em;
+		    background-color: lightpink;
+		    color: white;
+		    padding-left: 2em;
+		    padding-right: 2em;
+		    padding-top: 8px;
+		    padding-bottom: 5px;
+		    font-size: 20px;
+		    border: none;
+	     	}	
+
 </style>
 </head>
 <body>
-	<div id="hwSMain">	
-		<h4>(과제페이지)수강중인 강의</h4>
+	<div class="hwSMain">	
+	<div class="menu01">		
+				<ul>
+					<li><a class="modalBtn" href="hwStudent">과제 메인페이지</a></li>			
+				</ul>
+			
+				
+				</div>
+		<h4> * 현재 수강중인 강의 *</h4>
 		<br>
 		<div id="grid" ></div>
 			<script>
@@ -30,7 +62,8 @@
 									mname: '${list.mname}', lname: '${list.lname}', lyear : '${list.lyear}',
 									term: '${list.term}', lrcode: '${list.lrcode}', pname: '${list.pname}',
 									schedule: '${list.schedule}'
-									,hwBtn:'<button type="button">과제</button>'
+									,hwBtn:'<button type="button" id="hwClick" data-id="${list.opennum}">과제</button>'
+									,opennum:'${list.opennum}'
 								},
 								</c:forEach>
 								]; //컬럼DATA	
@@ -53,21 +86,35 @@
 					  				{header: '강의실',name: 'lrcode',width:100},
 					  				{header: '교수명',name: 'pname',width:140},
 					  				{header: '시간표',name: 'schedule'},
-					  				{header: '과제',name: 'hwBtn',width:120}
+					  				{header: '과제',name: 'hwBtn',width:120},
 					  			], //컬럼갯수
 					  			data: clsData
 					  		} );
 						
-								
+							/*	
 					  			grid.on('dblclick', ev => {
 					        		//console.log('더블클릭!', ev.rowKey);
 					        		var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
+					        		var opennum = data.opennum;
 					        		
+					        		hwStFrm.opennum.value=opennum;
+					       			hwStFrm.submit(); 		
 					        		
-					        		console.log(data); 	
 					        	});
-								
+								*/
+					  			$(".hwSMain").on("click","#hwClick",function(){
+					  				var a=$(this).data('id');
+					  				console.log(a);
+					  				hwStFrm.opennum.value=a;
+					  				hwStFrm.submit();
+					  			
+					  			});
 					  			</script>
 	</div>
+	
+	<form id="hwStFrm" name="hwStFrm" action="hwSelect" method="post">
+	<sec:csrfInput/>
+	 	<input type="hidden" id="opennum" name="opennum">
+	</form>
 </body>
 </html>

@@ -95,7 +95,6 @@
 <!-- 본체 -->
 <div align = "center">
 	<h2>강의 조회 페이지</h2>
-	<form name = "frm" method = "GET" action = "lectureLookUp">
 		<div class = "selectArea">
 			<select name = "mcode">
 				<option value = "">전공 선택</option>
@@ -145,7 +144,7 @@
 				<option value = "4">4</option>
 				<option value = "">전체</option>
 			</select>
-			<select name = "grade">	<!-- 미 -->
+			<select name = "day">	<!-- 미 -->
 				<option value = "">요일 선택</option>
 				<option value = "1">1</option>
 				<option value = "2">2</option>
@@ -153,7 +152,7 @@
 				<option value = "4">4</option>
 				<option value = "">전체</option>
 			</select>
-			<select name = "grade">	<!-- 미 -->
+			<select name = "time">	<!-- 미 -->
 				<option value = "">교시 선택</option>
 				<option value = "1">1</option>
 				<option value = "2">2</option>
@@ -163,7 +162,6 @@
 			</select>
 			<button id = "searchBtn">검색</button>
 		</div>
-	</form>
 	<div id = "grid"></div>
 </div>
 <!-- 본체 끝 -->
@@ -224,6 +222,83 @@
 	});
 	 */
 
+	 /* 
+	 var xhr = new XMLHttpRequest();
+	 
+	 xhr.onreadystatechange = function(){
+		 
+		 if (xhr.readyState == XMLHttpRequest.DONE){
+			
+			 if (xhr.status == 200){
+				 
+				 
+			 } else if (xhr.status == 400){
+				 
+				 alert('400');
+			 } else {
+				 
+				 alert('something else other than 200 was returned');
+			 }
+		 }
+	 };
+	 
+	 xhr.open("GET", "lectureLookUp", true);
+	 xhr.send();
+	 
+	 
+	 ajax
+	 xmlhttprequest
+	 fetch()
+	 
+	 */
+	 
+	 // 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
+	 document.getElementById('searchBtn').addEventListener('click', searchLecture);
+	 
+	 function searchLecture(){
+		 
+		 let mc 	= document.getElementsByName('mcode')[0].value;
+		 let dn 	= document.getElementsByName('dname')[0].value;
+		 
+		 let divi 	= document.getElementsByName('division');
+		 let divi_value;
+		 for (let i = 0; i < divi.length; i++){
+			 
+			 if (divi[i].checked){
+				 
+				 divi_value = divi[i].value;
+			 }
+		 }
+		 
+		 let loca 	= document.getElementsByName('location')[0].value;
+		 let gra 	= document.getElementsByName('grade')[0].value;
+		 
+		 let data = {
+				 "mcode" 	: mc,
+				 "dname" 	: dn,
+				 "division" : divi_value,
+				 "location" : loca,
+				 "grade" 	: gra
+		 }
+		 
+		 $.ajax({
+			 
+			 url: 'lectureLookUp',
+			 data: data,
+			 type: 'GET',
+			 //dataType: 'json',
+			 success: function(response){
+				 
+				 console.log(response);
+			 },
+			 error: function(err){
+				 
+				 console.log(err);
+			 }
+		 });
+	 }
+	 
+	 
 	// 그리드
 	var lecData = [
 		
@@ -306,8 +381,7 @@
 	// 그리드 끝
 
 
-// 그리드 클릭 이벤트
-
+	// 그리드 클릭 이벤트
 	grid.on('click', ev =>{
 		
 		var data = grid.getRow(ev.rowKey);

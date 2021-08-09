@@ -22,6 +22,7 @@ public class HwProfessorVO {
 	private String term;		//강의학기
 	private String lnum;		//강의코드
 	private String lcode;		//강의코드
+	private String submitId;	//과제제출한 고유번호
 	private String submitSid;	//학생번호
 	private String score;		//점수
 	}

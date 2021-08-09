@@ -1,6 +1,7 @@
 package com.last.prj.hwStudent.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,18 @@ public class HwStudentServiceImpl implements HwStudentService{
 	public int hw_studentUpdate(HwStudentVO vo) {
 		
 		return map.hw_studentUpdate(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> hwSLectureList(HwStudentVO vo) {
+		
+		return map.hwSLectureList(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> hwsSelectList(HwStudentVO vo) {
+	
+		return map.hwsSelectList(vo);
 	}
 	
 	

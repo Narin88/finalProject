@@ -51,7 +51,7 @@ pageEncoding="UTF-8" %>
 <ul>
 <li><a href="<%=request.getContextPath() %>/ProfessorLectureList">나의 강의 확인</a></li>
 <li><a href="<%=request.getContextPath() %>/ScoreCheckLectureList" >성적 관리</a></li>
-<li><a href="<%=request.getContextPath() %>/#">과제 관리#</a></li>
+<li><a href="<%=request.getContextPath() %>/hwList">과제 관리</a></li>
 <li><a href="<%=request.getContextPath() %>/lectureList" >학기 시간표 조회</a></li>
 <li><a href="<%=request.getContextPath() %>/LectureInfo">강의 개설</a></li>
 <li><a href="<%=request.getContextPath() %>/studyPlanList" >강의 계획서</a></li>

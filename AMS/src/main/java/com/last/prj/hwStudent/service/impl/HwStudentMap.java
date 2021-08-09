@@ -1,6 +1,7 @@
 package com.last.prj.hwStudent.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.last.prj.hwStudent.service.HwStudentVO;
 
@@ -14,4 +15,11 @@ public interface HwStudentMap {
 		int hw_studentInsert(HwStudentVO vo);
 		//(학생) 등록한 과제파일수정
 		int hw_studentUpdate(HwStudentVO vo);
+		
+		
+		//수강중인 과목의 과제조회
+		List<Map<String, Object>> hwsSelectList(HwStudentVO vo);
+		
+		//학생이 수강중인 목록조회
+		List<Map<String, Object>> hwSLectureList(HwStudentVO vo);
 }

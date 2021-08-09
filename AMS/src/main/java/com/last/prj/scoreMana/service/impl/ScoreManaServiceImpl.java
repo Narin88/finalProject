@@ -21,15 +21,13 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 		return SMmap.EnrolmentList(vo);
 	}
 
-	@Override
-	public ScoreManaVO OverlapCheck(ScoreManaVO vo) {
-		return SMmap.OverlapCheck(vo);
-	}
-
-	@Override
-	public int AjaxEnrolmentDelete(ScoreManaVO vo) {
-		return SMmap.AjaxEnrolmentDelete(vo);
-	}
+	/*
+	 * @Override public ScoreManaVO OverlapCheck(ScoreManaVO vo) { return
+	 * SMmap.OverlapCheck(vo); }
+	 * 
+	 * @Override public int AjaxEnrolmentDelete(ScoreManaVO vo) { return
+	 * SMmap.AjaxEnrolmentDelete(vo); }
+	 */
 
 	@Override
 	public StudentsVO StudentSelectinfo(String sId) {
@@ -54,6 +52,21 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	@Override
 	public StudentsVO EnrolmentStudent(StudentsVO vo) {
 		return SMmap.EnrolmentStudent(vo);
+	}
+
+	@Override
+	public List<LectureVO> scoreList(String sid) {
+		return SMmap.scoreList(sid);
+	}
+
+	@Override
+	public int deletescore(List<ScoreManaVO> vo) {
+		int count = 0;
+		for(int i=0; i<vo.size();i++) {
+			SMmap.deletescore(vo.get(i));
+			count++;
+		}
+		return count;
 	}
 	
 }

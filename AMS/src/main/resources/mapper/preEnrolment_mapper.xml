@@ -3,7 +3,7 @@
 <mapper namespace="com.last.prj.preenrolment.service.impl.PreEnrolmentMapper">
 	
 	<select id="PreStudentSelect" resultType="StudentsVO" parameterType="string">
-		select * from students where sId = #{sId}
+		select * from students where sid = #{sid}
 	</select>
 	
 	<select id="preLectureList" resultType="PreEnrolmentVO" parameterType="StudentsVO">
@@ -13,8 +13,9 @@
         case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
              when retake_Check(#{sid},l.opennum) = '002' then 'N'
              end as retake
-		from lecture_info li, LECTURE l, lecture_room lr
+		from lecture_info li, LECTURE l, lecture_room lr, MAJOR_VIEW mv
 		where li.LNUM = l.LNUM
+		and mv.MCODE = li.MCODE
 		and l.LRCODE = lr.LRCODE
 		and l.lyear = to_char(sysdate,'RRRR')
 		and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM')<![CDATA[<=]]>08  then 1
@@ -23,12 +24,12 @@
 		and opennum not in (select opennum from preenrolment where sid = #{sid})
 		<if test="dcode != 'defaultV' and dcode != null">
 			<choose>
-				<when test="mcode != 'defaultV' and dcode != null">
-					and dcode = #{dcode}
-					and mcode = #{mcode}
+				<when test="mcode != 'defaultV' and mcode != null">
+					and mv.dcode = #{dcode}
+					and mv.mcode = #{mcode}
 				</when>
 				<otherwise>
-					and dcode = #{dcode}
+					and mv.dcode = #{dcode}
 				</otherwise>
 			</choose>
 		</if>
@@ -47,7 +48,7 @@
 				find_code_name(100,li.dcode) as division, l.TIMETABLE||' / '||lr.LRNAME as timetable, 
 				case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
 					 when retake_Check(#{sid},l.opennum) = '002' then 'N'
-				end as retake
+				end as retake,l.opennum
 		FROM PREENROLMENT P, LECTURE L, LECTURE_INFO LI, LECTURE_ROOM LR
 		WHERE P.OPENNUM = L.OPENNUM
 		AND L.LNUM = LI.LNUM
@@ -58,4 +59,13 @@
 	<select id="preEnrolmentlimitCheck" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM PREENROLMENT  WHERE SID = #{sid}
 	</select>
+	
+	<insert id="preEnrolmentinsert" parameterType="PreEnrolmentVO">
+		insert into PREENROLMENT(sid,opennum,retake) VALUES(#{sid},#{opennum},case when #{retake} = 'N' then '002'
+                                  							   					   when #{retake} = 'Y' then '001' end)
+	</insert>
+	
+	<delete id="preEnrolmentdelete" parameterType="PreEnrolmentVO">
+		delete from preenrolment where sid = #{sid} and opennum = #{opennum}
+	</delete>
 </mapper>

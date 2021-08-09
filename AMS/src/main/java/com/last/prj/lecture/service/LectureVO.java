@@ -27,7 +27,7 @@ public class LectureVO {
 	
 	private String seach; //검색해야될 내용
 	private String seachgubun; //검색할카테고리
-	
+	private String sid; //학번
 	private int encount; //현재 수강인원
 	
 	private List<LectureVO> updatedRows;

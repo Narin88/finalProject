@@ -1,10 +1,14 @@
 package com.last.prj.preenrolment.service;
 
+import java.util.List;
+
+import com.last.prj.lecture.service.LectureVO;
+
 import lombok.Data;
 
 @Data
 public class PreEnrolmentVO {
-	private String sId; //학번
+	private String sid; //학번
 	private String opennum; //강의 개설번호
 	private String retake; //재수강여부
 	
@@ -20,5 +24,4 @@ public class PreEnrolmentVO {
 	private String dcode; //학과번호
 	private String mname; //전공명
 	private String dname; //학과명
-	
 }

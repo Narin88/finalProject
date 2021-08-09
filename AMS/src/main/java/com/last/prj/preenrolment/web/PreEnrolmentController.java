@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,9 +82,32 @@ public class PreEnrolmentController {
 	@ResponseBody
 	public Map<String, Object> preEnrolmentinsert(@RequestBody List<PreEnrolmentVO> vo, HttpSession session){
 		String sid = (String) session.getAttribute("id");
+		int total = vo.size();
+		for(int i =0; i<vo.size();i++) {
+			vo.get(i).setSid(sid);
+		};
+		System.out.println(vo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", true);
+		map.put("success", Pdao.preEnrolmentinsert(vo));
+		map.put("total", total);
 		
-		System.out.println("=============================="+vo);
-		
-		return null;
+		return map;
+	}
+	
+	@PostMapping("deletepre")
+	@ResponseBody
+	public Map<String, Object> preenrolmentdelete(@RequestBody List<PreEnrolmentVO> vo, HttpSession session) {
+		String sid = (String) session.getAttribute("id");
+		for(int i =0; i<vo.size();i++) {
+			vo.get(i).setSid(sid);
+		};
+		System.out.println(vo);
+		int total = vo.size();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", true);
+		map.put("success", Pdao.preEnrolmentdelete(vo));
+		map.put("total", total);
+		return map;
 	}
 }

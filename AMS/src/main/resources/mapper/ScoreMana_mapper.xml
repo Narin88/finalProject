@@ -21,13 +21,16 @@
 	<select id="EnrolmentList" resultType="LectureVO">
 		select l.opennum, l.lnum||'-'||l.dividenum as lnum, l.lyear||'-'||l.term as lyear, li.GRADE,
 		       li.lname, li.CREDIT, mv.dname, mv.mname, find_code_name(100,li.dcode) as division, 
-          		l.NEWLIMITCOUNT, lr.lrname, l.timetable, (select count(*) from score_mana where opennum = l.opennum) as encount
+          	   l.NEWLIMITCOUNT, lr.lrname, l.timetable, (select count(*) from score_mana where opennum = l.opennum) as encount
 		from lecture l, lecture_info li, lecture_room lr, MAJOR_VIEW mv
 		where l.lnum = li.lnum
     	and mv.MCODE = li.MCODE
 		and l.lrcode = lr.lrcode
 		and l.lyear = to_char(sysdate,'RRRR')
-		and li.GRADE =	#{grade}
+	    and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
+	                 else 2 end
+		and li.GRADE = #{grade}
+		and l.opennum not in (select opennum from score_mana where sid = #{sid})
 		<if test="seach != null and seach != ''">
 			<choose>
 				<when test="seachgubun == 'lnum'">
@@ -40,7 +43,7 @@
 		</if>
 	</select>
 
-	<!-- 수강신청 중복체크 -->
+<!-- 	수강신청 중복체크
 	<select id ="OverlapCheck" parameterType="ScoreManaVO" resultType="ScoreManaVO">
 		select l.opennum, s.sid from lecture l, SCORE_MANA s
 		where l.OPENNUM = s.OPENNUM
@@ -48,12 +51,12 @@
 		AND L.OPENNUM = #{opennum}
 	</select>
 	
-	<!-- 수강취소(삭제) -->
+	수강취소(삭제)
 	<delete id="AjaxEnrolmentDelete" parameterType="ScoreManaVO">
 		delete from score_mana
 		where sid = #{sid}
 		and opennum = #{opennum}
-	</delete>
+	</delete> -->
 	
 	<!-- 수강신청 -->
 	<insert id="AjaxEnrolmentInsert" parameterType="ScoreManaVO">
@@ -77,4 +80,24 @@
 		and s.sid = #{sid}
 		and l.lyear = to_char(sysdate,'RRRR')
 	</select>
+	
+	<!-- 수강신청 완료 목록 -->
+	<select id="scoreList" resultType="LectureVO">
+		select sc.opennum, l.lnum||'-'||l.DIVIDENUM as lnum, l.LYEAR||'-'||l.TERM as lyear,
+		       li.GRADE, li.LNAME, li.CREDIT, mv.dname, mv.mname,find_code_name(100,li.dcode) as division,
+		       l.TIMETABLE, lr.LRNAME
+		from score_mana sc, lecture l, lecture_info li, MAJOR_VIEW mv, lecture_room lr
+		where sc.OPENNUM = l.OPENNUM
+		and l.LNUM = li.LNUM
+		and l.lrcode = lr.lrcode
+		and li.mcode = mv.mcode
+		and sc.sid = #{sid}
+	</select>
+	
+	<delete id="deletescore" parameterType="ScoreManaVO">
+		delete from score_mana
+		where sid = #{sid}
+		and opennum = #{opennum}
+	</delete>
+	<!-- 수강 취소 -->
 </mapper>

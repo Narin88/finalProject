@@ -2,6 +2,7 @@ package com.last.prj.preenrolment.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,28 @@ public class PreEnrolmentServiceImpl implements PreEnrolmentService{
 	@Override
 	public int preEnrolmentlimitCheck(String sid) {
 		return Pmap.preEnrolmentlimitCheck(sid);
+	}
+
+	@Override
+	public int preEnrolmentinsert(List<PreEnrolmentVO> vo) {
+		int count = 0;
+		System.out.println("================2번"+vo);
+		for(int i=0; i<vo.size();i++) {
+			Pmap.preEnrolmentinsert(vo.get(i));
+			count++;
+		}
+		
+		return count;
+	}
+
+	@Override
+	public int preEnrolmentdelete(List<PreEnrolmentVO> vo) {
+		int count = 0;
+		for(int i=0; i<vo.size();i++) {
+			Pmap.preEnrolmentdelete(vo.get(i));
+			count++;
+		}
+		return count;
 	}
 	
 

@@ -1,7 +1,7 @@
 package com.last.prj.scoreMana.web;
 
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +47,7 @@ public class ScoreManaController {
 		lvo.setSeach(map.get("seach"));
 		lvo.setSeachgubun(map.get("seachgubun"));
 		lvo.setGrade(vo.getGrade());
+		lvo.setSid(sid);
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		data.put("result", true);
@@ -54,45 +56,30 @@ public class ScoreManaController {
 		return data;
 	}
 	
-	//중복 수강체크
-	@RequestMapping("AjaxConfirm")
-	@ResponseBody
-	public int AjaxConfirm(@RequestParam("opennum") String opennum, HttpSession session) {
-		String sid = (String) session.getAttribute("id");
-		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSid(sid);
-		vo.setOpennum(opennum);
-		ScoreManaVO vo2 = SMdao.OverlapCheck(vo);
-		
-		System.out.println(vo2);
-		//중복체크
-		int i = 1;
-		if(SMdao.OverlapCheck(vo)==null) { //중복수강 확인
-			i = 0;
-		}
-		System.out.println(i);
-		return i;
-	}
-	
-	//수강 취소(삭제)
-	@RequestMapping("AjaxEnrolmentDelete")
-	public String AjaxEnrolmentDelete(@RequestParam("opennum") String opennum,Model model, HttpSession session) {
-		String sid = (String) session.getAttribute("id");
-		String message = "";
-		ScoreManaVO vo = new ScoreManaVO();
-		vo.setSid(sid);
-		vo.setOpennum(opennum);
-		
-		int i = SMdao.AjaxEnrolmentDelete(vo);
-			if(i>0) {
-				message = "수강취소가 완료되었습니다.";
-			}else {
-				message = "수강취소가 실패되었습니다.";
-			}
-		model.addAttribute("message",message);
-		return "redirect:ScoreManaPage";
-	}
-	
+	/*
+	 * //중복 수강체크
+	 * 
+	 * @RequestMapping("AjaxConfirm")
+	 * 
+	 * @ResponseBody public int AjaxConfirm(@RequestParam("opennum") String opennum,
+	 * HttpSession session) { String sid = (String) session.getAttribute("id");
+	 * ScoreManaVO vo = new ScoreManaVO(); vo.setSid(sid); vo.setOpennum(opennum);
+	 * 
+	 * //중복체크 int i = 1; if(SMdao.OverlapCheck(vo)==null) { //중복수강 확인 i = 0; }
+	 * return i; }
+	 * 
+	 * //수강 취소(삭제)
+	 * 
+	 * @RequestMapping("AjaxEnrolmentDelete") public String
+	 * AjaxEnrolmentDelete(@RequestParam("opennum") String opennum,Model model,
+	 * HttpSession session) { String sid = (String) session.getAttribute("id");
+	 * String message = ""; ScoreManaVO vo = new ScoreManaVO(); vo.setSid(sid);
+	 * vo.setOpennum(opennum);
+	 * 
+	 * int i = SMdao.AjaxEnrolmentDelete(vo); if(i>0) { message = "수강취소가 완료되었습니다.";
+	 * }else { message = "수강취소가 실패되었습니다."; } model.addAttribute("message",message);
+	 * return "redirect:ScoreManaPage"; }
+	 */
 	//수강신청(insert)
 	@RequestMapping("AjaxEnrolmentInsert")
 	public String AjaxEnrolmentInsert(@RequestParam("opennum") String opennum, HttpSession session) {
@@ -123,7 +110,32 @@ public class ScoreManaController {
 		if(result==100) {
 			result=0;
 		}
-		System.out.println(result);
 		return result;
+	}
+	
+	@PostMapping("scoreList")
+	@ResponseBody
+	Map<String, Object> scoreList(HttpSession session){
+		String sid = (String)session.getAttribute("id");
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> maps = new HashMap<String, Object>();
+		map.put("result", true);
+		maps.put("contents", SMdao.scoreList(sid));
+		map.put("data", maps);
+		return map;
+	}
+	
+	@PostMapping("deletescore")
+	@ResponseBody
+	public Map<String, Object> deletescore(@RequestBody List<ScoreManaVO> vo, HttpSession session){
+		String sid = (String)session.getAttribute("id");
+		for(int i =0; i<vo.size();i++) {
+			vo.get(i).setSid(sid);
+		};
+		System.out.println(vo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", true);
+		map.put("success", SMdao.deletescore(vo));
+		return map;
 	}
 }

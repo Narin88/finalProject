@@ -137,13 +137,23 @@ public class StudentsController {
 		// 강의 시간표들 조회 (수강 신청 과정)
 
 		// common code
-		vo.setLyear("2021");
+		//vo.setLyear("2021");
 		vo.setTerm(1);
 
-		// select ( if )
-		vo.setDcode("004");
-		vo.setLocation("인문대");
-
+//		String divi = vo.getDivision();
+//		List<StudentsVO> diviResult = new ArrayList<StudentsVO>();
+//		
+//		if (divi.equals("교양")) {
+//			
+//			vo.setDcode("001");
+//			diviResult = stService.lectureLookUp(vo);
+//			
+//			vo.setDcode("002");
+//			stService.lectureLookUp(vo);
+//		}
+		
+		System.out.println("\n조회 결과 : " + stService.lectureLookUp(vo) + "\n");
+		
 		model.addAttribute("lec", stService.lectureLookUp(vo));
 
 		return "students/lectureLookUp.tiles";

@@ -54,10 +54,7 @@ LEFT OUTER JOIN hw_professor p
 	 		,se.score "score" 
 	 		,se.register_id "registerId"
 	   FROM
-			   		(SELECT hp.register_id AS "hp.regid", sm.* 
-		      		   FROM hw_professor hp 
-		   			   LEFT OUTER JOIN score_mana sm
-     					 ON hp.opennum = sm.opennum WHERE sm.opennum = #{opennum}
+			   		(select * from score_mana where opennum=#{opennum}
      					 )
 fir LEFT OUTER JOIN 
 					(SELECT hs.*, idn.name FROM hw_professor hp, hw_student hs, id_name idn 

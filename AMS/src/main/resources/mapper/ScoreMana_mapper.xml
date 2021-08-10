@@ -114,4 +114,17 @@
 		AND L.LRCODE = LR.LRCODE
 		AND P.SID = #{sid}
 	</select>
+	
+	
+	<!-- 모달창 한강의 정보 -->
+	<select id="oneselectLecture" parameterType="LectureVO" resultType="LectureVO">
+		SELECT l.*,(select count(*) from score_mana s where opennum = l.opennum) as encount, li.credit
+		FROM LECTURE l, lecture_info li
+		WHERE OPENNUM = #{opennum}
+		and l.lnum = li.lnum
+	</select>
+	
+	<delete id="AjaxPreEnrolmentdelete" parameterType="LectureVO">
+		delete from preEnrolment where sid = #{sid} and opennum = #{opennum}
+	</delete>
 </mapper>

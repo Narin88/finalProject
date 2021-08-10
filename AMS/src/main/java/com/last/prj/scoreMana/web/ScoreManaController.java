@@ -151,4 +151,18 @@ public class ScoreManaController {
 		return SMdao.getpreenrolment(sid);
 	}
 	
+	
+	
+	@PostMapping("oneselectLecture")
+	@ResponseBody
+	public LectureVO oneselectLecture(LectureVO vo) {
+		return SMdao.oneselectLecture(vo);
+	}
+	
+	@RequestMapping("AjaxPreEnrolmentdelete")
+	public String AjaxPreEnrolmentdelete(LectureVO vo,HttpSession session) {
+		 vo.setSid((String)session.getAttribute("id"));
+		 SMdao.AjaxPreEnrolmentdelete(vo);
+		return "redirect:ScoreManaPage";
+	}
 }

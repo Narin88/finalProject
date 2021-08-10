@@ -176,7 +176,7 @@ uri="http://www.springframework.org/security/tags" %>
       			{header: '정원',name: 'limitcount'},
       			{header: '이수코드',name: 'dcode'},
       			{header: '이수구분',name: 'division'},
-      			{header: '학점',name: 'credit'},
+      			{header: '학점',name: 'credit'}
       		], //컬럼갯수
       		data: clsData
       	} );

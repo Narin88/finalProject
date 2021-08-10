@@ -14,6 +14,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>강의 꾸러미 :: No.M University</title>
 <style>
+.tui-grid-cell .tui-grid-cell-content {
+   text-align: center;
+}
 .seachBox{
 	padding-left : 20px;
 	font-size: 13px;

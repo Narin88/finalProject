@@ -41,7 +41,7 @@ public class EvaluationController {
 	  public String Evaluation(Model model, HttpSession session, EvaluationVO vo) { 
 			vo.setSid((String) session.getAttribute("id"));
 			vo.setTerm(1);
-
+			
 			model.addAttribute("eva", dao.selectone(vo));
 		 	System.out.println(vo);
 		 	System.out.println(dao.selectone(vo));

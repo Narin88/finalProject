@@ -61,7 +61,7 @@ $('textarea').each(function() {
 <div class="container23" id="pdfwrap">
 	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
-	<p>${spList.LYear}년도 ${spList.term} 학기</p>
+	<p>${spList.lyear}년도 ${spList.term} 학기</p>
 	
 <div class="innercontainer23">
 

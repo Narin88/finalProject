@@ -49,6 +49,7 @@
             attendancescore = #{attendancescore},
             total = #{total},
             rank = #{rank}
+            
             where opennum = #{opennum}
 	</update>
 </mapper>

@@ -144,7 +144,7 @@ tr td th{
 				<form id="frm" name="frm" action="EvaluationResult" method="post">
 					<sec:csrfInput />
 					<input type="hidden" name="opennum" value="${eva.opennum }">
-
+					<input type="hidden" name="evalcheck" value="${eva.evalcheck }">
 					<div class="small223">
 						<table border="1px">
 							<tr >

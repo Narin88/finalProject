@@ -35,10 +35,11 @@ public String ScoreCheckLectureList(Model model, HttpSession session,LectureVO v
 
 // 컬럼 정보 하나씩 가져오기
 @RequestMapping("collectresult")
-public String selectresult(Model model, LectureVO vo) {
+public String selectresult(Model model, LectureVO vo,HttpSession session) {
+	vo.setPid((String)session.getAttribute("id"));
 	model.addAttribute("cc", dao.collectresult(vo));
 	
-	return null;
+	return "scoreCheck/scoreCheckLectureList.tiles";
 }
 
 //과목별 학생 리스트 출력

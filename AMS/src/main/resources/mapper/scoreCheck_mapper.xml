@@ -8,7 +8,9 @@
 	    from lecture l, lecture_info li, LECTURE_ROOM lr
 	    where l.lnum = li.lnum
 	    and l.LRCODE = lr.LRCODE
-	    and l.pid=#{pid} 	
+	    and l.pid=#{pid}
+	    and lyear = to_char(sysdate, 'RRRR')
+           			 and term = 1  	
 	    order by 1
 	</select>
 
@@ -32,7 +34,9 @@
 				    from lecture l, lecture_info li, LECTURE_ROOM lr
 				    where l.lnum = li.lnum
 				    and l.LRCODE = lr.LRCODE
-				    and l.pid=#{pid} 	
+				    and l.pid=#{pid}
+				     and lyear = to_char(sysdate, 'RRRR')
+           			 and term = 1 	
 				    
 	</select>
 	

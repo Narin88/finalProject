@@ -14,10 +14,21 @@ public class EvaluationServiceImpl implements EvaluationService {
 
 	@Autowired
 	EvaluationMapper map;
+
+	/*
+	 * @Override public List<EvaluationVO> question(EvaluationVO vo) { return
+	 * map.question(vo); }
+	 */
 	@Override
-	public List<EvaluationVO> question(EvaluationVO vo) {
-		return map.question(vo);
+	public List<EvaluationVO> Evaluation(EvaluationVO vo) {
+		return map.Evaluation(vo);
 	}
+
+	@Override
+	public EvaluationVO selectone(EvaluationVO vo) {
+		return map.selectone(vo);
+	}
+
 
 	
 }

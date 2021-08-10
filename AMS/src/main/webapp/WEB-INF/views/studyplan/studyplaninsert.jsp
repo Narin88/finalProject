@@ -73,10 +73,10 @@
 							
 					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 								<tr width="200" height="100%">
-									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.LName} "></th>
-									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.PName}"> </th>
+									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.lname} "></th>
+									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.pname}"> </th>
 									<th ><font size="3">이메일</font></th><th><input type="text"  value="${spList.email}"></th>
-									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" value="${spList.PPhone} " > </th>
+									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" value="${spList.pphone} " > </th>
 								</tr>
 								
 					</table>
@@ -87,14 +87,14 @@
 
 								
 										<tr  width="200">
-												<th><font size="3">수강학과</font></th>	 <th><input type="text" value="${spList.MName}"></th>
-												<th ><font size="3">수강학부</font></th>	 <th><input type="text" value="${spList.DName}"> </th>
-												<th ><font size="3">강의실</font></th>	 <th><input type="text" value="${spList.lrName}" ></th>
+												<th><font size="3">수강학과</font></th>	 <th><input type="text" value="${spList.mname}"></th>
+												<th ><font size="3">수강학부</font></th>	 <th><input type="text" value="${spList.dname}"> </th>
+												<th ><font size="3">강의실</font></th>	 <th><input type="text" value="${spList.lrname}" ></th>
 												<th ><font size="3">교재</font></th>	 <th><input type="text" value="${spList.book}"  size=20></th>
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.LNum}"  size=20></th> <th>-<input type="text" value="${spList.dividenum}"  size=20> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.lnum}"  size=20></th> <th>-<input type="text" value="${spList.dividenum}"  size=20> </th>
 											<th></th>
 											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}" ></th>
 											
@@ -104,7 +104,7 @@
 														
 											<th ><font size="3">학점</font></th>	 <th><input type="text" value="${spList.credit}"  size=20></th>
 											<th><font size="3">대상학년</font></th>	 <th><input type="text" value="${spList.grade}"  size=20> </th>
-											<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitCount}"  size=20></th>
+											<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitcount}"  size=20></th>
 											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="width:200px;" value="${spList.division}" size=20> </th>
 									</tr>
 									

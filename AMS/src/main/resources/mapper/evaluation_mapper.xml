@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.last.prj.evaluation.service.impl.EvaluationMapper">
-	
-
+<mapper
+	namespace="com.last.prj.evaluation.service.impl.EvaluationMapper">
+	<select id="selectone" resultType="EvaluationVO"	parameterType="string">
+		select distinct l.lyear, l.term, li.lname,l.opennum
+		from lecture l, lecture_info li, students s, SCORE_MANA sm
+		where s.sid = #{sid}
+		and l.lnum = li.lnum
+		and sm.OPENNUM = l.OPENNUM
+		and l.opennum = 3
+		and sm.sid = s.sid
+	</select>
 </mapper>

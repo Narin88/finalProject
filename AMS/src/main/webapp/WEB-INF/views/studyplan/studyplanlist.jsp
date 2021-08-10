@@ -43,10 +43,10 @@
 				<sec:csrfInput/>
 				
 						<label>년도:</label>						
-							<select name="lYear" id="lYear">		
+							<select name="lyear" id="lyear">		
 									<option value="">선택 </option>			  
 								<c:forEach items="${ySelect}" var="ySelect">
-									  <option value="${ySelect.LYear }"  <c:if test="${ySelect.LYear}"> selected="selected"</c:if> >${ySelect.LYear }</option>
+									  <option value="${ySelect.lyear }"  <c:if test="${ySelect.lyear}"> selected="selected"</c:if> >${ySelect.lyear }</option>
 								 </c:forEach>	 
 							</select>
 								
@@ -88,16 +88,16 @@
 				<c:choose>
 					<c:when test="${empty s.content}">
 						{
-							lYear:'${s.LYear}', term:'${s.term}', lName: '${s.LName}', LNum: '${s.LNum}-${s.dividenum}', PName: '${s.PName}',
-							MName:'${s.MName}',DName: '${s.DName}', grade: '${s.grade}', 학점: '${s.credit}',
+							lYear:'${s.lyear}', term:'${s.term}', lName: '${s.lname}', LNum: '${s.lnum}-${s.dividenum}', PName: '${s.pname}',
+							MName:'${s.mname}',DName: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 							division: '${s.division}', credit: '${s.credit}', 
 							Btn: '<button  onclick=location.href="studyPlanInsertPage?opennum=${s.opennum}">등록</button>'
 						},
 					</c:when>
 					<c:otherwise>
 						{
-								lYear:'${s.LYear}', term:'${s.term}', lName: '${s.LName}', LNum: '${s.LNum}${s.dividenum}', PName: '${s.PName}',
-								MName:'${s.MName}',DName: '${s.DName}', grade: '${s.grade}', 학점: '${s.credit}',
+								lYear:'${s.lyear}', term:'${s.term}', lName: '${s.lname}', LNum: '${s.lnum}${s.dividenum}', PName: '${s.pname}',
+								MName:'${s.mname}',DName: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 								division: '${s.division}', credit: '${s.credit}', 
 								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}">수정</button><button onclick=location.href="readOnly2?opennum=${s.opennum}">읽기전용</button>'
 										

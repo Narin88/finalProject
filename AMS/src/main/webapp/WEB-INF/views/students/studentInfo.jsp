@@ -65,9 +65,6 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#abc">지도교수정보</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#tuition">등록금</a>
-				</li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="score">
@@ -128,11 +125,6 @@
 							</tr>
 						</table>
 					</div>
-				</div>
-				<div class="tab-pane fade" id="tuition">
-					<p>Curabitur dignissim quis nunc vitae laoreet. Etiam ut mattis
-						leo, vel fermentum tellus. Sed sagittis rhoncus venenatis. Quisque
-						commodo consectetur faucibus. Aenean eget ultricies justo.</p>
 				</div>
 			</div>
 		</div>

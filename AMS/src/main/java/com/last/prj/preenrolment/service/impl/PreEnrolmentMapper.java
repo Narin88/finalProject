@@ -12,4 +12,6 @@ public interface PreEnrolmentMapper {
 	List<PreEnrolmentVO> getMajorList(PreEnrolmentVO vo);
 	List<PreEnrolmentVO> enrolmentpackage(String sid);
 	int preEnrolmentlimitCheck(String sid);
+	int preEnrolmentinsert(PreEnrolmentVO preEnrolmentVO);
+	int preEnrolmentdelete(PreEnrolmentVO preEnrolmentVO);
 }

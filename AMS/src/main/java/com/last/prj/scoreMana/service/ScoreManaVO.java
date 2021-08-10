@@ -15,7 +15,7 @@ public class ScoreManaVO {
 	private String retake; //재수강여부 001재수강 002수강
 	private String pid;//교수 아이디
 	private int grade; //학년
-	private int lnum;//과목번호
+	private String lnum;//과목번호
 	private String lname;//과목이름
 	private int dividenum;//분반번호
 	private String sname; //학생이름

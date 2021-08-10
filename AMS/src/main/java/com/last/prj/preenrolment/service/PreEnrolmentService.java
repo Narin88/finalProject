@@ -11,4 +11,6 @@ public interface PreEnrolmentService {
 	List<PreEnrolmentVO> getMajorList(PreEnrolmentVO vo);
 	List<PreEnrolmentVO> enrolmentpackage(String sid);
 	int preEnrolmentlimitCheck(String sid);
+	int preEnrolmentinsert(List<PreEnrolmentVO> vo);
+	int preEnrolmentdelete(List<PreEnrolmentVO> vo);
  }

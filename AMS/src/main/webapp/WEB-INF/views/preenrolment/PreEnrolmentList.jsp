@@ -19,26 +19,42 @@
 	font-size: 13px;
 	margin-bottom: 10px;
 }
+.btns{
+	background: #9FF781;
+}
 </style>
 </head>
 <body>
-<div class="seachBox">
-대학 : <select id ="depart" name="depart">
- 	<option value="defaultV">선택</option>
- 	<c:forEach items="${depart }" var="dvo">	
- 		<option value="${dvo.dcode }">${dvo.dname }</option>
- 	</c:forEach>
- </select>
- 전공 : <select id="major" name="major">
- 	<option value="defaultV">선택</option>
- </select>
- <button onclick="getSeach()">검색</button>
+
+
+<div id="grid">
+	<h2 align="center">수강 내역</h2>
+	<div class="seachBox">
+		대학 : <select id ="depart" name="depart">
+		 	<option value="defaultV">선택</option>
+		 	<c:forEach items="${depart }" var="dvo">	
+		 		<option value="${dvo.dcode }">${dvo.dname }</option>
+		 	</c:forEach>
+		 </select>
+		 전공 : <select id="major" name="major">
+		 	<option value="defaultV">선택</option>
+		 </select>
+		 <button id="seach">검색</button>
+	</div>
+	<div align="right">
+		<button id="createBtn">등록</button>
+	</div>	
 </div>
-<div align="right">
-	<button id="createBtn">등록</button>
+
+
+<div id="preEnrol">
+	<h2 align="center">내 수강 꾸러미</h2>
+
+	<div align="right">
+	
+		<button id="deleteBtn" class="btns">취소</button>
+	</div>
 </div>
-<div id="grid"></div>
-<div id="preEnrol"></div>
 
 <script>
 //첫 번쨰 그리드
@@ -48,8 +64,7 @@ var grid = new tui.Grid({
 	data: {
 			contentType: 'application/json',
 			api:{
-				readData:{ url: 'PreEnrolmentList',method: 'POST' },
-				createData:{ url: 'PreEnrolmentInsert', method: 'POST'}
+				readData:{ url: 'PreEnrolmentList',method: 'POST' }
 			}
 	},
 	
@@ -61,12 +76,12 @@ var grid = new tui.Grid({
     },
 	columns: [
 		{header: '등록번호',name: 'opennum'},
-		{header: '강의번호',name: 'lnum', width: 100},
-		{header: '과목명',name: 'lname', width: 100}, //강의번호+분반
-		{header: '학점',name: 'credit',width: 100}, //년도+학기
-		{header: '이수구분',name: 'division',width: 90},
-		{header: '강의시간/강의실',name: 'timetable',width: 100},
-		{header: '재수강 여부',name: 'retake',width: 100}
+		{header: '강의번호',name: 'lnum'},
+		{header: '과목명',name: 'lname'}, //강의번호+분반
+		{header: '학점',name: 'credit'}, //년도+학기
+		{header: '이수구분',name: 'division'},
+		{header: '강의시간/강의실',name: 'timetable'},
+		{header: '재수강 여부',name: 'retake'}
 	] //컬럼갯수
 });
 
@@ -75,11 +90,13 @@ var preEnrol = new tui.Grid( {
 	el: document.getElementById('preEnrol'),
 	data: {
 			api:{
-				readData:{ url: 'enrolmentpackage',method: 'POST' }
+				readData:{ url: 'enrolmentpackage', method: 'POST' }
 			},
 	contentType: 'application/json'
 	},
+	rowHeaders: ['checkbox'],
 	columns: [
+		{header: '등록번호',name: 'opennum'},
 		{header: '강의번호',name: 'lnum'},
 		{header: '과목명',name: 'lname'}, //강의번호+분반
 		{header: '학점',name: 'credit'}, //년도+학기
@@ -89,6 +106,8 @@ var preEnrol = new tui.Grid( {
 	] //컬럼갯수
 } );
 
+
+// 수강꾸러미 등록
 $('#createBtn').click(function(){
 	var indata = grid.getCheckedRows();
 	$.ajax({
@@ -103,8 +122,9 @@ $('#createBtn').click(function(){
 					type:'POST',
 					data: JSON.stringify(indata),
 					contentType: 'application/json',
-					success: function(){
-						
+					success: function(result){
+						alert(result.total+'건 중에'+result.success+'이 신청되었습니다.');
+						location.href='PreEnrolmentPage';
 					}
 				})
 			}
@@ -112,15 +132,29 @@ $('#createBtn').click(function(){
 	})
 });
 
-
+//수강 꾸러미 삭제
+$('#deleteBtn').click(function(){
+	var indata = preEnrol.getCheckedRows();
+	console.log(indata);
+	$.ajax({
+		url:'deletepre',
+		type:'POST',
+		data: JSON.stringify(indata),
+		contentType: 'application/json',
+		success: function(result){
+			alert('꾸러미에 등록된 '+result.success+'건 취소가 되었습니다.');
+			location.href='PreEnrolmentPage';
+		}
+	})
+});
 //검색 함수
-function getSeach(){
+$('#seach').click(function(){
 	var major = $('#major').val();
 	var depart = $('#depart').val();
 	var seachD = {dcode:depart, mcode:major};
 	console.log(seachD);
 	grid.readData(1,seachD,true);
-}
+})
 
 //검색 컬럼변화
 $("#depart").change(function(){

@@ -88,16 +88,16 @@
 				<c:choose>
 					<c:when test="${empty s.content}">
 						{
-							lYear:'${s.lyear}', term:'${s.term}', lName: '${s.lname}', LNum: '${s.lnum}-${s.dividenum}', PName: '${s.pname}',
-							MName:'${s.mname}',DName: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
+							lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}-${s.dividenum}', pname: '${s.pname}',
+							mname:'${s.mname}',dname: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 							division: '${s.division}', credit: '${s.credit}', 
 							Btn: '<button  onclick=location.href="studyPlanInsertPage?opennum=${s.opennum}">등록</button>'
 						},
 					</c:when>
 					<c:otherwise>
 						{
-								lYear:'${s.lyear}', term:'${s.term}', lName: '${s.lname}', LNum: '${s.lnum}${s.dividenum}', PName: '${s.pname}',
-								MName:'${s.mname}',DName: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
+								lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}${s.dividenum}', pname: '${s.pname}',
+								mname:'${s.mname}',dname: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 								division: '${s.division}', credit: '${s.credit}', 
 								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}">수정</button><button onclick=location.href="readOnly2?opennum=${s.opennum}">읽기전용</button>'
 										
@@ -119,13 +119,13 @@
 		    }
 			,
 			columns: [
-				{header: '강의년도',name: 'lYear'},
+				{header: '강의년도',name: 'lyear'},
 				{header: '강의학기',name: 'term'},
-				{header: '강의이름',name: 'lName'},
-				{header: '강의코드',name: 'LNum'},
-				{header: '교수이름',name: 'PName'},
-				{header: '개설대학',name: 'MName'},
-				{header: '수강학과',name: 'DName'},
+				{header: '강의이름',name: 'lname'},
+				{header: '강의코드',name: 'lnum'},
+				{header: '교수이름',name: 'pname'},
+				{header: '개설대학',name: 'mname'},
+				{header: '수강학과',name: 'dname'},
 				{header: '대상학년',name: 'grade'},
 				{header: '학점',name: 'credit'},
 				{header: '이수구분',name: 'division'},

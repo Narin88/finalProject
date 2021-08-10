@@ -191,6 +191,23 @@ public class StudentsController {
 		return path;
 	}
 
-	// ajax 시험성적 검색기능
-//	@PostMapping("")
+	@ResponseBody
+	@RequestMapping("/lectureList")
+	public Map<String, Object> lectureList(
+			HttpSession session,
+			@RequestBody Map<String, Object> map,
+			StudentsVO vo)
+	{
+		
+		vo.setSid((String) session.getAttribute("id"));
+
+		// 리스트 보내주기
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", stService.lectureLookUp(vo));
+		data.put("data", datas);
+
+		return data;
+	}
 }

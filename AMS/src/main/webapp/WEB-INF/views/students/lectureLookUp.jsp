@@ -76,19 +76,11 @@
 		padding: 10px;
 		width: 150px;
 	}
+	
+	td[data-column-name="pname"] {
+		color : skyblue;
+	}
 </style>
-
-<!-- Toast grid -->
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
-
 
 <title>강의 조회 페이지</title>
 
@@ -188,69 +180,14 @@
 
 
 <script>
-	/* 
-	//window.onload = function() {}
-	document.addEventListener("DOMContentLoaded", function(){
-		
-		// 비동기
-		var btn = document.getElementById("searchBtn");
-		
-		btn.addEventListener("click", () => {
-			
-			// XMLHttpRequest 객체 생성
-			var xhr = new XMLHttpRequest();
-			
-			// 요청을 보낼 방식, 주소, 비동기 여부 설정
-			xhr.open('GET', '/lectureLookUp', true);
-			
-			// 요청 전송
-			xhr.send();
-			
-			// 통신 뒤 작업
-			xhr.onload = () => {
-				
-				if(xhr.status == 200){
-					
-					console.log('성공');
-				} else {
-					
-					console.log('실패');
-				}
-			}
-		});
-		
-	});
-	 */
-
+	
+	 
 	 /* 
-	 var xhr = new XMLHttpRequest();
-	 
-	 xhr.onreadystatechange = function(){
-		 
-		 if (xhr.readyState == XMLHttpRequest.DONE){
-			
-			 if (xhr.status == 200){
-				 
-				 
-			 } else if (xhr.status == 400){
-				 
-				 alert('400');
-			 } else {
-				 
-				 alert('something else other than 200 was returned');
-			 }
-		 }
-	 };
-	 
-	 xhr.open("GET", "lectureLookUp", true);
-	 xhr.send();
-	 
-	 
 	 ajax
 	 xmlhttprequest
 	 fetch()
+	  */
 	 
-	 */
 	 
 	 // 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
 	 document.getElementById('searchBtn').addEventListener('click', searchLecture);
@@ -263,15 +200,13 @@
 		 let divi 	= document.getElementsByName('division');
 		 let divi_value;
 		 for (let i = 0; i < divi.length; i++){
-			 
 			 if (divi[i].checked){
-				 
 				 divi_value = divi[i].value;
 			 }
 		 }
 		 
 		 let loca 	= document.getElementsByName('location')[0].value;
-		 let gra 	= document.getElementsByName('grade')[0].value;
+		 let gra 	= Number(document.getElementsByName('grade')[0].value);
 		 
 		 let data = {
 				 "mcode" 	: mc,
@@ -281,21 +216,20 @@
 				 "grade" 	: gra
 		 }
 		 
-		 $.ajax({
+		 /* $.ajax({
 			 
 			 url: 'lectureLookUp',
 			 data: data,
 			 type: 'GET',
 			 //dataType: 'json',
 			 success: function(response){
-				 
-				 console.log(response);
+				 console.log(data);
 			 },
 			 error: function(err){
-				 
 				 console.log(err);
 			 }
-		 });
+		 }); */
+		 grid.lecData(1, data, true);
 	 }
 	 
 	 
@@ -303,7 +237,6 @@
 	var lecData = [
 		
 		<c:forEach items = "${lec}" var = "lec" varStatus = "seq">{
-			
 			// 실질적 값
 			seq			: '${seq.count}',
 			lnum 		: '${lec.lnum}' + '-' + '${lec.dividenum}',
@@ -322,39 +255,25 @@
 			pid			: '${lec.pid}',
 			opennum		: '${lec.opennum}'
 		}
-		
 		<c:if test='${!empty lec.lnum}'>
 		,
 		</c:if>
-		
 		</c:forEach>
 	];
 	
-	// 그리드 api-source
-	
-	/* 	const dataSource = {
-			
-			withCredentials	: false,
-			initialRequest	: false,
-			contentType		: 'application/json',
-			api : {
-				
-				readData	: {},
-				updateData	: {
-					
-					url		: '',
-					method	: ''
-				}
-			}
-			
-		}; */
-
 
 	// 그리드를 보여준다
 	var grid = new tui.Grid({
 		
 		el: document.getElementById('grid'),
-		data: lecData,
+		data: {
+			api: {
+				lecData: {
+					url: "/lectureList", method: "POST" 
+				},
+			},
+			contentType: "application/json"
+		},
 		//rowHeaders: ['checkbox'],
 		pagination: true,		//페이징 처리
 	    pageOptions: {
@@ -380,19 +299,16 @@
 	grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
 	// 그리드 끝
 
-
 	// 그리드 클릭 이벤트
 	grid.on('click', ev =>{
 		
 		var data = grid.getRow(ev.rowKey);
 		
 		if (ev.columnName == "pname") {
-			
 			showOffer(data);
 		}
 		
 		if (ev.columnName == "lname"){
-			
 			// 쿼리에 필요한 값 적용시키기
 			let pid 	= data.pid;
 			let opennum = data.opennum;
@@ -422,6 +338,7 @@
 	}
 				
 	function modal(mm) {
+		
 	    var zIndex = 9999;
 	    var modal = document.getElementById(mm);
 
@@ -438,6 +355,7 @@
 	        // 레이어 색갈은 여기서 바꾸면 됨
 	        backgroundColor: 'rgba(0,0,0,0.4)'
 	    });
+	    
 	    document.body.append(bg);
 
 	    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기

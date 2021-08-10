@@ -15,63 +15,53 @@
 
 
 <style>
-#my_offer {
-	display: none;
-	width: 80%;
-	height: 40%;
-	padding: 30px 60px;
-	background-color: #fefefe;
-	border: 1px solid #888;
-	border-radius: 3px;
-}
-
-#my_offer .modal_close_btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
-
-.modal-body {
-	font-size: 10pt;
-}
-
-.professorInfo { -
-	-bs-table-bg: transparent; -
-	-bs-table-striped-color: #212529; -
-	-bs-table-striped-bg: rgba(0, 0, 0, 0.05); -
-	-bs-table-active-color: #212529; -
-	-bs-table-active-bg: rgba(0, 0, 0, 0.1); -
-	-bs-table-hover-color: #212529; -
-	-bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-	width: 100%;
-	color: #212529;
-	vertical-align: top;
-	border-color: #dee2e6;
-}
-
-.tui-grid-cell .tui-grid-cell-content {
-	text-align: center;
-}
+	#my_offer {
+		display: none;
+		width: 80%;
+		height: 40%;
+		padding: 30px 60px;
+		background-color: #fefefe;
+		border: 1px solid #888;
+		border-radius: 3px;
+	}
+	
+	#my_offer .modal_close_btn {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+	
+	.modal-body {
+		font-size: 10pt;
+	}
+	
+	.professorInfo { -
+		-bs-table-bg: transparent; -
+		-bs-table-striped-color: #212529; -
+		-bs-table-striped-bg: rgba(0, 0, 0, 0.05); -
+		-bs-table-active-color: #212529; -
+		-bs-table-active-bg: rgba(0, 0, 0, 0.1); -
+		-bs-table-hover-color: #212529; -
+		-bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+		width: 100%;
+		color: #212529;
+		vertical-align: top;
+		border-color: #dee2e6;
+	}
+	
+	.tui-grid-cell .tui-grid-cell-content {
+		text-align: center;
+	}
+	
+	td[data-column-name="pname"] {
+		color : skyblue;
+	}
+	
 </style>
 
 <!-- Toast grid -->
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-<script type="text/javascript"
-	src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-<script
-	src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
+
 <title>수강 신청된 과목 확인</title>
 
 <div align="center">
@@ -127,11 +117,10 @@
 		
 	////////////////////////////////////
 	
-// 그리드
+	// 그리드
 	var lecData = [
 		
 		<c:forEach items = "${st}" var = "st">{
-			
 			// 이 페이지 실질적 데이터
 			lnum 		: '${st.lnum}' +'-' + '${st.dividenum}',
 			lname 		: '${st.lname}',
@@ -153,38 +142,11 @@
 		</c:forEach>
 	];
 	
-// 그리드 api-source
-
-	/* const dataSource = {
-		
-		withCredentials	: false,
-		initialRequest	: false,
-		contentType		: 'application/json',
-		api : {
-			
-			readData	: {},
-			updateData	: {
-				
-				url		: '',
-				method	: ''
-			}
-		}
-		
-	}; */
-
-
-// 그리드를 보여준다
+	// 그리드를 보여준다
 	var grid = new tui.Grid({
 		
 		el: document.getElementById('grid'),
 		data: lecData,
-		//rowHeaders: ['checkbox'],
-		/* pagination: false,		//페이징 처리
-	    pageOptions: {
-	    	useClient: false,	//페이징 처리
-	    	perPage: 10   		//페이징 갯수
-	    }
-		, */
 		columns: [
 			{header: '강의코드', name: 'lnum'},
 			{header: '강의명', name: 'lname'},
@@ -193,29 +155,23 @@
 			{header: '강의시간', name: 'timetable'},
 			{header: '강의실', name: 'lrname'},
 			{header: '교수', name: 'pname'}
-			
 		] //컬럼갯수
-		
 	});
 
 	grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
-	
-// 그리드 끝
+	// 그리드 끝
 
-//모달 start
+	//모달 start
 	document.addEventListener("DOMContentLoaded", function(){
-		
 		grid.on('click', ev =>{
 			
 			var data = grid.getRow(ev.rowKey);
 			
 			if (ev.columnName == "pname") {
-				
 				showOffer(data);
 			}
 			
 			if (ev.columnName == "lname"){
-				
 				// 쿼리에 필요한 값 적용시키기
 				let pid 	= data.pid;
 				let opennum = data.opennum;
@@ -322,7 +278,6 @@
 		
 		let week = [
 			"",
-			"",
 			"월",
 			"화",
 			"수",
@@ -331,22 +286,29 @@
 		];
 		
 		let timeseq =[
-			"1교시" + "<br>" + "09:00 ~ 10:00",
-			"2교시" + "<br>" + "09:00 ~ 10:00",
-			"3교시" + "<br>" + "09:00 ~ 10:00",
-			"4교시" + "<br>" + "09:00 ~ 10:00",
-			"5교시" + "<br>" + "09:00 ~ 10:00",
-			"6교시" + "<br>" + "09:00 ~ 10:00",
-			"7교시" + "<br>" + "09:00 ~ 10:00",
-			"8교시" + "<br>" + "09:00 ~ 10:00",
-			"9교시" + "<br>" + "09:00 ~ 10:00"
+			`1교시<br>09:00 ~ 10:00`,
+			`2교시<br>09:00 ~ 10:00`,
+			`3교시<br>09:00 ~ 10:00`,
+			`4교시<br>09:00 ~ 10:00`,
+			`5교시<br>09:00 ~ 10:00`,
+			`6교시<br>09:00 ~ 10:00`,
+			`7교시<br>09:00 ~ 10:00`,
+			`8교시<br>09:00 ~ 10:00`,
+			`9교시<br>09:00 ~ 10:00`,
 		];
+		/* "1교시" + "<br>" + "09:00 ~ 10:00",
+		"2교시" + "<br>" + "09:00 ~ 10:00",
+		"3교시" + "<br>" + "09:00 ~ 10:00",
+		"4교시" + "<br>" + "09:00 ~ 10:00",
+		"5교시" + "<br>" + "09:00 ~ 10:00",
+		"6교시" + "<br>" + "09:00 ~ 10:00",
+		"7교시" + "<br>" + "09:00 ~ 10:00",
+		"8교시" + "<br>" + "09:00 ~ 10:00",
+		"9교시" + "<br>" + "09:00 ~ 10:00" */
 		
-		for(let i = 1; i < 10; i++){
-			
+		for(let i = 0; i < timeseq.length; i++){
 			let tr = $('<tr />');
-			
-			for(let j = 1; j < 7; j++){
+			for(let j = 0; j < week.length; j++){
 				
 			//	console.log("위크 : " + week[j] + i);
 			//	console.log("토탈 : " + totaltime.indexOf(week[j] + i));
@@ -368,15 +330,16 @@
 				// console.log('강의명 : ' + lec);
 				// console.log('장소 : ' + room);
 				
-				if (j == 1){
+				if (j == 0){
 					// 테이블 첫 번째 자리에 강의 시간 집어넣기
 					
 					// td에 아이디값 안 줘도 될 듯? 
-					tr.append($('<td class="table-secondary timeCol" id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i - 1]));
+					// tr.append($('<td class="table-secondary timeCol" id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i]));
+					tr.append($(`<td class = table-secondary timeCol id = jackpot${i}-${j}>)`).html(timeseq[i]));
 	
 				} else {
 					
-					let curTime = week[j] + i;
+					let curTime = week[j] + (i + 1);
 					//console.log("컬타임 : " + curTime);
 					
 					//과목찾기
@@ -388,18 +351,14 @@
 							lectureName = getValue[lectureTime][0] + "<br>" + lectureTime + "<br>" + getValue[lectureTime][1];
 						}
 					}
-					//console.log(lectureName);					
+					//console.log(lectureName);
 						
 					// 강의 집어넣기
 					tr.append($('<td '+ tColor +' id =  "jackpot'+ i+ '-' + j + '"/>').html(lectureName));
-					
 				}
-				
 			}
-
 			sTable.append(tr);
 		}
-		 
 		$('#scheduleShow').append(sTable);
 	});
 	

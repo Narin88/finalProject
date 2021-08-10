@@ -15,7 +15,7 @@
 	} */
 
 	.pwdArea {
-		padding-left: 45%;
+		/* padding-left: 45%; */
 		padding-bottom: 1%;
 	}
 	
@@ -28,6 +28,7 @@
 	.check {
 		float: right;
 		right : 40%;
+		position: absolute;
 	}
 	
 </style>
@@ -46,10 +47,10 @@
 		</div>
 		<div class = "pwdArea">
 			<div>
-				<input type = "password" id="npwd" name = "nPwd" placeholder = "New Password" maxlength = "12" value="">
+				<input type = "password" name = "nPwd" placeholder = "New Password" maxlength = "12" onkeyup ="keyEvent()">
 			</div>
 			<div class = "leftSide">
-				<input type = "password" id="pwd" name = "pwd" placeholder = "Cofirm New Password" maxlength = "12" value="">
+				<input type = "password" name = "pwd" placeholder = "Cofirm New Password" maxlength = "12" onkeyup ="keyEvent()">
 				<span id = "check"></span>
 			</div>
 		</div>
@@ -61,36 +62,31 @@
 
 <script>
 	
-	var bool = false;
-	
 	document.getElementById('updateBtn').addEventListener('click', studentUpdate);
-	
+
+	var bool = false;
+
+	// 정규식
+	let idReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()-_+|=])[A-Za-z\d`~!@#$%^&*()-_+|=]{6,12}$/;
+			// 숫자, 문자, 특문 무조건 1개 이상. 6~12글자로.
+	///^[0-9][a-zA-Z][`~!@#$%^&*()-_=+\|]$/	
 	function studentUpdate(){
-		
-		// https://tlatmsrud.tistory.com/3 정규식 없이
-		
-		// 정규식
-		let idReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()-_+|=])[A-Za-z\d`~!@#$%^&*()-_+|=]{6,12}$/;
-				// 숫자, 문자, 특문 무조건 1개 이상. 6~12글자로.
 				
 		if(!idReg.test(frmPwd.nPwd.value)){
-			
 			alert('비밀번호 조건을 맞춰 주세요!\n6 글자 이상 12 글자 이하\n숫자, 문자, 특수문자 최소 1 개 포함');
 			document.frmPwd.pwd.focus();
 			return;
 		} else if (bool == false) {
-			
 			alert('비밀번호가 일치하지 않습니다!');
 			document.frmPwd.pwd.focus();
 			return;
 		} else {
-			
 			alert('비밀번호가 변경되었습니다.');
 			document.frmPwd.submit();
 		}
 		
 	}
-	
+	/* 
 	$("#pwd, #npwd").on("propertychange change keyup paste input", function() {
 		
 		let nPwd = document.getElementsByName('nPwd')[0].value;
@@ -113,7 +109,31 @@
 			}
 		}
 	})
-	
+	 */
+	 
+	function keyEvent() {
+		
+		let nPwd 	= document.getElementsByName('nPwd')[0].value;
+		let cPwd 	= document.getElementsByName('pwd')[0].value;
+		let write 	= document.getElementById('check');
+		
+		if (nPwd == '' || cPwd == '') {
+			write.innerText = '';
+			bool = false;
+		}
+		
+		if (nPwd != '' && cPwd != '') {
+			if (nPwd != cPwd){
+				write.innerText = '비밀번호가 일치하지 않습니다.';
+				write.style.color = 'hotpink';
+				bool = false;
+			} else {
+				write.innerText = '비밀번호가 일치합니다.';
+				write.style.color = 'skyblue';
+				bool = true;
+			}
+		}
+	}
 </script>
 </body>
 </html>

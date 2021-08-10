@@ -134,9 +134,10 @@
 	</div>
 	<div class="rightContainer" style="visibility:hidden;">
 	<form action="hwInsertForm" id="hwInsertFrm" name="hwInsertFrm">
+	<sec:csrfInput/>
 			<input type="hidden" id="opennum" name="opennum">
 			<input type="hidden" id="pperiod" name="pperiod">
-			<input type="hidden" id="registerFile" name="registerFile">
+		 	<input type="hidden" id="registerFile" name="registerFile"> 
 			<input type="hidden" id="pcomment" name="pcomment">
 		<table id="hwInsertTb" border="1">
 			<tbody>
@@ -145,25 +146,7 @@
 				<div class="hwInsertFormC">
 				</div>
 				
-				<!-- 날짜 형식변환 -->
-				<script>
-				function hwInsertSubmit(){
-					var a=$('#endDate').val();
-					var year=a.substring(0,4);
-					var month=a.substring(4,6);
-					var day=a.substring(6,8);
-					var resultDate=year+'-'+month+'-'+day;
-					
-					var date= new Date(resultDate);
-					
-					
-					hwInsertFrm.pperiod.value=date;
-					hwInsertFrm.registerFile.value=null;
-					hwInsertFrm.pcomment.value=null;
-					hwInsertFrm.submit();
-					
-				}
-				</script>
+				
 	</form>
 		<script>
 			function  checkDate(){
@@ -173,6 +156,7 @@
 		<script>
 		$(".leftContainer").on("click","#hwInsert",function(){
            var a= $(this).data('num'); //
+           console.log(a);
        	grid.on('click', ev => {
            var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 			ClickData(data,a);
@@ -209,6 +193,25 @@
 			}
         });
 		</script>
+		<!-- 날짜 형식변환 -->
+				<script>
+				function hwInsertSubmit(){
+					var a=$('#endDate').val();
+					var year=a.substring(0,4);
+					var month=a.substring(4,6);
+					var day=a.substring(6,8);
+					var resultDate=year+'-'+month+'-'+day;
+					
+					var date= new Date(resultDate);
+					console.log(date);
+					
+					hwInsertFrm.pperiod.value=date;
+					hwInsertFrm.registerFile.value=null;
+					hwInsertFrm.pcomment.value=null;
+					hwInsertFrm.submit();
+					
+				}
+				</script>
 	</div>
 	<div>
 	

@@ -18,8 +18,14 @@ public interface HwStudentMap {
 		
 		
 		//수강중인 과목의 과제조회
-		List<Map<String, Object>> hwsSelectList(HwStudentVO vo);
-		
+		List<Map<String, Object>> hwsSelectList(HwStudentVO vo);	
 		//학생이 수강중인 목록조회
 		List<Map<String, Object>> hwSLectureList(HwStudentVO vo);
+		//학생이 해당과제제출 페이지 이동
+		List<Map<String, Object>> hwSOneSelect(HwStudentVO vo);
+		
+		//학생이 과제제출
+		int hwSSubmit(HwStudentVO vo);
+		//학생이 과제제출한것을 수정(삭제를하여서 다시 insert)
+		int deleteHwS(HwStudentVO vo);
 }

@@ -67,10 +67,10 @@ $('textarea').each(function() {
 
 					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 								<tr width="200" height="100%">
-									<th><font size="3">교과목 명</font></th>	 <th><input type="text" style="height:25px;" value="${spList.LName}" readonly> </th>
-									<th ><font size="3">담당교수</font></th>	 <th><input type="text" style="height:25px;" value="${spList.PName}" readonly> </th>
+									<th><font size="3">교과목 명</font></th>	 <th><input type="text" style="height:25px;" value="${spList.lname}" readonly> </th>
+									<th ><font size="3">담당교수</font></th>	 <th><input type="text" style="height:25px;" value="${spList.pname}" readonly> </th>
 									<th ><font size="3">이메일</font></th><th><input type="text" style="height:25px;" value="${spList.email}" readonly> </th>
-									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" style="height:25px;" value="${spList.PPhone} " readonly> </th>
+									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" style="height:25px;" value="${spList.pphone} " readonly> </th>
 								</tr>
 								
 					</table>
@@ -81,14 +81,14 @@ $('textarea').each(function() {
 
 								
 										<tr>
-												<th><font size="3">수강학과</font></th>	 <th><input type="text" style="height:25px;" value="${spList.MName} " readonly></th>
-												<th ><font size="3">수강학부</font></th>	 <th><input type="text" style="height:25px;" value="${spList.DName} " readonly></th>
-												<th ><font size="3">강의실</font></th>	 <th><input type="text" style="height:25px;" value="${spList.lrName} " readonly></th>
+												<th><font size="3">수강학과</font></th>	 <th><input type="text" style="height:25px;" value="${spList.mname} " readonly></th>
+												<th ><font size="3">수강학부</font></th>	 <th><input type="text" style="height:25px;" value="${spList.dname} " readonly></th>
+												<th ><font size="3">강의실</font></th>	 <th><input type="text" style="height:25px;" value="${spList.lrname} " readonly></th>
 												<th ><font size="3">교재</font></th>	 <th><input type="text" style="height:25px;" value="${spList.book} " readonly></th>
 										</tr>
 										<tr>				
 														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" style="height:25px;" value="${spList.LNum} " readonly></th><th>- <input type="text" style="height:25px;" value="${spList.dividenum}" readonly> </th>
+											<th ><font size="3">강의코드</font></th>	 <th><input type="text" style="height:25px;" value="${spList.lnum} " readonly></th><th>- <input type="text" style="height:25px;" value="${spList.dividenum}" readonly> </th>
 											<th></th>
 											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="height:25px;width:95.5%;" value="${spList.schedule}" readonly></th>
 											
@@ -98,7 +98,7 @@ $('textarea').each(function() {
 														
 											<th ><font size="3">학점</font></th>	 <th><input type="text" style="height:25px;" value="${spList.credit}" readonly></th>
 											<th><font size="3">대상학년</font></th>	 <th><input type="text" style="height:25px;" value="${spList.grade}" readonly></th>
-											<th ><font size="3">정원</font></th>	 <th><input type="text" style="height:25px;" value="${spList.newlimitCount}" readonly></th>
+											<th ><font size="3">정원</font></th>	 <th><input type="text" style="height:25px;" value="${spList.newlimitcount}" readonly></th>
 											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="height:25px;" value="${spList.division}"readonly> </th>
 									</tr>
 									

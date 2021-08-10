@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.evaluationResult.service.EvaluationResultMapper">
+
+
+<update id="EvaluationResult" parameterType="EvaluationResultVO">
+		update EVALUATIONRESULT
+		set a1 = #{w1},
+		a2= #{w2},
+		a3 = #{w3},
+		a4 = #{w4},
+		a5 = #{w5},
+		a6 = #{w6},
+		a7 = #{w7},
+		a8 = #{w8},
+		<!-- evalcheck =#{evalcheck} 이거 if문 써서 서브밋 할때 Y로 바꿔주던지 a8값 들어가면 Y로 바뀌게 해야됨 -->
+		where opennum = #{opennum}
+		and sid = #{sid}
+	</update>
+
+
+</mapper>

@@ -28,7 +28,7 @@
 <body>
 
 <div align="center">
-	<h2>{lYear}년도 {term}학기 강의 목록</h2>
+	<h2>${lectures}년도 학기 강의 목록</h2>
 </div>
 
 

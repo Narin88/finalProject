@@ -4,7 +4,10 @@ import java.util.List;
 
 
 public interface EvaluationService {
-	List<EvaluationVO> question(EvaluationVO vo);
-	
+	/*
+	 * List<EvaluationVO> question(EvaluationVO vo);
+	 */
 
+	public List<EvaluationVO>Evaluation(EvaluationVO vo);
+	EvaluationVO selectone(EvaluationVO vo);
 }

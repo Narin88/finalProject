@@ -74,5 +74,15 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	public List<PreEnrolmentVO> getpreenrolment(String sid) {
 		return SMmap.getpreenrolment(sid);
 	}
+
+	@Override
+	public LectureVO oneselectLecture(LectureVO vo) {
+		return SMmap.oneselectLecture(vo);
+	}
+
+	@Override
+	public int AjaxPreEnrolmentdelete(LectureVO vo) {
+		return SMmap.AjaxPreEnrolmentdelete(vo);
+	}
 	
 }

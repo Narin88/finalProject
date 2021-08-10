@@ -117,28 +117,26 @@
       <a class="modal_close_btn">닫기</a>
       <div class="modal-body" id="pdfwrap">
         <h2>수강 등록</h2>
-        <form id="frm" action="LectureInsert">
           <sec:csrfInput />
-          <table class="preEnroltbl" id="preEnroltbl" border="1">
+          <table class="tbl" id="preEnroltbl" border="1">
             <thead>
               <tr>
-                <th>등록번호</th>
-                <th>강의번호/분반</th>
-                <th>과목명</th>
-                <th>학점</th>
-                <th>이수구분</th>
-                <th>강의시간/강의실</th>
-                <th>재수강 여부</th>
-                <th>비고</th>
+                <th class = "infotitle">등록번호</th>
+                <th class = "infotitle">강의번호/분반</th>
+                <th class = "infotitle">과목명</th>
+                <th class = "infotitle">학점</th>
+                <th class = "infotitle">이수구분</th>
+                <th class = "infotitle">강의시간/강의실</th>
+                <th class = "infotitle">재수강 여부</th>
+                <th class = "infotitle">비고</th>
               </tr>
             </thead>
 
             <tbody></tbody>
           </table>
-        </form>
       </div>
     </div>
- 
+
 <script>
 
 $(function(){
@@ -253,6 +251,7 @@ $(function(){
 		 //중복x -> 재이수 확인
 			if(encount>=limit){ //정원 초과시
 				alert("수강정원이 마감되었습니다."); 
+				return false;
 			}
 			 var remain = $('#credit').html();
 		 		console.log(remain,credit);
@@ -260,7 +259,7 @@ $(function(){
 				alert('20학점을 초과하였습니다.');
 				return false;
 			}
-			 $.ajax({
+			$.ajax({
 				url: 'AjaxRetakeChek',
 				type: 'POST',
 				data: {opennum: opennum},
@@ -291,74 +290,123 @@ $('#preEnrolList').click(function(){
 })
 
 //모달 start
-      		function preEnrolmentList() {
-      			modal('showmodal');
-      			$.ajax({
-      				url: 'getpreenrolment',
-      				type: 'POST',
-      				success: function(result){
-      	      			var row='<tr>';
-      	      			$.each(result,function(i){
-      	      				row += '<td>'+result[i].opennum+'</td><td>'+result[i].lnum+'</td><td>'+result[i].lname+'</td><td>'+result[i].credit+
-      	      				'</td><td>'+result[i].division+'</td><td>'+result[i].timetable+'</td><td>'+result[i].retake+'</td><td>'+
-      	      				'<button>신청</button></tr>';
-      	      			})
-      	      			$("#preEnroltbl tbody").empty();
-      	      			$("#preEnroltbl tbody").append(row);
-      	      			
-      	      			
-      				}
-      			})
+function preEnrolmentList() {
+	modal('showmodal');
+	$.ajax({
+		url: 'getpreenrolment',
+		type: 'POST',
+		success: function(result){
+     			var row='<tr>';
+     			if($.isEmptyObject(result)){
+     				row += '<td colspan="8" align="center" class="info"> 수강 꾸러미 내역이 비어 있습니다 :)</td></tr>';
+     			}
+      			$.each(result,function(i){
+     				row += '<td class="info">'+result[i].opennum+'</td><td class="info">'+result[i].lnum+'</td><td class="info">'+result[i].lname+'</td><td class="info">'+result[i].credit+
+     				'</td><td class="info">'+result[i].division+'</td><td class="info">'+result[i].timetable+'</td><td class="info">'+result[i].retake+'</td><td class="info">'+
+     				'<button id = \'preinsertbtn'+result[i].opennum+'\' onclick=\'preinsert('+result[i].opennum+')\'>신청</button></td></tr>';
+     			})
 
-      		}
+     			$("#preEnroltbl tbody").empty();
+     			$("#preEnroltbl tbody").append(row);
+		}
+	})
 
-      		function modal(mm) {
-      		    var zIndex = 9999;
-      		    var modal = document.getElementById(mm);
+}
 
-      		    // 모달 div 뒤에 희끄무레한 레이어
-      		    var bg = document.createElement('div');
-      		    bg.setStyle({
-      		        position: 'fixed',
-      		        zIndex: zIndex,
-      		        left: '0px',
-      		        top: '0px',
-      		        width: '100%',
-      		        height: '100%',
-      		        overflow: 'auto',
-      		        // 레이어 색갈은 여기서 바꾸면 됨
-      		        backgroundColor: 'rgba(0,0,0,0.4)'
-      		    });
-      		    document.body.append(bg);
+function preinsert(num){
+	var remain = $('#credit').html();
+	var opennum = num;
+	$.ajax({
+		url:'oneselectLecture',
+		data:{opennum: opennum},
+		type: 'POST',
+		success: function(one){
+			console.log(one);
+			if(one.encount>=one.newlimitcount){ //정원 초과시
+				alert("수강정원이 마감되었습니다."); 
+				return false;
+			}
+			if(remain-one.credit<0){ //20학점 초과검사
+				alert('20학점을 초과하였습니다.');
+				return false;
+			}
+			$.ajax({
+				url: 'AjaxRetakeChek',
+				type: 'POST',
+				data: {opennum: opennum},
+				success: function(result){
+				if(result=='001'){ //insert
+					var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
+					if(con){
+						location.href='AjaxEnrolmentInsert?opennum='+opennum;
+						location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+					}else{
+						return false;
+						}
+					}
+				else{ //insert
+					var con = confirm('수강신청 하시겠습니까?')
+					if(con){
+						location.href='AjaxEnrolmentInsert?opennum='+opennum;
+						location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+					}else{
+						return false;
+					}
+				}
+			}
+			})
+		}
+		
+	})
+}
 
-      		    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-      		    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
-      		        bg.remove();
-      		        modal.style.display = 'none';
-      		    });
+function modal(mm) {
+    var zIndex = 9999;
+    var modal = document.getElementById(mm);
 
-      		    modal.setStyle({
-      		        position: 'fixed',
-      		        display: 'block',
-      		        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    // 모달 div 뒤에 희끄무레한 레이어
+    var bg = document.createElement('div');
+    bg.setStyle({
+        position: 'fixed',
+        zIndex: zIndex,
+        left: '0px',
+        top: '0px',
+        width: '100%',
+        height: '100%',
+        overflow: 'auto',
+        // 레이어 색갈은 여기서 바꾸면 됨
+        backgroundColor: 'rgba(0,0,0,0.4)'
+    });
+    document.body.append(bg);
 
-      		        // 시꺼먼 레이어 보다 한칸 위에 보이기
-      		        zIndex: zIndex + 1,
+    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+        bg.remove();
+        modal.style.display = 'none';
+    });
 
-      		        // div center 정렬
-      		        top: '50%',
-      		        left: '50%',
-      		        transform: 'translate(-50%, -50%)',
-      		        msTransform: 'translate(-50%, -50%)',
-      		        webkitTransform: 'translate(-50%, -50%)'
-      		    });
-      		}
+    modal.setStyle({
+        position: 'fixed',
+        display: 'block',
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 
-      		// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
-      		Element.prototype.setStyle = function(styles) {
-      		    for (var k in styles) this.style[k] = styles[k];
-      		    return this;
-      		};
+        // 시꺼먼 레이어 보다 한칸 위에 보이기
+        zIndex: zIndex + 1,
+
+        // div center 정렬
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        msTransform: 'translate(-50%, -50%)',
+        webkitTransform: 'translate(-50%, -50%)'
+    });
+}
+
+// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+Element.prototype.setStyle = function(styles) {
+    for (var k in styles) this.style[k] = styles[k];
+    return this;
+};
 
 </script>
 </body>

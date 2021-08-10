@@ -9,10 +9,10 @@ import lombok.ToString;
 @Setter @Getter
 @ToString
 public class LogVO {
-	private String visitid;
-	private String visitname;
-	private String visitip;
-	private String visittime;
-	private String visitcookie;
-	private String visitagent;
+	private String visitId;
+	private String visitName;
+	private String visitIp;
+	private String visitTime;
+	private String visitCookie;
+	private String visitAgent;
 }

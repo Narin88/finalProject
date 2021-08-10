@@ -49,16 +49,6 @@
 	border-color: #dee2e6;
 }
 
-th, td {
-	border: 1;
-	border-color: inherit;
-	border-style: solid;
-	/*border-width: 0;*/
-	text-align: center;
-	padding: 10px;
-	width: 150px;
-}
-
 .tui-grid-cell .tui-grid-cell-content {
 	text-align: center;
 }
@@ -81,6 +71,7 @@ th, td {
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+<link rel="stylesheet" href="resources/css/studentsInfo.css" />
 <title>수강 신청된 과목 확인</title>
 
 <div align="center">
@@ -88,6 +79,7 @@ th, td {
 	<div id="grid"></div>
 	<div class="total">
 		<div class="scheduleTime"></div>
+		<p></p>
 		<div id="scheduleShow"></div>
 	</div>
 </div>
@@ -121,7 +113,7 @@ th, td {
 </div> --%>
 
 <script>
-	let colorArr = ['red', 'blue', 'yellow', 'green', 'orange', 'purple'];
+	let colorArr = ['table-danger', 'table-warning', 'table-info', 'table-success', 'table-primary', 'table-active'];
 	//let totaltime = "";
 	
 	// 강의 시간을 한 문자로 묶기(ex : 월1화2...)
@@ -307,23 +299,25 @@ th, td {
 	// 테이블에 타이틀 추가하기 기능
 	function addTitle() {
 		
+		let thead = $("<thead />").attr("class", "thead-dark");
 		let title = $('<tr />');
 		title.append(
-	       	$('<th />').html(''),
-	   		$('<th />').html('월'),
-	   		$('<th />').html('화'),
-	   		$('<th />').html('수'),
-	   		$('<th />').html('목'),
-	   		$('<th />').html('금')
+			$('<th scope="col" style="width: 15%"  />').html(''),
+			$('<th scope="col" style="width: 17%" />').html('월'),
+			$('<th scope="col" style="width: 17%" />').html('화'),
+		   	$('<th scope="col" style="width: 17%" />').html('수'),
+		   	$('<th scope="col" style="width: 17%" />').html('목'),
+		   	$('<th scope="col" style="width: 17%" />').html('금')
 		);
+		thead.append(title);
 		
-		return title;
+		return thead;
 	};
 
 	document.addEventListener("DOMContentLoaded", function(){
 		
 		// 테이블 생성
-		let sTable = $('<table />').attr('border', '1');
+		let sTable = $('<table />').attr('class', 'table showSchedule').attr("style", "width:1000px; height: 550px;");
 		sTable.append(addTitle());
 		
 		let week = [
@@ -378,7 +372,7 @@ th, td {
 					// 테이블 첫 번째 자리에 강의 시간 집어넣기
 					
 					// td에 아이디값 안 줘도 될 듯? 
-					tr.append($('<td id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i - 1]));
+					tr.append($('<td class="table-secondary timeCol" id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i - 1]));
 	
 				} else {
 					
@@ -390,7 +384,7 @@ th, td {
 					let tColor = "";
 					for(lectureTime in getValue){
 						if(lectureTime.indexOf(curTime) != -1){
-							tColor = " style = 'background-color:"+getValue[lectureTime][2]+"'";
+							tColor = " class = '" + getValue[lectureTime][2] + " detailCul'";
 							lectureName = getValue[lectureTime][0] + "<br>" + lectureTime + "<br>" + getValue[lectureTime][1];
 						}
 					}

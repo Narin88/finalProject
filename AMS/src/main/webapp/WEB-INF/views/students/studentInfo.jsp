@@ -63,10 +63,10 @@
 					<a class="nav-link active" data-toggle="tab" href="#score">시험점수</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#pro">지도교수정보</a>
+					<a class="nav-link" data-toggle="tab" href="#abc">지도교수정보</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>
+					<a class="nav-link" data-toggle="tab" href="#tuition">등록금</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -90,7 +90,7 @@
 					</div>
 					<div id="scoreGrid"></div>
 				</div>
-				<div class="tab-pane fade" id="pro">
+				<div class="tab-pane fade" id="abc">
 					<div class="proInfo">
 						<table class="table table-bordered">
 							<tr>
@@ -129,7 +129,7 @@
 						</table>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="zxc">
+				<div class="tab-pane fade" id="tuition">
 					<p>Curabitur dignissim quis nunc vitae laoreet. Etiam ut mattis
 						leo, vel fermentum tellus. Sed sagittis rhoncus venenatis. Quisque
 						commodo consectetur faucibus. Aenean eget ultricies justo.</p>
@@ -204,95 +204,137 @@
     	grid.readData(1, data, true);
     }
     
-    $("#showTimeSchedule").on("click", function() {
-    	console.log($("#addActive").attr("class"));
-    	
-    	if (typeof $("#addActive").attr("class") === "undefined" || $("#addActive").attr("class") == null || $("#addActive").attr("class") == "") {
-    		$("#addActive").attr("class", "timeActive");
-    		
-    		$("#addActive").append("<td colspan='4'><div id='timeSchedule'></div></td>");
-    		
-    		// 풀 캘린더 시작
-    	   	 var calendarEl = document.getElementById('timeSchedule');
-    	             var calendar = new FullCalendar.Calendar(calendarEl, {
-    	           	  height: "800px",
-    	           	  expandRows: true, // 화면에 맞게 높이 재설정
-    	           	  slotMinTime: '08:30', // Day 캘린더에서 시작 시간
-    	           	  slotMaxTime: '18:30', // Day 캘린더에서 종료 시간
-    	           	  // 해더에 표시할 툴바
-    	           	  headerToolbar: {
-    	           	  left: 'prev,next today',
-    	           	  center: 'title',
-    	           	  right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    	           	  },
-    	           	  initialView: 'timeGridWeek', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-    	           	  nowIndicator: true, // 현재 시간 마크
-    	           	  events: [
-    	           		  {
-    	           		  title: 'All Day Event',
-    	           		  start: '2021-08-05',
-    	           		  },
-    	           		  {
-    	           		  title: 'Long Event',
-    	           		  start: '2021-08-05',
-    	           		  end: '2021-08-10'
-    	           		  },
-    	           		  {
-    	           		  groupId: 999,
-    	           		  title: 'Repeating Event',
-    	           		  start: '2021-08-09T16:00:00'
-    	           		  },
-    	           		  {
-    	           		  groupId: 999,
-    	           		  title: 'Repeating Event',
-    	           		  start: '2021-08-16T16:00:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Conference',
-    	           		  start: '2021-08-11',
-    	           		  end: '2021-08-13'
-    	           		  },
-    	           		  {
-    	           		  title: 'Meeting',
-    	           		  start: '2021-08-12T10:30:00',
-    	           		  end: '2021-08-12T12:30:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Lunch',
-    	           		  start: '2021-08-12T12:00:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Meeting',
-    	           		  start: '2021-08-12T14:30:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Happy Hour',
-    	           		  start: '2021-08-12T17:30:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Dinner',
-    	           		  start: '2021-08-12T20:00:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Birthday Party',
-    	           		  start: '2021-08-13T07:00:00'
-    	           		  },
-    	           		  {
-    	           		  title: 'Click for Google',
-    	           		  url: 'http://google.com/', // 클릭시 해당 url로 이동
-    	           		  start: '2021-08-28'
-    	           		  }
-    	           		  ]
+    let colorArr = ['table-danger', 'table-warning', 'table-info', 'table-success', 'table-primary', 'table-active'];
+	//let totaltime = "";
+	
+	// 강의 시간을 한 문자로 묶기(ex : 월1화2...)
+	let getValue = [];
+ 	<c:forEach items = "${al}" var = "al" varStatus = "seq">
+		//totaltime += '${st.timetable}'
+		getValue["${al.timetable }"] = ['${al.lname}','${al.lrname}', colorArr[${seq.index}]];
+	</c:forEach>
+	
+	// 눌렀을때 시간표가 보이고 꺼지도록
+	$("#showTimeSchedule").on("click", function() {
+		if (typeof $("#addActive").attr("class") === "undefined" || $("#addActive").attr("class") == null || $("#addActive").attr("class") == "") {
+			$("#addActive").attr("class", "timeActive");
 
-    	             });
-    	             calendar.render();
-    	} else {
-    		console.log($(".timeActive").children().remove());
-    		$("#addActive").removeClass();
-    	}
-    	
-    
-    })
+			$("#addActive").append("<td colspan='4'><div id='scheduleShow'></div></td>");
+			
+			addShowTable();
+
+		} else {
+			console.log($(".timeActive").children().remove());
+			$("#addActive").removeClass();
+		}
+	});
+	
+	// 테이블에 타이틀 추가하기 기능
+	function addTitle() {
+		
+		let thead = $("<thead />").attr("class", "thead-dark");
+		let title = $('<tr />');
+		title.append(
+	       	$('<th scope="col" style="width: 15%"  />').html(''),
+	   		$('<th scope="col" style="width: 17%" />').html('월'),
+	   		$('<th scope="col" style="width: 17%" />').html('화'),
+	   		$('<th scope="col" style="width: 17%" />').html('수'),
+	   		$('<th scope="col" style="width: 17%" />').html('목'),
+	   		$('<th scope="col" style="width: 17%" />').html('금')
+		);
+		thead.append(title);
+		
+		return thead;
+	};
+
+	function addShowTable() {
+		
+		// 테이블 생성
+		let sTable = $('<table />').attr('class', 'table showSchedule');
+		sTable.append(addTitle());
+		
+		let week = [
+			"",
+			"",
+			"월",
+			"화",
+			"수",
+			"목",
+			"금"
+		];
+		
+		let timeseq =[
+			"1교시" + "<br>" + "09:00 ~ 10:00",
+			"2교시" + "<br>" + "09:00 ~ 10:00",
+			"3교시" + "<br>" + "09:00 ~ 10:00",
+			"4교시" + "<br>" + "09:00 ~ 10:00",
+			"5교시" + "<br>" + "09:00 ~ 10:00",
+			"6교시" + "<br>" + "09:00 ~ 10:00",
+			"7교시" + "<br>" + "09:00 ~ 10:00",
+			"8교시" + "<br>" + "09:00 ~ 10:00",
+			"9교시" + "<br>" + "09:00 ~ 10:00"
+		];
+		
+		for(let i = 1; i < 10; i++){
+			
+			let tr = $('<tr />');
+			
+			for(let j = 1; j < 7; j++){
+				
+			//	console.log("위크 : " + week[j] + i);
+			//	console.log("토탈 : " + totaltime.indexOf(week[j] + i));
+				/* 
+				let time = null;
+				let lec = null;
+				let room = null;
+				try {
+					// for문 반복 횟수보다 아이디가 부족할 경우 value 없다고 에러뜸
+					
+					time = document.getElementById('hidden_timetable' + i).value;
+					lec = document.getElementById('hidden_lname' + i).value;
+					room = document.getElementById('hidden_lrname' + i).value;
+				} catch (e) {
+					console.log(e);
+				}
+				 */
+				// console.log('시간 : ' + time);
+				// console.log('강의명 : ' + lec);
+				// console.log('장소 : ' + room);
+				
+				if (j == 1){
+					// 테이블 첫 번째 자리에 강의 시간 집어넣기
+					
+					// td에 아이디값 안 줘도 될 듯? 
+					tr.append($('<td class="table-secondary timeCol" id = "jackpot'+ i + '-' + j +'"/>').html(timeseq[i - 1]));
+	
+				} else {
+					
+					let curTime = week[j] + i;
+					//console.log("컬타임 : " + curTime);
+					
+					//과목찾기
+					let lectureName = "";
+					let tColor = "";
+					for(lectureTime in getValue){
+						if(lectureTime.indexOf(curTime) != -1){
+							tColor = " class = '" + getValue[lectureTime][2] + " detailCul'";
+							lectureName = getValue[lectureTime][0] + "<br>" + lectureTime + "<br>" + getValue[lectureTime][1];
+						}
+					}
+					//console.log(lectureName);					
+						
+					// 강의 집어넣기
+					tr.append($('<td '+ tColor +' id =  "jackpot'+ i+ '-' + j + '"/>').html(lectureName));
+					
+				}
+				
+			}
+
+			sTable.append(tr);
+		}
+		 
+		$('#scheduleShow').append(sTable);
+	};
 </script>
 </body>
 </html>

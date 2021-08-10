@@ -42,10 +42,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		// 로그입력
 		Map<String, String> map = LogInfo.getInfo(request);
 		LogVO vo = new LogVO();
-		vo.setVisitid(userDetails.getUsername());
-		vo.setVisitip(map.get("ip"));
-		vo.setVisitagent(map.get("browser"));
-		vo.setVisitcookie(map.get("cookie"));
+		vo.setVisitId(userDetails.getUsername());
+		vo.setVisitIp(map.get("ip"));
+		vo.setVisitAgent(map.get("browser"));
+		vo.setVisitCookie(map.get("cookie"));
 
 		dao.insertLogger(vo);
 		System.out.println(LogInfo.getInfo(request));

@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.log.service.impl.LogMapper">
 	<resultMap type="LogVO" id="asLogName">
-		<result property="visitid" column="사용자id" />
-		<result property="visitname" column="사용자이름" />
-		<result property="visitip" column="사용자ip" />
-		<result property="visittime" column="방문시간" />
-		<result property="visitagent" column="사용브라우저" />
-		<result property="visitcookie" column="쿠키값" />
+		<result property="visitId" column="사용자id" />
+		<result property="visitName" column="사용자이름" />
+		<result property="visitIp" column="사용자ip" />
+		<result property="visitTime" column="방문시간" />
+		<result property="visitAgent" column="사용브라우저" />
+		<result property="visitCookie" column="쿠키값" />
 	</resultMap>
 
 	<insert id="insertLogger" parameterType="LogVO">
@@ -19,11 +19,11 @@
 							visit_cookie
 							)
 		VALUES (
-				#{visitid},
-				#{visitip},
+				#{visitId},
+				#{visitIp},
 				SYSDATE,
-				#{visitagent},
-				#{visitcookie}
+				#{visitAgent},
+				#{visitCookie}
 				)
 	</insert>
 	

@@ -19,6 +19,9 @@
 	font-size: 13px;
 	margin-bottom: 10px;
 }
+.btns{
+	background: #9FF781;
+}
 </style>
 </head>
 <body>
@@ -49,7 +52,7 @@
 
 	<div align="right">
 	
-		<button id="deleteBtn">취소</button>
+		<button id="deleteBtn" class="btns">취소</button>
 	</div>
 </div>
 

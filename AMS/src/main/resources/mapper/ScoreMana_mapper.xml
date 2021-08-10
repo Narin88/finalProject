@@ -94,10 +94,24 @@
 		and sc.sid = #{sid}
 	</select>
 	
+	<!-- 수강 취소 -->
 	<delete id="deletescore" parameterType="ScoreManaVO">
 		delete from score_mana
 		where sid = #{sid}
 		and opennum = #{opennum}
 	</delete>
-	<!-- 수강 취소 -->
+
+	<!-- 내 수강꾸러미 목록 -->
+	<select id="getpreenrolment" resultType="PreEnrolmentVO">
+		select l.LNUM||'-'||l.dividenum as lnum, li.lname,li.credit,
+				find_code_name(100,li.dcode) as division, l.TIMETABLE||' / '||lr.LRNAME as timetable, 
+				case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
+					 when retake_Check(#{sid},l.opennum) = '002' then 'N'
+				end as retake,l.opennum
+		FROM PREENROLMENT P, LECTURE L, LECTURE_INFO LI, LECTURE_ROOM LR
+		WHERE P.OPENNUM = L.OPENNUM
+		AND L.LNUM = LI.LNUM
+		AND L.LRCODE = LR.LRCODE
+		AND P.SID = #{sid}
+	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.last.prj.scoreMana.service;
 import java.util.List;
 
 import com.last.prj.lecture.service.LectureVO;
+import com.last.prj.preenrolment.service.PreEnrolmentVO;
 import com.last.prj.students.service.StudentsVO;
 
 public interface ScoreManaService {
@@ -16,4 +17,5 @@ public interface ScoreManaService {
 	int AjaxCreditCheck(String sId);
 	List<LectureVO> scoreList(String sid);
 	int deletescore(List<ScoreManaVO> vo);
+	List<PreEnrolmentVO> getpreenrolment(String sid);
 }

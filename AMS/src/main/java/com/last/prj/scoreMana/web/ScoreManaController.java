@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.lecture.service.LectureVO;
+import com.last.prj.preenrolment.service.PreEnrolmentVO;
 import com.last.prj.scoreMana.service.ScoreManaService;
 import com.last.prj.scoreMana.service.ScoreManaVO;
 import com.last.prj.students.service.StudentsVO;
@@ -102,6 +103,7 @@ public class ScoreManaController {
 		return SMdao.RetakeChek(vo);
 	}
 	
+	//학점체크
 	@RequestMapping("AjaxcreditCheck")
 	@ResponseBody
 	public int AjaxCreditCheck(HttpSession session) {
@@ -113,6 +115,8 @@ public class ScoreManaController {
 		return result;
 	}
 	
+	
+	//수강등록 내역 확인
 	@PostMapping("scoreList")
 	@ResponseBody
 	Map<String, Object> scoreList(HttpSession session){
@@ -125,6 +129,7 @@ public class ScoreManaController {
 		return map;
 	}
 	
+	//수강 내역 삭제
 	@PostMapping("deletescore")
 	@ResponseBody
 	public Map<String, Object> deletescore(@RequestBody List<ScoreManaVO> vo, HttpSession session){
@@ -138,4 +143,12 @@ public class ScoreManaController {
 		map.put("success", SMdao.deletescore(vo));
 		return map;
 	}
+	
+	@PostMapping("getpreenrolment")
+	@ResponseBody
+	public List<PreEnrolmentVO> getpreenrolment(HttpSession session) {
+		String sid = (String)session.getAttribute("id");
+		return SMdao.getpreenrolment(sid);
+	}
+	
 }

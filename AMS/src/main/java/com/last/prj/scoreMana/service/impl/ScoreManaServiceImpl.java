@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.lecture.service.impl.LectureMapper;
+import com.last.prj.preenrolment.service.PreEnrolmentVO;
 import com.last.prj.scoreMana.service.ScoreManaService;
 import com.last.prj.scoreMana.service.ScoreManaVO;
 import com.last.prj.students.service.StudentsVO;
@@ -67,6 +68,11 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 			count++;
 		}
 		return count;
+	}
+
+	@Override
+	public List<PreEnrolmentVO> getpreenrolment(String sid) {
+		return SMmap.getpreenrolment(sid);
 	}
 	
 }

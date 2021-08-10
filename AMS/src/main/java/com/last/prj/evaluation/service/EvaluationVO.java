@@ -17,6 +17,6 @@ public class EvaluationVO {
 	private Date sdate; // 시작 일 
 	private Date edate; // 마감 일 
 	private String lname;//강의이름
-
+	private String evalcheck;//참석여부
 
 }

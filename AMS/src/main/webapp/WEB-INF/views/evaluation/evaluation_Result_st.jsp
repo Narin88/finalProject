@@ -59,39 +59,6 @@ input[type="number"] {
 
 <body>
 <script>
-
-	var label = ['','매우 불만족','불만족', '보통','만족','매우 만족']
-	var colors =[ '#009EE0', '#008AC5', '#008AC5', '#EB001F','#BE3075']
-	var qname =['1. 교수는 수업시간을 잘 지켰습니까?', '2. 강의 교재 및 자료는 학습에 도움이 되었습니까?', '3. 교수는 수업을 위한 준비를 잘했습니까?', '4. 수업의 내용과 분량은 학습을 하기에 충분했습니까?', '5. 강의는 학습 내용을 이해하기 쉽게 설명되었습니까?', '6. 강의를 통해 많은 것을 배웠습니까?']
-	
-	
-	
-	var opennum = '${opennum}'
-	$.ajax({
-		url:"${pageContext.request.contextPath }/Eresultpro",
-		method:'post',
-		data: {opennum: opennum},
-		dataType: "JSON",
-		async: false,
-		success: function(data){
-			console.log(data);
-		var opendata = pushdata(data.q1);
-		console.log(opendata);
-	
-			draw(opendata); 
-		}
-	})//end of ajax
-
-function pushdata(data){
-	var chartData = [];
-	for(i=0; i<data.length; i++){
-		var opendata = [data[i].a1 , parseInt(data[i].cnt), colors[i], label[data[i].a1] ];
-		chartData.push(opendata);
-	}
-	return chartData;
-}
-
-function draw(data){
 Highcharts.chart('container', {
 
 	  chart: {
@@ -99,18 +66,29 @@ Highcharts.chart('container', {
 	  },
 
 	  title: {
-	    text: qname[i]
+	    text: 'Highcharts item chart'
 	  },
 
+	  subtitle: {
+	    text: 'Parliament visualization'
+	  },
 
 	  legend: {
 	    labelFormat: '{name} <span style="opacity: 0.4">{y}</span>'
 	  },
-	
+
 	  series: [{
-	    name: '선택',
-	    keys: ['name', 'y','colors','label'],
-	    data: data,
+	    name: 'Representatives',
+	    keys: ['name', 'y', 'color', 'label'],
+	    data: [
+	      ['The Left', 69, '#BE3075', 'DIE LINKE'],
+	      ['Social Democratic Party', 153, '#EB001F', 'SPD'],
+	      ['Alliance 90/The Greens', 67, '#64A12D', 'GRÜNE'],
+	      ['Free Democratic Party', 80, '#FFED00', 'FDP'],
+	      ['Christian Democratic Union', 200, '#000000', 'CDU'],
+	      ['Christian Social Union in Bavaria', 46, '#008AC5', 'CSU'],
+	      ['Alternative for Germany', 94, '#009EE0', 'AfD']
+	    ],
 	    dataLabels: {
 	      enabled: true,
 	      format: '{point.label}'
@@ -122,11 +100,7 @@ Highcharts.chart('container', {
 	    startAngle: -100,
 	    endAngle: 100
 	  }]
-})
-}
-//
-
-
+	});
 </script>
 </body>
 </html>

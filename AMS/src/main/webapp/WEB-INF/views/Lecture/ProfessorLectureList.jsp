@@ -106,7 +106,7 @@ $(function(){
 		$.ajax({
 			url:'ScoreStudentList',
 			type: 'GET',
-			data: {opennum: openNum},
+			data: {opennum: opennum},
 			success: function(result){
 				StudentList(result);
 			}
@@ -197,7 +197,7 @@ var clsData = [
 	<c:forEach items="${lectures }" var="lec">{
 		opennum: '${lec.opennum}', lnum: '${lec.lnum}-${lec.dividenum}', lyear: '${lec.lyear}-${lec.term}', grade: '${lec.grade}',
 		lname: '${lec.lname}', book: '${lec.book}', division: '${lec.division}', newlimitcount: '${lec.newlimitcount}', lrname: '${lec.lrname}',
-		timetable: '${lec.timetable}'
+		timetable: '${lec.timetable}' , evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})">확인</button>'
 	}
 	<c:if test='${!empty lec.opennum}'>
 	,
@@ -245,7 +245,8 @@ var clsData = [
 			{header: '이수구분',name: 'division',width: 100},
 			{header: '정원',name: 'newlimitcount',width: 80},
 			{header: '강의실',name: 'lrname',width: 80},
-			{header: '시간표',name: 'timetable',width: 150, editor: 'text'}
+			{header: '시간표',name: 'timetable',width: 150, editor: 'text'},
+			{header: '강의평가', name: 'evaluation', width:150}
 		] //컬럼갯수
 
 	} );
@@ -264,8 +265,10 @@ function lectureDelete(){
     grid.request('deleteData', {checkedOnly: true});
 }
 
-
-
+function openpage(data){
+	var opennum = data;
+	location.href="Eresultpro?opennum="+opennum
+}
 
 //작업중인 행들을 저장해줌
 	function lectureUpdate(){

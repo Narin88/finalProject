@@ -15,4 +15,5 @@ public class EvaluationResultVO {
 	private String a6;//6
 	private String a7;//7
 	private String a8;//8
+	private String cnt;//값
 }                  

@@ -41,7 +41,7 @@
         	AND L.lyear = #{lyear}
         	AND L.term = #{term}
         </if>
-		ORDER BY L.LYEAR, L.TERM, I.CREDIT DESC, I.LNAME
+		ORDER BY L.LYEAR, L.TERM DESC
 	</select>
 	
 	<!-- 학생 본인 수강 신청 과목 조회 -->
@@ -63,7 +63,7 @@
 		AND L.LYEAR = TO_CHAR(SYSDATE,'RRRR')
 		AND L.TERM = #{term}
 		AND S.SID = #{sid}
-		ORDER BY I.CREDIT DESC, I.LNAME
+		ORDER BY I.CREDIT DESC
 	</select>
 	
 	<!-- 강의 시간표들 조회 -->

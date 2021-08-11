@@ -24,8 +24,14 @@
       var clsData = [
         <c:forEach items="${logList }" var="log">
         {
-          visitId: '${log.visitId}', visitName: '${log.visitName}', visitIp: '${log.visitIp}', visitTime: '${log.visitTime}',
-          visitAgent: '${log.visitAgent}', visitCookie: '${log.visitCookie}'
+          visitId: '${log.visitId}',
+          visitName: '${log.visitName}',
+          visitIp: '${log.visitIp}',
+          visitDate: '${log.visitDate}',
+          visitTime: '${log.visitTime}',
+          visitAgent: '${log.visitAgent}',
+          visitCookie: '${log.visitCookie}',
+          button: "<button type='button'>버튼</button>",
         },
         </c:forEach>
         ]; //컬럼DATA
@@ -41,12 +47,14 @@
           scrollX: true,
           scrollY: true,
         columns: [
-          {header: '사용자ID',name: 'visitId', align: "center", width: 250, filter: {type: "text"}},
-          {header: '사용자이름',name: 'visitName', align: "center", width: 250, filter: {type: "text"}},
-          {header: '사용자IP',name: 'visitIp', align: "center", width: 250},
-          {header: '방문시간',name: 'visitTime', align: "center", width: 250, filter: {type: "date"}},
-          {header: '사용브라우저',name: 'visitAgent', align: "center", width: 250},
-          {header: '쿠키값',name: 'visitCookie', align: "center"},
+          {header: '사용자ID', name: 'visitId', align: "center", width: 250, filter: {type: "text"}},
+          {header: '사용자이름', name: 'visitName', align: "center", width: 200, filter: {type: "text"}},
+          {header: '사용자IP', name: 'visitIp', align: "center", width: 250},
+          {header: '방문날짜', name: 'visitDate', align: "center", width: 200, filter: {type: "date"}},
+          {header: '방문시간', name: 'visitTime', align: "center", width: 200},
+          {header: '사용브라우저', name: 'visitAgent', align: "center", width: 200},
+          {header: '쿠키값', name: 'visitCookie', align: "center", width: 1200},
+          {header: '버튼', name: 'button', align: "center", width: 200},
         ], //컬럼갯수
         data: clsData
       });

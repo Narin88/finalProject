@@ -16,4 +16,5 @@ public interface StudentsService {
 	StudentsVO selfAuthentication(StudentsVO vo);	// 본인 인증
 	int studentUpdate(StudentsVO vo);				// 학적 수정
 	StudentsVO chkSidEmail(StudentsVO vo); 			// 비밀번호 변경 학번 이메일 체크
+	void studentPicUpdate(StudentsVO vo);			// 사진 수정
 }

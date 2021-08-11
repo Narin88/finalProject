@@ -69,4 +69,11 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.chkSidEmail(vo);
 	}
 
+
+	@Override
+	public void studentPicUpdate(StudentsVO vo) {
+		// 사진변경
+		map.studentPicUpdate(vo);
+	}
+
 }

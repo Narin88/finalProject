@@ -24,6 +24,7 @@ public class StudentsVO {
 	private int grade;			// 학년
 	private int sgender;		// 학생 성별
 	private int term;			// 학기
+	private String picture;		// 사진이름
 	
 	
 	

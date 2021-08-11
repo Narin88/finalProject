@@ -10,19 +10,6 @@ a:visited {
 	text-decoration: none;
 }
 
-div.menu {
-	button: type= "button";
-	display: inline-block;
-}
-
-header, footer {
-	padding: 1em;
-	color: black;
-	background-color: white;
-	clear: left;
-	text-align: center;
-}
-
 article {
 	margin-left: 170px;
 	border-left: 1px solid gray;
@@ -31,81 +18,12 @@ article {
 	min-height: 600px;
 }
 
-div.menu2 {
-	display: flex;
-	align-content: left;
-	border-bottom: 1px solid gray;
-}
 
-div.icon {
-	height: 128px;
-	width: 289px;
-}
-
-div.select {
-	height: 100px;
-	width: 200px;
-	margin-top: 50px;
-}
-
-button.main {
-	border: none;
-	width: 100px;
-	font-size: 30px;
-	font-weight: bold;
-	background-color: white;
-	margin-top: 20px;
-}
 </style>
-<script>
-	function studyfunction() {
-
-		location.href = "home2";
-	}
-
-	function enrollfunction() {
-
-		location.href = "home2";
-	}
-
-	function pfinfofunction() {
-
-		location.href = "home2";
-	}
-
-	function lecturefunction() {
-
-		location.href = "home2";
-	}
-</script>
 <div class="menu2">
 	<div class="icon">
-		<a href="home2"> <img
-			src="${pageContext.request.contextPath }/resources/loginpicture/newlogo.png">
-		</a>
-	</div>
-
-	<div class="select">
-		<button type="button" class="main" name="stinfo"
-			onclick="studyfunction()">학적</button>
-	</div>
-
-	<div class="select">
-		<button type="button" class="main" id="stenroll"
-			onclick="enrollfunction()">수강</button>
-	</div>
-
-	<div class="select">
-		<h1>@ㅓ매</h1>
-	</div>
-
-	<div class="select">
-		<button type="button" class="main" id="pfinfo"
-			onclick="pfinfofunction()">정보</button>
-	</div>
-
-	<div class="select">
-		<button type="button" class="main" id="pflecture"
-			onclick="lecturefunction()">강의</button>
+		<div>
+			<img src="${pageContext.request.contextPath }/resources/loginpicture/newlogo.png">
+		</div>
 	</div>
 </div>

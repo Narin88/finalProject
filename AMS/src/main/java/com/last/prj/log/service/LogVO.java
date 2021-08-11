@@ -12,6 +12,7 @@ public class LogVO {
 	private String visitId;
 	private String visitName;
 	private String visitIp;
+	private String visitDate;
 	private String visitTime;
 	private String visitCookie;
 	private String visitAgent;

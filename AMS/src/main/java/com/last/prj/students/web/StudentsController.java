@@ -1,5 +1,6 @@
 package com.last.prj.students.web;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.last.prj.common.ImageUpload;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.students.service.StudentsService;
@@ -48,7 +51,7 @@ public class StudentsController {
 		svo.setTerm(1);
 
 		model.addAttribute("al", stService.appliedLecture(svo));
-
+		
 		return "students/studentInfo.tiles";
 	}
 
@@ -209,5 +212,27 @@ public class StudentsController {
 		data.put("data", datas);
 
 		return data;
+	}
+	
+	// 사진변경
+	@RequestMapping("updatePic")
+	public String updatePic(MultipartHttpServletRequest req, StudentsVO vo, HttpSession session) {
+		Map<String, String> map = ImageUpload.uploadTest(req);
+		
+		vo.setSid((String)session.getAttribute("id"));
+		
+		StudentsVO vo2 = stService.studentInfo(vo);
+		
+		if (vo2.getPicture() != null || vo2.getPicture() != "") {
+			File file = new File(map.get("path") + File.separator + vo2.getPicture());
+			file.delete();
+		}
+				
+		vo.setPicture(map.get("orgName"));
+		
+				
+		stService.studentPicUpdate(vo);
+		
+		return "redirect:studentInfo";
 	}
 }

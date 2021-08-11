@@ -16,7 +16,7 @@
 	<div>
 		<div class="bigDiv">
 			<div>
-				<img src="resources/image/students/st1.png" alt="증명사진" class="infoImg" />
+				<img src="resources/image/students/${st.picture }" alt="증명사진" class="infoImg" id="infoImg" />
 			</div>
 			<div>
 				<table class="table table-bordered">
@@ -55,6 +55,14 @@
 					</tr>
 				</table>
 			</div>
+		</div>
+		<div align="left" style="margin-left: 128px;">
+			<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
+				<label class="btn btn-secondary btn-sm" style="margin-top: 7px;">
+	    		    사진변경 <input type="file" style="display: none;" id="changeImg" name="pic">&nbsp;
+   				 </label>
+   				 <button type="submit" class="btn btn-secondary btn-sm">확인</button>
+   			</form>
 		</div>
 		<br /> <br />
 		<div class="bigDiv2">
@@ -327,6 +335,33 @@
 		 
 		$('#scheduleShow').append(sTable);
 	};
+	
+	function readImage(input) {
+
+	    // 인풋 태그에 파일이 있는 경우
+	    if(input.files && input.files[0]) {
+
+	        // 이미지 파일인지 검사 (생략)
+
+	        // FileReader 인스턴스 생성
+	        const reader = new FileReader()
+
+	        // 이미지가 로드가 된 경우
+	        reader.onload = e => {
+	            const previewImage = document.getElementById("infoImg")
+	            previewImage.src = e.target.result
+	        }
+
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(input.files[0])
+	    }
+	}
+
+	// input file에 change 이벤트 부여
+	const inputImage = document.getElementById("changeImg")
+	inputImage.addEventListener("change", e => {
+	    readImage(e.target)
+	})
 </script>
 </body>
 </html>

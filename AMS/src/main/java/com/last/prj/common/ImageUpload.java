@@ -10,9 +10,11 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-public class FileUpload {
+public class ImageUpload {
 	public static Map<String, String> uploadTest(MultipartHttpServletRequest request) {
-		String rootUploadDir = ""; // 업로드 주소
+		String rootUploadDir = "C:" + File.separator + "git" + File.separator + "finalProject" + File.separator +
+								"AMS" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" +
+								 File.separator + "resources"  + File.separator + "image"  + File.separator + "students"; // 업로드 주소
 
 		File dir = new File(rootUploadDir);
 
@@ -47,7 +49,7 @@ public class FileUpload {
 
 				try {
 					System.out.println("try 진입");
-					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/sysFileName
+					mFile.transferTo(new File(dir + File.separator + orgFileName)); // C:/Upload/orgFileName
 					map.put("orgName", orgFileName);
 					map.put("sysName", sysFileName);
 

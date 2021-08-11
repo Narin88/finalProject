@@ -22,11 +22,15 @@
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<link href="tui-date-picker.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
 <script
 	src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+
 
 <!-- 풀 캘린더 -->
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.css" />
@@ -46,6 +50,31 @@
 div.AMScontainer {
 	width: 100%;
 	border: 1px solid gray;
+}
+
+header {
+	padding: 1em;
+	color: black;
+	background-color: white;
+	clear: left;
+	text-align: center;
+	width: 100%;
+	height: 180px;
+	border-bottom: 1px solid gray;
+}
+
+div .icon {
+	display: flex;
+	width: 100%;
+}
+
+.icon div {
+	justify-content: center;
+}
+
+.icon img {
+	height: 128px;
+	width: 289px;
 }
 </style>
 </head>

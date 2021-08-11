@@ -14,10 +14,10 @@
 2. 컬럼 출력 순서 및 양식 통일
 
 3. 검색기 만들기
-	- 이수구분(교양, 전공, ...)				== 
+	- 이수구분(교양, 전공, ...)				== 완
 	- 개설년도		~> 필요한가? 이번 년도 이번 학기만 보여주면 되는 거 아닌가?
 	- 캠퍼스 (위치)						== 완
-	- 요일 및 교시							== 
+	- 요일 및 교시							== 완
 	- 대상 학년							== 완
 	- 학과 코드, 전공 코드					== 미확인
 
@@ -80,6 +80,10 @@
 	td[data-column-name="pname"] {
 		color : skyblue;
 	}
+	
+	td[data-column-name="lname"] {
+		color : skyblue;
+	}
 </style>
 
 <title>강의 조회 페이지</title>
@@ -88,8 +92,9 @@
 <div align = "center">
 	<h2>강의 조회 페이지</h2>
 		<div class = "selectArea">
+			<font>전공 : </font>
 			<select name = "mcode">
-				<option value = "">전공 선택</option>
+				<option value = "">전체</option>
 				<option value = "301">게임모바일 공학전공</option>
 				<option value = "302">디지펜게임 공학전공</option>
 				<option value = "304">신소재 공학전공</option>
@@ -97,14 +102,13 @@
 				<option value = "305">전자 공학전공</option>
 				<option value = "300">컴퓨터 공학전공</option>
 				<option value = "303">화학 공학전공</option>
-				<option value = "">전체</option>
 			</select>
+			<font>학과 : </font>
 			<select name = "dname">
-				<option value = "">학과 선택</option>
+				<option value = "">전체</option>
 				<option value = "전기전자공학">전기전자공학</option>
 				<option value = "컴퓨터공학">컴퓨터공학</option>
 				<option value = "화공신소재공학">화공신소재공학</option>
-				<option value = "">전체</option>
 			</select>
 			<!-- <select name = "dcode">	dcode???? 이거로 division 구분하면 전공은ㅇ ㅓ떻게 구분??
 				<option value = "">교양 전공 선택</option>
@@ -120,37 +124,45 @@
 				<input type = "radio" name = "division" value = "대학원">대학원	<!-- 없음 -->
 				<input type = "radio" name = "division" value = "" checked>전체
 			</div>
+			<font>위치 : </font>
 			<select name = "location">
-				<option value = "">위치 선택</option>
+				<option value = "">전체</option>
 				<option value = "경영대">경영대</option>
 				<option value = "공대">공대</option>
 				<option value = "사회대">사회대</option>
 				<option value = "인문대">인문대</option>
-				<option value = "">전체</option>
 			</select>
+			<br>
+			<font>학년 : </font>
 			<select name = "grade">
-				<option value = "">학년 선택</option>
+				<option value = "">전체</option>
 				<option value = "1">1</option>
 				<option value = "2">2</option>
 				<option value = "3">3</option>
 				<option value = "4">4</option>
-				<option value = "">전체</option>
 			</select>
-			<select name = "day">	<!-- 미 -->
-				<option value = "">요일 선택</option>
-				<option value = "1">1</option>
-				<option value = "2">2</option>
-				<option value = "3">3</option>
-				<option value = "4">4</option>
+			<br>
+			<font>요일 : </font>
+			<select name = "day">
 				<option value = "">전체</option>
+				<option value = "월">월</option>
+				<option value = "화">화</option>
+				<option value = "수">수</option>
+				<option value = "목">목</option>
+				<option value = "금">금</option>
 			</select>
-			<select name = "time">	<!-- 미 -->
-				<option value = "">교시 선택</option>
-				<option value = "1">1</option>
-				<option value = "2">2</option>
-				<option value = "3">3</option>
-				<option value = "4">4</option>
+			<font>교시 : </font>
+			<select name = "time">
 				<option value = "">전체</option>
+				<option value = "1">1교시</option>
+				<option value = "2">2교시</option>
+				<option value = "3">3교시</option>
+				<option value = "4">4교시</option>
+				<option value = "5">5교시</option>
+				<option value = "6">6교시</option>
+				<option value = "7">7교시</option>
+				<option value = "8">8교시</option>
+				<option value = "9">9교시</option>
 			</select>
 			<button id = "searchBtn">검색</button>
 		</div>
@@ -167,9 +179,9 @@
 		<table class="professorInfo" id="professorInfo" border="1">
 			<thead>
 				<tr>
-					<th>교수명</th>
-					<th>이메일</th>
+					<th>교수</th>
 					<th>연락처</th>
+					<th>이메일</th>
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -180,65 +192,50 @@
 
 
 <script>
-	
 	 
-	 /* 
-	 ajax
-	 xmlhttprequest
-	 fetch()
-	  */
+	// 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
+	document.getElementById('searchBtn').addEventListener('click', searchLecture);
 	 
-	 
-	 // 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
-	 document.getElementById('searchBtn').addEventListener('click', searchLecture);
-	 
-	 function searchLecture(){
+	function searchLecture(){
 		 
-		 let mc 	= document.getElementsByName('mcode')[0].value;
-		 let dn 	= document.getElementsByName('dname')[0].value;
+		let mc = document.getElementsByName('mcode')[0].value;
+		let dn = document.getElementsByName('dname')[0].value;
 		 
-		 let divi 	= document.getElementsByName('division');
-		 let divi_value;
-		 for (let i = 0; i < divi.length; i++){
-			 if (divi[i].checked){
-				 divi_value = divi[i].value;
-			 }
-		 }
+		let divi_value;
+		let divi = document.getElementsByName('division');
+		for (let i = 0; i < divi.length; i++){
+			if (divi[i].checked){
+				divi_value = divi[i].value;
+			}
+		}
 		 
-		 let loca 	= document.getElementsByName('location')[0].value;
-		 let gra 	= Number(document.getElementsByName('grade')[0].value);
+		let loca 	= document.getElementsByName('location')[0].value;
+		let gra 	= Number(document.getElementsByName('grade')[0].value);
+		let day		= document.getElementsByName('day')[0].value;
+		let time	= document.getElementsByName('time')[0].value;
+		
+		let timetable = day + time;
 		 
-		 let data = {
-				 "mcode" 	: mc,
-				 "dname" 	: dn,
-				 "division" : divi_value,
-				 "location" : loca,
-				 "grade" 	: gra
-		 }
+		let data = {
+				mcode 		: mc,
+				dname 		: dn,
+				division 	: divi_value,
+				location 	: loca,
+				grade 		: gra,
+				timetable	: timetable
+		};
 		 
-		 /* $.ajax({
-			 
-			 url: 'lectureLookUp',
-			 data: data,
-			 type: 'GET',
-			 //dataType: 'json',
-			 success: function(response){
-				 console.log(data);
-			 },
-			 error: function(err){
-				 console.log(err);
-			 }
-		 }); */
-		 grid.lecData(1, data, true);
-	 }
+		grid.readData(1, data, true);
+	}
 	 
 	 
 	// 그리드
+	// api 쓰게 되면서 얘 의미 없게 되긴 했는데, 주석 처리하자니 교수 이름 때문에 걸리네?
+	// seq 값도 못 받음
 	var lecData = [
-		
 		<c:forEach items = "${lec}" var = "lec" varStatus = "seq">{
 			// 실질적 값
-			seq			: '${seq.count}',
+			/* seq			: '${seq.count}',
 			lnum 		: '${lec.lnum}' + '-' + '${lec.dividenum}',
 			lname 		: '${lec.lname}',
 			division 	: '${lec.division}',
@@ -247,7 +244,7 @@
 			pname		: '${lec.pname}',
 			timetable 	: '${lec.timetable}',
 			lrname 		: '${lec.lrname}',
-			limitcount	: '${lec.limitcount}',
+			limitcount	: '${lec.limitcount}', */
 			
 			// 필요에 의한 값 땡겨오기.
 			email		: '${lec.email}',
@@ -268,8 +265,8 @@
 		el: document.getElementById('grid'),
 		data: {
 			api: {
-				lecData: {
-					url: "/lectureList", method: "POST" 
+				readData: {
+					url: "wantLectureList", method: "POST" 
 				},
 			},
 			contentType: "application/json"
@@ -282,7 +279,7 @@
 	    }
 		,
 		columns: [
-			{header: ' ', name: 'seq'},
+			//{header: ' ', name: 'seq'},
 			{header: '강의코드', name: 'lnum'},
 			{header: '강의명', name: 'lname'},
 			{header: '이수구분', name: 'division'},
@@ -316,7 +313,7 @@
 			console.log("pid 값 : " + pid);
 			console.log("opennum 값 : " + opennum);
 			
-			location.href = "/readOnly2?pid=" + pid + "&opennum=" + opennum;
+			// location.href = "/readOnly2?pid=" + pid + "&opennum=" + opennum;
 		}
 	});
 
@@ -332,8 +329,8 @@
 		$("#professorInfo tbody").empty();
 		$('<tr>')
 		.append($('<td>').html(pname))
-		.append($('<td>').html(email))
 		.append($('<td>').html(pphone))
+		.append($('<td>').html(email))
 		.appendTo("#professorInfo tbody"); 
 	}
 				

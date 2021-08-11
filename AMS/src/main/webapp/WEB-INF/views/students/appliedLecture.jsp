@@ -53,7 +53,21 @@
 		text-align: center;
 	}
 	
+	th, td {
+		border: 1;
+		border-color: inherit;
+		border-style: solid;
+		/*border-width: 0;*/
+		text-align: center;
+		padding: 10px;
+		width: 150px;
+	}
+	
 	td[data-column-name="pname"] {
+		color : skyblue;
+	}
+	
+	td[data-column-name="lname"] {
 		color : skyblue;
 	}
 	
@@ -83,8 +97,8 @@
 			<thead>
 				<tr>
 					<th>교수명</th>
-					<th>이메일</th>
 					<th>연락처</th>
+					<th>이메일</th>
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -194,8 +208,8 @@
 			$("#professorInfo tbody").empty();
 			$('<tr>')
 			.append($('<td>').html(pname))
-			.append($('<td>').html(email))
 			.append($('<td>').html(pphone))
+			.append($('<td>').html(email))
 			.appendTo("#professorInfo tbody"); 
 			
 		}

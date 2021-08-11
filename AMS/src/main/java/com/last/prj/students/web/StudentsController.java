@@ -139,34 +139,12 @@ public class StudentsController {
 		// vo.setLyear("2021");
 		vo.setTerm(1);
 
-//		String divi = vo.getDivision();
-//		List<StudentsVO> diviResult = new ArrayList<StudentsVO>();
-//		
-//		if (divi.equals("교양")) {
-//			
-//			vo.setDcode("001");
-//			diviResult = stService.lectureLookUp(vo);
-//			
-//			vo.setDcode("002");
-//			stService.lectureLookUp(vo);
-//		}
-
 		System.out.println("\n조회 결과 : " + stService.lectureLookUp(vo) + "\n");
 
 		model.addAttribute("lec", stService.lectureLookUp(vo));
 
 		return "students/lectureLookUp.tiles";
 	}
-
-	// 모달에서 클릭 이벤트 발생시킬 때 사용하려고 했는데 이벤트 발생 페이지에서 교수 정보 다 불러 오면 굳이 필요 없음
-//	@RequestMapping("/professorSelect")
-//	public String professorSelect(ProfessorVO vo, Model model) {
-//		// 교수 정보 보기
-//		
-//		model.addAttribute("prf", stService.professorSelect(vo));
-//		
-//		return "students/appliedLecture";
-//	}
 
 	@RequestMapping("/studentUpdate")
 	public String studentUpdate(StudentsVO vo, Model model, HttpSession session) {
@@ -195,15 +173,26 @@ public class StudentsController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/lectureList2")
-	public Map<String, Object> lectureList2(
+	@RequestMapping("/wantLectureList")
+	public Map<String, Object> wantLectureList(
 			HttpSession session,
-			@RequestBody Map<String, Object> map,
+			@RequestBody Map<String, String> map,
 			StudentsVO vo)
 	{
 		
 		vo.setSid((String) session.getAttribute("id"));
-
+		vo.setTerm(1);
+		
+		vo.setMcode(map.get("mcode"));
+		vo.setDname(map.get("dname"));
+		vo.setDivision(map.get("division"));
+		vo.setLocation(map.get("location"));
+		vo.setTimetable(map.get("timetable"));
+		
+		if (map.get("grade") != null) {
+			vo.setGrade(Integer.parseInt(map.get("grade")));
+		}
+		
 		// 리스트 보내주기
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();

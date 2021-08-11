@@ -59,15 +59,7 @@
 	var grid = new tui.Grid({
 		
 		el: document.getElementById('grid'),
-		//data: dataSource,
 		data: scrData,
-		//rowHeaders: ['checkbox'],
-		/* pagination: false,		//페이징 처리
-	    pageOptions: {
-	    	useClient: false,	//페이징 처리
-	    	perPage: 10   		//페이징 갯수
-	    }
-		, */
 		columns: [
 			{header: '년도', name: 'lyear'},
 			{header: '학기', name: 'term'},	<!-- 년도랑 학기가 같은 값일 때, 강의 개수 만큼 묶어서 출력해야 하는데. 어떡해야 하지? -->

@@ -11,14 +11,14 @@ pageEncoding="UTF-8" %>
 	<div align="center" class="topHeader">
 	
 		<ul>	
-			<li><a href="<%=request.getContextPath() %>/studentInfo.do">학적관리</a></li>
+			<li><a href="<%=request.getContextPath() %>/studentInfo">학적관리</a></li>
 			<li><a href="<%=request.getContextPath() %>/scoreView" >영구성적 조회</a></li>
 		</ul>
 	
 	<ul>
 		<li><a href="<%=request.getContextPath() %>/appliedLecture">나의 수강 확인</a></li>
 		<li><a href="<%=request.getContextPath() %>/Evaluation">강의평가</a></li>
-		<li><a href="<%=request.getContextPath() %>/lectureLookUp.do" >전체 강의 시간표 조회</a></li>
+		<li><a href="<%=request.getContextPath() %>/lectureLookUp" >전체 강의 시간표 조회</a></li>
 		<li><a href="<%=request.getContextPath() %>/ScoreManaPage">수강신청</a></li>
 		<li><a href="<%=request.getContextPath() %>/#">수강꾸러미 신청#</a></li>
 		<li><a href="<%=request.getContextPath() %>/hwStudent">과제페이지</a></li>

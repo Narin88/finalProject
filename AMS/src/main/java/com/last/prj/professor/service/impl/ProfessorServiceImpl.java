@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.last.prj.professor.service.ProfessorLectureVO;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService{

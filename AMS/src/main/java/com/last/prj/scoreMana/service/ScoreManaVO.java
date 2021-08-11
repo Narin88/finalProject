@@ -1,5 +1,7 @@
 package com.last.prj.scoreMana.service;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -25,4 +27,5 @@ public class ScoreManaVO {
 	private String sgender; //학생성별
 	private String disabled; //장애여부
 	
+	private List<ScoreManaVO> updatedRows;
 }

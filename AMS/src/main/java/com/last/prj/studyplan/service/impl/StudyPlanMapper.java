@@ -2,9 +2,8 @@ package com.last.prj.studyplan.service.impl;
 
 import java.util.List;
 
-
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
-import com.last.prj.stuyplan.service.StudyplanVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanVO;
 
 public interface StudyPlanMapper {
 

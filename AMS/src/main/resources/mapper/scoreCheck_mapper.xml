@@ -15,16 +15,13 @@
 	</select>
 
 	<select id="ScoreCheckLectureStudent" parameterType="ScoreManaVO" resultType="ScoreManaVO">
-				select i.sid, i.sname, i.email,i.grade,i.disabled, i.sphone,
-		    	l.lnum, l.opennum,
-		    	f.lname, p.pid
-				from students i, lecture l, lecture_info f,professor p,SCORE_MANA s
-				where l.lnum =  f.lnum
-		        and p.pid = l.pid
-		        and l.opennum = s.opennum
-		        and p.pid = #{pid}
-		        and s.OPENNUM = #{opennum}
-	
+		SELECT SM.OPENNUM, SM.SID, S.SNAME, L.LNUM, LI.LNAME, SM.MIDDLESCORE, SM.FINALSCORE, SM.HOMEWORK, SM.ATTENDANCESCORE, SM.TOTAL, SM.RANK
+		FROM SCORE_MANA SM, STUDENTS S, LECTURE L, LECTURE_INFO LI
+		WHERE SM.SID = S.SID
+		AND L.OPENNUM = SM.OPENNUM
+		AND L.LNUM = LI.LNUM
+		AND L.PID = #{pid}
+		AND SM.OPENNUM = #{opennum}
 	</select>
 	
 	
@@ -42,14 +39,12 @@
 	
 	<!-- 등록 업데이트 -->
 	<update id="ScoreInsert" parameterType="ScoreManaVO">
-			update SCORE_MANA set
-		    middlescore = #{middlescore},
-            finalscore = #{finalscore},
-            homework = #{homework},
-            attendancescore = #{attendancescore},
-            total = #{total},
-            rank = #{rank}
-            
+			update SCORE_MANA
+			set middlescore = #{middlescore},
+            	finalscore = #{finalscore},
+            	homework = #{homework},
+            	attendancescore = #{attendancescore}
             where opennum = #{opennum}
+            and sid = #{sid}
 	</update>
 </mapper>

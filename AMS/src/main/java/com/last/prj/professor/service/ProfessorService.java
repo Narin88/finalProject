@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
 
 public interface ProfessorService {
 	@Select("select * from professor")

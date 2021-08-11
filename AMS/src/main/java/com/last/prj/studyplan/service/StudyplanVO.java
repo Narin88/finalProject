@@ -1,4 +1,4 @@
-package com.last.prj.stuyplan.service;
+package com.last.prj.studyplan.service;
 
 import lombok.Data;
 

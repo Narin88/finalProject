@@ -30,7 +30,7 @@
 <body>
 
 	<div align="center">
-		<h2>{lName } - 수강생 리스트</h2>
+		<h2>수강생 리스트</h2>
 	</div>
 
 	<div align="right">
@@ -78,7 +78,7 @@ var clsData = [
 	    updateData: {
 	      url: 'ScoreInsert', //업데이트 url
 	      method: 'PUT' //funtion 메서드
-	    },
+	    }
 	    
 	  }
 	};

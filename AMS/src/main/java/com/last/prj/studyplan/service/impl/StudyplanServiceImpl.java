@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
-import com.last.prj.stuyplan.service.StudyplanService;
-import com.last.prj.stuyplan.service.StudyplanVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanService;
+import com.last.prj.studyplan.service.StudyplanVO;
 
 @Service
 public class StudyplanServiceImpl implements StudyplanService {

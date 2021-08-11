@@ -133,9 +133,10 @@ public class HwStudentController {
 	}
 	
 	@RequestMapping("submitList")
-	public String submitList() {
-		
-		
+	public String submitList(HwStudentVO vo,Model model,HttpSession session) {
+		vo.setSid((String) session.getAttribute("id"));
+		List<Map<String, Object>> result =service.hwSAllList(vo);
+			model.addAttribute("result",result);
 		return "hw_student/hw_SubmitList.tiles";
 	}
 }

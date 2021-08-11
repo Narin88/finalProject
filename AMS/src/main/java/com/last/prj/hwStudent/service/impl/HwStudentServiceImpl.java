@@ -68,6 +68,12 @@ public class HwStudentServiceImpl implements HwStudentService{
 
 		return map.deleteHwS(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> hwSAllList(HwStudentVO vo) {
+	
+		return map.hwSAllList(vo);
+	}
 	
 	
 }

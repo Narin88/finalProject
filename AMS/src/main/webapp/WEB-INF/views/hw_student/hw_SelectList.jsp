@@ -95,7 +95,7 @@
 				
 	</div>
 	<div style="    padding-bottom: 40px;">
-			<h4> * 검색한 과제 목록 *</h4>
+			<h4> * 선택한 강의과제 목록 *</h4>
 			
 			<h6  style="float: right;    text-decoration: underline;"> # 제출기한이 지나면 수정이 불가능합니다. </h6>
 			<h6 style="clear:both;float:right;"> # 제출하려고 하는 과제는 더블클릭 </h6>
@@ -110,7 +110,7 @@
 					  		//grid start
 					  			var a=1;
 					  				var clsData = [
-								<c:forEach items="${result }" var="list" varStatus="status">
+								<c:forEach items="${result }" var="list">
 								
 								{
 									
@@ -125,8 +125,6 @@
 									,opennum:'${list.opennum}'
 									,hwstatus:'${list.hwstatus}'
 									,submitCheckVal:'${list.submitCheck}'
-									,alterBtn:'<c:if test="${list.submitCheck > 0}"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}"> 수정 </button></c:if><c:if test="${list.submitCheck <= 0}">X</c:if>'
-									,statusEnd:'${i}'
 								},
 								
 								</c:forEach>
@@ -151,7 +149,6 @@
 					  				{header: '제출기간',name: 'pperiod'},
 					  				{header: '점수',name: 'score',width:140},
 					  				{header: '제출여부',name: 'submitCheck',width:120},
-					  				{header: '수정',name: 'alterBtn',width:120},
 					  			], //컬럼갯수
 					  			data: clsData
 					  		} );
@@ -179,28 +176,7 @@
 									
 					        	});
 								
-					  			$("#grid").on("click","#alterBtn",function(){
-									var a=$(this).data('id');
-									var b=$(this).data('id2');
-									var c=$(this).data('id3');
-									console.log(a);
-									console.log(b);
-									console.log(c);
-									deleteHwSFrm.registerId.value=a;
-									deleteHwSFrm.opennum.value=b;
-									if(c <= 0){
-										alert("수정이 불가능합니다.");
-									}else{
-										if(confirm("수정을 하게되면 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){
-											alert("작성페이지로 이동합니다.")		
-											deleteHwSFrm.submit();
-											}else{
-												alert("취소되었습니다");
-												return false;
-											}
-									}
-					            
-					  			});
+					  			
 					  			
 					  			</script>
 			
@@ -218,10 +194,6 @@
 					<input type="hidden" id="opennum" name="opennum">
 			</form>		  		
 			
-			<form action="deleteHwS" method="post" id="deleteHwSFrm" name="deleteHwSFrm">
-				<sec:csrfInput/>
-					<input type="hidden" id="registerId" name="registerId">
-					<input type="hidden" id="opennum" name="opennum">
-			</form>	
+			
 </body>
 </html>

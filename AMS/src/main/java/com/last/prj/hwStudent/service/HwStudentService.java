@@ -25,4 +25,7 @@ public interface HwStudentService {
 	int hwSSubmit(HwStudentVO vo);
 	//학생이 과제제출한것을 수정(삭제를하여서 다시 insert)
 	int deleteHwS(HwStudentVO vo);
+	
+	//(학생) 수강중인 강의의 제출한 과제 전체리스트
+	List<Map<String, Object>> hwSAllList(HwStudentVO vo);
 }

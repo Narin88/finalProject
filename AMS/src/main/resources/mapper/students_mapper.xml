@@ -43,7 +43,7 @@
 		    I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT, l.lyear,l.term,
             L.TIMETABLE, L.DIVIDENUM, L.OPENNUM,
    			P.PNAME, P.EMAIL, P.PID,
-   			SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4) PPHONE,
+   			(SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4)) PPHONE,
    			R.LRNAME
 		FROM STUDENTS S, SCORE_MANA M, PROFESSOR P,
 		    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R
@@ -62,10 +62,11 @@
 	<!-- 강의 시간표들 조회 -->
 	<select id="lectureLookUp" resultType = "StudentsVO">
 		SELECT 
-			I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.GRADE TARGET, I.CREDIT, I.LIMITCOUNT, 
+			(I.LNUM || '-' || L.DIVIDENUM) LNUM, 
+			I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.GRADE TARGET, I.CREDIT, I.LIMITCOUNT, 
 		    P.PNAME, P.EMAIL, P.PID, 
-		    SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4) PPHONE, 
-		    L.TIMETABLE, L.DIVIDENUM, L.OPENNUM,
+		    (SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4)) PPHONE, 
+		    L.TIMETABLE, L.OPENNUM,
 		    R.LRNAME, 
 		    MV.MNAME, MV.DNAME
 		FROM LECTURE L, LECTURE_INFO I, LECTURE_ROOM R, PROFESSOR P, MAJOR_VIEW MV
@@ -76,20 +77,24 @@
 		AND L.TERM = #{term}
 		AND L.LNUM = I.LNUM
 		AND MV.MCODE = I.MCODE
-		<choose>
-			<when test = "dname != null and dname != ''">
-				AND MV.DNAME = #{dname} -->
-			</when>
-			<when test = "mcode != null and mcode != ''">
-				AND I.MCODE = #{mcode}
-			</when>
-			<when test = "location != null and location != ''">
-				AND R.LOCATION = #{location}
-			</when>
-			<when test = "grade != null and grade != ''">
-				AND I.GRADE = #{grade}
-			</when>
-		</choose>
+		<if test = "mcode != null and mcode != ''">
+			AND I.MCODE = #{mcode}
+		</if>
+		<if test = "dname != null and dname != ''">
+			AND MV.DNAME = #{dname} 
+		</if>
+		<if test = "division != null and division != ''">
+			AND FIND_CODE_NAME(100, I.DCODE) LIKE '%${division}%'
+		</if>
+		<if test = "location != null and location != ''">
+			AND R.LOCATION = #{location}
+		</if>
+		<if test = "grade != null and grade != ''">
+			AND I.GRADE = #{grade}
+		</if>
+		<if test = "timetable != null and timetable != ''">
+			AND L.TIMETABLE LIKE '%${timetable}%'
+		</if>
 		ORDER BY I.CREDIT DESC, I.LNAME
 	</select>
 	

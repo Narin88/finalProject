@@ -40,6 +40,7 @@
 	        class="fadeIn third"
 	        name="sid"
 	        placeholder="ID"
+	        maxlength = "20"
 		/>
 		<input
 			type="password"
@@ -47,6 +48,7 @@
 			class="fadeIn fourth"
 			name="pwd"
 			placeholder="Password"
+			maxlength = "20"
 		/>
 		<input type="submit" class="fadeIn fourth" value="확인" />
 	</form>

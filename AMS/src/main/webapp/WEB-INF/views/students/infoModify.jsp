@@ -15,10 +15,11 @@
 	} */
 
 	.pwdArea {
-		/* padding-left: 45%; */
+		padding-left: 45%;
+		/*margin: 100px auto;		안 됨*/
 		padding-bottom: 1%;
 	}
-	
+	/* 
 	#leftSide {
 		padding-top: 3px;
 		float: left;
@@ -30,7 +31,12 @@
 		right : 40%;
 		position: absolute;
 	}
-	
+	 */
+	 
+	 p {
+	 	color : red;
+	 }
+	 
 </style>
 <body>
 
@@ -43,7 +49,7 @@
 		<div align = "center">
 			비밀번호만 수정할 수 있다.<br>
 			주소나 연락처는 해당 학과 행정실 이용 바람.<br>
-			<p>비밀번호에는 숫자, 문자, 특수문자 각각 최소 1개씩 포함돼야 합니다.</p>
+			<p>비밀번호는 숫자, 대소문자, 특수문자를 각각 하나씩 포함시킨 6 ~ 12자리 글자여야 합니다.</p>
 		</div>
 		<div class = "pwdArea">
 			<div>
@@ -55,7 +61,7 @@
 			</div>
 		</div>
 		<div align = "center">
-			<button type = "button" id = "updateBtn">비번 수정하기</button>
+			<button type = "button" id = "updateBtn">수정</button>
 		</div>
 	</div>
 </form>
@@ -66,14 +72,13 @@
 
 	var bool = false;
 
-	// 정규식
-	let idReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()-_+|=])[A-Za-z\d`~!@#$%^&*()-_+|=]{6,12}$/;
-			// 숫자, 문자, 특문 무조건 1개 이상. 6~12글자로.
-	///^[0-9][a-zA-Z][`~!@#$%^&*()-_=+\|]$/	
+	// 정규식 = 대문자, 특수문자가 반드시 하나 이상 포함된 비밀번호 (한글 x)
+	let idReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}/;
+	
 	function studentUpdate(){
 				
 		if(!idReg.test(frmPwd.nPwd.value)){
-			alert('비밀번호 조건을 맞춰 주세요!\n6 글자 이상 12 글자 이하\n숫자, 문자, 특수문자 최소 1 개 포함');
+			alert('비밀번호 조건이 맞지 않습니다!');
 			document.frmPwd.pwd.focus();
 			return;
 		} else if (bool == false) {
@@ -86,31 +91,8 @@
 		}
 		
 	}
-	/* 
-	$("#pwd, #npwd").on("propertychange change keyup paste input", function() {
-		
-		let nPwd = document.getElementsByName('nPwd')[0].value;
-		let cPwd = document.getElementsByName('pwd')[0].value;
-		
-		let write = document.getElementById('check');
-		
-		if(nPwd != '' && cPwd != ''){
-			
-			if (nPwd != cPwd){
-				
-				write.innerText = '비밀번호가 일치하지 않습니다.';
-				write.style.color = 'hotpink';
-				bool = false;
-			} else {
-				
-				write.innerText = '비밀번호가 일치합니다.';
-				write.style.color = 'skyblue';
-				bool = true;
-			}
-		}
-	})
-	 */
-	 
+
+	//$("#pwd, #npwd").on("propertychange change keyup paste input", function() {
 	function keyEvent() {
 		
 		let nPwd 	= document.getElementsByName('nPwd')[0].value;

@@ -23,6 +23,9 @@
 	 	 WHERE 	  sc.sid=#{sid}	
 	 	   AND 	  l.datestatus='수강중'
 	</select>
+	
+	<!-- 학생이 수강중인 강의의 과제개수 -->
+	
 	<!-- 해당강의 과제 조회했을때  -->
 	<select id="hwsSelectList" resultType="map">
 		SELECT 		 lf.lname	"lname"
@@ -63,14 +66,14 @@
 		  INTO hw_student(register_id
 		  				 ,submit_id
 		  				 ,submit_sid
-		  		<!--      ,submit_file -->
+		  		         ,submit_file
 		  				 ,submit_date
 		  				 ,scomment
 		  				 ) 
        	VALUES (    #{registerId}
        			    ,submit_seq.nextval
        			    ,#{submitSid}
-       		<!--  	    ,#{submitFile}-->
+       		 	    ,#{submitFile}
        			    ,sysdate
        			    ,#{scomment}
        			    )

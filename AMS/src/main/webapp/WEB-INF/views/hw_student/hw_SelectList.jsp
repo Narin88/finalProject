@@ -96,6 +96,7 @@
 	</div>
 	<div style="    padding-bottom: 40px;">
 			<h4> * 검색한 과제 목록 *</h4>
+			
 			<h6  style="float: right;    text-decoration: underline;"> # 제출기한이 지나면 수정이 불가능합니다. </h6>
 			<h6 style="clear:both;float:right;"> # 제출하려고 하는 과제는 더블클릭 </h6>
 			<br>
@@ -107,9 +108,10 @@
 			<script>
 			
 					  		//grid start
-					  		
+					  			var a=1;
 					  				var clsData = [
-								<c:forEach items="${result }" var="list">
+								<c:forEach items="${result }" var="list" varStatus="status">
+								
 								{
 									
 									lname: '${list.lname}'
@@ -124,18 +126,21 @@
 									,hwstatus:'${list.hwstatus}'
 									,submitCheckVal:'${list.submitCheck}'
 									,alterBtn:'<c:if test="${list.submitCheck > 0}"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}"> 수정 </button></c:if><c:if test="${list.submitCheck <= 0}">X</c:if>'
+									,statusEnd:'${i}'
 								},
+								
 								</c:forEach>
 								]; //컬럼DATA	
 
 					  		
 					  	       // GRID 를 보여준다.
 					  			var grid = new tui.Grid( {
+					  				bodyHeight:300,
 									el: document.getElementById('grid'),
 									pagination: true,   //페이징 처리
 								    pageOptions: {
 								    	useClient: true,   //페이징 처리
-								    	perPage: 10   //페이징 갯수
+								    	perPage: 6  //페이징 갯수
 								    }
 									,
 					  			columns: [
@@ -146,7 +151,7 @@
 					  				{header: '제출기간',name: 'pperiod'},
 					  				{header: '점수',name: 'score',width:140},
 					  				{header: '제출여부',name: 'submitCheck',width:120},
-					  				{header: '수정',name: 'alterBtn',width:120}
+					  				{header: '수정',name: 'alterBtn',width:120},
 					  			], //컬럼갯수
 					  			data: clsData
 					  		} );

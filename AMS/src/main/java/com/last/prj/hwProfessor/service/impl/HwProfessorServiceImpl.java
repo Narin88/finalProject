@@ -95,9 +95,9 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 	}
 
 	@Override
-	public int hwPfDel(HwProfessorVO vo) {
+	public int hwPfDelete(HwProfessorVO vo) {
 		
-		return map.hwPfDel(vo);
+		return map.hwPfDelete(vo);
 	}
 
 	@Override

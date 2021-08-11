@@ -89,7 +89,7 @@
 				
 			</div>
 			<div id="grid" >
-				<p style="float:left;"> #(' ')교수님 [과제]등록가능한 수강목록</p>
+				<p style="float:left;">  [과제]  등록가능한 수강목록</p>
 			</div>
 	<script>
 		
@@ -133,11 +133,11 @@
 					  			</script>
 	</div>
 	<div class="rightContainer" style="visibility:hidden;">
-	<form action="hwInsertForm" id="hwInsertFrm" name="hwInsertFrm">
+	<!-- 과제등록 정보 폼 -->
+	<form method="post" enctype="multipart/form-data" action="hwInsertForm" id="hwInsertFrm" name="hwInsertFrm" >
 	<sec:csrfInput/>
 			<input type="hidden" id="opennum" name="opennum">
 			<input type="hidden" id="pperiod" name="pperiod">
-		 	<input type="hidden" id="registerFile" name="registerFile"> 
 			<input type="hidden" id="pcomment" name="pcomment">
 		<table id="hwInsertTb" border="1">
 			<tbody>
@@ -178,11 +178,11 @@
 				.appendTo("#hwInsertTb tbody");			
 				$('<tr>')
 				.append($('<th width="120px;">').html('과제제목'))
-				.append($('<td  width="500px" height="140px" style="padding:0;" >').html('<textarea cols="100" rows="10"></textarea>'))
+				.append($('<td class="areaTr" width="500px" height="140px" style="padding:0;" >').html('<textarea id="area" name="area" cols="100" rows="10"></textarea>'))
 						.appendTo("#hwInsertTb tbody");
 				$('<tr>')
 				.append($('<th width="120px;">').html('과제파일 :'))
-				.append($('<td  width="500px" height="80px" >').html('<input type="file">'))
+				.append($('<td  width="500px" height="80px" >').html('<input type="file" id="file" name="file">'))
 						.appendTo("#hwInsertTb tbody");
 				$('<tr>')
 				.append($('<th width="120px;">').html('날짜설정'))
@@ -193,7 +193,7 @@
 			}
         });
 		</script>
-		<!-- 날짜 형식변환 -->
+		<!-- 날짜 형식변환 및 교수 과제등록 -->
 				<script>
 				function hwInsertSubmit(){
 					var a=$('#endDate').val();
@@ -201,15 +201,24 @@
 					var month=a.substring(4,6);
 					var day=a.substring(6,8);
 					var resultDate=year+'-'+month+'-'+day;
-					
+					var bbb=$('#area').val();
 					var date= new Date(resultDate);
 					console.log(date);
-					
-					hwInsertFrm.pperiod.value=date;
-					hwInsertFrm.registerFile.value=null;
-					hwInsertFrm.pcomment.value=null;
-					hwInsertFrm.submit();
-					
+					console.log(bbb);
+					if(a =="" || bbb==""){
+						alert("날짜 또는 제목을 입력해주세요");
+					}else{
+						hwInsertFrm.pperiod.value=date;
+						hwInsertFrm.pcomment.value=bbb;
+						if(confirm(' 등록하시겠습니까 ?')==true){
+							alert("등록이 완료되었습니다.");
+							hwInsertFrm.submit();
+						}else{
+							
+							return false;
+						}
+				
+					}
 				}
 				</script>
 	</div>

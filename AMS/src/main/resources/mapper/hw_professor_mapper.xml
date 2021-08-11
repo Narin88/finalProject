@@ -125,7 +125,7 @@ fir LEFT OUTER JOIN
 		 WHERE register_id=#{registerId}
 		  
 	</delete>
-	<!-- 등록페이지/ 과제등록가능한 교수 강의목록 -->
+	<!-- 등록페이지/ 과제등록가능한 교수 강의목록 default 2021년-->
 	<select id="hwPfInsertSelect" resultType="map">
 		 SELECT  
           		distinct l.lyear  "lyear"
@@ -141,6 +141,7 @@ fir LEFT OUTER JOIN
 		       JOIN     lecture_info i
 		         ON     l.lnum=i.LNUM
 		      WHERE l.pid=#{pid}
+		       AND l.lyear='2021'
 	</select>
 	<!-- 교수 과제 등록 -->
 	<insert id="hwPfInsert">
@@ -157,10 +158,10 @@ fir LEFT OUTER JOIN
 		  
 	</insert>
 	<!-- 교수가 등록한 과제삭제 -->
-	<delete id="hwPfDel">
+	<delete id="hwPfDelete">
 		DELETE
 		  FROM hw_professor
-		 WHERE register_id={registerId}	
+		 WHERE register_id=#{registerId}	
 	</delete>
 	
 	
@@ -169,6 +170,7 @@ fir LEFT OUTER JOIN
 		UPDATE	hw_professor
 		   SET  pperiod=#{pperiod}
 		   	   ,pcomment=#{pcomment}
+		   	   ,register_file=#{registerFile}
 		 WHERE register_id=#{registerId}
 	</update>
 </mapper>

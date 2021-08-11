@@ -1,12 +1,17 @@
 package com.last.prj.hwProfessor.web;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.runtime.directive.Parse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.hwProfessor.service.HwProfessorService;
 import com.last.prj.hwProfessor.service.HwProfessorVO;
@@ -29,8 +36,8 @@ public class HwProfessorController {
 	HwProfessorService service;
 
 	@RequestMapping("hwList")
-	public String hwList(Model model, HwProfessorVO vo, HttpServletRequest req) {
-		vo.setPid("99003013");
+	public String hwList(Model model, HwProfessorVO vo, HttpServletRequest req,HttpSession session) {
+		vo.setPid((String)session.getAttribute("id"));
 //		if (vo.getLyear()==null || "".equals(vo.getLyear())){
 //			vo.setLyear("2021");
 //		}
@@ -84,7 +91,10 @@ public class HwProfessorController {
 						//	System.out.println(register_id);
 					//List<Map<String, Object>> submitResult = service.hw_submitList(vo);
 					//model.addAttribute("submitList", submitResult);
-		return  service.hw_submitList(vo);
+		List<Map<String, Object>> inquiry = service.hw_submitList(vo);
+		model.addAttribute("inquiry",inquiry);
+		System.out.println(inquiry);
+		return  inquiry;
 	}
 	//교수 점수 기능
 	@RequestMapping("scoreIn")
@@ -96,10 +106,10 @@ public class HwProfessorController {
 	}
 	
 	
-	//교수 과제 등록
+	//교수 과제 등록페이지
 	@RequestMapping("hwPfInsert")
-	public String hwPfInsert(HwProfessorVO vo,Model model) {
-				vo.setPid("99003013");
+	public String hwPfInsert(HwProfessorVO vo,Model model,HttpSession session) {
+		vo.setPid((String)session.getAttribute("id"));
 				// 해당교수 과제 목록
 				List<Map<String, Object>> result = service.hwPfInsertSelect(vo);
 				System.out.println(result);
@@ -120,10 +130,55 @@ public class HwProfessorController {
 				return "hw_professor/hw_professorInsert.tiles";
 	}
 	
+	//교수 과제등록 작성폼
 	@RequestMapping("hwInsertForm")
-	public String hwInsertFrm(HwProfessorVO vo,HttpServletRequest req) {
-	System.out.println(vo);
-			service.hwPfInsert(vo);
+	public String hwInsertFrm(HwProfessorVO vo,MultipartHttpServletRequest request) {
+		//파일업로드
+				String rootUploadDir = "C:\\Users\\User\\git\\finalProject\\AMS\\src\\main\\webapp\\resources\\upload\\hw_professor"; // 업로드 주소
+				File dir = new File(rootUploadDir);
+
+				if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성
+					dir.mkdirs();
+				}
+
+				Iterator<String> iterator = request.getFileNames(); // 업로드된 파일정보 수집(2개 - file1,file2)
+
+				int fileLoop = 0;
+				String uploadFileName;
+				MultipartFile mFile = null;
+				String orgFileName = ""; // 진짜 파일명
+				String sysFileName = ""; // 변환된 파일명
+
+				ArrayList<String> list = new ArrayList<String>();
+
+				while (iterator.hasNext()) {
+					fileLoop++;
+
+					uploadFileName = iterator.next();
+					mFile = request.getFile(uploadFileName);
+
+					orgFileName = mFile.getOriginalFilename();
+					System.out.println(orgFileName);
+
+					if (orgFileName != null && orgFileName.length() != 0) { // sysFileName 생성
+						System.out.println("if문 진입");
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
+						Calendar calendar = Calendar.getInstance();
+						sysFileName =orgFileName; // sysFileName: 날짜-fileLoop번호
+						try {
+							System.out.println("try 진입");
+							mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/sysFileName
+							list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
+
+						} catch (Exception e) {
+							list.add("파일 업로드 중 에러발생!!!");
+						}
+					} // if
+				} // while
+				vo.setRegisterFile(sysFileName); //파일명저장
+	
+	
+				service.hwPfInsert(vo);
 		return "redirect:hwPfInsert";
 	}
 	
@@ -142,9 +197,9 @@ public class HwProfessorController {
 	}
 	
 	//교수가 등록한 과제삭제
-	@RequestMapping("hwPfDel")
-	public String hwPfDel(HwProfessorVO vo) {
-		int r=service.hwPfDel(vo);
+	@RequestMapping("hwPfDelete")
+	public String hwPfDelete(HwProfessorVO vo) {
+		int r=service.hwPfDelete(vo);
 		if(r!=0) {
 			System.out.println("success");
 		}else {
@@ -154,8 +209,62 @@ public class HwProfessorController {
 	}
 	
 	@RequestMapping("hwUpdate")
-	public String hwUpdate(HwProfessorVO vo) {
+	public String hwUpdate(HwProfessorVO vo,MultipartHttpServletRequest request,Model model){
+		
+		
+		//파일업로드
+		String rootUploadDir = "C:\\Users\\User\\git\\finalProject\\AMS\\src\\main\\webapp\\resources\\upload\\hw_professor"; // 업로드 주소
+		File dir = new File(rootUploadDir);
+
+		if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성
+			dir.mkdirs();
+		}
+
+		Iterator<String> iterator = request.getFileNames(); // 업로드된 파일정보 수집(2개 - file1,file2)
+
+		int fileLoop = 0;
+		String uploadFileName;
+		MultipartFile mFile = null;
+		String orgFileName = ""; // 진짜 파일명
+		String sysFileName = ""; // 변환된 파일명
+
+		ArrayList<String> list = new ArrayList<String>();
+
+		while (iterator.hasNext()) {
+			fileLoop++;
+
+			uploadFileName = iterator.next();
+			mFile = request.getFile(uploadFileName);
+
+			orgFileName = mFile.getOriginalFilename();
+			System.out.println(orgFileName);
+
+			if (orgFileName != null && orgFileName.length() != 0) { // sysFileName 생성
+				System.out.println("if문 진입");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
+				Calendar calendar = Calendar.getInstance();
+				sysFileName =vo.getRegisterId()+'_'+orgFileName; // sysFileName: 날짜-fileLoop번호
+				try {
+					System.out.println("try 진입");
+					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/sysFileName
+					list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
+
+				} catch (Exception e) {
+					list.add("파일 업로드 중 에러발생!!!");
+				}
+			} // if
+		} // while
+		vo.setRegisterFile(sysFileName); //파일명저장
+		
+		
+
+	
+		
+
+		
 		int r=service.hwUpdate(vo);
 		return "redirect:hwList";
 	}
+	
+
 }

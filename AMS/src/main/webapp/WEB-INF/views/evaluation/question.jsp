@@ -208,16 +208,9 @@ tr td th{
 								<td><input type="radio" name="a6" value="2">불만족</td>
 								<td><input type="radio" name="a6" value="1">매우불만족</td>
 							</tr>
+							
 							<tr>
-								<th>7. 해당 강의를 다른 사람들에게 추천하겠습니까?</th>
-								<td><input type="radio" name="a7" value="5">매우 추천</td>
-								<td><input type="radio" name="a7" value="4">추천</td>
-								<td><input type="radio" name="a7" value="3">보통</td>
-								<td><input type="radio" name="a7" value="2">추천 안함</td>
-								<td><input type="radio" name="a7" value="1">절대 안함</td>
-							</tr>
-							<tr>
-							<th>8. 강의 코멘트를 남겨주세요.</th>
+							<th>7. 강의 코멘트를 남겨주세요.</th>
 								<td colspan="5"><textarea id="limit" name="a8" placeholder="선택문항_50자까지 작성 가능합니다."style="resize: none;width:100%;"></textarea></td>
 							
 							</tr>

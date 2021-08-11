@@ -192,8 +192,8 @@ public class StudentsController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/lectureList")
-	public Map<String, Object> lectureList(
+	@RequestMapping("/lectureList2")
+	public Map<String, Object> lectureList2(
 			HttpSession session,
 			@RequestBody Map<String, Object> map,
 			StudentsVO vo)

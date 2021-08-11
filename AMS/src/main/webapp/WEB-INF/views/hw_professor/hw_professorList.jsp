@@ -165,7 +165,7 @@
             cursor: pointer;
         }
         .tui-grid-body-area{
-        height:300px;
+        height:600px;
         }
 	</style>
 	<!-- Toast grid -->
@@ -191,7 +191,11 @@
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
 					
 				</ul>
-			
+			<!--  -->
+									<c:forEach items="${list }" var="data">
+										${data }
+									
+									</c:forEach>
 				
 			</div>
 		<div class="box1">				
@@ -250,11 +254,14 @@
 						 <br>		 
 				 			<h4> 			 			
 				 				<c:choose>
+				 					<c:when test="${reTerm eq '선택'}">
+					 					<span style="color:brown;">' ${reYear } 년   ${reTerm }  학기  '  </span>로 등록된 과제 목록
+					 				</c:when>
 					 				<c:when test="${reName eq '선택'}">
-					 					<span style="color:brown;">'  ${reYear } 년   ${reTerm }  학기  '  </span>로 검색한 결과..
+					 					<span style="color:brown;">' ${reYear } 년    ${reTerm }  학기  '  </span>로 등록된 과제 목록
 					 				</c:when>		
 				 					<c:otherwise>
-				 						<span style="color:brown;">'Default : 2021  ${reYear } 년  ${reTerm }  학기   ${reName } '  </span>로 검색한 결과..
+				 						<span style="color:brown;">'  ${reYear } 년  ${reTerm }  학기   ${reName } '  </span>로 등록된 과제 목록
 				 					</c:otherwise>
 				 				</c:choose>
 				 			</h4>
@@ -295,16 +302,7 @@
 								<div id="grid2"></div>
 								<!-- submit_SID값으로 학생정보 가져오기 -->
 								 <br>
-													<table class="" border="1" style="width:100%; text-align:center;">
-															<thead>
-															<tr>
-																
-																<th>학생학번</th>	<th>학생이름(SNAME)</th>	 <th>제출파일</th>	
-																<th>제출날짜</th>	<th>학생코멘트</th>	<th>점수</th>		<th>점수IN</th>		<th>삭제</th>
-															</tr>
-															</thead>
-															<tfoot></tfoot>
-														</table>
+													
 														
 														<br>
 														<!-- <button type="button" id="delete" style="margin-left: 480px;">선택삭제</button> -->
@@ -331,11 +329,11 @@
 		      <span class="close2">&times;</span>                                                         
 			<div class="hwContainer">
 								<div class="" style="border-radius:10px;">
+									<h4 align="center">과제변경전</h4>
 									<table border="1" class="noSubmit2" >
-						
 									</table>
 								</div>
-								<form action="hwUpdate" id="udFrm" name="udFrm" method="post">
+								<form action="hwUpdate" id="udFrm" name="udFrm" method="post" enctype="multipart/form-data" >
 								<sec:csrfInput/>
 								<input type="hidden" id="pperiod" name="pperiod">
 								<input type="hidden" id="pcomment" name="pcomment">
@@ -344,6 +342,8 @@
 									<table border="1" class="noSubmit3" >
 						
 									</table>
+									
+									
 								</div>
 								</form>
 							</div>
@@ -355,23 +355,22 @@
 			
 		
 			<script>
-			$(document).ready(function(){
-			    //체크박스 전체 선탣&해제
-			    $('#ck_all').click(function(){
-			         if($("#ck_all").prop("checked")){
-			            $("input[type=checkbox]").prop("checked",true); 
-			        }else{
-			            $("input[type=checkbox]").prop("checked",false); 
-			        }
-			    });
 			    
-			    $('#delete').click(function(){
-			            $("input[name=checkRow]:checked").each(function(){
-			            	 var tr_value =$(this).val();
-			            	 console.log(tr_value);        
-			            });
-			        
-			    });
+			$(".hwTable1").on("click","#hwDelete",function(){
+			var a=	$(this).data('id');
+			var b= $(this).data('num');
+				console.log(a);
+				hwPfDeleteFrm.registerId.value=a;
+				
+				if(confirm(' * '+b+' '+' * ' + '삭제 하시겠습니까 ?')==true){
+					alert("삭제가 완료되었습니다.");
+					hwPfDeleteFrm.submit();
+				}else{
+					
+					return false;
+				}
+				
+				
 			});
 			
 			
@@ -425,33 +424,62 @@
 						if(count > 0){
 						$('<button type="button" id="hwDeleteAll" style="float: right;margin-right: 50px;" onclick="submitDelFuc();">전체삭제</button>').appendTo('.noSubmit');
 						}
-						//grid start
 						
-			  			
-			  					
 						
-			  					
-						//]; //컬럼DATA	
+
+		  			/*	var clsData = [
+					<c:forEach items="${result }" var="list">
+					{
+						
+					},
+					</c:forEach>
+					]; //컬럼DATA	
+						
+						
+						$.each(data,function(i,item){
+						//	console.log("i :" + i);
+						//	console.log("i :" + item.name);
+						//	var a='<button type="button">반복문테스트</button>';
+						//	console.log(a);
+						//	console.log(JSON.stringify(a));
+						//	data.push("i");
+							});
+						
+						console.log(data);
+						
+						
+						var clsData = [
+							$.each(data,function(i,item){
+								{
+									data:'<button type="button">반복문테스트</button>'
+									 
+									},
+							}
+						]; //컬럼DATA	
+						
+					*/
+						
 						
 			  				 // GRID 를 보여준다.
 				  			var grid = new tui.Grid( {
 				  				
-				  				bodyHeight:250,
+				  				bodyHeight:430,
 								el: document.getElementById('grid2'),
 								pagination: true,   //페이징 처리
 							    pageOptions: {
 							    	useClient: true,   //페이징 처리
-							    	perPage: 5   //페이징 갯수
+							    	perPage: 10   //페이징 갯수
 							    }
 								,
 				  			columns: [
 				  				{header: '학생학번',name: 'submitSid',width:100},
 				  				{header: '학생이름',name: 'name',width:100},
 				  				{header: '제출파일',name: 'submit_file',width:100},
-				  				{header: '학생코멘트',name: 'submit_date',width:100},
-				  				{header: '점수',name: 'name',width:100},
+				  				{header: '제출날짜',name: 'submit_date',width:100},
+				  				{header: '학생코멘트',name: 's_comment'},
+				  				{header: '점수',name: 'score',width:100},
 				  				{header: '점수버튼',name: 'name',width:100},
-				  				{header: '삭제',name: 'name',width:100}
+				  				{header: '삭제',name: 'submitBtn',width:100}
 				  			], //컬럼갯수
 				  			data: data
 				  		} );
@@ -535,6 +563,9 @@
 			
 	        }
 	        
+	        
+	        
+	        
 			//과제제출 학생 삭제 FUNCTION
 			function hwDeleteFunc(a){
 				$.ajax({
@@ -573,7 +604,7 @@
 									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
 									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
 									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
-									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.opennum }">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
+									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
 										,updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="${list.pperiod}" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}">변경</button>'
 								},
 								</c:forEach>
@@ -592,18 +623,18 @@
 								    }
 									,
 					  			columns: [
-					  				{header: '강의년도',name: 'lyear',width:100},
+					  				{header: '강의년도',name: 'lyear',width:70},
 					  				{header: '학기',name: 'lterm',width:60}, //강의번호+분반
 					  				{header: '강의명',name: 'lname',width:90}, //년도+학기
 					  				{header: '강의실',name: 'lrcode',width:80},
-					  				{header: '과제제목',name: 'pcomment'},
+					  				{header: '과제제목',name: 'pcomment',width:200},
 					  				{header: '등록날짜',name: 'register_date',width:140},
-					  				{header: '과제기간',name: 'pperiod',width:220},
-					  				{header: '양식파일',name: 'register_file',width:100},
-					  				{header: '제출현황',name: 'submitCount',width:120},
-					  				{header: '조회',name: 'inquiryBtn',width:120},
-					  				{header: '삭제',name: 'deleteBtn',width:120},
-					  				{header: '변경',name: 'updateBtn',width:120}
+					  				{header: '과제기간',name: 'pperiod',width:180},
+					  				{header: '양식파일',name: 'register_file',width:150},
+					  				{header: '제출현황',name: 'submitCount',width:100},
+					  				{header: '조회',name: 'inquiryBtn',width:100},
+					  				{header: '삭제',name: 'deleteBtn',width:100},
+					  				{header: '변경',name: 'updateBtn',width:100}
 					  			], //컬럼갯수
 					  			data: clsData
 					  		} );
@@ -666,7 +697,7 @@
 			            }
 			        }
 		            modal.style.display = "block";
-						$('.noSubmit2').empty();
+						$('.noSubmit2').empty();	
 						$('<tr class="updateTr">')
 						.append($('<th width="100px;">강의년도</th>'))
 						.append($('<th width="80px;">학기</th>'))
@@ -701,7 +732,7 @@
 						$('<tr>')	
 						.append($('<td class="dateTd"><input type="text" id="startDate"  value="'+resultDate+'" disabled></td>'))	
 						.append($('<td class="pcommentTd"><input tpye="text" id="pcoId" value="'+c+'" disabled></td>'))
-						.append($('<td class="fileTd"><input type="file" id="fileId"></td>'))
+						.append($('<td class="fileTd"><input type="file" id="file" name="file"></td>'))
 						.append($('<td><button type="button" onclick="updateSubmit();">변경</button></td>'))
 						.append($('<td class="updateReset"><button type="button">취소</button></td>'))
 						.appendTo('.noSubmit3');		
@@ -713,7 +744,7 @@
 			            });
 						$('.pcommentTd').on("dblclick", function(){
 			            	$('#pcoId').attr("disabled",false);
-			            	
+			            	$('#pcoId').attr("value",null);
 			            });
 						
 						$('.updateReset').on("click", function(){
@@ -772,9 +803,19 @@
 	
 					var b=$("#pcoId").val();
 					udFrm.pcomment.value=b;
-					console.log(b);
-					
-					udFrm.submit();
+					var filen=$('#file').val();
+					console.log(filen);
+					if(filen == ""){
+						alert("파일을 입력해주세요");
+					}else{
+							if(confirm(' 입력값으로 변경하시겠습니까 ? ')==true){
+								alert("변경이 완료되었습니다");
+								udFrm.submit();
+							}else{
+								
+								return false;
+							}
+					}
 				}
 					
 					//점수IN
@@ -813,6 +854,10 @@
 			
 			</div>
 		</div>
+		<!-- 교수 등록한 과제 삭제 -->
+		<form id="hwPfDeleteFrm" name="hwPfDeleteFrm"  method="post" action="hwPfDelete">
+			<input type="hidden" id="registerId" name="registerId">
+		</form>
 		<!-- 과제제출한 학생 전체데이터 삭제 -->
 		<form id="submitDelAll"  method="post" action="submitDelAll">
 			<input type="hidden" id="registerId" name="registerId">

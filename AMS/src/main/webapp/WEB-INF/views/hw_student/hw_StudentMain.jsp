@@ -41,10 +41,16 @@
 </style>
 </head>
 <body>
+	
+
+
+
 	<div class="hwSMain">	
 	<div class="menu01">		
 				<ul>
 					<li><a class="modalBtn" href="hwStudent">과제 메인페이지</a></li>			
+					
+					<li><a class="modalBtn" href="submitList" style="    margin-left: 20px;">제출한 과제</a></li>	
 				</ul>
 			
 				
@@ -72,10 +78,11 @@
 					  	       // GRID 를 보여준다.
 					  			var grid = new tui.Grid( {
 									el: document.getElementById('grid'),
+									bodyHeight:230,
 									pagination: true,   //페이징 처리
 								    pageOptions: {
 								    	useClient: true,   //페이징 처리
-								    	perPage: 10   //페이징 갯수
+								    	perPage: 5   //페이징 갯수
 								    }
 									,
 					  			columns: [

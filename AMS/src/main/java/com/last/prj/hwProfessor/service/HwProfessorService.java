@@ -35,7 +35,7 @@ public interface HwProfessorService {
 	int submitDelAll(HwProfessorVO vo);
 	
 	//교수가 등록한 과제삭제
-	int hwPfDel(HwProfessorVO vo);
+	int hwPfDelete(HwProfessorVO vo);
 	//교수가 등록한 과제변경
 	int hwUpdate(HwProfessorVO vo);
 	//교수 등록할 과제조회

@@ -77,15 +77,16 @@
 				<br>
 				<h6> * 과제정보 *</h6>
 				<br>
-				<form id="hwSSubmitFrm" name="hwSSubmitFrm" action="hwSSubmit" method="post">
+				<form id="hwSSubmitFrm" name="hwSSubmitFrm" action="hwSSubmit" method="post" enctype="multipart/form-data">
 				<sec:csrfInput/>
 					<input type="hidden" id="registerId" name="registerId" value="${list.registerId }">
+					<input type="hidden" id="scomment" name="scomment">
 					<table	class="hwSTable" border="1" style="border-collpase:collpase;width:800px;">
 						<tr style="border-top: 2px solid orange;">
 							<th width="130px"> 교수님께 한마디 </th>	<td> <textarea id="scomment" name="scomment" style="border:none;" rows="5" cols="90"></textarea></td>
 						</tr>
 						<tr>
-							<th width="130px"> 첨부파일 </th>	<td> <input type="file"></td>
+							<th width="130px"> 첨부파일 </th>	<td> <input type="file" id="file" name="file"></td>
 						</tr>
 						<tr>
 							<th width="130px"> 제출날짜 </th>	<td> <input type="text" value="${date }" disabled></td>
@@ -99,6 +100,9 @@
 		
 		<script>
 			function submitFunc(){
+				var a=$("#scomment").val();
+				console.log(a);
+				hwSSubmitFrm.scomment.value=a;
 				if(confirm("제출하시겠습니까?")==true){
 					alert("제출완료!");
 					hwSSubmitFrm.submit();

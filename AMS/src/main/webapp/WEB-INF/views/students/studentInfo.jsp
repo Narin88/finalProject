@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,14 +57,16 @@
 				</table>
 			</div>
 		</div>
-		<div align="left" style="margin-left: 128px;">
-			<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
-				<label class="btn btn-secondary btn-sm" style="margin-top: 7px;">
-	    		    사진변경 <input type="file" style="display: none;" id="changeImg" name="pic">&nbsp;
-   				 </label>
-   				 <button type="submit" class="btn btn-secondary btn-sm">확인</button>
-   			</form>
-		</div>
+		<sec:authorize access="hasRole('ROLE_PRO')">
+			<div align="left" style="margin-left: 128px;">
+				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
+					<label class="btn btn-secondary btn-sm" style="margin-top: 7px;">
+		    		    사진변경 <input type="file" style="display: none;" id="changeImg" name="pic">&nbsp;
+	   				 </label>
+	   				 <button type="submit" class="btn btn-secondary btn-sm">확인</button>
+	   			</form>
+			</div>
+		</sec:authorize>
 		<br /> <br />
 		<div class="bigDiv2">
 			<ul class="nav nav-tabs">

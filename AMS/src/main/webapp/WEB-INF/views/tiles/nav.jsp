@@ -4,8 +4,6 @@ pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="stinfo" value="stinfo" />
 
-<link rel="stylesheet" href="resources/css/navCss.css" />
-
 <div class="leftNav">
 <sec:authorize access="hasRole('ROLE_STD')">
 	<div align="center" class="topHeader">

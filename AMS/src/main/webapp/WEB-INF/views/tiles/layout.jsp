@@ -44,37 +44,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-<style>
-div.AMScontainer {
-	width: 100%;
-	border: 1px solid gray;
-}
-
-header {
-	padding: 1em;
-	color: black;
-	background-color: white;
-	clear: left;
-	text-align: center;
-	width: 100%;
-	height: 180px;
-	border-bottom: 1px solid gray;
-}
-
-div .icon {
-	display: flex;
-	width: 100%;
-}
-
-.icon div {
-	justify-content: center;
-}
-
-.icon img {
-	height: 128px;
-	width: 289px;
-}
-</style>
+<link rel="stylesheet" href="resources/css/mainCss.css" />
 </head>
 
 <body>

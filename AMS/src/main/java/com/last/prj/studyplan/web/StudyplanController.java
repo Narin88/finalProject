@@ -3,6 +3,8 @@ package com.last.prj.studyplan.web;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.students.service.StudentsVO;
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
-import com.last.prj.stuyplan.service.StudyplanService;
-import com.last.prj.stuyplan.service.StudyplanVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanService;
+import com.last.prj.studyplan.service.StudyplanVO;
 
 @Controller
 public class StudyplanController {
@@ -27,16 +29,16 @@ public class StudyplanController {
 	// 내 강의 리스트 출력하기
 	@RequestMapping("studyPlanList")
 	public String studyplanList(Model model,HttpSession session,HttpServletRequest req, StudyplanJoinVO vo) {
-
-		vo.setPid((String)session.getAttribute("id"));
-		
+		String pid = (String)session.getAttribute("id");
+		vo.setPid(pid);
 		model.addAttribute("ySelect", dao.ySelect(vo));
-		System.out.println("결과 : " + dao.ySelect(vo));
-//		String term = req.getParameter("term");
-//		model.addAttribute("reTerm", term);
 
-		model.addAttribute("spList", dao.studyPlanList(vo));
-		System.out.println("qq" + dao.studyPlanList(vo));
+		StudyplanJoinVO svo = new StudyplanJoinVO();
+		svo.setPid(pid);
+		svo.setLyear(vo.getLyear());
+		svo.setTerm(vo.getTerm());
+		model.addAttribute("spList", dao.studyPlanList(svo));
+
 		return "studyplan/studyplanlist.tiles";
 	}
 

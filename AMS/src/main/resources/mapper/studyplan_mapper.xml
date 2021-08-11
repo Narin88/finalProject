@@ -9,42 +9,31 @@
 
 
 	<!-- 강의 정보리스트 -->
-	<select id="studyPlanList" resultType="StudyplanJoinVO"
-		parameterType="StudyplanJoinVO">
+	<select id="studyPlanList" resultType="StudyplanJoinVO" parameterType="StudyplanJoinVO">
 		
-				select
-				l.lyear "LYear"
-				,l.term "term"
-				,v.lname "lname"
-				,l.lrcode "lrcode"
-				,find_code_name(100, v.dcode) as division, v.CREDIT,v.grade,v.lname, p.pname, p.email,
-				p.PPHONE, l.*, m.DNAME, m.MNAME, r.LRNAME, p.PSTATUS, s.w1, s.w2,
-				s.w3, s.w4, s.w5, s.w6, s.w7, s.w8, s.w9, s.w10, s.w11, s.w12,
-				s.w13, s.w14, s.w15, s.w16,s.content
-				from lecture_info v, LECTURE l, professor p, MAJOR_VIEW m,
-				LECTURE_ROOM r, study_plan s
-				where v.LNUM = l.LNUM
-				and l.pid = p.pid
-				and l.opennum = s.opennum
-				and p.mcode = m.mcode
-				and l.LRCODE = r.LRCODE
-				and l.PID = #{pid}
+			select l.lyear, l.term, li.lname, l.lnum,l.DIVIDENUM, p.pname, mv.dname, mv.mname,li.grade,
+			       li.credit, find_code_name(100, li.dcode) as division
+			from lecture l, lecture_info li, PROFESSOR p, MAJOR_VIEW mv
+			where l.lnum = li.lnum
+			and l.pid = p.pid
+			and li.mcode = mv.mcode
+			and l.pid = #{pid}
 				
-	<!-- 	<choose>
-			<when test="LYear=null or LYear='' and term=null">
-										and term=#{term} 	and LYear=#{LYear}
-			</when>
-		
-			<when test="LYear!=null or LYear!='' and term=null">
-										and LYear=#{LYear}
-			</when>
+			<choose>
+				<when test="lyear!= 0 and term != 0">
+					and term=#{term} 	and lyear=#{lyear}
+				</when>
 			
-			
-			<when test="LYear=null or LYear='' and term!=null">
-										and term=#{term} 
-			</when>
+				<when test="lyear != 0 and term = 0">
+					and lyear=#{lyear}
+				</when>
+				
+				
+				<when test="lyear = 0 and term != 0">
+					and term=#{term} 
+				</when>
 			 
-			</choose> -->
+			</choose>
 
 				
 	</select>

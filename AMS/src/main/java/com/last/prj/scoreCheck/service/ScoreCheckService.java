@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.scoreMana.service.ScoreManaVO;
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
 
 public interface ScoreCheckService {
 
@@ -14,5 +14,4 @@ public interface ScoreCheckService {
 
 	List<ScoreManaVO>ScoreCheckLectureStudent(ScoreManaVO vo);//수강 학생 리스트
 	public LectureVO collectresult(LectureVO vo);// 값 하나 받아오기
-
 }

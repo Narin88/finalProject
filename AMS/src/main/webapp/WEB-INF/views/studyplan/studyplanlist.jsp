@@ -44,7 +44,7 @@
 				
 						<label>년도:</label>						
 							<select name="lyear" id="lyear">		
-									<option value="">선택 </option>			  
+									<option value="0">선택 </option>			  
 								<c:forEach items="${ySelect}" var="ySelect">
 									  <option value="${ySelect.lyear }"  <c:if test="${ySelect.lyear}"> selected="selected"</c:if> >${ySelect.lyear }</option>
 								 </c:forEach>	 
@@ -52,9 +52,9 @@
 								
 					<label for="term">강의학기:</label>
 							<select name="term" id="term">
-							  <option value="">선택</option>	
-							 <option value="1"  <c:if test="${term eq 1}"> selected=	"selected"</c:if>>1학기</option>
-							  <option value="2" <c:if test="${term eq 2}"> selected="selected"</c:if>>2학기</option> 
+							  <option value="0">선택</option>	
+							 <option value="1" >1학기</option>
+							  <option value="2">2학기</option> 
 						</select> 
 							
 						

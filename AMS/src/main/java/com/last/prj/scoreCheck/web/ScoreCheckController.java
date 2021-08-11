@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.scoreCheck.service.ScoreCheckService;
 import com.last.prj.scoreMana.service.ScoreManaVO;
-import com.last.prj.stuyplan.service.StudyplanJoinVO;
 @Controller
 public class ScoreCheckController {
 @Autowired
@@ -29,7 +28,7 @@ public String ScoreCheckLectureList(Model model, HttpSession session,LectureVO v
 	model.addAttribute("lectures",dao.ScoreCheckLectureList(vo));
 	List<LectureVO> vo2 = dao.ScoreCheckLectureList(vo);
 		
-	System.out.println("============================="+vo2);
+//	System.out.println("============================="+vo2);
 	return "scoreCheck/scoreCheckLectureList.tiles";
 		}
 
@@ -46,20 +45,21 @@ public String selectresult(Model model, LectureVO vo,HttpSession session) {
 @RequestMapping("ScoreCheckLectureStudent")
 public String ScoreCheckLectureStudent(Model model, HttpSession session, ScoreManaVO vo) {
 	vo.setPid((String)session.getAttribute("id"));
+	System.out.println(dao.ScoreCheckLectureStudent(vo));
 	model.addAttribute("lectures",dao.ScoreCheckLectureStudent(vo));
-	List<ScoreManaVO> vo2 = dao.ScoreCheckLectureStudent(vo);
-	System.out.println("학생============================="+vo2);
 	return "scoreCheck/ScoreCheckLectureStudent.tiles";
 }
 
-/*
- * @RequestMapping("ScoreInsert") public String ScoreInsert(Model model,
- * HttpSession session, ScoreManaVO vo) {
- * vo.setPid((String)session.getAttribute("id"));
- * model.addAttribute("lectures",dao.ScoreCheckLectureStudent(vo));
- * 
- * return "redirect:ScoreCheckLectureStudent.tiles"; }
- */
+@ResponseBody
+@RequestMapping(value = "ScoreInsert", method = RequestMethod.PUT)
+public int ScoreInsert(@RequestBody ScoreManaVO vo) {
+	System.out.println(vo);
+	int result = dao.ScoreInsert(vo);
+	System.out.println("결과====================" +result);
+	return result;
+}
+
+ 
 
 // 아직 구현 못함.
 /*

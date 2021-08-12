@@ -10,12 +10,13 @@
    text-align: center;
 }
 .tbl{
-	width: 80%;
+	width: 100%;
 	border-spacing: 0;
     border-collapse: collapse;
+    border: 1px solid black;
 }
 .infotitle{
-	border-bottom: 1px solid #dedede !important;
+	border: 1px solid #dedede !important; 
     color: #212121;
     font-size: 15px;
     text-transform: uppercase;
@@ -24,12 +25,11 @@
     height: 30px;
 }
 .info{
-	border-bottom: 1px solid #dedede !important;
-    color: #212121;
+	border: 1px solid #dedede !important;
+    color: 007bff;
     font-size: 15px;
     text-transform: uppercase;
     text-align: center;
-    color: darkgray;
     }
 .grid{
 	margin-top: 20px;
@@ -77,16 +77,12 @@
 				<td class = "infotitle">년도/학기</td><td class = "info">${student.lyear }/${student.target }</td>
 				<td class = "infotitle">학번</td><td class = "info">${student.sid }</td>
 				<td class = "infotitle">성명</td><td class = "info">${student.sname }</td>
-			</tr>
-			<tr>
 				<td class = "infotitle">학과</td><td class = "info">${student.dname }</td>
 				<td class = "infotitle">학년</td><td class = "info">${student.grade }</td>
 				<td class = "infotitle">인정학기</td>
 				<td class = "info">${(student.grade*2) - (2-student.term) }</td>
-			</tr>
-			<tr >
-				<td colspan="2" class = "infotitle">신청가능학점</td><td colspan="2" id="credit" class = "info"></td>
-				<td colspan="2" class = "info"><button id="preEnrolList">내 수강 꾸러미</button> </td>
+				<td class = "infotitle">신청가능학점</td><td id="credit" class = "info"></td>
+				<td class = "info"><button id="preEnrolList">내 수강 꾸러미</button> </td>
 			</tr>
 		</table>
 	</div>
@@ -246,19 +242,29 @@ $(function(){
 		var opennum = data.opennum;
 		var lname = data.lname;
 		var credit = data.credit;
-		console.log(data);
+		var timetable = data.timetable;
+		console.log(timetable);
 		//조건 검사
 		 //중복x -> 재이수 확인
 			if(encount>=limit){ //정원 초과시
 				alert("수강정원이 마감되었습니다."); 
 				return false;
 			}
-			 var remain = $('#credit').html();
-		 		console.log(remain,credit);
+			var remain = $('#credit').html();
 			if(remain-credit<0){ //20학점 초과검사
 				alert('20학점을 초과하였습니다.');
 				return false;
 			}
+			$.ajax({
+				url:'timetablecheck',
+				type: 'POST',
+				data: {timetable: timetable, opennum: opennum},
+				success: function(result){
+					
+				}
+			})
+			
+			
 			$.ajax({
 				url: 'AjaxRetakeChek',
 				type: 'POST',

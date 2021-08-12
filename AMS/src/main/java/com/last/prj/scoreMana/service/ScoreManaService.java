@@ -18,4 +18,6 @@ public interface ScoreManaService {
 	List<LectureVO> scoreList(String sid);
 	int deletescore(List<ScoreManaVO> vo);
 	List<PreEnrolmentVO> getpreenrolment(String sid);
+	int AjaxPreEnrolmentdelete(LectureVO vo);
+	LectureVO oneselectLecture(LectureVO vo);
 }

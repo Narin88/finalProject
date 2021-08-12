@@ -165,4 +165,13 @@ public class ScoreManaController {
 		 SMdao.AjaxPreEnrolmentdelete(vo);
 		return "redirect:ScoreManaPage";
 	}
+	
+	
+	@PostMapping("timetablecheck")
+	@ResponseBody
+	public int timetablecheck(LectureVO vo) {
+		String time = vo.getTimetable();
+		System.out.println("결과:"+time.length());
+		return 0;
+	}
 }

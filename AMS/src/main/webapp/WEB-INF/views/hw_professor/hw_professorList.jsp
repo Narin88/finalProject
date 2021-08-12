@@ -287,9 +287,12 @@
 									<script>
 										function check(e){
 										if(e.value=="submitAll"){
+											
 												$('.unsubmit').show();
 												$('.submit').show();
 											}else if(e.value=="submit"){
+											var a=	$('#grid2').data('column-name');
+											console.log(a);
 												$('.submit').show();
 												$('.unsubmit').hide();
 											}else if(e.value=="noSubmit"){
@@ -303,10 +306,12 @@
 								
 							
    								  <div id="select-box" style="width: 200px"></div>
+   								  <button style="float:right;margin-top: -35px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
+   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn">점수정정</button>
 								<div id="grid2">
 									
 								</div>
-								<button type="button" id="selectDel">삭제</button>
+								
 								<!-- submit_SID값으로 학생정보 가져오기 -->
 								 <br>
 													
@@ -401,7 +406,6 @@
 	            modal.style.display = "block";
 	            $(this).data('id'); //
 				var a= $(this).data('id');
-				submitDelAll.registerId.value=a;
 				var b= $(this).data('num');
 				
 				var count=$(this).data('count');
@@ -431,45 +435,11 @@
 						//$('</form>')
 						$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
 					
-						if(count > 0){
-						$('<button type="button" id="hwDeleteAll" style="float: right;margin-right: 50px;" onclick="submitDelFuc();">전체삭제</button>').appendTo('.noSubmit');
-						}
+						
 						
 					
 					
-					/*
-				    class CustomSliderRenderer {
-				      constructor(props) {
-				        const el = document.createElement('button');
-				  
-						el.innerText='삭제';
-						el.className="btn btn-info";
-				        this.el = el;
-				        this.render(props);
-				      }
-
-				      getElement() {
-				        return this.el;
-				      }
-
-				      render(props) {
-				        this.el.value = String(props.value);
-				      }
-				    }
-				
-					var asd=[];	
-					console.log(JSON.stringify({ x: 5, y: 6 }));
-				    for(i=0;i<data.length;i++){
-				    	
-				    	var obj={};
-						console.log(data[i].name);
-						var asf=data[i].name;
-						obj["name"]
-						asd.push(asf);
-					}	
-						
-				    */
-				
+					
 					//grid start
 			  					
 					
@@ -483,8 +453,8 @@
 								readData: {},
 								deleteData: {
 									url: 'hwSubmitDel',
-									method: 'DELETE' }
-								}
+									method: 'PUT'
+									},
 							    updateData: {
 							      url: 'scoreIn', //점수 기능
 							      method: 'PUT' //funtion 메서드
@@ -494,9 +464,7 @@
 							};
 					
 					
-					
-					
-					
+			
 					
 	  			
 					
@@ -513,28 +481,78 @@
 							    	perPage: 10   //페이징 갯수
 							    }
 								,
-				  			columns: [
-				  				{header: '학생학번',name: 'submitSid',width:100,},
-				  				{header: '학생이름',name: 'name',width:100},
-				  				{header: '제출파일',name: 'submit_file',width:100},
-				  				{header: '제출날짜',name: 'submit_date',width:150},
-				  				{header: '학생코멘트',name: 's_comment'},
-				  				{header: '점수',name: 'score',width:100,editor:'text'},
-				  				{header: '점수버튼',name: '',width:100},
-
-				  			], //컬럼갯수
+					  			columns: [
+					  				{header: '학생학번',name: 'submitSid',width:100},
+					  				{header: '학생이름',name: 'name',width:100},
+					  				{header: '제출파일',name: 'submit_file',width:130},
+					  				{header: '제출날짜',name: 'submit_date',width:140},
+					  				{header: '학생코멘트',name: 's_comment'},
+					  				{header: '점수',name: 'score',width:70,editor:'text'},
+	
+					  			], //컬럼갯수
 				  		
-				  		} );
-						//grid end
+				  		    } );
+							//grid end
 			  				 
 			  				 
 			  				 
 			  		
-			  				grid.resetData(data)
-			  				 
-				  		
+			  			grid.resetData(data)
+			  			
+			  			setInterval(eachTest , 500);
+							
+						function eachTest(){	
+				  			$('[data-column-name="submit_file"]').each(function(index, item){
+				  				if($(this).text()==""){
+				  					$(this).parent().children().css("backgroundColor","gray");
+				  				};
+				  					
+				  			});			  			
+						}	
 						
+			  			//삭제 버튼 누를때  함수 실행
+			  			document.getElementById('selectDelBtn').addEventListener('click', hwSubmitDel);
 						
+						//점수정정 버튼 누를때 함수 실행
+						document.getElementById('selectScoreBtn').addEventListener('click', scoreIn);
+			  		   
+						
+						//과제제출한 학생 선택한 목록 처리
+			  			function hwSubmitDel(){
+		  				
+		  			   		
+		  					grid.removeCheckedRows(false);
+		  					grid.request('deleteData', { checkedOnly: true  });
+		  						 	 
+		  				}
+			  		    
+			  			//작업중인 행들을 저장해줌
+			  			function scoreIn(){
+			  				const { rowKey, columnName } = grid.getFocusedCell();
+			  			
+			  				  if (rowKey && columnName) {
+			  				    grid.finishEditing(rowKey, columnName);
+			  				  }
+			  			
+			  				  grid.request('updateData', {
+			  				    checkedOnly: false
+			  				  });
+			  			}
+			  		    
+			  		    	  		    
+			  		   
+			  		  	// 업데이트 실행 이벤트
+	  					grid.on('response', data => {
+	  						  	
+	  						  console.log('data : ', data);
+	  					});
+				
+				
+			  		  
+			  		  
+			  		  
+			  		  
+			  		  
 						
 							/*for(var i of data){
 							var a="";
@@ -600,20 +618,7 @@
 	            }
 	        }
 			
-	        //과제제출 학생 모든데이터삭제
-	        function submitDelFuc(){
-	        var a=submitDelAll.registerId.value;
-	        //	;
-	        	console.log(a);
-	        	
-	        	if(confirm("전체 데이터를 삭제하시겠습니까?")==true){
-					alert("삭제되었습니다");
-	        		submitDelAll.submit()
-				}else{
-					return false;
-				}
-			
-	        }
+	        
 	        
 	        
 	        
@@ -882,7 +887,7 @@
 					}
 				}
 					
-					//점수IN
+					/*점수IN
 					function scoreIn(){	
 					    	//$(".scoreBtn").on("click", function(){
 					       		//var a=$(this).prev().val();
@@ -906,7 +911,7 @@
 					    //});
 							
 					}
-							
+						*/	
 							//var b=$('#scoreIn').val();`
 							//var c=$('.scoreIn').val();
 							//var a=$(event.target).closest('tr').find('td').eq(0).html();
@@ -922,17 +927,16 @@
 		<form id="hwPfDeleteFrm" name="hwPfDeleteFrm"  method="post" action="hwPfDelete">
 			<input type="hidden" id="registerId" name="registerId">
 		</form>
-		<!-- 과제제출한 학생 전체데이터 삭제 -->
-		<form id="submitDelAll"  method="post" action="submitDelAll">
-			<input type="hidden" id="registerId" name="registerId">
-		</form>
-		<!--과제제출한 학생리스트 점수in 값 저장  -->
+
+		
+		<!--과제제출한 학생리스트 점수in 값 저장 
 		<form id="frmScoreIn" method="post" action="scoreIn">
 		<sec:csrfInput/>
 			<input type="hidden" id="registerId" name="registerId">
 			<input type="hidden" id="score" name="score">
 			<input type="hidden" id="submitSid" name="submitSid">
 		</form>
+		 -->
 			<!-- 점수 IN MEXLENGTH -->
 			<script>
 			function maxLengthCheck(object){
@@ -941,6 +945,7 @@
 			    }    
 			  }
 			</script>
+			
 		<!-- 검색조건 초기화 function -->
 		<script>
 		function resetFunction(){

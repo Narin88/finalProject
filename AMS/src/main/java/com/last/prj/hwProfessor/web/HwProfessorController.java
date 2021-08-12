@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -97,12 +98,14 @@ public class HwProfessorController {
 		return  inquiry;
 	}
 	//교수 점수 기능
-	@RequestMapping("scoreIn")
-	public String scoreIn(HwProfessorVO vo){
+	
+	@RequestMapping(value="scoreIn",method=RequestMethod.PUT)
+	@ResponseBody
+	public int scoreIn(@RequestBody HwProfessorVO vo){
 		System.out.println(vo.getSubmitSid());
 		System.out.println(vo.getScore());
 		service.hwScoreIn(vo);
-		return "redirect:hwList";
+		return 0;
 	}
 	
 	
@@ -182,11 +185,12 @@ public class HwProfessorController {
 		return "redirect:hwPfInsert";
 	}
 	
-	@RequestMapping("hwSubmitDel")
+	@RequestMapping(value="hwSubmitDel", method=RequestMethod.PUT)
 	@ResponseBody
-	public int hwSubmitDel(HwProfessorVO vo) {
-		
-		return service.hwSubmitDel(vo);
+	public int hwSubmitDel(@RequestBody HwProfessorVO vo) {
+		int result=service.hwSubmitDel(vo);
+		System.out.println("결과=========="+result);
+		return 0;
 	}
 	
 	

@@ -11,10 +11,11 @@
 	<!-- 강의 정보리스트 -->
 	<select id="studyPlanList" resultType="StudyplanJoinVO" parameterType="StudyplanJoinVO">
 		
-			select l.lyear, l.term, li.lname, l.lnum,l.DIVIDENUM, p.pname, mv.dname, mv.mname,li.grade,
-			       li.credit, find_code_name(100, li.dcode) as division
-			from lecture l, lecture_info li, PROFESSOR p, MAJOR_VIEW mv
+			select l.opennum, l.lyear, l.term, li.lname, l.lnum,l.DIVIDENUM, p.pname, mv.dname, mv.mname,li.grade,
+			       li.credit, find_code_name(100, li.dcode) as division,s.CONTENT
+			from lecture l, lecture_info li, PROFESSOR p, MAJOR_VIEW mv, STUDY_PLAN s
 			where l.lnum = li.lnum
+    		and l.OPENNUM = s.OPENNUM
 			and l.pid = p.pid
 			and li.mcode = mv.mcode
 			and l.pid = #{pid}

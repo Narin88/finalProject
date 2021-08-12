@@ -148,7 +148,9 @@
 			email		: '${st.email}',
 			pphone		: '${st.pphone}',
 			pid			: '${st.pid}',
-			opennum		: '${st.opennum}'
+			opennum		: '${st.opennum}',
+			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(${st.opennum})">확인</button>'
+				
 		}
 		<c:if test='${!empty st.lnum}'>
 		,
@@ -168,7 +170,9 @@
 			{header: '학점', name: 'credit'},
 			{header: '강의시간', name: 'timetable'},
 			{header: '강의실', name: 'lrname'},
-			{header: '교수', name: 'pname'}
+			{header: '교수', name: 'pname'},
+			{header:'강의평가',name:'eavaluation'}
+			
 		] //컬럼갯수
 	});
 
@@ -375,5 +379,11 @@
 		}
 		$('#scheduleShow').append(sTable);
 	});
+	
+	
+	function openpage(data){
+		var opennum = data;
+		location.href="Evaluation?opennum="+opennum
+	}
 	
 </script>

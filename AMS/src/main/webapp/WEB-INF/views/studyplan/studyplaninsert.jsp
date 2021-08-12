@@ -57,6 +57,14 @@
  font-family: 'Noto Sans KR', sans-serif;
  align: center;
  }
+ .inbox{
+ 	width: 180px;
+ 	text-align: center;
+ }
+ .schedulebox{
+	width: 99%;
+ 	text-align: center;
+ }
  </style>
 
 <meta charset="UTF-8">
@@ -66,17 +74,17 @@
 <div class="container23">
 	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
-	<p>${spList.LYear}년도 ${spList.term} 학기</p>
+	<p>${spList.lyear}년도 ${spList.term} 학기</p>
 	
 <div class="innercontainer23">
 
 							
 					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 								<tr width="200" height="100%">
-									<th><font size="3">교과목 명</font></th>	 <th><input type="text" value="${spList.lname} "></th>
-									<th ><font size="3">담당교수</font></th>	 <th><input type="text" value="${spList.pname}"> </th>
-									<th ><font size="3">이메일</font></th><th><input type="text"  value="${spList.email}"></th>
-									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" value="${spList.pphone} " > </th>
+									<th><font size="3">교과목 명</font></th>	 <th><input class ="inbox" type="text" value="${spList.lname}"></th>
+									<th ><font size="3">담당교수</font></th>	 <th><input class ="inbox" type="text" value="${spList.pname}"> </th>
+									<th ><font size="3">이메일</font></th>	<th><input type="text" class ="inbox" value="${spList.email}"></th>
+									<th ><font size="3">교수 연락처</font></th>	 <th><input type="text" class ="inbox" value="${spList.pphone} " > </th>
 								</tr>
 								
 					</table>
@@ -86,28 +94,24 @@
 					<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 
 								
-										<tr  width="200">
-												<th><font size="3">수강학과</font></th>	 <th><input type="text" value="${spList.mname}"></th>
-												<th ><font size="3">수강학부</font></th>	 <th><input type="text" value="${spList.dname}"> </th>
-												<th ><font size="3">강의실</font></th>	 <th><input type="text" value="${spList.lrname}" ></th>
-												<th ><font size="3">교재</font></th>	 <th><input type="text" value="${spList.book}"  size=20></th>
-										</tr>
-										<tr>				
-														
-											<th ><font size="3">강의코드</font></th>	 <th><input type="text" value="${spList.lnum}"  size=20></th> <th>-<input type="text" value="${spList.dividenum}"  size=20> </th>
-											<th></th>
-											<th><font size="3">강의 시간</font></th>	 <th colspan="3" ><input type="text" style="width:470px" value="${spList.schedule}" ></th>
-											
-										
-									</tr>
-									<tr>				
-														
-											<th ><font size="3">학점</font></th>	 <th><input type="text" value="${spList.credit}"  size=20></th>
-											<th><font size="3">대상학년</font></th>	 <th><input type="text" value="${spList.grade}"  size=20> </th>
-											<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitcount}"  size=20></th>
-											<th><font size="3">이수구분</font></th>	 <th><input type="text" style="width:200px;" value="${spList.division}" size=20> </th>
-									</tr>
-									
+								<tr>
+										<th><font size="3">수강학과</font></th>	 <th><input type="text" class ="inbox" value="${spList.mname}"></th>
+										<th ><font size="3">수강학부</font></th>	 <th><input type="text" class ="inbox" value="${spList.dname}"> </th>
+										<th ><font size="3">강의실</font></th>	 <th><input type="text" class ="inbox" value="${spList.lrname}" ></th>
+										<th ><font size="3">교재</font></th>		 <th><input type="text" class ="schedulebox" value="${spList.book}"></th>
+								</tr>
+								<tr>				
+									<th>강의 코드</th> 	<td><input type="text" class ="inbox" value="${spList.lnum }"></td>
+									<th> - </th> 		<td><input type="text" class ="inbox" value="${spList.dividenum }"></td>
+									<th>강의 시간</th>		<td colspan="3"><input type="text" class="schedulebox" value="${spList.schedule }">
+								</tr>
+								<tr>				
+												
+									<th ><font size="3">학점</font></th>	 <th><input type="text" value="${spList.credit}" class ="inbox"></th>
+									<th><font size="3">대상학년</font></th>	 <th><input type="text" value="${spList.grade}" class ="inbox"> </th>
+									<th ><font size="3">정원</font></th>	 <th><input type="text" value="${spList.newlimitcount}" class ="inbox"></th>
+									<th><font size="3">이수구분</font></th>	 <th><input type="text" value="${spList.division}" class ="schedulebox"> </th>
+								</tr>
 					</table>
 	
 		<br/>

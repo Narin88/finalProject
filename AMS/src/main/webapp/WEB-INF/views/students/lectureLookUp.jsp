@@ -15,7 +15,7 @@
 
 3. 검색기 만들기
 	- 이수구분(교양, 전공, ...)				== 완
-	- 개설년도		~> 필요한가? 이번 년도 이번 학기만 보여주면 되는 거 아닌가?
+	- 개설년도		 -> 전체 학년도 다 보여줘야함
 	- 캠퍼스 (위치)						== 완
 	- 요일 및 교시							== 완
 	- 대상 학년							== 완
@@ -250,7 +250,9 @@
 			email		: '${lec.email}',
 			pphone		: '${lec.pphone}',
 			pid			: '${lec.pid}',
-			opennum		: '${lec.opennum}'
+			opennum		: '${lec.opennum}',
+			evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})">확인</button>'
+			
 		}
 		<c:if test='${!empty lec.lnum}'>
 		,
@@ -288,7 +290,8 @@
 			{header: '교수', name: 'pname'},
 			{header: '강의시간', name: 'timetable'},
 			{header: '강의실', name: 'lrname'},
-			{header: '최대수용인원', name: 'limitcount'}
+			{header: '수강정원', name: 'limitcount'},
+			{header:'강의평가',name:'eavaluation'}
 		] //컬럼갯수
 		
 	});
@@ -383,5 +386,10 @@
 	    for (var k in styles) this.style[k] = styles[k];
 	    return this;
 	};
+	
+	function openpage(data){
+		var opennum = data;
+		location.href="Eresultst?opennum="+opennum
+	}
 	
 </script>

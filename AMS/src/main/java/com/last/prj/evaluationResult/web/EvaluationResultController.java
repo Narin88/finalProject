@@ -61,8 +61,10 @@ public class EvaluationResultController {
 	@ResponseBody
 	public Map<String, Object> getEvaluationResultpr(EvaluationResultVO vo){
 			Map<String, Object> map = new HashMap<String,Object>();
+			vo.setOpennum("14");
 			vo.setA1("a1");
-			map.put("q1", dao.EvaluationResult(vo));
+			System.out.println(dao.EvaluationResult(vo));
+			map.put("q1", dao.EvaluationResult(vo));  
 			vo.setA1("a2");
 			map.put("q2", dao.EvaluationResult(vo));
 			vo.setA1("a3");
@@ -75,6 +77,8 @@ public class EvaluationResultController {
 			map.put("q6", dao.EvaluationResult(vo));
 			vo.setA1("a7");
 			map.put("q7", dao.EvaluationResult(vo));
+			
+			
 		return map;
 	}
 }

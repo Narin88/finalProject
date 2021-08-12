@@ -8,8 +8,15 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <figure class="highcharts-figure">
-  <div id="container"></div>
-
+<div id = "bigbig"></div>
+  <div id="container0"></div>
+<div id="container1"></div>
+<div id="container2"></div>
+<div id="container3"></div>
+<div id="container4"></div>
+<div id="container5"></div>
+<div id="container6"></div>
+<div id="container7"></div>
 </figure>
 <head>
 <style>
@@ -75,31 +82,40 @@ input[type="number"] {
 		async: false,
 		success: function(data){
 			console.log(data);
-		var opendata = pushdata(data.q1);
-		console.log(opendata);
-	
-			draw(opendata); 
+/* 			for(i=0; i<6; i++) {   
+				var opendata = pushdata(data['q'+(i+1)]);  
+				console.log(opendata);
+				 draw(opendata, i); 
+			} */
+			var opendata = pushdata(data['q1']);  
+			 draw(opendata, 0); 
+			var opendata = pushdata(data['q2']);  
+			draw(opendata, 1); 
+			var opendata = pushdata(data['q3']);  
+			draw(opendata, 2); 
 		}
 	})//end of ajax
 
+	
 function pushdata(data){
 	var chartData = [];
 	for(i=0; i<data.length; i++){
-		var opendata = [data[i].a1 , parseInt(data[i].cnt), colors[i], label[data[i].a1] ];
+		var opendata = [data[i].a1 , parseInt(data[i].cnt), colors[i], label[data[i].a1] ]; // 잠시만 함 보구요넵
 		chartData.push(opendata);
 	}
 	return chartData;
 }
 
-function draw(data){
-Highcharts.chart('container', {
+async function draw(data, idx){
+
+await Highcharts.chart('container'+idx, {
 
 	  chart: {
 	    type: 'item'
 	  },
 
 	  title: {
-	    text: qname[i]
+	    text: qname[idx]
 	  },
 
 
@@ -123,6 +139,7 @@ Highcharts.chart('container', {
 	    endAngle: 100
 	  }]
 })
+
 }
 //
 

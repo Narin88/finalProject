@@ -69,7 +69,7 @@
 	var grid = new tui.Grid( {
 		el: document.getElementById('grid'),
 		data: clsData,
-		rowHeaders: ['checkbox'],
+		
 		pagination: true,   //페이징 처리
 	    pageOptions: {
 	    	useClient: true,   //페이징 처리
@@ -77,10 +77,10 @@
 	    }
 		,
 		columns: [
-			{header: '강의등록번호',name: 'opennum', width: 150},
+			{header: '강의등록번호',name: 'opennum', width: 130},
 			{header: '강의번호',name: 'lnum', width: 150}, //강의번호+분반
 			{header: '년도',name: 'lyear',width: 150}, //년도+학기
-			{header: '학년',name: 'grade',width: 150},
+			{header: '학년',name: 'grade',width: 120},
 			{header: '과목명',name: 'lname',width: 250},
 			{header: '교재',name: 'book',width: 250},
 			{header: '이수구분',name: 'division',width: 150},

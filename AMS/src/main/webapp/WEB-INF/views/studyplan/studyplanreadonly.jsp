@@ -289,8 +289,6 @@ $('textarea').each(function() {
 
 
 	
-</div>
-
 </body>
 <script>
 $('#createpdf').click(function() {

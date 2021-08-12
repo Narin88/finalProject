@@ -15,7 +15,6 @@
 		#{a5},
 		a6 = #{a6},
 		a7 = #{a7},
-		a8 = #{a8},
 		evalcheck ='Y'
 		where
 		opennum =

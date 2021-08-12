@@ -6,15 +6,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type = "text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>학사정보</title>
-
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
+<style>
+.createpdf{
+align: right;
+}
+
+</style>
 </head>
 <body>
-	<div>
+
+<button id="createpdf" >
+  pdf 출력하기
+</button>
+
+
+<div id="pdfwrap">
 		<div class="bigDiv">
 			<div>
 				<img src="resources/image/students/${st.picture }" alt="증명사진" class="infoImg" id="infoImg" />
@@ -139,7 +153,36 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		</div>
+
+	<script> //PDF처리
+$('#createpdf').click(function() {
+
+	  //pdf_wrap을 canvas객체로 변환
+/* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
+	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+	    doc.save('LecturePlan-file.pdf'); //pdf저장
+	    alert('클릭됨');
+	  }); */
+	  
+	  html2canvas($('#pdfwrap')[0]).then(function (canvas) {
+		  var filename = 'Student_info' + Date.now() + '.pdf'; 
+		  var doc = new jsPDF('p', 'mm', 'a4'); 
+		  var imgData = canvas.toDataURL('image/png'); 
+		  var imgWidth = 210; 
+		  var pageHeight = 295; 
+		  var imgHeight = canvas.height * imgWidth / canvas.width; 
+		  var heightLeft = imgHeight; 
+		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
+		  alert('클릭됨');
+	  });
+
+	});
+	
+</script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -366,5 +409,6 @@
 	    readImage(e.target)
 	})
 </script>
+
 </body>
 </html>

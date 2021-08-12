@@ -28,7 +28,7 @@
     select a.a1, nvl(b.cnt,0) as cnt
 		from ( 		select a1 as a1, count(a1) as cnt
 							from 	EVALUATIONRESULT
-							where opennum = 14
+							where opennum = #{opennum}
 							group by a1) b,
 					(		select level as a1,0 as cnt
 							from dual

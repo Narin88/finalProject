@@ -76,4 +76,11 @@ public class StudentsServiceImpl implements StudentsService {
 		map.studentPicUpdate(vo);
 	}
 
+
+	@Override
+	public List<StudentsVO> proLectureList(StudentsVO vo) {
+		// 지도교수 강의리스트
+		return map.proLectureList(vo);
+	}
+
 }

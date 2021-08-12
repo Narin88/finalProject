@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.students.service.impl.StudentsMapper">
 
+	<!-- 지도교수 강의정보 -->
+	<select id="proLectureList" resultType="StudentsVO">
+		SELECT l.*, li.lname, lr.lrname
+		FROM lecture l, lecture_info li, lecture_room lr
+		WHERE l.lnum = li.lnum
+		AND l.lrcode = lr.lrcode
+		AND l.pid = (SELECT pid
+		FROM students
+		WHERE sid = #{sid})
+		AND datestatus = '수강중'
+	</select>
+
 	<!-- 학생 사진 업데이트 -->
 	<update id="studentPicUpdate" parameterType="StudentsVO">
 		UPDATE students

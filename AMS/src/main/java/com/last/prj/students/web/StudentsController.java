@@ -44,13 +44,8 @@ public class StudentsController {
 		// 지도교수 정보
 		model.addAttribute("pro", pfService.professorSelect(pvo));
 
-		// 수강 신청한(했던) 과목 조회
-
-		// select
-		svo.setLyear("2021");
-		svo.setTerm(1);
-
-		model.addAttribute("al", stService.appliedLecture(svo));
+		// 지도교수 강의정보
+		model.addAttribute("al", stService.proLectureList(svo));
 		
 		return "students/studentInfo.tiles";
 	}

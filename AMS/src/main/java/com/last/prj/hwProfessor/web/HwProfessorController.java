@@ -188,6 +188,10 @@ public class HwProfessorController {
 		
 		return service.hwSubmitDel(vo);
 	}
+	
+	
+	
+	
 	//학생 제출한과제 전체삭제
 	@RequestMapping("submitDelAll")
 	public String submitDelAll(HwProfessorVO vo) {
@@ -195,6 +199,8 @@ public class HwProfessorController {
 		service.submitDelAll(vo);
 		return "redirect:hwList"; 
 	}
+	
+	
 	
 	//교수가 등록한 과제삭제
 	@RequestMapping("hwPfDelete")

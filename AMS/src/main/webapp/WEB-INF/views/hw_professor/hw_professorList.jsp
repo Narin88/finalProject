@@ -299,7 +299,14 @@
 										}
 									</script>
 								</div>
-								<div id="grid2"></div>
+								
+								
+							
+   								  <div id="select-box" style="width: 200px"></div>
+								<div id="grid2">
+									
+								</div>
+								<button type="button" id="selectDel">삭제</button>
 								<!-- submit_SID값으로 학생정보 가져오기 -->
 								 <br>
 													
@@ -311,6 +318,9 @@
 		      </div>
 		 
 		    </div>
+		    
+		
+		    	
 		    
 		    <!--테이블 페이징 -->
 		    <script>
@@ -425,44 +435,76 @@
 						$('<button type="button" id="hwDeleteAll" style="float: right;margin-right: 50px;" onclick="submitDelFuc();">전체삭제</button>').appendTo('.noSubmit');
 						}
 						
-						
+					
+					
+					/*
+				    class CustomSliderRenderer {
+				      constructor(props) {
+				        const el = document.createElement('button');
+				  
+						el.innerText='삭제';
+						el.className="btn btn-info";
+				        this.el = el;
+				        this.render(props);
+				      }
 
-		  			/*	var clsData = [
-					<c:forEach items="${result }" var="list">
-					{
+				      getElement() {
+				        return this.el;
+				      }
+
+				      render(props) {
+				        this.el.value = String(props.value);
+				      }
+				    }
+				
+					var asd=[];	
+					console.log(JSON.stringify({ x: 5, y: 6 }));
+				    for(i=0;i<data.length;i++){
+				    	
+				    	var obj={};
+						console.log(data[i].name);
+						var asf=data[i].name;
+						obj["name"]
+						asd.push(asf);
+					}	
 						
-					},
-					</c:forEach>
-					]; //컬럼DATA	
-						
-						
-						$.each(data,function(i,item){
-						//	console.log("i :" + i);
-						//	console.log("i :" + item.name);
-						//	var a='<button type="button">반복문테스트</button>';
-						//	console.log(a);
-						//	console.log(JSON.stringify(a));
-						//	data.push("i");
-							});
-						
-						console.log(data);
-						
-						
-						var clsData = [
-							$.each(data,function(i,item){
-								{
-									data:'<button type="button">반복문테스트</button>'
-									 
-									},
-							}
-						]; //컬럼DATA	
-						
-					*/
-						
+				    */
+				
+					//grid start
+			  					
+					
+							//제출한 학생과제 삭제 delete & 점수 수정 update
+							//grid api-source
+							const dataSource = {
+							  withCredentials: false,  
+							  initialRequest: false,
+							  contentType: 'application/json',
+							  api: {
+								readData: {},
+								deleteData: {
+									url: 'hwSubmitDel',
+									method: 'DELETE' }
+								}
+							    updateData: {
+							      url: 'scoreIn', //점수 기능
+							      method: 'PUT' //funtion 메서드
+							    }
+							    
+							  }
+							};
+					
+					
+					
+					
+					
+					
+	  			
+					
 						
 			  				 // GRID 를 보여준다.
 				  			var grid = new tui.Grid( {
-				  				
+				  				data:dataSource,
+				  				rowHeaders: ['checkbox'],	
 				  				bodyHeight:430,
 								el: document.getElementById('grid2'),
 								pagination: true,   //페이징 처리
@@ -472,17 +514,27 @@
 							    }
 								,
 				  			columns: [
-				  				{header: '학생학번',name: 'submitSid',width:100},
+				  				{header: '학생학번',name: 'submitSid',width:100,},
 				  				{header: '학생이름',name: 'name',width:100},
 				  				{header: '제출파일',name: 'submit_file',width:100},
-				  				{header: '제출날짜',name: 'submit_date',width:100},
+				  				{header: '제출날짜',name: 'submit_date',width:150},
 				  				{header: '학생코멘트',name: 's_comment'},
-				  				{header: '점수',name: 'score',width:100},
-				  				{header: '점수버튼',name: 'name',width:100},
-				  				{header: '삭제',name: 'submitBtn',width:100}
+				  				{header: '점수',name: 'score',width:100,editor:'text'},
+				  				{header: '점수버튼',name: '',width:100},
+
 				  			], //컬럼갯수
-				  			data: data
+				  		
 				  		} );
+						//grid end
+			  				 
+			  				 
+			  				 
+			  		
+			  				grid.resetData(data)
+			  				 
+				  		
+						
+						
 						
 							/*for(var i of data){
 							var a="";
@@ -577,8 +629,16 @@
 				},
 				dataType:"JSON",
 				success:function(){
-					alert("삭제 되었습니다");
-					location.reload();
+					if(confirm(' 삭제하시겠습니까 ? ')==true){
+						alert("삭제가 완료되었습니다");
+						alert("삭제 되었습니다");
+						location.reload();
+					}else{
+						
+						return false;
+					}	
+				
+					
 				}
 				
 				});
@@ -591,7 +651,9 @@
 			
 		
 			
-			<div id="grid" ></div>
+			<div id="grid" >
+			
+			</div>
 			<script>
 			
 					  		//grid start
@@ -641,11 +703,13 @@
 						
 								
 					  			grid.on('dblclick', ev => {
+					  			
+					  			
 					        		//console.log('더블클릭!', ev.rowKey);
 					        		var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 					        		
 					        		
-					        		console.log(data); 	
+					        	//	console.log(data); 	
 					        	});
 								
 					  			</script>

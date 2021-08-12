@@ -38,6 +38,7 @@ public class StudyplanController {
 		svo.setLyear(vo.getLyear());
 		svo.setTerm(vo.getTerm());
 		model.addAttribute("spList", dao.studyPlanList(svo));
+		System.out.println("====================="+dao.studyPlanList(svo));
 
 		return "studyplan/studyplanlist.tiles";
 	}
@@ -97,12 +98,13 @@ public class StudyplanController {
 //	 */
 
 	 @RequestMapping("/readOnly2")
-	 public String studyplanReadonlyPage(Model model, StudentsVO vo , StudyplanJoinVO vo2) {
+	 public String studyplanReadonlyPage(Model model, StudentsVO vo , StudyplanJoinVO vo2, HttpSession session) {
 		 
 		 // 페이지에서 학생에게서 받은 정보들을 대입 
-		 vo2.setPid(vo.getPid());
+		 String pid = (String)session.getAttribute("id");
+		 vo2.setPid(pid);
 		 vo2.setOpennum(vo.getOpennum());
-		 
+		 System.out.println(vo2);
 		 model.addAttribute("spList", dao.selectresult(vo2));
 		 
 		 return "studyplan/studyplanreadonly.tiles";

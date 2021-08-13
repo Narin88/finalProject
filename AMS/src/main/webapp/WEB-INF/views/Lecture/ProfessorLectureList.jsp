@@ -245,7 +245,7 @@ var clsData = [
 			{header: '이수구분',name: 'division',width: 100},
 			{header: '정원',name: 'newlimitcount',width: 80},
 			{header: '강의실',name: 'lrname',width: 80},
-			{header: '시간표',name: 'timetable',width: 150, editor: 'text'},
+			{header: '시간표',name: 'timetable',width: 150},
 			{header: '강의평가', name: 'evaluation', width:150}
 		] //컬럼갯수
 

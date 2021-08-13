@@ -19,7 +19,7 @@ public interface ScoreManaMapper {
 	List<LectureVO> scoreList(String sid);
 	int deletescore(ScoreManaVO ScoreManaVO);
 	List<PreEnrolmentVO> getpreenrolment(String sid);
-	
+	int timetablecheck(LectureVO vo);
 	
 	//모달창 처리내역
 	LectureVO oneselectLecture(LectureVO vo); 

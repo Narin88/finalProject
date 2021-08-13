@@ -260,34 +260,39 @@ $(function(){
 				type: 'POST',
 				data: {timetable: timetable, opennum: opennum},
 				success: function(result){
-					
+					if(result>0){
+						alert('같은 시간에 등록된 수업이 있습니다.');
+						return false;
+					}else{
+						$.ajax({
+							url: 'AjaxRetakeChek',
+							type: 'POST',
+							data: {opennum: opennum},
+							success: function(result){
+							if(result=='001'){ //insert
+								var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
+								if(con){
+									location.href='AjaxEnrolmentInsert?opennum='+opennum
+								}else{
+									return false;
+									}
+								}
+							else{ //insert
+								var con = confirm('강의번호 '+opennum+'의 과목 '+lname+' 신청하시겠습니까?')
+								if(con){
+									location.href='AjaxEnrolmentInsert?opennum='+opennum
+								}else{
+									return false;
+									}
+								}
+							}
+						})
+					}
 				}
 			})
 			
 			
-			$.ajax({
-				url: 'AjaxRetakeChek',
-				type: 'POST',
-				data: {opennum: opennum},
-				success: function(result){
-				if(result=='001'){ //insert
-					var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
-					if(con){
-						location.href='AjaxEnrolmentInsert?opennum='+opennum
-					}else{
-						return false;
-						}
-					}
-				else{ //insert
-					var con = confirm('강의번호 '+opennum+'의 과목 '+lname+' 신청하시겠습니까?')
-					if(con){
-						location.href='AjaxEnrolmentInsert?opennum='+opennum
-					}else{
-						return false;
-					}
-				}
-			}
-			})
+			
 	});
 
 //grid end

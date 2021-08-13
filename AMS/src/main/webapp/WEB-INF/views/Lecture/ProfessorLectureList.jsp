@@ -67,8 +67,8 @@
 	<h2>강의 목록</h2>
 </div>
 <div align = "right">
-<button id="updateBtn">수정하기</button>
-<button id="deleteBtn">삭제하기</button>
+	<input type="button" id ="updateBtn" value="수정">
+	<input type="button" id ="deleteBtn" value="삭제">
 </div>
 
 <div id="grid"></div>
@@ -197,7 +197,7 @@ var clsData = [
 	<c:forEach items="${lectures }" var="lec">{
 		opennum: '${lec.opennum}', lnum: '${lec.lnum}-${lec.dividenum}', lyear: '${lec.lyear}-${lec.term}', grade: '${lec.grade}',
 		lname: '${lec.lname}', book: '${lec.book}', division: '${lec.division}', newlimitcount: '${lec.newlimitcount}', lrname: '${lec.lrname}',
-		timetable: '${lec.timetable}' , evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})">확인</button>'
+		timetable: '${lec.timetable}' , evaluation: '<input type="button" id ="openbtn${lec.opennum}" value="확인" onclick="openpage(${lec.opennum})">'
 	}
 	<c:if test='${!empty lec.opennum}'>
 	,
@@ -219,7 +219,8 @@ var clsData = [
 	    deleteData: {
 	    	url: 'lectureDelete',
 	    	method: 'PUT' 
-	    	}
+	    	},
+	    reloadData:{}
 	  }
 	};
 		
@@ -236,17 +237,17 @@ var clsData = [
 	    }
 		,
 		columns: [
-			{header: '강의등록번호',name: 'opennum', width: 100},
-			{header: '강의번호',name: 'lnum', width: 100}, //강의번호+분반
-			{header: '년도',name: 'lyear',width: 100}, //년도+학기
-			{header: '학년',name: 'grade',width: 100},
-			{header: '과목명',name: 'lname',width: 200},
-			{header: '교재',name: 'book',width: 200, editor: 'text'},
-			{header: '이수구분',name: 'division',width: 100},
-			{header: '정원',name: 'newlimitcount',width: 80},
-			{header: '강의실',name: 'lrname',width: 80},
-			{header: '시간표',name: 'timetable',width: 150},
-			{header: '강의평가', name: 'evaluation', width:150}
+			{header: '강의등록번호',name: 'opennum'},
+			{header: '강의번호',name: 'lnum'}, //강의번호+분반
+			{header: '년도',name: 'lyear'}, //년도+학기
+			{header: '학년',name: 'grade'},
+			{header: '과목명',name: 'lname'},
+			{header: '교재',name: 'book',editor: 'text'},
+			{header: '이수구분',name: 'division'},
+			{header: '정원',name: 'newlimitcount'},
+			{header: '강의실',name: 'lrname'},
+			{header: '시간표',name: 'timetable'},
+			{header: '강의평가', name: 'evaluation'}
 		] //컬럼갯수
 
 	} );
@@ -281,6 +282,7 @@ function openpage(data){
 		  grid.request('updateData', {
 		    checkedOnly: false
 		  });
+		 
 	}
 // 업데이트 실행 이벤트
 	grid.on('response', ev => {

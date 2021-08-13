@@ -45,7 +45,7 @@
 		 <button id="seach">검색</button>
 	</div>
 	<div align="right">
-		<button id="createBtn">등록</button>
+		<input type="button" id="createBtn" value="등록">
 	</div>	
 </div>
 

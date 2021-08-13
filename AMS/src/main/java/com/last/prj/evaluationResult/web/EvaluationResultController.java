@@ -38,7 +38,7 @@ public class EvaluationResultController {
 		model.addAttribute("st", stService.scoreView(vo2));
 		dao.EvaluationInsert(vo);
 		System.out.println(dao.EvaluationInsert(vo));
-		return "scoreView";
+		return "redirect:scoreView";
 	}
 	
 	@RequestMapping("EresultSt")//학생 결과 확인 페이지

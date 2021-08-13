@@ -171,7 +171,7 @@
 			{header: '강의시간', name: 'timetable'},
 			{header: '강의실', name: 'lrname'},
 			{header: '교수', name: 'pname'},
-			{header:'강의평가',name:'eavaluation'}
+			{header:'강의평가',name:'evaluation'}
 			
 		] //컬럼갯수
 	});

@@ -98,11 +98,7 @@ tr td th{
     		frm.a6.focus();
     		return false;
     	}
-		if(frm.a7.value == ""){
-    		alert("문항7 답변을 입력하세요");
-    		frm.a7.focus();
-    		return false;
-    	}
+		
 		frm.submit();
 		alert("한 학기 동안 고생하셨습니다.");
 		
@@ -141,7 +137,7 @@ tr td th{
 				<br />
 
 
-				<form id="frm" name="frm" action="EvaluationResult" method="post">
+				<form id="frm" name="frm" action="EvaluationInsert" method="post">
 					<sec:csrfInput />
 					<input type="hidden" name="opennum" value="${eva.opennum }">
 					<input type="hidden" name="evalcheck" value="${eva.evalcheck }">
@@ -211,7 +207,7 @@ tr td th{
 							
 							<tr>
 							<th>7. 강의 코멘트를 남겨주세요.</th>
-								<td colspan="5"><textarea id="limit" name="a8" placeholder="선택문항_50자까지 작성 가능합니다."style="resize: none;width:100%;"></textarea></td>
+								<td colspan="5"><textarea id="limit" name="a7" placeholder="선택문항_50자까지 작성 가능합니다."style="resize: none;width:100%;"></textarea></td>
 							
 							</tr>
 						</table>

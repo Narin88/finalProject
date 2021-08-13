@@ -99,7 +99,7 @@
 								lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}${s.dividenum}', pname: '${s.pname}',
 								mname:'${s.mname}',dname: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 								division: '${s.division}', credit: '${s.credit}', 
-								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}">수정</button><button onclick=location.href="readOnly2?opennum=${s.opennum}">읽기전용</button>'
+								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}">수정</button>'
 										
 						},
 					</c:otherwise>
@@ -135,6 +135,6 @@
 		} );
 	</script>
 	
-
+<!-- <button onclick=location.href="readOnly2?opennum=${s.opennum}">읽기전용</button> -->
 </body>
 </html>

@@ -5,10 +5,10 @@
 	<select id="selectone" resultType="EvaluationVO"	parameterType="string">
 select distinct l.lyear, l.term, li.lname,l.opennum, r.evalcheck
 		from lecture l, lecture_info li, students s, SCORE_MANA sm, EVALUATIONRESULT r
-		where s.sid = '21001001'
+		where s.sid = #{sid}
 		and l.lnum = li.lnum
 		and sm.OPENNUM = l.OPENNUM
-		and l.opennum = 14
+		and l.opennum = #{opennum}
     and r.evalcheck = 'N'
 		and sm.sid = s.sid
 	</select>

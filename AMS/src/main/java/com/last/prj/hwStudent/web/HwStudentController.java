@@ -114,7 +114,7 @@ public class HwStudentController {
 		
 		int result= service.hwSSubmit(vo);
 		
-		return "redirect:hwSelect";
+		return "redirect:submitList";
 	}
 	
 	

@@ -1,14 +1,11 @@
 package com.last.prj.hwProfessor.service;
 
 import java.util.Date;
+import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class HwProfessorVO {
 	
 	private String registerId;		//과제등록번호
@@ -25,5 +22,8 @@ public class HwProfessorVO {
 	private String submitId;	//과제제출한 고유번호
 	private String submitSid;	//학생번호
 	private String score;		//점수
+	
+	private List<HwProfessorVO> deletedRows;
+	private List<HwProfessorVO> updatedRows;
 	}
 

@@ -66,10 +66,7 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 		return map.hwSearchList(vo);
 	}
 
-	@Override
-	public int hwScoreIn(HwProfessorVO vo) {
-		return map.hwScoreIn(vo);
-	}
+	
 	
 	@Override
 	public List<Map<String, Object>> hwPfInsertSelect(HwProfessorVO vo) {
@@ -84,10 +81,24 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 
 	@Override
 	public int hwSubmitDel(HwProfessorVO vo) {
+		for(int i=0;i<vo.getDeletedRows().size();i++) {
+			map.hwSubmitDel(vo.getDeletedRows().get(i));
+		}
 		
-		return map.hwSubmitDel(vo);
+		
+		return 0;
 	}
 
+	
+	
+	@Override
+	public int hwScoreIn(HwProfessorVO vo) {
+		for(int i=0;i<vo.getUpdatedRows().size();i++) {
+			map.hwScoreIn(vo.getUpdatedRows().get(i));
+		}
+		
+		return 0;
+	}
 	@Override
 	public int submitDelAll(HwProfessorVO vo) {
 		

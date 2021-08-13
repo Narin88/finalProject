@@ -291,10 +291,7 @@
 												$('.unsubmit').show();
 												$('.submit').show();
 											}else if(e.value=="submit"){
-											var a=	$('#grid2').data('column-name');
-											console.log(a);
-												$('.submit').show();
-												$('.unsubmit').hide();
+											
 											}else if(e.value=="noSubmit"){
 												$('.submit').hide();
 												$('.unsubmit').show();
@@ -304,10 +301,11 @@
 								</div>
 								
 								
-							
+									
    								  <div id="select-box" style="width: 200px"></div>
-   								  <button style="float:right;margin-top: -35px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
-   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn">점수정정</button>
+   								  <button style="float:left;    margin-top: -53px; margin-left: 320px;" id="selectScoreBtn">검색</button>
+   								  <button style="float:right;margin-top: -50px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
+   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -50px;" id="selectScoreBtn">점수정정</button>
 								<div id="grid2">
 									
 								</div>
@@ -433,8 +431,8 @@
 						.append($('</select>>'))		
 						.appendTo('.noSubmit');		
 						//$('</form>')
-						$('<h4 style="color:brown; float:left;"> 목록 선택 </h4>').appendTo('.noSubmit');
-					
+						$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4><br><br>').appendTo('.noSubmit');
+						
 						
 						
 					
@@ -462,11 +460,6 @@
 							    
 							  }
 							};
-					
-					
-			
-					
-	  			
 					
 						
 			  				 // GRID 를 보여준다.
@@ -499,17 +492,23 @@
 			  		
 			  			grid.resetData(data)
 			  			
-			  			setInterval(eachTest , 500);
+			  			setInterval(eachTest , 100);
 							
 						function eachTest(){	
 				  			$('[data-column-name="submit_file"]').each(function(index, item){
+				  			
 				  				if($(this).text()==""){
-				  					$(this).parent().children().css("backgroundColor","gray");
-				  				};
+				  				console.log($(this).closest('tr').find('td').eq(4).html());
+				  				$(this).parent().children().css("background-Color","white");
+							  						$(this).text("제출된과제없음");
+							  						$(this).css("text-align","center");
+							  						$(this).css("color","red");
+				  				}
+				  				
 				  					
-				  			});			  			
-						}	
-						
+				  					  			
+						})	
+						};
 			  			//삭제 버튼 누를때  함수 실행
 			  			document.getElementById('selectDelBtn').addEventListener('click', hwSubmitDel);
 						
@@ -667,8 +666,8 @@
 								<c:forEach items="${result }" var="list">
 								{
 									lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
-									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.d HH:mm" /> ',
-									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월d일"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
+									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지 <c:if test="${list.hwstatus >= 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><br><span style="color:blue;">마감</span></c:if>'
 									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
 									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
 									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
@@ -873,9 +872,12 @@
 					var b=$("#pcoId").val();
 					udFrm.pcomment.value=b;
 					var filen=$('#file').val();
+					var pdate=$('#startDate').val();
+					console.log(b);
+					console.log(pdate);
 					console.log(filen);
-					if(filen == ""){
-						alert("파일을 입력해주세요");
+					if(filen == "" || pdate == "" || b == ""){
+						alert("입력되지 않은 값이 있습니다.");
 					}else{
 							if(confirm(' 입력값으로 변경하시겠습니까 ? ')==true){
 								alert("변경이 완료되었습니다");

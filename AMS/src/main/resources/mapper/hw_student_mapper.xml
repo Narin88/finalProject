@@ -37,7 +37,7 @@
 					,hw.register_date	"registerDate"
 					,hw.register_id		"registerId"
 					,l.opennum			"opennum"
-					,round((hw.pperiod-sysdate)*24*60*60,2) "hwstatus"
+					, to_date(to_char(hw.pperiod,'yyyymmdd'))-trunc(sysdate)  "hwstatus"
 					,(select count(*) from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "submitCheck"
 					,(select hs.score from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "score"
 		  FROM 		lecture l 
@@ -101,7 +101,7 @@
             ,hp.register_id	"registerId"
             ,hs.submit_sid	"submitSid"
             ,hp.opennum	"opennum"
-            ,round((hp.pperiod-sysdate)*24*60*60,2) "hwstatus"
+            ,to_date(to_char(hp.pperiod,'yyyymmdd'))-trunc(sysdate)  "hwstatus"
             ,hp.register_date	"registerDate"
 	  FROM  hw_professor hp	
       JOIN  hw_student hs

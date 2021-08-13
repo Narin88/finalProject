@@ -15,7 +15,7 @@ public interface HwProfessorMap {
 	List<Map<String, Object>> hwSearchList(HwProfessorVO vo);
 	
 	//과제 학생점수 IN
-		int hwScoreIn(HwProfessorVO vo);
+	int hwScoreIn(HwProfessorVO vo);
 	
 	//(교수)등록한과제 전체조희
 	List<Map<String, Object>> hw_professorSelectList(HwProfessorVO vo);

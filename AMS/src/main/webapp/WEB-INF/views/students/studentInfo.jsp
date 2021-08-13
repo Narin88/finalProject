@@ -57,8 +57,8 @@
 				</table>
 			</div>
 		</div>
-		<sec:authorize access="hasRole('ROLE_PRO')">
-			<div align="left" style="margin-left: 128px;">
+		<%-- <sec:authorize access="hasRole('ROLE_PRO')"> --%>
+			<div align="left" style="margin-left: 120px;">
 				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
 					<label class="btn btn-secondary btn-sm" style="margin-top: 7px;">
 		    		    사진변경 <input type="file" style="display: none;" id="changeImg" name="pic">&nbsp;
@@ -66,7 +66,7 @@
 	   				 <button type="submit" class="btn btn-secondary btn-sm">확인</button>
 	   			</form>
 			</div>
-		</sec:authorize>
+		<%-- </sec:authorize> --%>
 		<br /> <br />
 		<div class="bigDiv2">
 			<ul class="nav nav-tabs">

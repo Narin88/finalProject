@@ -1,6 +1,8 @@
 package com.last.prj.students.web;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +48,9 @@ public class StudentsController {
 
 		// 지도교수 강의정보
 		model.addAttribute("al", stService.proLectureList(svo));
+		
+		String realPath = session.getServletContext().getRealPath("/resources/img/students");
+		System.out.println(realPath);
 		
 		return "students/studentInfo.tiles";
 	}

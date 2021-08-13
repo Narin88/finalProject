@@ -2,18 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- 
-
-
-할 일
-
-1. 테이블 높이 일정하도록 css 먹이기
-
-
-
- -->
-
-
 <style>
 	#my_offer {
 		display: none;

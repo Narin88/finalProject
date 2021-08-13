@@ -18,4 +18,6 @@ public interface StudentsService {
 	StudentsVO chkSidEmail(StudentsVO vo); 			// 비밀번호 변경 학번 이메일 체크
 	void studentPicUpdate(StudentsVO vo);			// 사진 수정
 	List<StudentsVO> proLectureList(StudentsVO vo);	// 지도교수 강의정보
+	
+	List<StudentsVO> whereRoom();					// 강의실 정보 불러오기
 }

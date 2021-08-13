@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.common.ImageUpload;
+import com.last.prj.preenrolment.service.PreEnrolmentService;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.students.service.StudentsService;
@@ -30,6 +31,9 @@ public class StudentsController {
 
 	@Autowired
 	private ProfessorService pfService;
+	
+	@Autowired
+	private PreEnrolmentService preService;
 
 	////////////////////////////////////////////////////////////
 
@@ -136,13 +140,12 @@ public class StudentsController {
 		// 강의 시간표들 조회 (수강 신청 과정)
 
 		// common code
-		// vo.setLyear("2021");
 		vo.setTerm(1);
 
-		System.out.println("\n조회 결과 : " + stService.lectureLookUp(vo) + "\n");
-
 		model.addAttribute("lec", stService.lectureLookUp(vo));
-
+		model.addAttribute("room", stService.whereRoom());
+		model.addAttribute("depart", preService.preDepartments());
+		
 		return "students/lectureLookUp.tiles";
 	}
 

@@ -83,4 +83,11 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.proLectureList(vo);
 	}
 
+
+	@Override
+	public List<StudentsVO> whereRoom() {
+		// 강의실 정보 불러오기
+		return map.whereRoom();
+	}
+
 }

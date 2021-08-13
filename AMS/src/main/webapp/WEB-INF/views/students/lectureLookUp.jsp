@@ -3,31 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<!-- 
-
-할 일
-
-1. 컬럼 추가		== 완
-	- 순번
-	- 정원
-	
-2. 컬럼 출력 순서 및 양식 통일
-
-3. 검색기 만들기
-	- 이수구분(교양, 전공, ...)				== 완
-	- 개설년도		 -> 전체 학년도 다 보여줘야함
-	- 캠퍼스 (위치)						== 완
-	- 요일 및 교시							== 완
-	- 대상 학년							== 완
-	- 학과 코드, 전공 코드					== 미확인
-
-4. 클릭 이벤트
-	- 교과목 누르면 강의 계획서 보이기			== 미완
-	- 담당 교수 이름 누르면 교수 정보 보이기		== 완
-	- 강의 만족도 (미)
-	- 시인성
- -->
-
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
 		text-align: center;
@@ -92,9 +67,22 @@
 <div align = "center">
 	<h2>강의 조회 페이지</h2>
 		<div class = "selectArea">
-			<font>전공 : </font>
-			<select name = "mcode">
+			<font>학과 : </font>
+			<select name = "dname" id = "dname">
 				<option value = "">전체</option>
+				<!-- 
+				<option value = "전기전자공학">전기전자공학</option>
+				<option value = "컴퓨터공학">컴퓨터공학</option>
+				<option value = "화공신소재공학">화공신소재공학</option>
+				 -->
+				<c:forEach items = "${depart }" var = "depart">
+					<option value = "${depart.dname }">${depart.dname }</option>
+				</c:forEach>
+			</select>
+			<font>전공 : </font>
+			<select name = "mcode" id = "mcode">
+				<option value = "">선택</option>
+				<!-- 
 				<option value = "301">게임모바일 공학전공</option>
 				<option value = "302">디지펜게임 공학전공</option>
 				<option value = "304">신소재 공학전공</option>
@@ -102,35 +90,27 @@
 				<option value = "305">전자 공학전공</option>
 				<option value = "300">컴퓨터 공학전공</option>
 				<option value = "303">화학 공학전공</option>
+				 -->
 			</select>
-			<font>학과 : </font>
-			<select name = "dname">
-				<option value = "">전체</option>
-				<option value = "전기전자공학">전기전자공학</option>
-				<option value = "컴퓨터공학">컴퓨터공학</option>
-				<option value = "화공신소재공학">화공신소재공학</option>
-			</select>
-			<!-- <select name = "dcode">	dcode???? 이거로 division 구분하면 전공은ㅇ ㅓ떻게 구분??
-				<option value = "">교양 전공 선택</option>
-				<option value = "001">전공</option>
-				<option value = "002">전공선택</option>
-				<option value = "003">공통교양</option>
-				<option value = "">전체</option>
-			</select> -->
 			<div class = "lecture_division">
 				<font>구분 : </font>
 				<input type = "radio" name = "division" value = "교양">교양
-				<input type = "radio" name = "division" value = "전공">전공	<!-- 교양 체크하면 일반교양 공통교양, 전공 체크하면 전공필수 전공선택으로 결과값이 나와야하는데 쿼리 어떻게 짜지?-->
+				<input type = "radio" name = "division" value = "전공">전공
 				<input type = "radio" name = "division" value = "대학원">대학원	<!-- 없음 -->
 				<input type = "radio" name = "division" value = "" checked>전체
 			</div>
 			<font>위치 : </font>
 			<select name = "location">
 				<option value = "">전체</option>
+				<!-- 
 				<option value = "경영대">경영대</option>
 				<option value = "공대">공대</option>
 				<option value = "사회대">사회대</option>
 				<option value = "인문대">인문대</option>
+				 -->
+				 <c:forEach items = "${room }" var = "room">
+				 	<option value = "${room.location }">${room.location }</option>
+				 </c:forEach>
 			</select>
 			<br>
 			<font>학년 : </font>
@@ -392,4 +372,33 @@
 		location.href="Eresultst?opennum="+opennum
 	}
 	
+	// 검색 컬럼 변화
+	$("#dname").change(function(){
+		
+		let dname = $(this).val();
+		let mcode;
+		
+		if (dname == "") {
+			$(`select[name = mcode] option`).remove();
+			mcode += `<option value = "">선택</option>`;
+			$('#mcode').append(mcode);
+		} else {
+			$(`select[name = mcode] option`).remove();
+			
+			$.ajax({
+				url: 'getMajorList',
+				type: 'GET',
+				data: {dname: dname},
+				success: function(result) {
+					$.each(result, function(i, v){
+						//mcode += `<option value = ${v.mcode}>${v.mname}</option>`;
+						//console.log(v);
+						//console.log(v.mcode);
+						mcode += '<option value="'+v.mname+'">'+v.mname+'</option>';
+					});
+					$('#mcode').append(mcode);
+				}
+			});
+		}
+	});
 </script>

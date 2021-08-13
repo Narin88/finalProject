@@ -27,8 +27,12 @@ align: right;
   pdf 출력하기
 </button>
 
-
 <div id="pdfwrap">
+
+	<div>
+	&nbsp<br>
+	&nbsp<br>
+
 		<div class="bigDiv">
 			<div>
 				<img src="resources/image/students/${st.picture }" alt="증명사진" class="infoImg" id="infoImg" />
@@ -152,6 +156,7 @@ align: right;
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		</div>
 

@@ -5,6 +5,9 @@
 <html>
 <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 <head>
+<script type = "text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <style>
  .container23{
@@ -66,7 +69,13 @@ function sub(){
 <title>강의 계획서 수정</title>
 </head>
 <body>
-<div class="container23">
+
+<button id="createpdf">
+  pdf 생성
+</button>
+
+
+<div class="container23" id="pdfwrap">
 	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
 	<p>${spList.lyear}년도 ${spList.term} 학기</p>
@@ -300,6 +309,33 @@ function sub(){
 </div>
 
 </body>
+<script>
+$('#createpdf').click(function() {
+	  //pdf_wrap을 canvas객체로 변환
+/* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
+	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+	    doc.save('LecturePlan-file.pdf'); //pdf저장
+	    alert('클릭됨');
+	  }); */
+	  
+	  html2canvas($('#pdfwrap')[0]).then(function (canvas) {
+		  var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
+		  var doc = new jsPDF('p', 'mm', 'a4'); 
+		  var imgData = canvas.toDataURL('image/png'); 
+		  var imgWidth = 210; 
+		  var pageHeight = 295; 
+		  var imgHeight = canvas.height * imgWidth / canvas.width; 
+		  var heightLeft = imgHeight; 
+		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
+		  alert('클릭됨');
+	  });
+
+	});
+	
+</script>
 </html>
 
 

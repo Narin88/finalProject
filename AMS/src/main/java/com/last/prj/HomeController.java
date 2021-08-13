@@ -39,7 +39,7 @@ public class HomeController {
 	@Autowired
 	private LogService logService;
 
-	@RequestMapping("home")
+	@RequestMapping("home2")
 	public String home() {
 		try {
 			InetAddress inetAddress = InetAddress.getLocalHost();
@@ -49,7 +49,7 @@ public class HomeController {
 			e.printStackTrace();
 		}
 
-		return "home";
+		return "tiles/home2.tiles";
 	}
 
 	@RequestMapping("uploadTest")

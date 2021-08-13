@@ -17,7 +17,7 @@
 		<security:form-login 
 						login-page="/goLogin"
 						login-processing-url="/logincheck"
-						default-target-url="/home"
+						default-target-url="/home2"
 						username-parameter="id"
 						password-parameter="pwd"
 						authentication-success-handler-ref="customSuccessHandler"
@@ -33,19 +33,19 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query=
-					"select SID, '{noop}' || PWD, 1
+					"select SID, PWD, 1
 					from role_chk
 					where sid = ?"
 				authorities-by-username-query=	
 					"select sid, ROLE_NAME
 					from role_chk
 					where sid = ?" />
-					<!-- <security:password-encoder hash="bcrypt" /> -->
+					<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
 	<beans:bean id="customSuccessHandler" class="com.last.prj.common.CustomSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/" />
-	</beans:bean>
+	</beans:bean>	
 
 </beans:beans>

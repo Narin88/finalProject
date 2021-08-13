@@ -112,7 +112,7 @@ public class StudyplanController {
 
 	
 	//홈2
-	@RequestMapping("/home2")
+	@RequestMapping("home")
 	public String home2(Model model,HttpSession session,StudentsVO vo) {
 		
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -121,7 +121,7 @@ public class StudyplanController {
 		model.addAttribute("sr",vo);
 		//세션 아이디 값 가져오기 
 	    session.setAttribute("id", userDetails.getUsername());
-		return "studyplan/home2.tiles";
+		return "home";
 	}
 
 }

@@ -31,7 +31,6 @@
           visitTime: '${log.visitTime}',
           visitAgent: '${log.visitAgent}',
           visitCookie: '${log.visitCookie}',
-          button: "<button type='button'>버튼</button>",
         },
         </c:forEach>
         ]; //컬럼DATA
@@ -54,7 +53,6 @@
           {header: '방문시간', name: 'visitTime', align: "center", width: 200},
           {header: '사용브라우저', name: 'visitAgent', align: "center", width: 200},
           {header: '쿠키값', name: 'visitCookie', align: "center", width: 1200},
-          {header: '버튼', name: 'button', align: "center", width: 200},
         ], //컬럼갯수
         data: clsData
       });

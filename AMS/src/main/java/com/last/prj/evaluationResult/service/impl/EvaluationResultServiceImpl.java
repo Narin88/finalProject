@@ -21,7 +21,13 @@ public class EvaluationResultServiceImpl implements EvaluationResultService {
 
 	@Override
 	public List<EvaluationResultVO> EvaluationResult(EvaluationResultVO vo) {
+		
 		return map.EvaluationResultpr(vo);
+	}
+
+	@Override
+	public List<EvaluationResultVO> EvaluationQ7Result(EvaluationResultVO vo) {
+		return map.EvaluationQ7Result(vo);
 	}
 
 

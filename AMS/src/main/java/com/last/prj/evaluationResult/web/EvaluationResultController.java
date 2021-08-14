@@ -1,21 +1,18 @@
 package com.last.prj.evaluationResult.web;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.last.prj.evaluation.service.EvaluationVO;
 import com.last.prj.evaluationResult.service.EvaluationResultService;
 import com.last.prj.evaluationResult.service.EvaluationResultVO;
 import com.last.prj.students.service.StudentsService;
@@ -48,11 +45,10 @@ public class EvaluationResultController {
 	}
 	
 	@RequestMapping("Eresultpro")//교수 결과 확인 페이지
-	public String EvaluationResultpr(Model model, HttpSession session, EvaluationResultVO vo) {
+	public String EvaluationResultpr(Model model, EvaluationResultVO vo) {
 		model.addAttribute("num",vo.getOpennum());
-		
-		model.addAttribute("data",dao.EvaluationResult(vo));
-		System.out.println(dao.EvaluationResult(vo));
+		model.addAttribute(dao.EvaluationQ7Result(vo));
+		System.out.println(dao.EvaluationQ7Result(vo));
 		
 		return "evaluation/evaluation_Result_pro.tiles";
 	}
@@ -61,22 +57,12 @@ public class EvaluationResultController {
 	@ResponseBody
 	public Map<String, Object> getEvaluationResultpr(EvaluationResultVO vo){
 			Map<String, Object> map = new HashMap<String,Object>();
-			vo.setOpennum("14");
-			vo.setA1("a1");
-			System.out.println(dao.EvaluationResult(vo));
-			map.put("q1", dao.EvaluationResult(vo));  
-			vo.setA1("a2");
-			map.put("q2", dao.EvaluationResult(vo));
-			vo.setA1("a3");
-			map.put("q3", dao.EvaluationResult(vo));
-			vo.setA1("a4");
-			map.put("q4", dao.EvaluationResult(vo));
-			vo.setA1("a5");
-			map.put("q5", dao.EvaluationResult(vo));
-			vo.setA1("a6");
-			map.put("q6", dao.EvaluationResult(vo));
-			vo.setA1("a7");
-			map.put("q7", dao.EvaluationResult(vo));
+			for (int i = 1; i < 7; i++) {
+				vo.setA2("a" + i);
+				
+				map.put("q" + i, dao.EvaluationResult(vo));
+				System.out.println(dao.EvaluationResult(vo));
+			}
 			
 			
 		return map;

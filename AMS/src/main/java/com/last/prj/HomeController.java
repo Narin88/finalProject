@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.common.FileUpload;
+import com.last.prj.common.PasswordEncrypt;
 import com.last.prj.log.service.LogService;
 import com.last.prj.students.service.StudentsService;
 import com.last.prj.students.service.StudentsVO;
@@ -78,8 +79,8 @@ public class HomeController {
 	public String forgetPwdAut(@RequestParam("email") String email, @RequestParam("sname") String sname,
 							   @RequestParam("sid") String sid, Model model) {
 		Random random = new Random();
-		String user = "gmail아이디";
-		String pwd = "gmail비밀번호";
+		String user = "dlrjatk2@gmail.com";
+		String pwd = "!xotn71202703!";
 
 		int num = random.nextInt(999999);
 		String toEmail = email;
@@ -150,7 +151,7 @@ public class HomeController {
 	@ResponseBody
 	public String forgetNewPwd(@RequestParam("pwd") String pwd, @RequestParam("sid") String sid, StudentsVO vo) {
 		vo.setSid(sid);
-		vo.setPwd(pwd);
+		vo.setPwd(PasswordEncrypt.bcryTest(pwd));
 		
 		if (studentsService.studentUpdate(vo) > 0) {
 			return "yes";

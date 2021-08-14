@@ -10,7 +10,7 @@ public class PwEncrypt {
 	@Test
 	public void bcryTest() {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String result = encoder.encode("123");
+		String result = encoder.encode("1234");
 		
 		System.out.println(result);
 //		assertTrue(encoder.matches("myPassword", result));

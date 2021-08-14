@@ -21,7 +21,9 @@
 						username-parameter="id"
 						password-parameter="pwd"
 						authentication-success-handler-ref="customSuccessHandler"
+						authentication-failure-handler-ref="loginFailureHandler"
 						/>
+						
 		<security:logout logout-url="/logout" 
 						 logout-success-url="/goLogin"
 						 invalidate-session="true"
@@ -46,6 +48,9 @@
 	
 	<beans:bean id="customSuccessHandler" class="com.last.prj.common.CustomSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/" />
-	</beans:bean>	
+	</beans:bean>
+	
+	<beans:bean id="loginFailureHandler" class="com.last.prj.common.LoginFailureHandler">
+	</beans:bean>
 
 </beans:beans>

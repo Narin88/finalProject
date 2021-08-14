@@ -77,7 +77,7 @@ align: right;
 					<label class="btn btn-secondary btn-sm" style="margin-top: 7px;">
 		    		    사진변경 <input type="file" style="display: none;" id="changeImg" name="pic">&nbsp;
 	   				 </label>
-	   				 <button type="submit" class="btn btn-secondary btn-sm">확인</button>
+	   				 <button type="button" class="btn btn-secondary btn-sm" onclick="changeBtn()">확인</button>
 	   			</form>
 			</div>
 		<%-- </sec:authorize> --%>
@@ -144,7 +144,7 @@ align: right;
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4" align="center" id="showTimeSchedule"><b>시간표</b></td>
+								<td colspan="4" align="center" id="showTimeSchedule"><b>시간표 보기(클릭)</b></td>
 							</tr>
 							<tr id="addActive">
 							</tr>
@@ -408,6 +408,16 @@ $('#createpdf').click(function() {
 	inputImage.addEventListener("change", e => {
 	    readImage(e.target)
 	})
+	
+	function changeBtn() {
+		const chgImg = $("#changeImg").val();
+		if(!chgImg) {
+			alert("사진 파일을 넣어주세요!!");
+			return false;
+		} else {
+			$("#frm").submit();
+		}
+	}
 </script>
 
 </body>

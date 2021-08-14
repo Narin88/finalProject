@@ -69,17 +69,17 @@ input[type="number"] {
 
 	var label = ['','매우 불만족','불만족', '보통','만족','매우 만족']
 	var colors =[ '#009EE0', '#008AC5', '#008AC5', '#EB001F','#BE3075']
-	var qname =['1. 교수는 수업시간을 잘 지켰습니까?', '2. 강의 교재 및 자료는 학습에 도움이 되었습니까?', '3. 교수는 수업을 위한 준비를 잘했습니까?', '4. 수업의 내용과 분량은 학습을 하기에 충분했습니까?', '5. 강의는 학습 내용을 이해하기 쉽게 설명되었습니까?', '6. 강의를 통해 많은 것을 배웠습니까?']
+	var qname =['', '1. 교수는 수업시간을 잘 지켰습니까?', '2. 강의 교재 및 자료는 학습에 도움이 되었습니까?', '3. 교수는 수업을 위한 준비를 잘했습니까?', '4. 수업의 내용과 분량은 학습을 하기에 충분했습니까?', '5. 강의는 학습 내용을 이해하기 쉽게 설명되었습니까?', '6. 강의를 통해 많은 것을 배웠습니까?']
 	
 	
 	
-	var opennum = '${opennum}'
+	var opennum = '${num}';
+	console.log(opennum);
 	$.ajax({
 		url:"${pageContext.request.contextPath }/Eresultpro",
 		method:'post',
 		data: {opennum: opennum},
 		dataType: "JSON",
-		async: false,
 		success: function(data){
 			console.log(data);
 /* 			for(i=0; i<6; i++) {   
@@ -87,13 +87,15 @@ input[type="number"] {
 				console.log(opendata);
 				 draw(opendata, i); 
 			} */
-			var opendata = pushdata(data['q1']);  
-			 draw(opendata, 0); 
-			var opendata = pushdata(data['q2']);  
-			draw(opendata, 1); 
-			var opendata = pushdata(data['q3']);  
-			draw(opendata, 2); 
-		}
+			for(var i = 1; i < 7; i++) {
+				var opendata = pushdata(data['q' + i]);  
+				 draw(opendata, i); 
+			}
+		},
+		error: function(err) {
+			console.log(err);
+		},
+		async: false,
 	})//end of ajax
 
 	

@@ -22,18 +22,23 @@
 		and sid = #{sid}
 	</update>
 
-	<select id="EvaluationResultpr"
-		resultType="EvaluationResultVO">
-    select a.a1, nvl(b.cnt,0) as cnt
-		from ( 		select a1 as a1, count(a1) as cnt
+	<select id="EvaluationResultpr" resultType="EvaluationResultVO">
+    select a.${a2}, nvl(b.cnt,0) as cnt
+		from ( 		select ${a2} as ${a2}, count(${a2}) as cnt
 							from 	EVALUATIONRESULT
-							where opennum = #{opennum}
-							group by a1) b,
-					(		select level as a1,0 as cnt
+							where opennum = ${opennum}
+							group by ${a2}) b,
+					(		select level as ${a2},0 as cnt
 							from dual
 							connect by level <![CDATA[<=]]>5) a
-		where a.a1 = b.a1(+)
-		order by a.a1
+		where a.${a2} = b.${a2}(+)
+		order by a.${a2}
+	</select>
+	
+	<select id="EvaluationQ7Result" resultType="EvaluationResultVO">
+		SELECT a7
+		FROM evaluationresult
+		WHERE opennum = #{opennum}
 	</select>
 
 	<!-- <select id="EvaluationResultpra2"

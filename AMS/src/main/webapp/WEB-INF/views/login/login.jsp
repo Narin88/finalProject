@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -46,8 +47,11 @@ pageEncoding="UTF-8"%>
             name="pwd"
             placeholder="password"
           />
-          <input type="submit" class="fadeIn fourth" value="Log In" />
+          <input type="submit" class="fadeIn fourth" value="Log In" id="loginBtn" />
         </form>
+       	<c:if test="${not empty loginFailMsg }">
+       		${loginFailMsg }
+       	</c:if>
 
         <!-- Remind Passowrd -->
         <div id="formFooter">
@@ -55,5 +59,23 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
+    <script>
+		$("#loginBtn").on("click", function() {
+			let id = $("#login").val();
+			let pwd = $("#password").val();
+			
+			if(id == "" || id == null) {
+				alert("학번을 입력해주세요");
+				$("#login").focus();
+				return false;
+			}
+			
+			if(pwd == "" || pwd == null) {
+				alert("비밀번호를 입력해주세요");
+				$("#password").focus();
+				return false;
+			}
+		})    
+    </script>
   </body>
 </html>

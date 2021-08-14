@@ -589,7 +589,7 @@
 					p_week[i - 1].value = result.w + [i];
 					console.log(result.w + [i]);
 				}
-				/* 
+				/* ㅋㅋ
 				p_week[0].value			= result.w1;
 				w2.value				= result.w2;
 				w3.value				= result.w3;

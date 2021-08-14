@@ -125,7 +125,12 @@
 	    height: 100%;
 	    overflow-y: auto;
 	}
-	
+	.tui-grid-cell-header.tui-grid-cell-selected {
+		background-color: unset;
+	}
+	.tui-grid-layer-selection {
+		display: none;
+	}
 </style>
 <title>강의 조회 페이지</title>
 
@@ -393,7 +398,7 @@
 	// 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
 	document.getElementById('searchBtn').addEventListener('click', searchLecture);
 	 
-	function searchLecture(){
+	function searchLecture() {
 		 
 		let mc = document.getElementsByName('mcode')[0].value;
 		let dn = document.getElementsByName('dname')[0].value;
@@ -459,7 +464,7 @@
 	
 
 	// 그리드를 보여준다
-	var grid = new tui.Grid({
+	const grid = new tui.Grid({
 		
 		el: document.getElementById('grid'),
 		data: {
@@ -490,27 +495,34 @@
 			{header: '수강정원', name: 'limitcount'},
 			{header:'강의평가',name:'evaluation'}
 		] //컬럼갯수
-		
 	});
-
 	// grid.readData(1, lec, true);
 	// grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
 	// 그리드 끝
-
 	// 그리드 클릭 이벤트
-	grid.on('dblclick', ev =>{
+	
+	/*
+	click 이벤트는 grid 전체 이벤트 클릭이다.
+	ev.targetType을 보면 columnHeader와 
+	cell: 데이터들
+	근데 헤더를 누르면
+	cell 데이터에 tui-grid-layer-selection 이라는 div가 생겨서 클릭을 막고있었다.
+	css에서 display none 으로 숨겨서 클릭되게 했음.
+	*/
+	grid.on('click', ev => {
 		
 		var data = grid.getRow(ev.rowKey);
-		
-		if (ev.columnName == "pname") {
+		const isHeader = ev.targetType === "columnHeader";
+		// console.log(ev)
+		if (ev.columnName == "pname" && !isHeader) {
 			showOffer(data);
 		}
 		
-		if (ev.columnName == "lname"){
+		if (ev.columnName == "lname" && !isHeader) {
 			modalOffer(data);
 		}
 	});
-
+	
 	
 	function modalOffer(data) {
 		
@@ -537,6 +549,7 @@
 		let p_grade 		= document.getElementsByName('plan_grade')[0];
 		let p_newlimitcount = document.getElementsByName('plan_newlimitcount')[0];
 		let p_division 		= document.getElementsByName('plan_division')[0];
+		let p_content		= document.getElementsByName('plan_content')[0];
 		let p_week = [
 			'w1',
 			'w2',
@@ -584,29 +597,11 @@
 				p_grade.value			= result.grade;
 				p_newlimitcount.value	= result.newlimitcount;
 				p_division.value		= result.division;
+				p_content.value			= result.content;
 				
 				for (let i = 1; i <= p_week.length; i++) {
-					p_week[i - 1].value = result.w + [i];
-					console.log(result.w + [i]);
+					p_week[i - 1].value = result['w' + i];
 				}
-				/* ㅋㅋ
-				p_week[0].value			= result.w1;
-				w2.value				= result.w2;
-				w3.value				= result.w3;
-				w4.value				= result.w4;
-				w5.value				= result.w5;
-				w6.value				= result.w6;
-				w7.value				= result.w7;
-				w8.value				= result.w8;
-				w9.value				= result.w9;
-				w10.value				= result.w10;
-				w11.value				= result.w11;
-				w12.value				= result.w12;
-				w13.value				= result.w13;
-				w14.value				= result.w14;
-				w15.value				= result.w15;
-				w16.value				= result.w16;
-				*/
 			},
 			error: function(err){
 				console.log(err);

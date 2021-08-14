@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="preDepartments" resultType="PreEnrolmentVO">
-		select * from departments
+		select * from departments ORDER BY DNAME
 	</select>
 	
 	<select id="getMajorList" resultType="PreEnrolmentVO" parameterType="PreEnrolmentVO">

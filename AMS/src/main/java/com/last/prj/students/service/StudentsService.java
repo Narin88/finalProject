@@ -20,4 +20,5 @@ public interface StudentsService {
 	List<StudentsVO> proLectureList(StudentsVO vo);	// 지도교수 강의정보
 	
 	List<StudentsVO> whereRoom();					// 강의실 정보 불러오기
+	List<StudentsVO> customDcode(StudentsVO vo);	// 학과명을 통해 전공코드 및 전공명 불러오기
 }

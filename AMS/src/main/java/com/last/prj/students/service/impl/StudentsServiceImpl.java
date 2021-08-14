@@ -90,4 +90,11 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.whereRoom();
 	}
 
+
+	@Override
+	public List<StudentsVO> customDcode(StudentsVO vo) {
+		// 학과명을 통해 전공코드 및 전공명 불러오기
+		return map.customDcode(vo);
+	}
+
 }

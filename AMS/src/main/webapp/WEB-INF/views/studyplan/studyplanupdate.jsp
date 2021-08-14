@@ -63,9 +63,10 @@ function sub(){
     
     </script>
 <meta charset="UTF-8">
-<title>강의 계획서 수정</title>
+<title>강의 계획서 수정 :: No.M University</title>
 </head>
 <body>
+<div class="content-page">
 <div class="container23">
 	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
@@ -298,7 +299,7 @@ function sub(){
 
 	
 </div>
-
+</div>
 </body>
 </html>
 

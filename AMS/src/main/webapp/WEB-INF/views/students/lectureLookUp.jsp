@@ -61,9 +61,10 @@
 	}
 </style>
 
-<title>강의 조회 페이지</title>
+<title>수정 :: No.M University</title>
 
 <!-- 본체 -->
+<div class="content-page">
 <div align = "center">
 	<h2>강의 조회 페이지</h2>
 		<div class = "selectArea">
@@ -169,7 +170,7 @@
 	</div>
 </div>
 <!-- 모달 끝 -->
-
+</div>
 
 <script>
 	 

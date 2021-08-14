@@ -25,10 +25,10 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-<title>성적관리</title>
+<title>성적 관리 :: No.M University</title>
 </head>
 <body>
-
+<div class="content-page">
 	<div align="center">
 		<h2>수강생 리스트</h2>
 	</div>
@@ -142,6 +142,6 @@ document.getElementById('updateBtn').addEventListener('click', ScoreInsert);
 
 	
 </script>
-
+</div>
 </body>
 </html>

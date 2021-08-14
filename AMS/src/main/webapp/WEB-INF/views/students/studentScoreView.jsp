@@ -8,12 +8,14 @@
 	}
 </style>
 
-<title>학생 성적 확인</title>
+<title>성적 확인 :: No.M University</title>
+<div class="content-page">
+
 <div align = "center">
 	<h2>학생 성적 확인</h2>
 	<div id = "grid"></div>
 </div>
-
+</div>
 <script>
 
 // 그리드

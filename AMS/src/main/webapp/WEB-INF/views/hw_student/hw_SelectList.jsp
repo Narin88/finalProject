@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>과제 리스트 :: No.M University</title>
 <style>
 
 		.tui-grid-cell .tui-grid-cell-content {
@@ -87,6 +87,7 @@
 </style>
 </head>
 <body>
+<div class="content-page">
 	<div class="menu01">		
 					<ul>
 						<li><a class="modalBtn" href="hwStudent">과제 메인페이지 이동</a></li>			
@@ -194,6 +195,6 @@
 					<input type="hidden" id="opennum" name="opennum">
 			</form>		  		
 			
-			
+</div>		
 </body>
 </html>

@@ -64,7 +64,9 @@
 <!-- Toast grid -->
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
 
-<title>수강 신청된 과목 확인</title>
+<title>수강 확인 :: No.M University</title>
+<body>
+<div class="content-page">
 
 <div align="center">
 	<h2>수강 신청된 강의 리스트</h2>
@@ -375,3 +377,5 @@
 	}
 	
 </script>
+</div>
+</body>

@@ -27,10 +27,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-<title>성적관리</title>
+<title>성적 관리 :: No.M University</title>
 </head>
 <body>
-
+<div class="content-page">
 <div align="center">
 	<h2>${nowDate }년도 학기 강의 목록</h2>
 </div>
@@ -100,6 +100,6 @@
 //그리드 이벤트
 
 </script>
-
+</div>
 </body>
 </html>

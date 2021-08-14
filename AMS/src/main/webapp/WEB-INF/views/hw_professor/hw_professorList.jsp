@@ -8,7 +8,7 @@
 <head>
 <META charset="UTF-8">
 <head> 
-	<title>(교수)과제</title>
+	<title>과제 :: No.M University</title>
 	<style>
 	.noSubmit2{ 
 		text-align:center;
@@ -183,7 +183,7 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
-
+<div class="content-page">
 
 			<div class="menu01">		
 				<ul>
@@ -955,5 +955,6 @@
 			frmHw.submit();
 		}
 		</script>
+</div>
 </body>
 </html>

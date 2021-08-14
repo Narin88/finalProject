@@ -29,10 +29,10 @@
 			border:1px solid gray;
 		}
 </style>
-<title>내 강의 목록</title>
+<title>강의 목록 :: No.M University</title>
 </head>
 <body>
-
+<div class="content-page">
 			
 			<!-- TEST -->
 			<h3> 강의 계획서</h3>	
@@ -136,5 +136,6 @@
 	</script>
 	
 <!-- <button onclick=location.href="readOnly2?opennum=${s.opennum}">읽기전용</button> -->
+</div>
 </body>
 </html>

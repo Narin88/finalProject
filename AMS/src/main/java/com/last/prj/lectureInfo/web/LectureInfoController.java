@@ -27,5 +27,9 @@ public class LectureInfoController {
 		return "Lecture/LectureInfoList.tiles";
 	}
 	
+	@RequestMapping("testPage")
+	public String testPage() {
+		return "test/testpage.tiles";
+	}
 }
  

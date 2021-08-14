@@ -28,34 +28,8 @@ uri="http://www.springframework.org/security/tags" %>
         font-size: 10pt;
       }
 
-      .lecutretbl {
-        --bs-table-bg: transparent;
-        --bs-table-striped-color: #212529;
-        --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-        --bs-table-active-color: #212529;
-        --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-        --bs-table-hover-color: #212529;
-        --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-        width: 100%;
-        color: #212529;
-        vertical-align: top;
-        border-color: #dee2e6;
-      }
-      th,
-      td {
-        border-color: inherit;
-        border-style: solid;
-        border-width: 0;
-        text-align: center;
-        padding: 10px;
-      }
       input {
         width: 100px;
-      }
-      .SaveBtn {
-        margin: 10px;
-        width: 100px;
-        height: 40px;
       }
       .pagemove {
         display: block;
@@ -105,6 +79,8 @@ uri="http://www.springframework.org/security/tags" %>
     <title>강의 등록 :: No.M University</title>
   </head>
   <body>
+  <div class="content-page">
+  <div class="card-body">
     <div align="center">
       <h2>수강 등록</h2>
       <div align="right">
@@ -114,14 +90,14 @@ uri="http://www.springframework.org/security/tags" %>
     <!-- model -->
 
     <div id="my_offer" align="center">
-      <button id="createpdf">pdf 생성</button>
+      <button id="createpdf" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">pdf 생성</button>
 
       <a class="modal_close_btn">닫기</a>
       <div class="modal-body" id="pdfwrap">
         <h2>수강 등록</h2>
         <form id="frm" action="LectureInsert">
           <sec:csrfInput />
-          <table class="lecutretbl" id="lecutretbl" border="1">
+          <table class="table table-bordered" id="lecutretbl" border="1">
             <thead>
               <tr>
                 <th>년도</th>
@@ -139,7 +115,7 @@ uri="http://www.springframework.org/security/tags" %>
             <tbody></tbody>
           </table>
           <div align="center">
-            <button type="submit" class="SaveBtn">수강 등록하기</button>
+            <button type="submit" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수강 등록하기</button>
           </div>
         </form>
       </div>
@@ -209,16 +185,16 @@ uri="http://www.springframework.org/security/tags" %>
       			$("#lecutretbl tbody").empty();
       			$('<tr>')
       			.append($('<td>').html('2021'))
-      			.append($('<td>').html($('<select id=\'term\' name=\'term\'>')
+      			.append($('<td>').html($('<select id=\'term\' name=\'term\' class="form-control">')
       					.append($('<option value=\'1\'>1학기</option>'))
       					.append($('<option value=\'2\'>2학기</option>'))))
       			.append($('<td>').html(lnum))
       			.append($('<td>').html(lname))
       			.append($('<td>').html(pid))
-      			.append($('<td>').html($('<input type=\'text\' id=\'newlimitcount\' name=\'newlimitcount\'>').val(limitCount)))
-      			.append($('<td>').html($('<input type=\'text\' id=\'book\' name=\'book\'>')))
-      			.append($('<td>').html($('<input type=\'text\' id=\'timetable\' name=\'timetable\'>')))
-      			.append($('<td>').html($('<select id=\'lrcode\' name=\'lrcode\'>')
+      			.append($('<td>').html($('<input type=\'text\' id=\'newlimitcount\' name=\'newlimitcount\' class="form-control">').val(limitCount)))
+      			.append($('<td>').html($('<input type=\'text\' id=\'book\' name=\'book\' class="form-control"> ')))
+      			.append($('<td>').html($('<input type=\'text\' id=\'timetable\' name=\'timetable\' class="form-control"> ')))
+      			.append($('<td>').html($('<select id=\'lrcode\' name=\'lrcode\' class="form-control">')
       				 <c:forEach items="${LR }" var="lr">
       				 .append($('<option value=\'${lr.lrcode}\'>${lr.lrname}</option>'))
       				</c:forEach>
@@ -317,5 +293,7 @@ uri="http://www.springframework.org/security/tags" %>
         });
       });
     </script>
+    </div>
+   </div>
   </body>
 </html>

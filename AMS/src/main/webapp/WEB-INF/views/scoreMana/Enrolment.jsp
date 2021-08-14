@@ -9,28 +9,6 @@
 .tui-grid-cell .tui-grid-cell-content {
    text-align: center;
 }
-.tbl{
-	width: 100%;
-	border-spacing: 0;
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-.infotitle{
-	border: 1px solid #dedede !important; 
-    color: #212121;
-    font-size: 15px;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 600;
-    height: 30px;
-}
-.info{
-	border: 1px solid #dedede !important;
-    color: 007bff;
-    font-size: 15px;
-    text-transform: uppercase;
-    text-align: center;
-    }
 .grid{
 	margin-top: 20px;
 	margin-bottom: 10px;
@@ -38,11 +16,19 @@
 .scoreList{
 	margin-top: 30px;
 }
+.form-control{
+	width: 170px;
+	display: inline;
+}
+
+.btn-facebook{
+	margin-top: 7px;
+}
 
 #showmodal {
   display: none;
   width: 80%;
-  height: 40%;
+  height: 63%;
   padding: 30px 60px;
   background-color: #fefefe;
   border: 1px solid #888;
@@ -70,69 +56,82 @@
 <title>수강신청 :: No.M University</title>
 </head>
 <body>
-<div align="center">
-	<div align="center">
-		<table id="tbl" class="tbl">
-			<tr>
-				<td class = "infotitle">년도/학기</td><td class = "info">${student.lyear }/${student.target }</td>
-				<td class = "infotitle">학번</td><td class = "info">${student.sid }</td>
-				<td class = "infotitle">성명</td><td class = "info">${student.sname }</td>
-				<td class = "infotitle">학과</td><td class = "info">${student.dname }</td>
-				<td class = "infotitle">학년</td><td class = "info">${student.grade }</td>
-				<td class = "infotitle">인정학기</td>
-				<td class = "info">${(student.grade*2) - (2-student.term) }</td>
-				<td class = "infotitle">신청가능학점</td><td id="credit" class = "info"></td>
-				<td class = "info"><button id="preEnrolList">내 수강 꾸러미</button> </td>
-			</tr>
-		</table>
-	</div>
-</div>
-
-<div id="grid" class="grid">
-	<h2 align="center"> 수강신청 리스트 </h2>
-	<div class="seachbox" align="right">
-		<select id="seachgubun">
-			<option value="lname">과목명</option>
-			<option value="lnum">과목번호</option>
-		</select>
-		<input type="text" id="seach" name="seach">
-		<button type="button" onclick="getList()">검색</button>
-	</div>
-</div>
-<div id="scoreList" class="scoreList">
-	<h3 align="center"> 나의 수강 목록</h3>
-	<div align="right">
-		<button type="button" id="deleteBtn">수강 취소</button>
-	</div>
-</div>
- 
- 
+<div class="content-page">
+	<div class="card-body">
+		<div align="center">
+			<div align="center">
+				<table id="tbl" class="table table-bordered">
+					<thead>
+						<tr>
+							<th>년도/학기</th>		
+							<th>학번</th>			
+							<th>성명</th>			
+							<th>학과</th>			
+							<th>학년</th>			
+							<th>인정학기</th>		
+							<th>신청가능학점</th>	
+							<th>꾸러미</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${student.lyear }/${student.target }</td>
+							<td>${student.sid }</td>
+							<td>${student.sname }</td>
+							<td>${student.dname }</td>
+							<td>${student.grade }</td>
+							<td>${(student.grade*2) - (2-student.term) }</td>
+							<td id="credit"></td>
+							<td><button id="preEnrolList" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">내 수강 꾸러미</button> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="grid" class="grid">
+			<h2 align="center"> 수강신청 리스트 </h2>
+			<div class="seachbox" align="right">
+				<select id="seachgubun" class="form-control">
+					<option value="lname">과목명</option>
+					<option value="lnum">과목번호</option>
+				</select>
+				<input type="text" id="seach" name="seach" placeholder="Search for..." class="form-control">
+				<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="getList()">검색</button>
+			</div>
+		</div>
+		<div id="scoreList" class="scoreList">
+			<h3 align="center"> 나의 수강 목록</h3>
+			<div align="right">
+				<button type="button" id="deleteBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수강 취소</button>
+			</div>
+		</div>
   <!-- model -->
 
-    <div id="showmodal" align="center">
-      <a class="modal_close_btn">닫기</a>
-      <div class="modal-body" id="pdfwrap">
-        <h2>수강 등록</h2>
-          <sec:csrfInput />
-          <table class="tbl" id="preEnroltbl" border="1">
-            <thead>
-              <tr>
-                <th class = "infotitle">등록번호</th>
-                <th class = "infotitle">강의번호/분반</th>
-                <th class = "infotitle">과목명</th>
-                <th class = "infotitle">학점</th>
-                <th class = "infotitle">이수구분</th>
-                <th class = "infotitle">강의시간/강의실</th>
-                <th class = "infotitle">재수강 여부</th>
-                <th class = "infotitle">비고</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-          </table>
-      </div>
-    </div>
-
+		<div id="showmodal" align="center">
+			<a class="modal_close_btn">닫기</a>
+			<div class="modal-body" id="pdfwrap">
+			<h2>수강 등록</h2>
+			<sec:csrfInput />
+				<table class="table table-bordered" id="preEnroltbl">
+					<thead>
+						<tr>
+							<th>등록번호</th>
+							<th>강의번호/분반</th>
+							<th>과목명</th>
+							<th>학점</th>
+							<th>이수구분</th>
+							<th>강의시간/강의실</th>
+							<th>재수강 여부</th>
+							<th>비고</th>
+						</tr>
+					</thead>
+				
+				<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
 
 $(function(){
@@ -304,12 +303,12 @@ function preEnrolmentList() {
 		success: function(result){
      			var row='<tr>';
      			if($.isEmptyObject(result)){
-     				row += '<td colspan="8" align="center" class="info"> 수강 꾸러미 내역이 비어 있습니다 :)</td></tr>';
+     				row += '<td colspan="8" align="center"> 수강 꾸러미 내역이 비어 있습니다 :)</td></tr>';
      			}
       			$.each(result,function(i){
-     				row += '<td class="info">'+result[i].opennum+'</td><td class="info">'+result[i].lnum+'</td><td class="info">'+result[i].lname+'</td><td class="info">'+result[i].credit+
-     				'</td><td class="info">'+result[i].division+'</td><td class="info">'+result[i].timetable+'</td><td class="info">'+result[i].retake+'</td><td class="info">'+
-     				'<button id = \'preinsertbtn'+result[i].opennum+'\' onclick=\'preinsert('+result[i].opennum+')\'>신청</button></td></tr>';
+     				row += '<td>'+result[i].opennum+'</td><td>'+result[i].lnum+'</td><td>'+result[i].lname+'</td><td>'+result[i].credit+
+     				'</td><td>'+result[i].division+'</td><td>'+result[i].timetable+'</td><td>'+result[i].retake+'</td><td>'+
+     				'<button id = \'preinsertbtn'+result[i].opennum+'\' onclick=\'preinsert('+result[i].opennum+')\' class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">신청</button></td></tr>';
      			})
 
      			$("#preEnroltbl tbody").empty();
@@ -402,7 +401,7 @@ function modal(mm) {
         // div center 정렬
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)',
+        transform: 'translate(-50%, -10%)',
         msTransform: 'translate(-50%, -50%)',
         webkitTransform: 'translate(-50%, -50%)'
     });
@@ -413,6 +412,10 @@ Element.prototype.setStyle = function(styles) {
     for (var k in styles) this.style[k] = styles[k];
     return this;
 };
+
+
+
+
 
 </script>
 </body>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>과제제출 페이지</title>
+<title>과제 제출 :: No.M University</title>
 <style>
 .menu01 {
 				width:100%;
@@ -48,6 +48,7 @@
 </style>
 </head>
 <body>
+<div class="content-page">
 <!-- 현재날짜 -->
 <c:set var="today" value="<%=new java.util.Date()%>" />
 <c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set> 
@@ -112,6 +113,6 @@
 				
 			}
 		</script>
-		
+</div>
 </body>
 </html>

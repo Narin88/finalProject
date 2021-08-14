@@ -41,10 +41,10 @@
  </style>
 
 <meta charset="UTF-8">
-<title>강의 계획서 수정</title>
+<title>강의 계획서 수정 :: No.M University</title>
 </head>
 <body>
-
+<div class="content-page">
 <button id="createpdf">
   pdf 생성
 </button>
@@ -288,7 +288,7 @@ $('textarea').each(function() {
 </div>
 
 
-	
+</div>
 </body>
 <script>
 $('#createpdf').click(function() {

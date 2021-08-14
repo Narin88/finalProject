@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>수정 :: No.M University</title>
 <style>
 
 		.tui-grid-cell .tui-grid-cell-content {
@@ -41,7 +41,7 @@
 </style>
 </head>
 <body>
-	
+<div class="content-page">
 
 
 
@@ -124,5 +124,6 @@
 	<sec:csrfInput/>
 	 	<input type="hidden" id="opennum" name="opennum">
 	</form>
+</div>
 </body>
 </html>

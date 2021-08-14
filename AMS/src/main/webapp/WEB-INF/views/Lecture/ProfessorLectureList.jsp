@@ -27,28 +27,9 @@
     .modal-body{
     	font-size: 10pt;
     }
-    
-.ScoStudent{
-	width: 80%;
-	border-spacing: 0;
-    border-collapse: collapse;
+.btn15{
+	height: 15px;
 }
-.infotitle{
-	border-bottom: 1px solid #dedede !important;
-    color: #212121;
-    font-size: 15px;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 600;
-    height: 50px;
-}
-.info{
-	border-bottom: 1px solid #dedede !important;
-    color: #212121;
-    font-size: 15px;
-    text-transform: uppercase;
-    text-align: center;
-    }
 </style>
 <!-- Toast grid -->
 	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
@@ -63,40 +44,43 @@
 <title>강의 목록 :: No.M University</title>
 </head>
 <body>
-<div align="center">
-	<h2>강의 목록</h2>
-</div>
-<div align = "right">
-<button id="updateBtn">수정하기</button>
-<button id="deleteBtn">삭제하기</button>
-</div>
+<div class="content-page">
+	<div class="card-body">
+		<div align="center">
+			<h2>강의 목록</h2>
+		</div>
+		<div align = "right">
+			<button id="updateBtn" class ="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수정하기</button>
+			<button id="deleteBtn" class ="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제하기</button>
+		</div>
 
-<div id="grid"></div>
+		<div id="grid"></div>
 
 
 <!-- 모달 div -->
-<div id="showmodal" align="center" class="showmodal">
-    <a class="modal_close_btn">닫기</a>
-    <div class="modal-body">
-	   <h2> 수강 등록 </h2>
-	   <sec:csrfInput/>
-	   <table class="ScoStudent" id="ScoStudent">
-	   		<thead>
-	   		<tr>
-	   			<th class="infotitle">학번</th>
-	   			<th class="infotitle">이름</th>
-	   			<th class="infotitle">전공</th>
-	   			<th class="infotitle">E-mail</th>
-	   			<th class="infotitle">연락처</th>
-	   			<th class="infotitle">성별</th>
-	   			<th class="infotitle">장애여부</th>
-	   		</tr>
-	   		</thead>
-	   		<tbody></tbody>
-	   </table>
+		<div id="showmodal" align="center" class="showmodal">
+		    <a class="modal_close_btn">닫기</a>
+		    <div class="modal-body">
+			   <h2> 수강 등록 </h2>
+			   <sec:csrfInput/>
+			   <table class="table table-bordered" id="ScoStudent">
+			   		<thead>
+			   		<tr>
+			   			<th>학번</th>
+			   			<th>이름</th>
+			   			<th>전공</th>
+			   			<th>E-mail</th>
+			   			<th>연락처</th>
+			   			<th>성별</th>
+			   			<th>장애여부</th>
+			   		</tr>
+			   		</thead>
+			   		<tbody></tbody>
+			   </table>
+			</div>
+		</div><!-- 모달 끝 -->
 	</div>
 </div>
-
 <script> 
 $(function(){
 	grid.on('dblclick', ev => {
@@ -124,8 +108,8 @@ $(function(){
 			row += '</tr>';
 		}else{
 			$.each(result,function(i){
-				row += '<td class=\'info\'>'+result[i].sid+'</td><td class=\'info\'>'+result[i].sname+'</td><td class=\'info\'>'+result[i].mname+'</td><td class=\'info\'>'+result[i].email+'</td><td class=\'info\'>'//
-					+result[i].sphone+'</td><td class=\'info\'>'+result[i].sgender+'</td><td class=\'info\'>'+result[i].disabled;
+				row += '<td>'+result[i].sid+'</td><td>'+result[i].sname+'</td><td>'+result[i].mname+'</td><td>'+result[i].email+'</td><td>'//
+					+result[i].sphone+'</td><td>'+result[i].sgender+'</td><td>'+result[i].disabled;
 				row += '</tr>';
 			});
 		}
@@ -197,7 +181,7 @@ var clsData = [
 	<c:forEach items="${lectures }" var="lec">{
 		opennum: '${lec.opennum}', lnum: '${lec.lnum}-${lec.dividenum}', lyear: '${lec.lyear}-${lec.term}', grade: '${lec.grade}',
 		lname: '${lec.lname}', book: '${lec.book}', division: '${lec.division}', newlimitcount: '${lec.newlimitcount}', lrname: '${lec.lrname}',
-		timetable: '${lec.timetable}' , evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})">확인</button>'
+		timetable: '${lec.timetable}' , evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">확인</button>'
 	}
 	<c:if test='${!empty lec.opennum}'>
 	,
@@ -245,7 +229,7 @@ var clsData = [
 			{header: '이수구분',name: 'division',width: 100},
 			{header: '정원',name: 'newlimitcount',width: 80},
 			{header: '강의실',name: 'lrname',width: 80},
-			{header: '시간표',name: 'timetable',width: 150, editor: 'text'},
+			{header: '시간표',name: 'timetable',width: 150},
 			{header: '강의평가', name: 'evaluation', width:150}
 		] //컬럼갯수
 

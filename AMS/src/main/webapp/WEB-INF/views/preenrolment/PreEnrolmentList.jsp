@@ -28,7 +28,7 @@
 </style>
 </head>
 <body>
-
+<div class="content-page">
 
 <div id="grid">
 	<h2 align="center">수강 내역</h2>
@@ -187,5 +187,6 @@ $("#depart").change(function(){
 
 
 </script>
+</div>
 </body>
 </html>

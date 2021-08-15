@@ -28,7 +28,7 @@
 <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
-<title>성적관리</title>
+<title>성적 관리 :: No.M University</title>
 </head>
 <body>
 
@@ -36,6 +36,7 @@
   pdf 생성
 </button>
 <div id="pdfwrap">
+<div class="content-page">
 	<div align="center">
 		<h2>수강생 리스트</h2>
 	</div>
@@ -185,5 +186,6 @@ $('#createpdf').click(function() {
 
 
 </script>
+</div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>정보 수정 페이지</title>
+<title>수정 :: No.M University</title>
 </head>
 
 <style>
@@ -39,7 +39,7 @@
 	 
 </style>
 <body>
-
+<div class="content-page">
 <form name = "frmPwd" method = "POST" action = "studentUpdate">
 
 	<!-- form 태그 안에 추가해야 함 -->
@@ -117,5 +117,6 @@
 		}
 	}
 </script>
+</div>
 </body>
 </html>

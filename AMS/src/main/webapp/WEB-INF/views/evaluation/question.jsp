@@ -114,7 +114,7 @@ tr td th{
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-
+<div class="content-page">
 	<div class="container23">
 		<div align="center">
 			<div>
@@ -221,7 +221,7 @@ tr td th{
 			</div>
 		</div>
 	</div>
-
+</div>
 
 
 </body>

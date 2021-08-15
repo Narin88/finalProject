@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<title>본인 확인 페이지</title>
+<title>강의 꾸러미 :: No.M University</title>
 
 <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -13,6 +13,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<body>
+<div class="content-page">
 
 <div class="wrapper fadeInDown">
 	<div id="formContent">
@@ -54,3 +56,5 @@
 	</form>
 	</div>
 </div>
+</div>
+</body>

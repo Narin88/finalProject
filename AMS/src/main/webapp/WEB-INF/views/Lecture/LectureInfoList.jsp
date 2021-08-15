@@ -28,34 +28,8 @@ uri="http://www.springframework.org/security/tags" %>
         font-size: 10pt;
       }
 
-      .lecutretbl {
-        --bs-table-bg: transparent;
-        --bs-table-striped-color: #212529;
-        --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-        --bs-table-active-color: #212529;
-        --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-        --bs-table-hover-color: #212529;
-        --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-        width: 100%;
-        color: #212529;
-        vertical-align: top;
-        border-color: #dee2e6;
-      }
-      th,
-      td {
-        border-color: inherit;
-        border-style: solid;
-        border-width: 0;
-        text-align: center;
-        padding: 10px;
-      }
       input {
         width: 100px;
-      }
-      .SaveBtn {
-        margin: 10px;
-        width: 100px;
-        height: 40px;
       }
       .pagemove {
         display: block;
@@ -105,185 +79,235 @@ uri="http://www.springframework.org/security/tags" %>
     <title>강의 등록 :: No.M University</title>
   </head>
   <body>
-    <div align="center">
-      <h2>수강 등록</h2>
-      <div align="right">
-        <a href="ProfessorLectureList" class="pagemove">등록된 수강 목록</a>
-      </div>
-    </div>
-    <!-- model -->
-
-    <div id="my_offer" align="center">
- 
-
-      <a class="modal_close_btn">닫기</a>
-      <div class="modal-body" >
-        <h2>수강 등록</h2>
-        <form id="frm" action="LectureInsert">
-          <sec:csrfInput />
-          <table class="lecutretbl" id="lecutretbl" border="1">
-            <thead>
-              <tr>
-                <th>년도</th>
-                <th>학기</th>
-                <th>강의번호</th>
-                <th>강의이름</th>
-                <th>교수번호</th>
-                <th>정원</th>
-                <th>교재</th>
-                <th>시간표</th>
-                <th>강의실 코드</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-          </table>
-          <div align="center">
-          	<input type="submit" class="SaveBtn" value="강의 등록">
-            
+    <div class="content-page">
+      <div class="card-body">
+        <div align="center">
+          <h2>수강 등록</h2>
+          <div align="right">
+            <a href="ProfessorLectureList" class="pagemove">등록된 수강 목록</a>
           </div>
-        </form>
+        </div>
+        <!-- model -->
+
+        <div id="my_offer" align="center">
+          <button
+            id="createpdf"
+            class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light"
+          >
+            pdf 생성
+          </button>
+
+          <a class="modal_close_btn">닫기</a>
+          <div class="modal-body">
+            <h2>수강 등록</h2>
+            <form id="frm" action="LectureInsert">
+              <sec:csrfInput />
+              <table class="table table-bordered" id="lecutretbl" border="1">
+                <thead>
+                  <tr>
+                    <th>년도</th>
+                    <th>학기</th>
+                    <th>강의번호</th>
+                    <th>강의이름</th>
+                    <th>교수번호</th>
+                    <th>정원</th>
+                    <th>교재</th>
+                    <th>시간표</th>
+                    <th>강의실 코드</th>
+                  </tr>
+                </thead>
+
+                <tbody></tbody>
+              </table>
+              <div align="center">
+                <button
+                  type="submit"
+                  class="
+                    btn btn-facebook
+                    m-b-10 m-l-10
+                    waves-effect waves-light
+                  "
+                >
+                  수강 등록하기
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- model end -->
+
+        <div id="grid"></div>
+        <script>
+          //grid start
+          	var clsData = [
+          		<c:forEach items="${Lectures }" var="Lec">
+          		{
+          			lnum: '${Lec.lnum}', lname: '${Lec.lname}', pid: '${Lec.pid}',
+          			grade: '${Lec.grade}', limitcount: '${Lec.limitcount}', dcode: '${Lec.dcode}',
+          			division: '${Lec.division}', credit: '${Lec.credit}'
+          		},
+          		</c:forEach>
+          		]; //컬럼DATA
+
+                 // GRID 를 보여준다.
+          	var grid = new tui.Grid( {
+          		el: document.getElementById('grid'),
+          		pagination: true,   //페이징 처리
+          	    pageOptions: {
+          	    	useClient: true,   //페이징 처리
+          	    	perPage: 10   //페이징 갯수
+          	    }
+          		,
+          		columns: [
+          			{header: '강의번호',name: 'lnum'},
+          			{header: '강의이름',name: 'lname'},
+          			{header: '교수코드',name: 'pid'},
+          			{header: '학년',name: 'grade'},
+          			{header: '정원',name: 'limitcount'},
+          			{header: '이수코드',name: 'dcode'},
+          			{header: '이수구분',name: 'division'},
+          			{header: '학점',name: 'credit'}
+          		], //컬럼갯수
+          		data: clsData
+          	} );
+          //grid end
+
+          //그리드 이벤트
+          	$(function(){
+          		grid.on('dblclick', ev => {
+          			//console.log('더블클릭!', ev.rowKey);
+          			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
+          			showOffer(data);
+          		});
+
+          		//모달 start
+          		function showOffer(data) {
+          			modal('my_offer');
+          			console.log(data.lnum);
+          			var lnum = data.lnum;
+          			var lcode = data.lcode;
+          			var pid = data.pid;
+          			var grade = data.grade;
+          			var limitCount = data.limitcount;
+          			var lname = data.lname;
+          			var mcode = data.mcode;
+          			var dcode = data.dcode;
+          			var division = data.division;
+          			var credit = credit;
+
+
+          			$("#lecutretbl tbody").empty();
+          			$('<tr>')
+          			.append($('<td>').html('2021'))
+          			.append($('<td>').html($('<select id=\'term\' name=\'term\' class="form-control">')
+          					.append($('<option value=\'1\'>1학기</option>'))
+          					.append($('<option value=\'2\'>2학기</option>'))))
+          			.append($('<td>').html(lnum))
+          			.append($('<td>').html(lname))
+          			.append($('<td>').html(pid))
+          			.append($('<td>').html($('<input type=\'text\' id=\'newlimitcount\' name=\'newlimitcount\' class="form-control">').val(limitCount)))
+          			.append($('<td>').html($('<input type=\'text\' id=\'book\' name=\'book\' class="form-control"> ')))
+          			.append($('<td>').html($('<input type=\'text\' id=\'timetable\' name=\'timetable\' class="form-control"> ')))
+          			.append($('<td>').html($('<select id=\'lrcode\' name=\'lrcode\' class="form-control">')
+          				 <c:forEach items="${LR }" var="lr">
+          				 .append($('<option value=\'${lr.lrcode}\'>${lr.lrname}</option>'))
+          				</c:forEach>
+          					))
+          			.append($('<input type=\'hidden\' id=\'lyear\' name=\'lyear\'>').val('2021'))
+          			.append($('<input type=\'hidden\' id=\'lnum\' name=\'lnum\'>').val(lnum))
+          			.append($('<input type=\'hidden\' id=\'pid\' name=\'pid\'>').val(pid))
+          			.appendTo("#lecutretbl tbody");
+
+
+          		}
+
+          		function modal(mm) {
+          		    var zIndex = 9999;
+          		    var modal = document.getElementById(mm);
+
+          		    // 모달 div 뒤에 희끄무레한 레이어
+          		    var bg = document.createElement('div');
+          		    bg.setStyle({
+          		        position: 'fixed',
+          		        zIndex: zIndex,
+          		        left: '0px',
+          		        top: '0px',
+          		        width: '100%',
+          		        height: '100%',
+          		        overflow: 'auto',
+          		        // 레이어 색갈은 여기서 바꾸면 됨
+          		        backgroundColor: 'rgba(0,0,0,0.4)'
+          		    });
+          		    document.body.append(bg);
+
+          		    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+          		    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+          		        bg.remove();
+          		        modal.style.display = 'none';
+          		    });
+
+          		    modal.setStyle({
+          		        position: 'fixed',
+          		        display: 'block',
+          		        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+          		        // 시꺼먼 레이어 보다 한칸 위에 보이기
+          		        zIndex: zIndex + 1,
+
+          		        // div center 정렬
+          		        top: '50%',
+          		        left: '50%',
+          		        transform: 'translate(-50%, -50%)',
+          		        msTransform: 'translate(-50%, -50%)',
+          		        webkitTransform: 'translate(-50%, -50%)'
+          		    });
+          		}
+
+          		// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+          		Element.prototype.setStyle = function(styles) {
+          		    for (var k in styles) this.style[k] = styles[k];
+          		    return this;
+          		};
+
+
+          	});
+        </script>
+
+        <!-- PDF 스크립트 -->
+        <script>
+          $("#createpdf").click(function () {
+            //pdf_wrap을 canvas객체로 변환
+            /* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
+	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+	    doc.save('LecturePlan-file.pdf'); //pdf저장
+	    alert('클릭됨');
+	  }); */
+
+            html2canvas($("#pdfwrap")[0]).then(function (canvas) {
+              var filename = "LecturePlan_" + Date.now() + ".pdf";
+              var doc = new jsPDF("p", "mm", "a4");
+              var imgData = canvas.toDataURL("image/png");
+              var imgWidth = 210;
+              var pageHeight = 295;
+              var imgHeight = (canvas.height * imgWidth) / canvas.width;
+              var heightLeft = imgHeight;
+              var position = 0;
+              doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+              heightLeft -= pageHeight;
+              while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                doc.addPage();
+                doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+              }
+              doc.save(filename);
+              alert("클릭됨");
+            });
+          });
+        </script>
       </div>
     </div>
-    <!-- model end -->
-
-    <div id="grid"></div>
-    <script>
-      //grid start
-      	var clsData = [
-      		<c:forEach items="${Lectures }" var="Lec">
-      		{
-      			lnum: '${Lec.lnum}', lname: '${Lec.lname}', pid: '${Lec.pid}',
-      			grade: '${Lec.grade}', limitcount: '${Lec.limitcount}', dcode: '${Lec.dcode}',
-      			division: '${Lec.division}', credit: '${Lec.credit}'
-      		},
-      		</c:forEach>
-      		]; //컬럼DATA
-
-             // GRID 를 보여준다.
-      	var grid = new tui.Grid( {
-      		el: document.getElementById('grid'),
-      		pagination: true,   //페이징 처리
-      	    pageOptions: {
-      	    	useClient: true,   //페이징 처리
-      	    	perPage: 10   //페이징 갯수
-      	    }
-      		,
-      		columns: [
-      			{header: '강의번호',name: 'lnum'},
-      			{header: '강의이름',name: 'lname'},
-      			{header: '교수코드',name: 'pid'},
-      			{header: '학년',name: 'grade'},
-      			{header: '정원',name: 'limitcount'},
-      			{header: '이수코드',name: 'dcode'},
-      			{header: '이수구분',name: 'division'},
-      			{header: '학점',name: 'credit'}
-      		], //컬럼갯수
-      		data: clsData
-      	} );
-      //grid end
-
-      //그리드 이벤트
-      	$(function(){
-      		grid.on('dblclick', ev => {
-      			//console.log('더블클릭!', ev.rowKey);
-      			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
-      			showOffer(data);
-      		});
-
-      		//모달 start
-      		function showOffer(data) {
-      			modal('my_offer');
-      			console.log(data.lnum);
-      			var lnum = data.lnum;
-      			var lcode = data.lcode;
-      			var pid = data.pid;
-      			var grade = data.grade;
-      			var limitCount = data.limitcount;
-      			var lname = data.lname;
-      			var mcode = data.mcode;
-      			var dcode = data.dcode;
-      			var division = data.division;
-      			var credit = credit;
-
-
-      			$("#lecutretbl tbody").empty();
-      			$('<tr>')
-      			.append($('<td>').html('2021'))
-      			.append($('<td>').html($('<select id=\'term\' name=\'term\'>')
-      					.append($('<option value=\'1\'>1학기</option>'))
-      					.append($('<option value=\'2\'>2학기</option>'))))
-      			.append($('<td>').html(lnum))
-      			.append($('<td>').html(lname))
-      			.append($('<td>').html(pid))
-      			.append($('<td>').html($('<input type=\'text\' id=\'newlimitcount\' name=\'newlimitcount\'>').val(limitCount)))
-      			.append($('<td>').html($('<input type=\'text\' id=\'book\' name=\'book\'>')))
-      			.append($('<td>').html($('<input type=\'text\' id=\'timetable\' name=\'timetable\'>')))
-      			.append($('<td>').html($('<select id=\'lrcode\' name=\'lrcode\'>')
-      				 <c:forEach items="${LR }" var="lr">
-      				 .append($('<option value=\'${lr.lrcode}\'>${lr.lrname}</option>'))
-      				</c:forEach>
-      					))
-      			.append($('<input type=\'hidden\' id=\'lyear\' name=\'lyear\'>').val('2021'))
-      			.append($('<input type=\'hidden\' id=\'lnum\' name=\'lnum\'>').val(lnum))
-      			.append($('<input type=\'hidden\' id=\'pid\' name=\'pid\'>').val(pid))
-      			.appendTo("#lecutretbl tbody");
-
-
-      		}
-
-      		function modal(mm) {
-      		    var zIndex = 9999;
-      		    var modal = document.getElementById(mm);
-
-      		    // 모달 div 뒤에 희끄무레한 레이어
-      		    var bg = document.createElement('div');
-      		    bg.setStyle({
-      		        position: 'fixed',
-      		        zIndex: zIndex,
-      		        left: '0px',
-      		        top: '0px',
-      		        width: '100%',
-      		        height: '100%',
-      		        overflow: 'auto',
-      		        // 레이어 색갈은 여기서 바꾸면 됨
-      		        backgroundColor: 'rgba(0,0,0,0.4)'
-      		    });
-      		    document.body.append(bg);
-
-      		    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-      		    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
-      		        bg.remove();
-      		        modal.style.display = 'none';
-      		    });
-
-      		    modal.setStyle({
-      		        position: 'fixed',
-      		        display: 'block',
-      		        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-
-      		        // 시꺼먼 레이어 보다 한칸 위에 보이기
-      		        zIndex: zIndex + 1,
-
-      		        // div center 정렬
-      		        top: '50%',
-      		        left: '50%',
-      		        transform: 'translate(-50%, -50%)',
-      		        msTransform: 'translate(-50%, -50%)',
-      		        webkitTransform: 'translate(-50%, -50%)'
-      		    });
-      		}
-
-      		// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
-      		Element.prototype.setStyle = function(styles) {
-      		    for (var k in styles) this.style[k] = styles[k];
-      		    return this;
-      		};
-
-
-      	});
-    </script>
-
- 
   </body>
 </html>

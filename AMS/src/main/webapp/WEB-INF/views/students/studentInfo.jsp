@@ -12,7 +12,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>학사정보</title>
+<title>수정 :: No.M University</title>
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
 <style>
 .createpdf{
@@ -22,7 +22,7 @@ align: right;
 </style>
 </head>
 <body>
-
+<div class="content-page">
 <button id="createpdf" >
   pdf 출력하기
 </button>
@@ -424,6 +424,6 @@ $('#createpdf').click(function() {
 		}
 	}
 </script>
-
+</div>
 </body>
 </html>

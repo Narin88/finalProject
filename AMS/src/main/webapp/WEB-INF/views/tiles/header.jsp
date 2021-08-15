@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
-	<div  class="icon">
-		<img
-			src="${pageContext.request.contextPath }/resources/loginpicture/long logo.png"
-			onclick="location.href='home2'" />
-	</div>
+
+<!-- Start right Content here -->
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <!-- Top Bar Start -->
+        <div class="topbar" align="center">
+            <nav class="navbar-custom">
+                <a href="index.html" class="logo">
+                    <img src="${pageContext.request.contextPath }/resources/assets/images/nom_logo.png" alt="" class="logo-large">
+                </a>
+                <div class="clearfix"></div>
+            </nav>
+        </div>
+        <!-- Top Bar End -->
+    </div> <!-- content -->
+
 </div>
+<!-- End Right content here -->

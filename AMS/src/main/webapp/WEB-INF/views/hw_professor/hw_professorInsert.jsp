@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>교수 과제 등록 Page</title>
+<title>과제등록 :: No.M University</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -78,7 +78,7 @@
 </style>
 </head>
 <body>
-
+<div class="content-page">
 	<div class="leftContainer">
 			<div class="menu01">		
 				<ul>
@@ -269,6 +269,6 @@
             });    
     });
 </script>
-
+</div>
 </body>
 </html>

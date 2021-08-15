@@ -68,9 +68,10 @@
  </style>
 
 <meta charset="UTF-8">
-<title>강의 계획서 등록</title>
+<title>강의 계획서 등록 :: No.M University</title>
 </head>
 <body>
+<div class="content-page">
 <div class="container23">
 	<h1 align="center" class="ns23">강 의 계 획 서</h1>
 	
@@ -308,7 +309,7 @@
 
 	
 </div>
-
+</div>
 </body>
 </html>
 

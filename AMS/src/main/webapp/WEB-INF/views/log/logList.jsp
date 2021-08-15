@@ -18,6 +18,7 @@
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <body>
+<div class="content-page">
 	<div id="grid"></div>
 	<script>
       //grid start
@@ -58,5 +59,6 @@
       });
       //grid end
     </script>
+</div>
 </body>
 </html>

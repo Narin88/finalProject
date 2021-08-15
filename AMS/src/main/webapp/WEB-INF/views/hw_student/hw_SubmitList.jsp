@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>수정 :: No.M University</title>
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
     text-align: center;
@@ -40,6 +40,7 @@
 </style>
 </head>
 <body>
+<div class="content-page">
 	<div class="menu01">		
 				<ul>
 					<li><a class="modalBtn" href="hwStudent">과제 메인페이지</a></li>			
@@ -153,6 +154,7 @@
 				<sec:csrfInput/>
 					<input type="hidden" id="registerId" name="registerId">
 					<input type="hidden" id="opennum" name="opennum">
-			</form>	
+			</form>
+</div>
 </body>
 </html>

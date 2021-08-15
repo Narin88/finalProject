@@ -20,4 +20,5 @@ public interface ScoreManaService {
 	List<PreEnrolmentVO> getpreenrolment(String sid);
 	int AjaxPreEnrolmentdelete(LectureVO vo);
 	LectureVO oneselectLecture(LectureVO vo);
+	int timetablecheck(LectureVO vo);
 }

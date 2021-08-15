@@ -115,6 +115,11 @@
 		AND P.SID = #{sid}
 	</select>
 	
+	<!-- 시간표 중복체크 -->
+	<select id="timetablecheck" parameterType="LectureVO" resultType="int">
+		select timetablecheck(#{sid},#{timetable})
+		from dual
+	</select>
 	
 	<!-- 모달창 한강의 정보 -->
 	<select id="oneselectLecture" parameterType="LectureVO" resultType="LectureVO">

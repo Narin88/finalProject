@@ -84,5 +84,10 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	public int AjaxPreEnrolmentdelete(LectureVO vo) {
 		return SMmap.AjaxPreEnrolmentdelete(vo);
 	}
+
+	@Override
+	public int timetablecheck(LectureVO vo) {
+		return SMmap.timetablecheck(vo);
+	}
 	
 }

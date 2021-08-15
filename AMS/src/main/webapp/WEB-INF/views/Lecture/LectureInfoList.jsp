@@ -139,7 +139,8 @@ uri="http://www.springframework.org/security/tags" %>
             <tbody></tbody>
           </table>
           <div align="center">
-            <button type="submit" class="SaveBtn">수강 등록하기</button>
+          	<input type="submit" class="SaveBtn" value="강의 등록">
+            
           </div>
         </form>
       </div>

@@ -169,9 +169,9 @@ public class ScoreManaController {
 	
 	@PostMapping("timetablecheck")
 	@ResponseBody
-	public int timetablecheck(LectureVO vo) {
-		String time = vo.getTimetable();
-		System.out.println("결과:"+time.length());
-		return 0;
+	public int timetablecheck(LectureVO vo, HttpSession session) {
+		vo.setSid((String)session.getAttribute("id"));
+		int i = SMdao.timetablecheck(vo);
+		return i;
 	}
 }

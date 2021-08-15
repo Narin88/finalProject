@@ -83,7 +83,7 @@
 					<input type="hidden" id="scomment" name="scomment">
 					<table	class="hwSTable" border="1" style="border-collpase:collpase;width:800px;">
 						<tr style="border-top: 2px solid orange;">
-							<th width="130px"> 교수님께 한마디 </th>	<td> <textarea id="scomment" name="scomment" style="border:none;" rows="5" cols="90"></textarea></td>
+							<th width="130px"> 교수님께 한마디 </th>	<td> <textarea id="scomment" name="scomment" style="border:none;" rows="5" cols="90" placeholder="교수님께 하실말이 있으시면 글을 남겨주세요."></textarea></td>
 						</tr>
 						<tr>
 							<th width="130px"> 첨부파일 </th>	<td> <input type="file" id="file" name="file"></td>
@@ -99,18 +99,24 @@
 		</c:forEach>
 		
 		<script>
-			function submitFunc(){
+	function submitFunc(){
 				var a=$("#scomment").val();
+				var b=$("#file").val();
+				console.log(b);
 				console.log(a);
 				hwSSubmitFrm.scomment.value=a;
-				if(confirm("제출하시겠습니까?")==true){
-					alert("제출완료!");
-					hwSSubmitFrm.submit();
-				}else{
-					return false;
-				}
-				
-			}
+				if(b == ""){
+						alert("첨부파일을 등록해주세요.");
+							}else{
+									if(confirm("제출하시겠습니까?")==true){
+											alert("제출완료!");
+											hwSSubmitFrm.submit();
+										}else{
+											return false;
+											}	
+								}	
+					
+						}
 		</script>
 		
 </body>

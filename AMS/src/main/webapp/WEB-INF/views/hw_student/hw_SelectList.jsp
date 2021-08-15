@@ -118,7 +118,7 @@
 									, lyear: '${list.lyear}'
 									, term : '${list.term}'
 									,pcomment: '<div class="underline">${list.pcomment}</div>'
-									,pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/><c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									,pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/><c:if test="${list.hwstatus >= 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><br><span style="color:blue;">마감</span></c:if>'
 									,score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if> ${list.score}'
 									,submitCheck: '<c:if test="${list.submitCheck > 0 }"><button class="btn-hover color-9">제출완료</button></c:if> <c:if test="${list.submitCheck == 0 }"><button class="btn-hover color-11">미제출</button></c:if>'
 									,registerId: '${list.registerId}'

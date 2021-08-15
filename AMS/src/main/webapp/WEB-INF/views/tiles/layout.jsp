@@ -49,6 +49,7 @@
 
 <body>
 	<div class="AMScontainer">
+		<div class="content-page">
 		<header>
 			<tiles:insertAttribute name="header" />
 		</header>
@@ -58,6 +59,7 @@
 		<article>
 			<tiles:insertAttribute name="content" />
 		</article>
+		</div>
 	</div>
 </body>
 </html>

@@ -2,6 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 
+해결 과제
+	1. 모달창
+		- 스크롤 내린 뒤 닫고 새 모달창을 열면 닫은 시점에서 열림
+		- pdf 출력
+	
+	2. 그리드
+		- 강의 평가 버튼
+	
+	3. 검색창
+		- css 통일 문제
+ -->
+
 
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
@@ -11,14 +24,14 @@
 	#my_offer {
 		display: none;
 		width: 80%;
-		height: 40%;
+		height: 30%;
 		padding: 30px 60px;
 		background-color: #fefefe;
 		border: 1px solid #888;
 		border-radius: 3px;
 	}
 	
-	#my_offer .modal_close_btn {
+	#my_offer .modal_close_btn, #modal_offer .modal_close_btn{
 		position: absolute;
 		top: 10px;
 		right: 10px;
@@ -59,8 +72,61 @@
 	td[data-column-name="lname"] {
 		color : skyblue;
 	}
+	
+	/********************************************************************/
+	/* 강의 계획서 모달에 쓰이는 스타일 */
+	.container23{
+		width: 1200px;
+		border: 1px solid black;
+		margin: 40px;
+		padding: 30px;
+	}
+	
+	.innercontainer23{
+ 		align : center;
+		width: 100%;
+	}
+	
+	.ns23{
+		font-family: 'Noto Sans KR', sans-serif;
+		align: center;
+	}
+	
+	textarea{
+		word-break: break-all;
+	}
+	
+	.inbox{
+		width: 180px;
+		text-align: center;
+		height:25px;
+	}
+	
+	.schedulebox{
+		width: 99%;
+ 		text-align: center;
+ 		height:25px;
+	}
+	
+	#modal_offer {
+	    /* overflow-y: initial !important; */
+	    
+	    display: none;
+		width: 80%;
+		height: 80%;
+		padding: 30px 60px;
+		background-color: #fefefe;
+		border: 1px solid #888;
+		border-radius: 3px;
+	}
+	
+	/* 모달 스크롤 */
+	#modal_offer .modal-body{
+	    height: 100%;
+	    overflow-y: auto;
+	}
+	
 </style>
-
 <title>강의 조회 페이지</title>
 
 <!-- 본체 -->
@@ -70,27 +136,13 @@
 			<font>학과 : </font>
 			<select name = "dname" id = "dname">
 				<option value = "">전체</option>
-				<!-- 
-				<option value = "전기전자공학">전기전자공학</option>
-				<option value = "컴퓨터공학">컴퓨터공학</option>
-				<option value = "화공신소재공학">화공신소재공학</option>
-				 -->
 				<c:forEach items = "${depart }" var = "depart">
 					<option value = "${depart.dname }">${depart.dname }</option>
 				</c:forEach>
 			</select>
 			<font>전공 : </font>
 			<select name = "mcode" id = "mcode">
-				<option value = "">선택</option>
-				<!-- 
-				<option value = "301">게임모바일 공학전공</option>
-				<option value = "302">디지펜게임 공학전공</option>
-				<option value = "304">신소재 공학전공</option>
-				<option value = "306">전기에너지 공학전공</option>
-				<option value = "305">전자 공학전공</option>
-				<option value = "300">컴퓨터 공학전공</option>
-				<option value = "303">화학 공학전공</option>
-				 -->
+				<option value = "">전체</option>
 			</select>
 			<div class = "lecture_division">
 				<font>구분 : </font>
@@ -102,12 +154,6 @@
 			<font>위치 : </font>
 			<select name = "location">
 				<option value = "">전체</option>
-				<!-- 
-				<option value = "경영대">경영대</option>
-				<option value = "공대">공대</option>
-				<option value = "사회대">사회대</option>
-				<option value = "인문대">인문대</option>
-				 -->
 				 <c:forEach items = "${room }" var = "room">
 				 	<option value = "${room.location }">${room.location }</option>
 				 </c:forEach>
@@ -171,6 +217,177 @@
 <!-- 모달 끝 -->
 
 
+<!-- 모달 뷰2 -->
+<div class="modal_offer" id = "modal_offer" align = "center">
+	<a class = "modal_close_btn">닫기</a>
+	<div class = "modal-body">
+		<button id="createpdf" style= "float : right;">pdf 생성</button>
+		<div class="container23" id="pdfwrap">
+			<h1 align="center" class="ns23">강 의 계 획 서</h1>
+			<p id = "plan_term"></p>
+			<!-- ${spList.lyear}년도 ${spList.term} 학기 -->
+			<div class="innercontainer23">
+				<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
+					<tr width="200" height="100%">
+						<th><font size="3">교과목 명</font></th>			<th><input type="text" name = "plan_lname" class ="inbox" readonly> </th>
+						<th ><font size="3">교수</font></th>			<th><input type="text" name = "plan_pname" class ="inbox" readonly> </th>
+						<th ><font size="3">이메일</font></th>			<th><input type="text" name = "plan_email" class ="inbox" readonly> </th>
+						<th ><font size="3">교수 연락처</font></th>		<th><input type="text" name = "plan_pphone" class ="inbox" readonly> </th>
+					</tr>
+				</table>
+				<br>
+				<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
+					<tr>
+						<th><font size="3">수강학과</font></th>			<th><input type="text" name = "plan_mname" class ="inbox" readonly></th>
+						<th><font size="3">수강학부</font></th>			<th><input type="text" name = "plan_dname" class ="inbox" readonly> </th>
+						<th><font size="3">강의실</font></th>	 			<th><input type="text" name = "plan_lrname" class ="inbox" readonly></th>
+						<th><font size="3">교재</font></th>				<th><input type="text" name = "plan_book" class ="schedulebox" readonly></th>
+					</tr>
+					<tr>				
+						<th>강의 코드</th> 								<td><input type="text" name = "plan_lnum" class ="inbox" readonly></td>
+						<th> - </th> 									<td><input type="text" name = "plan_dividenum" class ="inbox" readonly></td>
+						<th>강의 시간</th>									<td colspan="3"><input type="text" name = "plan_schedule" class="schedulebox" readonly>
+					</tr>
+					<tr>				
+						<th ><font size="3">학점</font></th>	 			<th><input type="text" name = "plan_credit" class ="inbox" readonly></th>
+						<th><font size="3">대상학년</font></th>			<th><input type="text" name = "plan_grade" class ="inbox" readonly> </th>
+						<th ><font size="3">정원</font></th>				<th><input type="text" name = "plan_newlimitcount" class ="inbox" readonly></th>
+						<th><font size="3">이수구분</font></th>			<th><input type="text" name = "plan_division" class ="schedulebox" readonly></th>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<%-- <input type="hidden" name="opennum" value="${spList.opennum}"> --%>
+			<table width="100%"  align="center" bgcolor="#d2d2d2" class="ns23">						
+				<tr>					
+					<th><p align="left"> &nbsp; 1. 교과목 개요</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="plan_content" rows="3" style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+			</table>
+			<br>
+			<label class="ns23">3. 주차별 강의 진행 과정 <span style="color:#aaa;"> (최대 300자) </span></label>
+			<table width="100%"  bgcolor="#d2d2d2" class="ns23">						
+				<br>
+				<tr>					
+					<th><p align="left">&nbsp; 1주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w1" rows="3" style="resize: none;width:99%;" wrap="hard" readonly></textarea></td>				
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp; 2주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w2" rows="3"  style="resize: none;width:99%;"wrap="hard" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  3주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w3" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  4주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w4" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  5주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w5" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  6주차 강의</p></th>
+				</tr>		
+				<tr height="20">					
+					<td><textarea name="w6" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  7주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w7" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  8주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea  placeholder="중간고사 기간" name="w8" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  9주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w9" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  10주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w10" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  11주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w11" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  12주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w12" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>
+					<th><p align="left"> &nbsp;  13주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w13" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  14주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w14" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  15주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w15" rows="3"  style="resize: none;width:99%;" readonly></textarea></td>						
+				</tr>					
+				<tr></tr>
+				<tr>					
+					<th><p align="left"> &nbsp;  16주차 강의</p></th>
+				</tr>					
+				<tr height="20">					
+					<td><textarea name="w16" rows="3"  style="resize: none;width:99%;" placeholder="기말고사 기간" readonly></textarea></td>						
+				</tr>					
+			</table>
+		</div>
+	</div>
+</div>
+
+
 <script>
 	 
 	// 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
@@ -212,10 +429,10 @@
 	// 그리드
 	// api 쓰게 되면서 얘 의미 없게 되긴 했는데, 주석 처리하자니 교수 이름 때문에 걸리네?
 	// seq 값도 못 받음
-	var lecData = [
+	/* var lecData = [
 		<c:forEach items = "${lec}" var = "lec" varStatus = "seq">{
 			// 실질적 값
-			/* seq			: '${seq.count}',
+			seq			: '${seq.count}',
 			lnum 		: '${lec.lnum}' + '-' + '${lec.dividenum}',
 			lname 		: '${lec.lname}',
 			division 	: '${lec.division}',
@@ -224,21 +441,21 @@
 			pname		: '${lec.pname}',
 			timetable 	: '${lec.timetable}',
 			lrname 		: '${lec.lrname}',
-			limitcount	: '${lec.limitcount}', */
+			limitcount	: '${lec.limitcount}',
 			
 			// 필요에 의한 값 땡겨오기.
-			email		: '${lec.email}',
-			pphone		: '${lec.pphone}',
-			pid			: '${lec.pid}',
-			opennum		: '${lec.opennum}',
-			evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})">확인</button>'
+			// email		: '${lec.email}',
+			// pphone		: '${lec.pphone}',
+			// pid			: '${lec.pid}',
+			// opennum		: '${lec.opennum}',
+			// evaluation: '<button id="openbtn${lec.opennum}" onclick="openpage(${lec.opennum})">확인</button>'
 			
 		}
 		<c:if test='${!empty lec.lnum}'>
 		,
 		</c:if>
 		</c:forEach>
-	];
+	]; */
 	
 
 	// 그리드를 보여준다
@@ -276,11 +493,12 @@
 		
 	});
 
-	grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
+	// grid.readData(1, lec, true);
+	// grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
 	// 그리드 끝
 
 	// 그리드 클릭 이벤트
-	grid.on('click', ev =>{
+	grid.on('dblclick', ev =>{
 		
 		var data = grid.getRow(ev.rowKey);
 		
@@ -289,17 +507,113 @@
 		}
 		
 		if (ev.columnName == "lname"){
-			// 쿼리에 필요한 값 적용시키기
-			let pid 	= data.pid;
-			let opennum = data.opennum;
-			
-			console.log("pid 값 : " + pid);
-			console.log("opennum 값 : " + opennum);
-			
-			// location.href = "/readOnly2?pid=" + pid + "&opennum=" + opennum;
+			modalOffer(data);
 		}
 	});
 
+	
+	function modalOffer(data) {
+		
+		modal('modal_offer');
+		
+		// 비동기로 쓸 받은 값
+		let pid 	= data.pid;
+		let opennum = data.opennum;
+		
+		// 비동기 결과 값 담기용 변수
+		let p_term			= document.getElementById('plan_term');
+		let p_lname 		= document.getElementsByName('plan_lname')[0];
+		let p_pname 		= document.getElementsByName('plan_pname')[0];
+		let p_email 		= document.getElementsByName('plan_email')[0];
+		let p_pphone 		= document.getElementsByName('plan_pphone')[0];
+		let p_mname 		= document.getElementsByName('plan_mname')[0];
+		let p_dname 		= document.getElementsByName('plan_dname')[0];
+		let p_lrname 		= document.getElementsByName('plan_lrname')[0];
+		let p_book 			= document.getElementsByName('plan_book')[0];
+		let p_lnum 			= document.getElementsByName('plan_lnum')[0];
+		let p_dividenum 	= document.getElementsByName('plan_dividenum')[0];
+		let p_schedule 		= document.getElementsByName('plan_schedule')[0];
+		let p_credit 		= document.getElementsByName('plan_credit')[0];
+		let p_grade 		= document.getElementsByName('plan_grade')[0];
+		let p_newlimitcount = document.getElementsByName('plan_newlimitcount')[0];
+		let p_division 		= document.getElementsByName('plan_division')[0];
+		let p_week = [
+			'w1',
+			'w2',
+			'w3',
+			'w4',
+			'w5',
+			'w6',
+			'w7',
+			'w8',
+			'w9',
+			'w10',
+			'w11',
+			'w12',
+			'w13',
+			'w14',
+			'w15',
+			'w16'
+		];
+		
+		for (let i = 1; i <= p_week.length; i++) {
+			p_week[i - 1] = document.getElementsByName('w' + [i])[0];
+		}
+		
+		$.ajax({
+			url: 'planView',
+			data: {
+				pid 	: pid,
+				opennum : opennum
+			},
+			success: function(result){
+				//$('#plan_lname').attr("value", result.lname);
+				p_term.innerHTML		= result.lyear + '년도 ' + result.term + '학기';
+				p_lname.value 			= result.lname;
+				p_pname.value			= result.pname;
+				p_email.value			= result.email;
+				p_pphone.value			= result.pphone;
+				p_mname.value			= result.mname;
+				p_dname.value			= result.dname;
+				p_lrname.value			= result.lrname;
+				p_book.value			= result.book;
+				p_lnum.value			= result.lnum;
+				p_dividenum.value		= result.dividenum;
+				p_schedule.value		= result.schedule;
+				p_credit.value			= result.credit;
+				p_grade.value			= result.grade;
+				p_newlimitcount.value	= result.newlimitcount;
+				p_division.value		= result.division;
+				
+				for (let i = 1; i <= p_week.length; i++) {
+					p_week[i - 1].value = result.w + [i];
+					console.log(result.w + [i]);
+				}
+				/* ㅋㅋ
+				p_week[0].value			= result.w1;
+				w2.value				= result.w2;
+				w3.value				= result.w3;
+				w4.value				= result.w4;
+				w5.value				= result.w5;
+				w6.value				= result.w6;
+				w7.value				= result.w7;
+				w8.value				= result.w8;
+				w9.value				= result.w9;
+				w10.value				= result.w10;
+				w11.value				= result.w11;
+				w12.value				= result.w12;
+				w13.value				= result.w13;
+				w14.value				= result.w14;
+				w15.value				= result.w15;
+				w16.value				= result.w16;
+				*/
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+		
+	}
 	
 	function showOffer(data) {
 		
@@ -314,7 +628,8 @@
 		.append($('<td>').html(pname))
 		.append($('<td>').html(pphone))
 		.append($('<td>').html(email))
-		.appendTo("#professorInfo tbody"); 
+		.appendTo("#professorInfo tbody");
+		
 	}
 				
 	function modal(mm) {
@@ -342,6 +657,7 @@
 	    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
 	        bg.remove();
 	        modal.style.display = 'none';
+	        // $(this).find('form')[0].reset();	초기화?
 	    });
 
 	    modal.setStyle({
@@ -360,7 +676,8 @@
 	        webkitTransform: 'translate(-50%, -50%)'
 	    });
 	}
-
+	
+	
 	// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
 	Element.prototype.setStyle = function(styles) {
 	    for (var k in styles) this.style[k] = styles[k];
@@ -375,30 +692,47 @@
 	// 검색 컬럼 변화
 	$("#dname").change(function(){
 		
-		let dname = $(this).val();
-		let mcode;
+		let v_dname = $(this).val();
+		let v_mcode = `<option value = "">전체</option>`;
 		
-		if (dname == "") {
+		if (v_dname != ""){
+			//$("select[name = 'mcode']" option).remove();
 			$(`select[name = mcode] option`).remove();
-			mcode += `<option value = "">선택</option>`;
-			$('#mcode').append(mcode);
-		} else {
-			$(`select[name = mcode] option`).remove();
-			
+		
 			$.ajax({
-				url: 'getMajorList',
+				url: 'customDcode',
 				type: 'GET',
-				data: {dname: dname},
+				data: {dname: v_dname},
 				success: function(result) {
 					$.each(result, function(i, v){
-						//mcode += `<option value = ${v.mcode}>${v.mname}</option>`;
-						//console.log(v);
-						//console.log(v.mcode);
-						mcode += '<option value="'+v.mname+'">'+v.mname+'</option>';
+						//v_mcode += `<option value = ${v.mcode}>${v.mname}</option>`;
+						v_mcode += '<option value="'+v.mcode+'">'+v.mname+'</option>';
 					});
-					$('#mcode').append(mcode);
+					$('#mcode').append(v_mcode);
 				}
 			});
+		} else {
+			$(`select[name = mcode] option`).remove();
+			$('#mcode').append(v_mcode);
 		}
+	});
+	
+	
+	// pdf
+	$('#createpdf').click(function() {
+
+		html2canvas($('#pdfwrap')[0]).then(function (canvas) {
+			var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
+			var doc = new jsPDF('p', 'mm', 'a4'); 
+			var imgData = canvas.toDataURL('image/png'); 
+			var imgWidth = 210; 
+			var pageHeight = 295; 
+			var imgHeight = canvas.height * imgWidth / canvas.width; 
+			var heightLeft = imgHeight; 
+			var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+			while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
+			alert('클릭됨');
+		});
+		
 	});
 </script>

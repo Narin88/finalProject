@@ -152,6 +152,16 @@
 	<select id="whereRoom" resultType="StudentsVO">
 		SELECT DISTINCT LOCATION
 		FROM LECTURE_ROOM
+		ORDER BY LOCATION
+	</select>
+	
+	<!-- 학과명으로 전공 조회 -->		<!-- FIND_CODE_NAME(x, DCODE)쓰고 있으면 dcode로 전공 조회할 때 문제 발생 -->
+	<select id="customDcode" resultType="StudentsVO">
+		SELECT D.DNAME, M.MCODE, M.MNAME
+		FROM DEPARTMENTS D, MAJOR M
+		WHERE D.DCODE = M.DCODE
+		AND D.DNAME = #{dname}
+		ORDER BY M.MNAME
 	</select>
 	
 </mapper>

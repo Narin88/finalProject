@@ -1,9 +1,8 @@
 package com.last.prj.students.web;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +22,8 @@ import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
 import com.last.prj.students.service.StudentsService;
 import com.last.prj.students.service.StudentsVO;
+import com.last.prj.studyplan.service.StudyplanJoinVO;
+import com.last.prj.studyplan.service.StudyplanService;
 
 @Controller
 public class StudentsController {
@@ -34,6 +36,9 @@ public class StudentsController {
 	
 	@Autowired
 	private PreEnrolmentService preService;
+	
+	@Autowired
+	private StudyplanService planService;
 
 	////////////////////////////////////////////////////////////
 
@@ -136,15 +141,16 @@ public class StudentsController {
 	}
 
 	@RequestMapping("/lectureLookUp")
-	public String lectureLookUp(StudentsVO vo, Model model) {
+	public String lectureLookUp(StudentsVO vo, Model model, StudyplanJoinVO planVO) {
 		// 강의 시간표들 조회 (수강 신청 과정)
 
 		// common code
 		vo.setTerm(1);
-
+		
 		model.addAttribute("lec", stService.lectureLookUp(vo));
 		model.addAttribute("room", stService.whereRoom());
 		model.addAttribute("depart", preService.preDepartments());
+		model.addAttribute("spList", planService.selectresult(planVO));
 		
 		return "students/lectureLookUp.tiles";
 	}
@@ -174,7 +180,24 @@ public class StudentsController {
 
 		return path;
 	}
+	
+	// 학과명으로 전공코드 및 전공명 조회
+	@ResponseBody
+	@GetMapping("customDcode")
+	List<StudentsVO> customDcode(StudentsVO vo) {
+		return stService.customDcode(vo);
+	}
+	
+	// 강의 계획서 조회
+	@ResponseBody
+	@GetMapping("planView")
+	StudyplanJoinVO planView(StudyplanJoinVO vo) {
+		
+		System.out.println("\n" + planService.selectresult(vo) + "\n");
+		return planService.selectresult(vo);
+	}
 
+	// 강의 정보 조회
 	@ResponseBody
 	@RequestMapping("/wantLectureList")
 	public Map<String, Object> wantLectureList(

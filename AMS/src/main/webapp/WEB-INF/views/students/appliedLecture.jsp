@@ -65,7 +65,6 @@
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
 
 <title>수강 신청된 과목 확인</title>
-
 <div align="center">
 	<h2>수강 신청된 강의 리스트</h2>
 	<div id="grid"></div>
@@ -169,7 +168,7 @@
 
 	//모달 start
 	document.addEventListener("DOMContentLoaded", function(){
-		grid.on('click', ev =>{
+		grid.on('dblclick', ev =>{
 			
 			var data = grid.getRow(ev.rowKey);
 			
@@ -292,15 +291,15 @@
 		];
 		
 		let timeseq =[
-			`1교시<br>09:00 ~ 10:00`,
-			`2교시<br>09:00 ~ 10:00`,
-			`3교시<br>09:00 ~ 10:00`,
-			`4교시<br>09:00 ~ 10:00`,
-			`5교시<br>09:00 ~ 10:00`,
-			`6교시<br>09:00 ~ 10:00`,
-			`7교시<br>09:00 ~ 10:00`,
-			`8교시<br>09:00 ~ 10:00`,
-			`9교시<br>09:00 ~ 10:00`,
+			`1교시<br>09:00 ~ 10:15`,
+			`2교시<br>10:30 ~ 11:45`,
+			`3교시<br>12:00 ~ 13:15`,
+			`4교시<br>13:30 ~ 14:45`,
+			`5교시<br>15:00 ~ 16:15`,
+			`6교시<br>16:30 ~ 17:45`,
+			`7교시<br>18:00 ~ 19:15`,
+			`8교시<br>19:30 ~ 20:45`,
+			`9교시<br>21:00 ~ 22:15`,
 		];
 		/* "1교시" + "<br>" + "09:00 ~ 10:00",
 		"2교시" + "<br>" + "09:00 ~ 10:00",

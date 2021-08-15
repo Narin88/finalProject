@@ -44,7 +44,8 @@
 		parameterType="StudyplanJoinVO">
 		select find_code_name(100, v.dcode) as division,
 		v.CREDIT,v.grade, v.lname,p.pname, p.email,
-		p.PPHONE, l.*, m.DNAME,
+		(SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4)) PPHONE, 
+		l.*, m.DNAME,
 		m.MNAME, r.LRNAME, p.PSTATUS, s.*
 		from lecture_info v, LECTURE l,
 		professor p, MAJOR_VIEW m,

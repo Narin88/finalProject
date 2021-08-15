@@ -52,14 +52,14 @@ public String ScoreCheckLectureStudent(Model model, HttpSession session, ScoreMa
 
 @ResponseBody
 @RequestMapping(value = "ScoreInsert", method = RequestMethod.PUT)
-public int ScoreInsert(@RequestBody ScoreManaVO vo) {
+public String ScoreInsert(@RequestBody ScoreManaVO vo) {
+	String opennum = vo.getOpennum();
 	System.out.println(vo);
 	int result = dao.ScoreInsert(vo);
 	System.out.println("결과====================" +result);
-	return result;
+	return null;
 }
 
- 
 
 // 아직 구현 못함.
 /*

@@ -24,11 +24,18 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script type = "text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <title>성적관리</title>
 </head>
 <body>
 
+<button id="createpdf">
+  pdf 생성
+</button>
+<div id="pdfwrap">
 	<div align="center">
 		<h2>수강생 리스트</h2>
 	</div>
@@ -39,7 +46,7 @@
 
 	<div id="grid"></div>
 
-
+</div>
 
 	<script> 
 
@@ -67,6 +74,7 @@ var clsData = [
 	</c:if>
 	</c:forEach>
 	]; 
+
 
 //grid api-source
 	const dataSource = {
@@ -96,29 +104,29 @@ var clsData = [
 	    }
 		,
 		columns: [
-			{header: '강의등록번호',name: 'opennum', width: 100},
-			{header: '학번',name: 'sid', width: 150}, 
-			{header: '학생이름',name: 'sname',width: 150}, 
+			{header: '강의등록번호',name: 'opennum', width: 130},
+			{header: '학번',name: 'sid', width: 130}, 
+			{header: '학생이름',name: 'sname',width: 130}, 
 			{header: '강의번호',name: 'lnum',width: 150}, 
 			{header: '강의이름',name: 'lname',width: 200}, 
-			{header: '중간고사',name: 'middlescore',width: 150, editor: 'text'},
-			{header: '기말고사',name: 'finalscore',width: 150, editor: 'text'},
-			{header: '출석점수',name: 'attendancescore',width: 150, editor: 'text'},
-			{header: '과제',name: 'homework',width: 150, editor: 'text'},
-			{header: '총점',name: 'total',width: 150},
+			{header: '중간고사',name: 'middlescore',width: 130, editor: 'text'},
+			{header: '기말고사',name: 'finalscore',width: 130, editor: 'text'},
+			{header: '출석점수',name: 'attendancescore',width: 130, editor: 'text'},
+			{header: '과제',name: 'homework',width: 130, editor: 'text'},
+			{header: '총점',name: 'total',width: 130},
 			{header: '등급',name: 'rank',width: 130},
 		
 		] //컬럼갯수
 
 	} );
 //grid end
-
 grid.resetData(clsData) //그리드를 그려놓고 데이터를 새로 넣음 (기존datasource -> clsData)
+
+
+
 
 //업데이트 버튼 누를때 lectureUpdate 함수 실행
 document.getElementById('updateBtn').addEventListener('click', ScoreInsert);
-
-
 //작업중인 행들을 저장해줌
 	function ScoreInsert(){
 		const { rowKey, columnName } = grid.getFocusedCell();
@@ -130,18 +138,52 @@ document.getElementById('updateBtn').addEventListener('click', ScoreInsert);
 		  grid.request('updateData', {
 		    checkedOnly: false
 		  });
+
 	}
 // 업데이트 실행 이벤트
 	grid.on('response', ev => {
 		  var {response} = ev.xhr;
 		  var responseObj = JSON.parse(response);
-	
+			
+		  
+		  
 		  console.log('result : ', responseObj.result);
 		  console.log('data : ', responseObj.data);
+
 		});
 
 	
 </script>
+<script>
+$('#createpdf').click(function() {
+	  //pdf_wrap을 canvas객체로 변환
+/* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
+	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+	    doc.save('LecturePlan-file.pdf'); //pdf저장
+	    alert('클릭됨');
+	  }); */
+	  
+	  html2canvas($('#pdfwrap')[0]).then(function (canvas) {
+		  var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
+		  var doc = new jsPDF('p', 'mm', 'a4'); 
+		  var imgData = canvas.toDataURL('image/png'); 
+		  var imgWidth = 210; 
+		  var pageHeight = 295; 
+		  var imgHeight = canvas.height * imgWidth / canvas.width; 
+		  var heightLeft = imgHeight; 
+		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
+		  alert('클릭됨');
+	  });
 
+	});
+	
+</script>
+<script>
+
+
+</script>
 </body>
 </html>

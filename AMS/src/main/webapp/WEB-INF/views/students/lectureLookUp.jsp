@@ -6,7 +6,6 @@
 해결 과제
 	1. 모달창
 		- 스크롤 내린 뒤 닫고 새 모달창을 열면 닫은 시점에서 열림
-		- pdf 출력
 	
 	2. 그리드
 		- 강의 평가 버튼
@@ -125,6 +124,8 @@
 	    height: 100%;
 	    overflow-y: auto;
 	}
+	
+	/* 그리드 클릭 이벤트 방해하고 있던 것 */
 	.tui-grid-cell-header.tui-grid-cell-selected {
 		background-color: unset;
 	}
@@ -243,8 +244,8 @@
 				<br>
 				<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 					<tr>
-						<th style="width: 200px;"><font size="3">학과</font></th>			<th><input type="text" name = "plan_mname" class ="inbox" readonly></th>
-						<th><font size="3">학부</font></th>								<th><input type="text" name = "plan_dname" class ="inbox" readonly> </th>
+						<th style="width: 200px;"><font size="3">학과</font></th>				<th><input type="text" name = "plan_mname" class ="inbox" readonly></th>
+						<th><font size="3">학부</font></th>									<th><input type="text" name = "plan_dname" class ="inbox" readonly> </th>
 						<th><font size="3">강의실</font></th>	 								<th><input type="text" name = "plan_lrname" class ="inbox" readonly></th>
 						<th><font size="3">교재</font></th>									<th><input type="text" name = "plan_book" class ="schedulebox" readonly style= "width: 200px;"></th>
 					</tr>
@@ -398,7 +399,52 @@
 	document.getElementById('searchBtn').addEventListener('click', searchLecture);
 	
 	// boolean
-	let isEmpty = false;
+	let isEmpty = 0;
+	
+	// 강의 계획서 모달에 필요한 값
+	let pid;
+	let opennum;
+	
+	// 비동기 결과 값 담기용 변수
+	let p_term			= document.getElementById('plan_term');
+	let p_lname 		= document.getElementsByName('plan_lname')[0];
+	let p_pname 		= document.getElementsByName('plan_pname')[0];
+	let p_email 		= document.getElementsByName('plan_email')[0];
+	let p_pphone 		= document.getElementsByName('plan_pphone')[0];
+	let p_mname 		= document.getElementsByName('plan_mname')[0];
+	let p_dname 		= document.getElementsByName('plan_dname')[0];
+	let p_lrname 		= document.getElementsByName('plan_lrname')[0];
+	let p_book 			= document.getElementsByName('plan_book')[0];
+	let p_lnum 			= document.getElementsByName('plan_lnum')[0];
+	let p_dividenum 	= document.getElementsByName('plan_dividenum')[0];
+	let p_schedule 		= document.getElementsByName('plan_schedule')[0];
+	let p_credit 		= document.getElementsByName('plan_credit')[0];
+	let p_grade 		= document.getElementsByName('plan_grade')[0];
+	let p_newlimitcount = document.getElementsByName('plan_newlimitcount')[0];
+	let p_division 		= document.getElementsByName('plan_division')[0];
+	let p_content		= document.getElementsByName('plan_content')[0];
+	let p_week = [
+		'w1',
+		'w2',
+		'w3',
+		'w4',
+		'w5',
+		'w6',
+		'w7',
+		'w8',
+		'w9',
+		'w10',
+		'w11',
+		'w12',
+		'w13',
+		'w14',
+		'w15',
+		'w16'
+	];
+	
+	for (let i = 1; i <= p_week.length; i++) {
+		p_week[i - 1] = document.getElementsByName('w' + [i])[0];
+	}
 	
 	// 그리드를 보여준다
 	const grid = new tui.Grid({
@@ -437,35 +483,35 @@
 	// grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
 	// 그리드 끝
 	
-		// 그리드 클릭 이벤트
+	// 그리드 클릭 이벤트
 	/*
 	click 이벤트는 grid 전체 이벤트 클릭이다.
-	ev.targetType을 보면 columnHeader와 
+	ev.targetType을 보면 columnHeader와 cell이 있다.
 	cell: 데이터들
 	근데 헤더를 누르면
 	cell 데이터에 tui-grid-layer-selection 이라는 div가 생겨서 클릭을 막고있었다.
 	css에서 display none 으로 숨겨서 클릭되게 했음.
+	document.querySelector()
 	*/
 	grid.on('click', ev => {
 		
 		var data = grid.getRow(ev.rowKey);
 		const isHeader = ev.targetType === "columnHeader";
-		// console.log(ev)
+		
 		if (ev.columnName == "pname" && !isHeader) {
 			showOffer(data);
 		}
 		
 		if (ev.columnName == "lname" && !isHeader) {
-			//modalOffer(data);
 			
-			console.log('planData함수 실행 전 istEmpty 값 : ' + isEmpty);
 			planData(data);
-			console.log('planData함수 실행 후 istEmpty 값 : ' + isEmpty);
-			if (isEmpty == true){
+			
+			if (isEmpty == -1) {
 				alert('강의 계획서가 작성되어 있지 않은 강의입니다.');
-				return;
-			} else {
+				isEmpty = 0;
+			} else if (isEmpty == 1){
 				modal('modal_offer');
+				isEmpty = 0;
 			}
 		}
 	});
@@ -539,60 +585,18 @@
 	function planData(data) {
 		
 		// 비동기로 쓸 받은 값
-		let pid 	= data.pid;
-		let opennum = data.opennum;
-		
-		// 비동기 결과 값 담기용 변수
-		let p_term			= document.getElementById('plan_term');
-		let p_lname 		= document.getElementsByName('plan_lname')[0];
-		let p_pname 		= document.getElementsByName('plan_pname')[0];
-		let p_email 		= document.getElementsByName('plan_email')[0];
-		let p_pphone 		= document.getElementsByName('plan_pphone')[0];
-		let p_mname 		= document.getElementsByName('plan_mname')[0];
-		let p_dname 		= document.getElementsByName('plan_dname')[0];
-		let p_lrname 		= document.getElementsByName('plan_lrname')[0];
-		let p_book 			= document.getElementsByName('plan_book')[0];
-		let p_lnum 			= document.getElementsByName('plan_lnum')[0];
-		let p_dividenum 	= document.getElementsByName('plan_dividenum')[0];
-		let p_schedule 		= document.getElementsByName('plan_schedule')[0];
-		let p_credit 		= document.getElementsByName('plan_credit')[0];
-		let p_grade 		= document.getElementsByName('plan_grade')[0];
-		let p_newlimitcount = document.getElementsByName('plan_newlimitcount')[0];
-		let p_division 		= document.getElementsByName('plan_division')[0];
-		let p_content		= document.getElementsByName('plan_content')[0];
-		let p_week = [
-			'w1',
-			'w2',
-			'w3',
-			'w4',
-			'w5',
-			'w6',
-			'w7',
-			'w8',
-			'w9',
-			'w10',
-			'w11',
-			'w12',
-			'w13',
-			'w14',
-			'w15',
-			'w16'
-		];
-		
-		for (let i = 1; i <= p_week.length; i++) {
-			p_week[i - 1] = document.getElementsByName('w' + [i])[0];
-		}
+		pid 	= data.pid;
+		opennum = data.opennum;
 		
 		$.ajax({
 			url: 'planView',
+			async:false,
 			data: {
 				pid 	: pid,
 				opennum : opennum
 			},
 			success: function(result){
-				console.log('ajax result : ' + result);
-				if (result != ''){
-					isEmpty = false;
+				if (result.content != null){
 					//$('#plan_lname').attr("value", result.lname);
 					p_term.innerHTML		= result.lyear + '년도 ' + result.term + '학기';
 					p_lname.value 			= result.lname;
@@ -615,8 +619,10 @@
 					for (let i = 1; i <= p_week.length; i++) {
 						p_week[i - 1].value = result['w' + i];
 					}
+					
+					isEmpty = 1;
 				} else {
-					isEmpty = true;
+					isEmpty = -1;
 				}
 			},
 			error: function(err){
@@ -667,7 +673,17 @@
 	    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
 	        bg.remove();
 	        modal.style.display = 'none';
+			// $('#modal_offer').scrollTop(0);	// 스크롤 위치 초기화
+			// window.scrollTo(0, 300);
+			// $('.modal-body').scrollTop(0);
 	        // $(this).find('form')[0].reset();	초기화?
+
+	    });
+	    
+	    // 스크롤 초기화 씨발
+	    $('#modal_offer').on('shown', function () {
+	    	$('.modal-body').scrollTop(0);
+	    	// $('#modal_offer').scrollTop(0);
 	    });
 
 	    modal.setStyle({
@@ -728,20 +744,29 @@
 	});
 	
 	
-	// pdf
+	// pdf 다운로드
 	$('#createpdf').click(function() {
 
 		html2canvas($('#pdfwrap')[0]).then(function (canvas) {
-			var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
-			var doc = new jsPDF('p', 'mm', 'a4'); 
-			var imgData = canvas.toDataURL('image/png'); 
-			var imgWidth = 210; 
-			var pageHeight = 295; 
-			var imgHeight = canvas.height * imgWidth / canvas.width; 
-			var heightLeft = imgHeight; 
-			var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
-			while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
-			alert('클릭됨');
+			
+			var filename 	= 'LecturePlan_' + Date.now() + '.pdf'; 
+			var doc 		= new jsPDF('p', 'mm', 'a4'); 
+			var imgData 	= canvas.toDataURL('image/png'); 
+			var imgWidth 	= 210; 
+			var pageHeight 	= 295; 
+			var imgHeight 	= canvas.height * imgWidth / canvas.width; 
+			var heightLeft 	= imgHeight; 
+			var position 	= 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+			
+			heightLeft -= pageHeight;
+			
+			while (heightLeft >= 0) { 
+				position = heightLeft - imgHeight;
+				doc.addPage();
+				doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+				heightLeft -= pageHeight;
+			}
+			doc.save(filename); 
 		});
 		
 	});

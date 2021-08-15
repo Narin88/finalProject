@@ -233,31 +233,31 @@
 			<!-- ${spList.lyear}년도 ${spList.term} 학기 -->
 			<div class="innercontainer23">
 				<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
-					<tr width="200" height="100%">
-						<th><font size="3">교과목 명</font></th>			<th><input type="text" name = "plan_lname" class ="inbox" readonly> </th>
-						<th ><font size="3">교수</font></th>			<th><input type="text" name = "plan_pname" class ="inbox" readonly> </th>
-						<th ><font size="3">이메일</font></th>			<th><input type="text" name = "plan_email" class ="inbox" readonly> </th>
-						<th ><font size="3">교수 연락처</font></th>		<th><input type="text" name = "plan_pphone" class ="inbox" readonly> </th>
+					<tr style= "width: 200px; height: 100%">
+						<th style="width: 200px;"><font size="3">강의명</font></th>			<th><input type="text" name = "plan_lname" class ="inbox" readonly> </th>
+						<th ><font size="3">교수</font></th>									<th><input type="text" name = "plan_pname" class ="inbox" readonly> </th>
+						<th ><font size="3">이메일</font></th>								<th><input type="text" name = "plan_email" class ="inbox" readonly> </th>
+						<th ><font size="3">교수 연락처</font></th>							<th><input type="text" name = "plan_pphone" class ="inbox" readonly style= "width: 200px;"> </th>
 					</tr>
 				</table>
 				<br>
 				<table align="center" bgcolor="#d2d2d2" width="100%"  class="ns23">
 					<tr>
-						<th><font size="3">수강학과</font></th>			<th><input type="text" name = "plan_mname" class ="inbox" readonly></th>
-						<th><font size="3">수강학부</font></th>			<th><input type="text" name = "plan_dname" class ="inbox" readonly> </th>
-						<th><font size="3">강의실</font></th>	 			<th><input type="text" name = "plan_lrname" class ="inbox" readonly></th>
-						<th><font size="3">교재</font></th>				<th><input type="text" name = "plan_book" class ="schedulebox" readonly></th>
+						<th style="width: 200px;"><font size="3">학과</font></th>			<th><input type="text" name = "plan_mname" class ="inbox" readonly></th>
+						<th><font size="3">학부</font></th>								<th><input type="text" name = "plan_dname" class ="inbox" readonly> </th>
+						<th><font size="3">강의실</font></th>	 								<th><input type="text" name = "plan_lrname" class ="inbox" readonly></th>
+						<th><font size="3">교재</font></th>									<th><input type="text" name = "plan_book" class ="schedulebox" readonly style= "width: 200px;"></th>
 					</tr>
 					<tr>				
-						<th>강의 코드</th> 								<td><input type="text" name = "plan_lnum" class ="inbox" readonly></td>
-						<th> - </th> 									<td><input type="text" name = "plan_dividenum" class ="inbox" readonly></td>
-						<th>강의 시간</th>									<td colspan="3"><input type="text" name = "plan_schedule" class="schedulebox" readonly>
+						<th>강의 코드</th> 													<td><input type="text" name = "plan_lnum" class ="inbox" readonly></td>
+						<th> - </th> 														<td><input type="text" name = "plan_dividenum" class ="inbox" readonly></td>
+						<th style="width: 200px;">강의 시간</th>								<td colspan="3"><input type="text" name = "plan_schedule" class="schedulebox" readonly>
 					</tr>
 					<tr>				
-						<th ><font size="3">학점</font></th>	 			<th><input type="text" name = "plan_credit" class ="inbox" readonly></th>
-						<th><font size="3">대상학년</font></th>			<th><input type="text" name = "plan_grade" class ="inbox" readonly> </th>
-						<th ><font size="3">정원</font></th>				<th><input type="text" name = "plan_newlimitcount" class ="inbox" readonly></th>
-						<th><font size="3">이수구분</font></th>			<th><input type="text" name = "plan_division" class ="schedulebox" readonly></th>
+						<th ><font size="3">학점</font></th>	 								<th><input type="text" name = "plan_credit" class ="inbox" readonly></th>
+						<th><font size="3">대상학년</font></th>								<th><input type="text" name = "plan_grade" class ="inbox" readonly> </th>
+						<th ><font size="3">정원</font></th>									<th><input type="text" name = "plan_newlimitcount" class ="inbox" readonly></th>
+						<th><font size="3">이수구분</font></th>								<th><input type="text" name = "plan_division" class ="schedulebox" readonly></th>
 					</tr>
 				</table>
 			</div>
@@ -274,7 +274,6 @@
 			<br>
 			<label class="ns23">3. 주차별 강의 진행 과정 <span style="color:#aaa;"> (최대 300자) </span></label>
 			<table width="100%"  bgcolor="#d2d2d2" class="ns23">						
-				<br>
 				<tr>					
 					<th><p align="left">&nbsp; 1주차 강의</p></th>
 				</tr>					
@@ -397,7 +396,81 @@
 	 
 	// 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
 	document.getElementById('searchBtn').addEventListener('click', searchLecture);
-	 
+	
+	// boolean
+	let isEmpty = false;
+	
+	// 그리드를 보여준다
+	const grid = new tui.Grid({
+		
+		el: document.getElementById('grid'),
+		data: {
+			api: {
+				readData: {
+					url: "wantLectureList", method: "POST" 
+				},
+			},
+			contentType: "application/json"
+		},
+		//rowHeaders: ['checkbox'],
+		pagination: true,		//페이징 처리
+	    pageOptions: {
+	    	useClient: true,	//페이징 처리
+	    	perPage: 5   		//페이징 갯수
+	    }
+		,
+		columns: [
+			//{header: ' ', name: 'seq'},
+			{header: '강의코드', name: 'lnum'},
+			{header: '강의명', name: 'lname'},
+			{header: '이수구분', name: 'division'},
+			{header: '학점', name: 'credit'},
+			{header: '대상학년', name: 'target'},
+			{header: '교수', name: 'pname'},
+			{header: '강의시간', name: 'timetable'},
+			{header: '강의실', name: 'lrname'},
+			{header: '수강정원', name: 'limitcount'},
+			{header:'강의평가',name:'evaluation'}
+		] //컬럼갯수
+	});
+	// grid.readData(1, lec, true);
+	// grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
+	// 그리드 끝
+	
+		// 그리드 클릭 이벤트
+	/*
+	click 이벤트는 grid 전체 이벤트 클릭이다.
+	ev.targetType을 보면 columnHeader와 
+	cell: 데이터들
+	근데 헤더를 누르면
+	cell 데이터에 tui-grid-layer-selection 이라는 div가 생겨서 클릭을 막고있었다.
+	css에서 display none 으로 숨겨서 클릭되게 했음.
+	*/
+	grid.on('click', ev => {
+		
+		var data = grid.getRow(ev.rowKey);
+		const isHeader = ev.targetType === "columnHeader";
+		// console.log(ev)
+		if (ev.columnName == "pname" && !isHeader) {
+			showOffer(data);
+		}
+		
+		if (ev.columnName == "lname" && !isHeader) {
+			//modalOffer(data);
+			
+			console.log('planData함수 실행 전 istEmpty 값 : ' + isEmpty);
+			planData(data);
+			console.log('planData함수 실행 후 istEmpty 값 : ' + isEmpty);
+			if (isEmpty == true){
+				alert('강의 계획서가 작성되어 있지 않은 강의입니다.');
+				return;
+			} else {
+				modal('modal_offer');
+			}
+		}
+	});
+	
+	// 검색 기능
 	function searchLecture() {
 		 
 		let mc = document.getElementsByName('mcode')[0].value;
@@ -463,70 +536,7 @@
 	]; */
 	
 
-	// 그리드를 보여준다
-	const grid = new tui.Grid({
-		
-		el: document.getElementById('grid'),
-		data: {
-			api: {
-				readData: {
-					url: "wantLectureList", method: "POST" 
-				},
-			},
-			contentType: "application/json"
-		},
-		//rowHeaders: ['checkbox'],
-		pagination: true,		//페이징 처리
-	    pageOptions: {
-	    	useClient: true,	//페이징 처리
-	    	perPage: 5   		//페이징 갯수
-	    }
-		,
-		columns: [
-			//{header: ' ', name: 'seq'},
-			{header: '강의코드', name: 'lnum'},
-			{header: '강의명', name: 'lname'},
-			{header: '이수구분', name: 'division'},
-			{header: '학점', name: 'credit'},
-			{header: '대상학년', name: 'target'},
-			{header: '교수', name: 'pname'},
-			{header: '강의시간', name: 'timetable'},
-			{header: '강의실', name: 'lrname'},
-			{header: '수강정원', name: 'limitcount'},
-			{header:'강의평가',name:'evaluation'}
-		] //컬럼갯수
-	});
-	// grid.readData(1, lec, true);
-	// grid.resetData(lecData) //그리드를 그려놓고 데이터를 넣음
-	// 그리드 끝
-	// 그리드 클릭 이벤트
-	
-	/*
-	click 이벤트는 grid 전체 이벤트 클릭이다.
-	ev.targetType을 보면 columnHeader와 
-	cell: 데이터들
-	근데 헤더를 누르면
-	cell 데이터에 tui-grid-layer-selection 이라는 div가 생겨서 클릭을 막고있었다.
-	css에서 display none 으로 숨겨서 클릭되게 했음.
-	*/
-	grid.on('click', ev => {
-		
-		var data = grid.getRow(ev.rowKey);
-		const isHeader = ev.targetType === "columnHeader";
-		// console.log(ev)
-		if (ev.columnName == "pname" && !isHeader) {
-			showOffer(data);
-		}
-		
-		if (ev.columnName == "lname" && !isHeader) {
-			modalOffer(data);
-		}
-	});
-	
-	
-	function modalOffer(data) {
-		
-		modal('modal_offer');
+	function planData(data) {
 		
 		// 비동기로 쓸 받은 값
 		let pid 	= data.pid;
@@ -580,34 +590,39 @@
 				opennum : opennum
 			},
 			success: function(result){
-				//$('#plan_lname').attr("value", result.lname);
-				p_term.innerHTML		= result.lyear + '년도 ' + result.term + '학기';
-				p_lname.value 			= result.lname;
-				p_pname.value			= result.pname;
-				p_email.value			= result.email;
-				p_pphone.value			= result.pphone;
-				p_mname.value			= result.mname;
-				p_dname.value			= result.dname;
-				p_lrname.value			= result.lrname;
-				p_book.value			= result.book;
-				p_lnum.value			= result.lnum;
-				p_dividenum.value		= result.dividenum;
-				p_schedule.value		= result.schedule;
-				p_credit.value			= result.credit;
-				p_grade.value			= result.grade;
-				p_newlimitcount.value	= result.newlimitcount;
-				p_division.value		= result.division;
-				p_content.value			= result.content;
-				
-				for (let i = 1; i <= p_week.length; i++) {
-					p_week[i - 1].value = result['w' + i];
+				console.log('ajax result : ' + result);
+				if (result != ''){
+					isEmpty = false;
+					//$('#plan_lname').attr("value", result.lname);
+					p_term.innerHTML		= result.lyear + '년도 ' + result.term + '학기';
+					p_lname.value 			= result.lname;
+					p_pname.value			= result.pname;
+					p_email.value			= result.email;
+					p_pphone.value			= result.pphone;
+					p_mname.value			= result.mname;
+					p_dname.value			= result.dname;
+					p_lrname.value			= result.lrname;
+					p_book.value			= result.book;
+					p_lnum.value			= result.lnum;
+					p_dividenum.value		= result.dividenum;
+					p_schedule.value		= result.schedule;
+					p_credit.value			= result.credit;
+					p_grade.value			= result.grade;
+					p_newlimitcount.value	= result.newlimitcount;
+					p_division.value		= result.division;
+					p_content.value			= result.content;
+					
+					for (let i = 1; i <= p_week.length; i++) {
+						p_week[i - 1].value = result['w' + i];
+					}
+				} else {
+					isEmpty = true;
 				}
 			},
 			error: function(err){
 				console.log(err);
 			}
 		});
-		
 	}
 	
 	function showOffer(data) {

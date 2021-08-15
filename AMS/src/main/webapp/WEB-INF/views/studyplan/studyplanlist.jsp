@@ -96,7 +96,7 @@
 					</c:when>
 					<c:otherwise>
 						{
-								lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}${s.dividenum}', pname: '${s.pname}',
+								lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}-${s.dividenum}', pname: '${s.pname}',
 								mname:'${s.mname}',dname: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 								division: '${s.division}', credit: '${s.credit}', 
 								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}">수정</button>'

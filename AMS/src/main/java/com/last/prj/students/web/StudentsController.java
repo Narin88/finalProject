@@ -141,7 +141,7 @@ public class StudentsController {
 	}
 
 	@RequestMapping("/lectureLookUp")
-	public String lectureLookUp(StudentsVO vo, Model model, StudyplanJoinVO planVO) {
+	public String lectureLookUp(StudentsVO vo, Model model) {
 		// 강의 시간표들 조회 (수강 신청 과정)
 
 		// common code
@@ -150,7 +150,7 @@ public class StudentsController {
 		model.addAttribute("lec", stService.lectureLookUp(vo));
 		model.addAttribute("room", stService.whereRoom());
 		model.addAttribute("depart", preService.preDepartments());
-		model.addAttribute("spList", planService.selectresult(planVO));
+		// model.addAttribute("spList", planService.selectresult(planVO));
 		
 		return "students/lectureLookUp.tiles";
 	}

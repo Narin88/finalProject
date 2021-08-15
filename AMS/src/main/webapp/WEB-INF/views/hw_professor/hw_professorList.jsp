@@ -8,7 +8,7 @@
 <head>
 <META charset="UTF-8">
 <head> 
-	<title>과제 :: No.M University</title>
+	<title>(교수)과제</title>
 	<style>
 	.noSubmit2{ 
 		text-align:center;
@@ -164,28 +164,21 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .tui-grid-body-area{
-        height:600px;
-        }
+        
 	</style>
-	<!-- Toast grid -->
+<!-- Toast grid -->
 	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 	<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
 	<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
 	<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
 	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	
-	<!--  -->
-	
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
-<div class="content-page">
 
-			<div class="menu01">		
+			<div class="menu01">	
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
@@ -273,7 +266,7 @@
 			
 			
 			<div class="hwTable1">
-	 		
+	 		<div id="grid" ></div>
 		    <!-- The Modal -->
 		    <div id="myModal" class="modalEE">
 		 
@@ -291,7 +284,10 @@
 												$('.unsubmit').show();
 												$('.submit').show();
 											}else if(e.value=="submit"){
-											
+											var a=	$('#grid2').data('column-name');
+											console.log(a);
+												$('.submit').show();
+												$('.unsubmit').hide();
 											}else if(e.value=="noSubmit"){
 												$('.submit').hide();
 												$('.unsubmit').show();
@@ -301,14 +297,11 @@
 								</div>
 								
 								
-									
+							
    								  <div id="select-box" style="width: 200px"></div>
-   								  <button style="float:left;    margin-top: -53px; margin-left: 320px;" id="selectScoreBtn">검색</button>
-   								  <button style="float:right;margin-top: -50px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
-   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -50px;" id="selectScoreBtn">점수정정</button>
-								<div id="grid2">
-									
-								</div>
+   								  <button style="float:right;margin-top: -5px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
+   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn" onclick="scoreBtn();">점수정정</button>
+								<div id="grid2"></div>
 								
 								<!-- submit_SID값으로 학생정보 가져오기 -->
 								 <br>
@@ -327,6 +320,9 @@
 		    
 		    <!--테이블 페이징 -->
 		    <script>
+		    function scoreBtn(){
+		    	console.log("ㅎ냥ㅎㄴㅇㅎ");
+		    }
 		    </script>
 		    
 		    
@@ -424,15 +420,15 @@
 						$("tfoot").empty();		
 						$(".noSubmit").empty();
 						//$('<form name="selectFrm" id="selectFrm">')
-						$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;">')
+					/*	$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;">')
 						.append($('<option value="submitAll">전체보기</option>'))
 						.append($(' <option value="submit">제출자</option>'))
 						.append($('<option value="noSubmit">미제출자</option>">'))
 						.append($('</select>>'))		
 						.appendTo('.noSubmit');		
-						//$('</form>')
-						$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4><br><br>').appendTo('.noSubmit');
-						
+						//$('</form>')*/
+						$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4>').appendTo('.noSubmit');
+					
 						
 						
 					
@@ -460,6 +456,11 @@
 							    
 							  }
 							};
+					
+					
+			
+					
+	  			
 					
 						
 			  				 // GRID 를 보여준다.
@@ -492,23 +493,18 @@
 			  		
 			  			grid.resetData(data)
 			  			
-			  			setInterval(eachTest , 100);
+			  			setInterval(eachTest , 500);
 							
 						function eachTest(){	
 				  			$('[data-column-name="submit_file"]').each(function(index, item){
-				  			
 				  				if($(this).text()==""){
-				  				console.log($(this).closest('tr').find('td').eq(4).html());
-				  				$(this).parent().children().css("background-Color","white");
-							  						$(this).text("제출된과제없음");
-							  						$(this).css("text-align","center");
-							  						$(this).css("color","red");
-				  				}
-				  				
+				  			
+				  					$(this).html("<p align='center' style='color:red;'>과제 미제출자</p>");
+				  				};
 				  					
-				  					  			
-						})	
-						};
+				  			});			  			
+						}	
+						
 			  			//삭제 버튼 누를때  함수 실행
 			  			document.getElementById('selectDelBtn').addEventListener('click', hwSubmitDel);
 						
@@ -527,15 +523,20 @@
 			  		    
 			  			//작업중인 행들을 저장해줌
 			  			function scoreIn(){
+			  					
+			  				
 			  				const { rowKey, columnName } = grid.getFocusedCell();
 			  			
 			  				  if (rowKey && columnName) {
 			  				    grid.finishEditing(rowKey, columnName);
+			  				 
 			  				  }
 			  			
 			  				  grid.request('updateData', {
 			  				    checkedOnly: false
 			  				  });
+			  				  
+			  				  
 			  			}
 			  		    
 			  		    	  		    
@@ -655,7 +656,7 @@
 			
 		
 			
-			<div id="grid" >
+			
 			
 			</div>
 			<script>
@@ -667,11 +668,12 @@
 								{
 									lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
 									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
-									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지 <c:if test="${list.hwstatus >= 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><br><span style="color:blue;">마감</span></c:if>'
+									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
 									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
 									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
 									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
 										,updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="${list.pperiod}" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}">변경</button>'
+										,opennum:'${list.opennum}'
 								},
 								</c:forEach>
 								]; //컬럼DATA	
@@ -689,6 +691,7 @@
 								    }
 									,
 					  			columns: [
+					  				{header: '강의번호',name: 'opennum',width:70},
 					  				{header: '강의년도',name: 'lyear',width:70},
 					  				{header: '학기',name: 'lterm',width:60}, //강의번호+분반
 					  				{header: '강의명',name: 'lname',width:90}, //년도+학기
@@ -872,12 +875,9 @@
 					var b=$("#pcoId").val();
 					udFrm.pcomment.value=b;
 					var filen=$('#file').val();
-					var pdate=$('#startDate').val();
-					console.log(b);
-					console.log(pdate);
 					console.log(filen);
-					if(filen == "" || pdate == "" || b == ""){
-						alert("입력되지 않은 값이 있습니다.");
+					if(filen == ""){
+						alert("파일을 입력해주세요");
 					}else{
 							if(confirm(' 입력값으로 변경하시겠습니까 ? ')==true){
 								alert("변경이 완료되었습니다");
@@ -957,6 +957,5 @@
 			frmHw.submit();
 		}
 		</script>
-</div>
 </body>
 </html>

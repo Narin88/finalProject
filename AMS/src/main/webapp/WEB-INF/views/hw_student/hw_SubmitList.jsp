@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>수정 :: No.M University</title>
+<title>Insert title here</title>
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
     text-align: center;
@@ -40,7 +40,6 @@
 </style>
 </head>
 <body>
-<div class="content-page">
 	<div class="menu01">		
 				<ul>
 					<li><a class="modalBtn" href="hwStudent">과제 메인페이지</a></li>			
@@ -67,8 +66,8 @@
 									, lyear: '${list.lyear}'
 									, term : '${list.term}'
 									,pcomment: '<div class="underline">${list.pcomment}</div>'
-									,pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/><c:if test="${list.hwstatus >= 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><br><span style="color:blue;">마감</span></c:if>'
-									,score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if> ${list.score}'
+									,pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/><c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									,score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if><c:if test="${list.score ne null}">${list.score } / 20</c:if>'
 									,registerId: '${list.registerId}'
 									,alterBtn:'<c:if test="${list.hwstatus > 0 }" ><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><span style="color:brown;">수정불가</span></c:if>'
 								},
@@ -154,7 +153,6 @@
 				<sec:csrfInput/>
 					<input type="hidden" id="registerId" name="registerId">
 					<input type="hidden" id="opennum" name="opennum">
-			</form>
-</div>
+			</form>	
 </body>
 </html>

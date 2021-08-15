@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@page import="java.net.URLEncoder"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,11 +70,29 @@
 							<th width="130px;">제출 기간</th>	 <td><fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/></td>
 						</tr>
 						<tr>
-							<th> 과제제출양식<br> (첨부파일) </th> 	<td>${list.registerFile }</td>
+							<th> 과제제출양식<br> (첨부파일) </th> 	<td onclick="downloadFile('${list.registerFile}')">${list.registerFile }</td>
 						</tr>
 					
 				</table>
 			</div>
+			<a href="C:\\Users\\User\\git\\finalProject67\\AMS\\src\\main\\webapp\\upload\\hw_professor/as34.TXT" download>download</a>
+			<!-- 파일다운로드 자바스크립트 -->
+			<script>
+			function downloadFile(filename){
+			    const encFileName = encodeURI(filename);
+			    $.ajax({
+			        method:"GET",
+			        url : `fileDownLoad`,
+			        success : function(data) {
+			            window.location =`fileDownLoad.do?FileName=${encFileName}`;
+			        },
+			        error:function(request,status){
+			            alert("오류가 발생했습니다.");
+			        }
+			    });
+			}
+
+			</script>
 			<div  style="width:800px;    margin: auto;">
 				<br>
 				<h6> * 과제정보 *</h6>

@@ -93,7 +93,7 @@
 
 <!-- App js -->
 <script src="resources/assets/js/app.js"></script>
-<link rel="stylesheet" href="resources/css/mainCss.css" />
+<!-- <link rel="stylesheet" href="resources/css/mainCss.css" /> -->
 
 <!-- pdf 다운로더 -->
 <script type="text/javascript"

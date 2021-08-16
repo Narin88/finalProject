@@ -31,14 +31,13 @@
 </head>
 <body>
 <div class="content-page">
-<div align="center">
-	<h2>${nowDate }년도 학기 강의 목록</h2>
+	<div class="card-body">
+		<div align="center">
+			<h2>${nowDate }년도 학기 강의 목록</h2>
+		</div>
+		<div id="grid"></div>
+	</div>
 </div>
-
-
-<div id="grid"></div>
-
-
 <script> 
 
 //grid start
@@ -77,16 +76,16 @@
 	    }
 		,
 		columns: [
-			{header: '강의등록번호',name: 'opennum', width: 130},
-			{header: '강의번호',name: 'lnum', width: 150}, //강의번호+분반
-			{header: '년도',name: 'lyear',width: 150}, //년도+학기
-			{header: '학년',name: 'grade',width: 120},
-			{header: '과목명',name: 'lname',width: 250},
-			{header: '교재',name: 'book',width: 250},
-			{header: '이수구분',name: 'division',width: 150},
-			{header: '정원',name: 'newlimitcount',width: 130},
-			{header: '강의실',name: 'lrname',width: 100},
-			{header: '시간표',name: 'timetable',width: 150}
+			{header: '강의등록번호',name: 'opennum',width: 130},
+			{header: '강의번호',name: 'lnum',width: 130}, //강의번호+분반
+			{header: '년도',name: 'lyear' ,width: 150}, //년도+학기
+			{header: '학년',name: 'grade',width: 100},
+			{header: '과목명',name: 'lname'},
+			{header: '교재',name: 'book'},
+			{header: '이수구분',name: 'division'},
+			{header: '정원',name: 'newlimitcount',width: 100},
+			{header: '강의실',name: 'lrname'},
+			{header: '시간표',name: 'timetable'}
 		] //컬럼갯수
 
 	} );
@@ -100,6 +99,6 @@
 //그리드 이벤트
 
 </script>
-</div>
+
 </body>
 </html>

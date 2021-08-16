@@ -18,20 +18,17 @@
 .createpdf{
 align: right;
 }
-
+.form-control{
+	width: 100px;
+	display: inline;
+	margin-right: 10px;
+}
 </style>
 </head>
 <body>
 <div class="content-page">
-<button id="createpdf" >
-  pdf 출력하기
-</button>
-
-<div id="pdfwrap">
-
-	<div>
-	&nbsp<br>
-	&nbsp<br>
+	<div class="card-body">
+		<div>
 
 		<div class="bigDiv">
 			<div>
@@ -66,9 +63,9 @@ align: right;
 					</tr>
 					<tr>
 						<th class="table-secondary">주소</th>
-						<td colspan="4">${st.saddress }</td>
+						<td colspan="3">${st.saddress }</td>
 						<th class="table-secondary">이메일</th>
-						<td colspan="2">${st.email }</td>
+						<td colspan="3">${st.email }</td>
 						<th class="table-secondary">입학일</th>
 						<td>${st.enterDate }</td>
 					</tr>
@@ -76,12 +73,10 @@ align: right;
 			</div>
 		</div>
 		<%-- <sec:authorize access="hasRole('ROLE_PRO')"> --%>
-			<div align="left" style="margin-left: 120px;">
+			<div align="left" style="margin-left: 120px; margin-top: 10px">
 				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
-					<label class="btn btn-secondary btn-sm" style="margin-top: 7px;">
-		    		    사진변경 <input type="file" style="display: none;" id="changeImg" name="pic">&nbsp;
-	   				 </label>
-	   				 <button type="button" class="btn btn-secondary btn-sm" onclick="changeBtn()">확인</button>
+	   				 <button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" id="changeImg" name="pic">사진변경</button>
+	   				 <button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="changeBtn()">확인</button>
 	   			</form>
 			</div>
 		<%-- </sec:authorize> --%>
@@ -100,19 +95,18 @@ align: right;
 					<div style="background-color: rgb(244, 244, 244)">
 						<c:set var="now" value="<%=new java.util.Date()%>" />
 						<!-- 현재 년도 출력을위한 설정 -->
-						<c:set var="sysYear">
+						<c:set var="sysYear" >
 							<fmt:formatDate value="${now }" pattern="yyyy" />
 						</c:set>
-          				&nbsp;&nbsp;&nbsp;&nbsp;
-          				년도<input type="number" id="year" name="year" value="${sysYear }" style="width: 3.8em;" />
-          				&nbsp;
-          				학기<select id="term">
+          				&nbsp;&nbsp;&nbsp;
+          				년도 <input type="number" id="year" name="year" value="${sysYear }" class="form-control" />
+          				학기 <select id="term" class="form-control">
 								<option value="1">1학기</option>
 								<option value="2">2학기</option>
 							</select>
 						&nbsp;
-						<button class="btn btn-outline-dark btn-sm" type="button" onclick="search()">검색</button>
-						<button class="btn btn-outline-dark btn-sm" type="button" onclick="cancel()">전체보기</button>
+						<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="search()">검색</button>
+						<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="cancel()">전체보기</button>
 					</div>
 					<div id="scoreGrid"></div>
 				</div>
@@ -157,9 +151,7 @@ align: right;
 				</div>
 			</div>
 		</div>
-		</div>
-		</div>
-
+	</div>
 	<script> //PDF처리
 $('#createpdf').click(function() {
 
@@ -222,18 +214,18 @@ $('#createpdf').click(function() {
 	        scrollX: true, // x축 스크롤on
 	        scrollY: true, // y축 스크롤on,
 	      columns: [
-	        {header: '과목이름',name: 'lname', align: "center", width: 200},
-	        {header: '학년',name: 'lyear', align: "center", width: 150},	
-	        {header: '학기',name: 'term', align: "center", width: 150},
-	        {header: '중간고사',name: 'middlescore', value:"1", align: "center", width: 100},
-	        {header: '기말고사',name: 'finalscore', align: "center", width: 100},
-	        {header: '과제점수',name: 'homework', align: "center", width: 100},
-	        {header: '출석점수',name: 'attendancescore', align: "center", width: 100},
-	        {header: '총점',name: 'total', align: "center", width: 100},
-	        {header: '등급',name: 'rank', align: "center", width: 100},
-	        {header: '학점',name: 'credit', align: "center", width: 100},
-	        {header: '이수구분',name: 'division', align: "center", width: 150},
-	        {header: '교수이름',name: 'pname', align: "center", width: 150},
+	        {header: '과목이름',name: 'lname', align: "center"},
+	        {header: '학년',name: 'lyear', align: "center"},	
+	        {header: '학기',name: 'term', align: "center"},
+	        {header: '중간고사',name: 'middlescore', value:"1", align: "center", width: "100"},
+	        {header: '기말고사',name: 'finalscore', align: "center",width: "100"},
+	        {header: '과제점수',name: 'homework', align: "center", width: "100"},
+	        {header: '출석점수',name: 'attendancescore', align: "center", width: "100"},
+	        {header: '총점',name: 'total', align: "center", width: "100"},
+	        {header: '등급',name: 'rank', align: "center", width: "100"},
+	        {header: '학점',name: 'credit', align: "center"},
+	        {header: '이수구분',name: 'division', align: "center"},
+	        {header: '교수이름',name: 'pname', align: "center"}
 	      ], //컬럼갯수
 	    });
 	  	

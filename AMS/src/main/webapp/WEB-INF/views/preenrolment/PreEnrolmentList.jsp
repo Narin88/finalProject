@@ -20,45 +20,48 @@
 .seachBox{
 	padding-left : 20px;
 	font-size: 13px;
-	margin-bottom: 10px;
 }
-.btns{
-	background: #9FF781;
+.submitbtn{
+	display: inline;
+	float: right;
+}
+.form-control{
+	width: 180px;
+	display: inline;
+	margin-right: 20px;
 }
 </style>
 </head>
 <body>
 <div class="content-page">
-
-<div id="grid">
-	<h2 align="center">수강 내역</h2>
-	<div class="seachBox">
-		대학 : <select id ="depart" name="depart">
-		 	<option value="defaultV">선택</option>
-		 	<c:forEach items="${depart }" var="dvo">	
-		 		<option value="${dvo.dcode }">${dvo.dname }</option>
-		 	</c:forEach>
-		 </select>
-		 전공 : <select id="major" name="major">
-		 	<option value="defaultV">선택</option>
-		 </select>
-		 <button id="seach">검색</button>
+	<div class="card-body">
+		<div id="grid">
+			<h2 align="center">수강 내역</h2>
+			<div class="seachBox">
+				대학 : <select id ="depart" name="depart" class="form-control">
+				 	<option value="defaultV">선택</option>
+				 	<c:forEach items="${depart }" var="dvo">	
+				 		<option value="${dvo.dcode }">${dvo.dname }</option>
+				 	</c:forEach>
+				 </select>
+				 전공 : <select id="major" name="major" class="form-control">
+				 	<option value="defaultV">선택</option>
+				 </select>
+				 <button id="seach" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" >검색</button>
+				 <div class="submitbtn">
+					<button type="button" id="createBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">등록</button>
+				 </div>
+			</div>	
+		</div>
+		<br>
+		<div id="preEnrol">
+			<h2 align="center">내 수강 꾸러미</h2>
+			<div align="right">
+				<button id="deleteBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">취소</button>
+			</div>
+		</div>
 	</div>
-	<div align="right">
-		<input type="button" id="createBtn" value="등록">
-	</div>	
 </div>
-
-
-<div id="preEnrol">
-	<h2 align="center">내 수강 꾸러미</h2>
-
-	<div align="right">
-	
-		<button id="deleteBtn" class="btns">취소</button>
-	</div>
-</div>
-
 <script>
 //첫 번쨰 그리드
 $(document).ready(function() {
@@ -187,6 +190,6 @@ $("#depart").change(function(){
 
 
 </script>
-</div>
+
 </body>
 </html>

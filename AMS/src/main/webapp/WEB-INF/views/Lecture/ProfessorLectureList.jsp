@@ -243,17 +243,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       	    }
       		,
       		columns: [
-      			{header: '강의등록번호',name: 'opennum', width: 100},
-      			{header: '강의번호',name: 'lnum', width: 100}, //강의번호+분반
-      			{header: '년도',name: 'lyear',width: 100}, //년도+학기
-      			{header: '학년',name: 'grade',width: 100},
-      			{header: '과목명',name: 'lname',width: 200},
-      			{header: '교재',name: 'book',width: 200, editor: 'text'},
-      			{header: '이수구분',name: 'division',width: 100},
-      			{header: '정원',name: 'newlimitcount',width: 80},
-      			{header: '강의실',name: 'lrname',width: 80},
-      			{header: '시간표',name: 'timetable',width: 150},
-      			{header: '강의평가', name: 'evaluation', width:150}
+      			{header: '강의등록번호',name: 'opennum'},
+      			{header: '강의번호',name: 'lnum'}, //강의번호+분반
+      			{header: '년도',name: 'lyear'}, //년도+학기
+      			{header: '학년',name: 'grade'},
+      			{header: '과목명',name: 'lname'},
+      			{header: '교재',name: 'book', editor: 'text'},
+      			{header: '이수구분',name: 'division'},
+      			{header: '정원',name: 'newlimitcount'},
+      			{header: '강의실',name: 'lrname'},
+      			{header: '시간표',name: 'timetable'},
+      			{header: '강의평가', name: 'evaluation'}
       		] //컬럼갯수
 
       	} );

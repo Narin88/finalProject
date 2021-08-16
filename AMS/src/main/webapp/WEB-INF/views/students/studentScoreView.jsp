@@ -6,6 +6,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   .tui-grid-cell .tui-grid-cell-content {
     text-align: center;
   }
+ .pdfwrap{
+	text-align: center;
+	width: 1200px;
+	margin: 40px auto;
+	padding: 30px;
+}
+ }
 </style>
 <script
   type="text/javascript"
@@ -21,19 +28,19 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 ></script>
 
 <title>성적 확인 :: No.M University</title>
-
-<button id="createpdf">pdf 생성</button>
-<div>
-  &nbsp<br />
-  &nbsp
+<body>
+<div class="content-page">
+	<div class="card-body">
+	<div align="center">
+		<button id="createpdf" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">pdf 생성</button>
+	</div>
+		<div id="pdfwrap" class ="pdfwrap">
+			<h2>학생 성적 확인</h2>
+			<div id="grid"></div>
+		</div>
+	</div>
 </div>
-<div align="center" id="pdfwrap">
-  <div class="content-page">
-    <div align="center">
-      <h2>학생 성적 확인</h2>
-      <div id="grid"></div>
-    </div>
-  </div>
+</body>
   <script>
 
     // 그리드
@@ -130,4 +137,4 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       });
     });
   </script>
-</div>
+

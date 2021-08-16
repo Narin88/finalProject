@@ -40,16 +40,7 @@
 		text-align: center;
 	}
 	
-	th, td {
-		border: 1;
-		border-color: inherit;
-		border-style: solid;
-		/*border-width: 0;*/
-		text-align: center;
-		padding: 10px;
-		width: 150px;
-	}
-	
+
 	td[data-column-name="pname"] {
 		color : skyblue;
 	}
@@ -57,7 +48,9 @@
 	td[data-column-name="lname"] {
 		color : skyblue;
 	}
-	
+	.btn15 {
+        height: 15px;
+      }
 </style>
 
 <!-- Toast grid -->
@@ -66,36 +59,37 @@
 <title>수강 확인 :: No.M University</title>
 
 <div class="content-page">
-
-<div align="center">
-	<h2>수강 신청된 강의 리스트</h2>
-	<div id="grid"></div>
-	<div class="total">
-		<div class="scheduleTime"></div>
-		<p></p>
-		<div id="scheduleShow"></div>
-	</div>
-</div>
+	<div class="card-body">
+		<div align="center">
+			<h2>수강 신청된 강의 리스트</h2>
+			<div id="grid"></div>
+			<div class="total">
+				<div class="scheduleTime"></div>
+				<p></p>
+				<div id="scheduleShow"></div>
+			</div>
+		</div>
 
 <!-- 모달 뷰-->
-<div id="my_offer" align="center">
-	<a class="modal_close_btn">닫기</a>
-	<div class="modal-body">
-		<h2>교수 정보</h2>
-		<table class="professorInfo" id="professorInfo" border="1">
-			<thead>
-				<tr>
-					<th>교수명</th>
-					<th>연락처</th>
-					<th>이메일</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
+	<div id="my_offer" align="center">
+		<a class="modal_close_btn">닫기</a>
+			<div class="modal-body">
+				<h2>교수 정보</h2>
+				<table class="table table-bordered" id="professorInfo">
+					<thead>
+						<tr>
+							<th>교수명</th>
+							<th>연락처</th>
+							<th>이메일</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- 모달 끝 -->
-</div>
 
 <!-- 히든 -->
 <%-- <div id = "hiddenData">
@@ -139,7 +133,7 @@
 			pphone		: '${st.pphone}',
 			pid			: '${st.pid}',
 			opennum		: '${st.opennum}',
-			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(${st.opennum})">확인</button>'
+			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(${st.opennum})" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">확인</button>'
 				
 		}
 		<c:if test='${!empty st.lnum}'>
@@ -187,7 +181,7 @@
 				console.log("pid 값 : " + pid);
 				console.log("opennum 값 : " + opennum);
 				
-				location.href = "/readOnly2?pid=" + pid + "&opennum=" + opennum;
+				location.href = "readOnly2?pid=" + pid + "&opennum=" + opennum;
 			}
 		});
 	

@@ -66,7 +66,6 @@ font-weight: bold;
 }
 .container23 {
 	width: 1200px;
-	border: 1px solid black;
 	margin: 40px auto;
 	padding: 30px;
 }
@@ -121,7 +120,9 @@ font-weight: bold;
 						<sec:csrfInput />
 						<input type="hidden" name="opennum" value="${spList.opennum}">
 						<br />
-						<h5><i class="ion-pound"></i>과목개요는 필수 입력 사항입니다</h5>
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<h5><i class="ion-compose"></i>과목개요는 필수 입니다.</h5>
+						</div>
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -249,8 +250,6 @@ font-weight: bold;
 						</div>
 					</form>
 				</div>
-
-
 			</div>
 		</div>
 	</div>

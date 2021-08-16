@@ -31,22 +31,20 @@
 <title>성적 관리 :: No.M University</title>
 </head>
 <body>
-
-<button id="createpdf">
-  pdf 생성
-</button>
-<div id="pdfwrap">
 <div class="content-page">
-	<div align="center">
-		<h2>수강생 리스트</h2>
+	<div class="card-body">
+		<div align="center">
+			<button id="createpdf" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">pdf 생성</button>
+		</div>
+		<div id="pdfwrap">
+			<div align="center">
+				<h2>수강생 리스트</h2>
+			</div>
+		<div align="right">
+			<button id="updateBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수정하기</button>
+		</div>
+		<div id="grid"></div>
 	</div>
-
-	<div align="right">
-		<button id="updateBtn">수정하기</button>
-	</div>
-
-	<div id="grid"></div>
-
 </div>
 
 	<script> 
@@ -109,7 +107,7 @@ var clsData = [
 			{header: '학번',name: 'sid', width: 130}, 
 			{header: '학생이름',name: 'sname',width: 130}, 
 			{header: '강의번호',name: 'lnum',width: 150}, 
-			{header: '강의이름',name: 'lname',width: 200}, 
+			{header: '강의이름',name: 'lname'}, 
 			{header: '중간고사',name: 'middlescore',width: 130, editor: 'text'},
 			{header: '기말고사',name: 'finalscore',width: 130, editor: 'text'},
 			{header: '출석점수',name: 'attendancescore',width: 130, editor: 'text'},
@@ -184,10 +182,6 @@ $('#createpdf').click(function() {
 	});
 	
 </script>
-<script>
 
-
-</script>
-</div>
 </body>
 </html>

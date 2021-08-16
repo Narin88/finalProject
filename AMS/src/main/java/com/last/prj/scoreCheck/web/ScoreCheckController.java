@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.scoreCheck.service.ScoreCheckService;
@@ -43,21 +45,21 @@ public String selectresult(Model model, LectureVO vo,HttpSession session) {
 
 //과목별 학생 리스트 출력
 @RequestMapping("ScoreCheckLectureStudent")
-public String ScoreCheckLectureStudent(Model model, HttpSession session, ScoreManaVO vo) {
+public String ScoreCheckLectureStudent(Model model, HttpSession session, ScoreManaVO vo, @RequestParam("opennum") int open_num) {
 	vo.setPid((String)session.getAttribute("id"));
-	System.out.println(dao.ScoreCheckLectureStudent(vo));
+	System.out.println(vo);
 	model.addAttribute("lectures",dao.ScoreCheckLectureStudent(vo));
-	return "scoreCheck/ScoreCheckLectureStudent.tiles";
+	return "scoreCheck/ScoreAjax.tiles";
 }
 
-@ResponseBody
-@RequestMapping(value = "ScoreInsert", method = RequestMethod.PUT)
-public String ScoreInsert(@RequestBody ScoreManaVO vo) {
-	String opennum = vo.getOpennum();
+
+@RequestMapping(value = "ScoreInsert", method = RequestMethod.POST)
+public String ScoreInsert(ScoreManaVO vo, RedirectAttributes red) {
 	System.out.println(vo);
 	int result = dao.ScoreInsert(vo);
+	red.addAttribute("opennum", vo.getOpennum());
 	System.out.println("결과====================" +result);
-	return null;
+	return "redirect:ScoreCheckLectureStudent";
 }
 
 

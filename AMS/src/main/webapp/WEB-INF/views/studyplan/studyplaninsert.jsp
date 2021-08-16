@@ -8,18 +8,8 @@
 <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"	rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
 <script>
-	$(document).ready(function() {
-		$('#limit').on('keyup', function() {
-			$('#limit_cnt').html("(" + $(this).val().length + " / 150)");
 
-			if ($(this).val().length > 150) {
-				$(this).val($(this).val().substring(0, 150));
-				$('#limit_cnt').html("(150 / 150)");
-			}
-		});
-	});
 	function sub() {
 
 		if (frm2.content.value == "") {
@@ -140,7 +130,7 @@ font-weight: bold;
 							</thead>
 							<tbody>
 								<tr>
-									<td><textarea name="content" id="limit" rows="3" required class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="content" id="limit" rows="3" required class="form-control" style="resize: none; width: 100%;" maxlength="300"></textarea></td>
 								</tr>
 							</tbody>
 						</table>
@@ -157,98 +147,98 @@ font-weight: bold;
 									<td style="text-align: left">1주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w1" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w1" id="limit" rows="3" class="form-control" style="resize: none; width: 100%; "  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 										<td style="text-align: left">2주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w2" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w2" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">3주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w3" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w3" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">4주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w4" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w4" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">5주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w5" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w5" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300"> </textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">6주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w6" id="limit" rows="3"	class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w6" id="limit" rows="3"	class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">7주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w7" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w7" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">8주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea placeholder="중간고사 기간" name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea placeholder="중간고사 기간" name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">9주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w9" rows="3" id="limit"	class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w9" rows="3" id="limit"	class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">10주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w10" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w10" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">11주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w11" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w11" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">12주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w12" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w12" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">13주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w13" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w13" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">14주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w14" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w14" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">15주차 강의</td>
 								</tr>
 	
 								<tr>
-									<td><textarea name="w15" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea name="w15" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">16주차 강의</td>
 								</tr>
 								<tr height="20">
-									<td><textarea placeholder="기말고사 기간" name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"></textarea></td>
+									<td><textarea placeholder="기말고사 기간" name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 							</tbody>
 						</table>

@@ -42,61 +42,97 @@
 	</div>
 
 	<div align="right">
-		<button id="updateBtn">수정하기</button>
+		
 	</div>
 
 	<div id="grid"></div>
 
 </div>
-<form action="">
-<table>
+<table align="center" border="1">
 	<thead>
 			<tr>
-					<th width: 130>강의등록번호</th>
-					<th width: 150>학번</th>
-					<th width: 200>학생이름</th>
-					<th width: 130>강의번호</th>
-					<th width: 130>강의이름</th>
-					<th width: 130>중간고사</th>
-					<th width: 130>기말고사</th>
-					<th width: 130>출석점수</th>
-					<th width: 130>과제</th>
-					<th width: 130>총점</th>
-					<th width: 130>등급</th>
+					<th style="width:130px" >강의등록번호</th>
+					<th style="width:150px">학번</th>
+					<th style="width:150px">학생이름</th>
+					<th style="width:150px">강의번호</th>
+					<th style="width:200px">강의이름</th>
+					<th style="width:130px">중간고사</th>
+					<th style="width:130px">기말고사</th>
+					<th style="width:130px">출석점수</th>
+					<th style="width:130px">과제</th>
+					<th style="width:130px">총점</th>
+					<th style="width:130px">등급</th>
+					<th></th>
 			</tr>
 	</thead>
 	<tbody>
 	
 		<c:forEach items="${lectures }" var="lec">
+			<input type="hidden" id="hiddenOpenNum" value="${lec.opennum }">
 			<tr>
 					<th>${lec.opennum}</th>
 					<th>${lec.sid}</th>
 					<th>${lec.sname}</th>
 					<th>${lec.lnum}</th>
 					<th>${lec.lname}</th>
-					<th><input type="text" id="middle" name="middle">${lec.middlescore}</th>
-					<th><input type="text" id="final" name="final">${lec.finalscore}</th>
-					<th><input type="text" id="attend" name="attend">${lec.attendancescore}</th>
+					<th><input type="text" id="middlescore${lec.sid }" name="middle" value="${lec.middlescore}"> </th>
+					<th><input type="text" id="finalscore${lec.sid }" name="final" value="${lec.finalscore}"></th>
+					<th><input type="text" id="attendancescore${lec.sid }" name="attend" value="${lec.attendancescore}"></th>
 					<th>${lec.homework}</th>
 					<th>${lec.total}</th>
-					<th>${lec.rank}</th>
+					<th>${lec.rank}</th> 
+					<th>
+						<button id="updateBtn" onclick="update('${lec.sid}', ${lec.opennum })">수정하기</button>
+					</th>
 			</tr>
 				</c:forEach>
 			
 	</tbody>
 </table>
-	</form>
 <script>
-$(function(){
-	$.ajax({
-		url: 'ScoreInsert',
-		data:{middlescore: middlescore, finalscore: finalscore, attendancescore: attendancescore}
-		type: 'POST',
-		success: function(result){
-			
-		}
-	})
-})
+
+
+function update(students_code, open_num) {
+	var middlescore = parseInt($('#middlescore' + students_code).val());
+	var finalscore = parseInt($('#finalscore' + students_code).val());
+	var attendancescore = parseInt($('#attendancescore' + students_code).val());
+	
+	console.log(students_code + middlescore + finalscore + attendancescore + open_num);
+	 $.ajax({
+			url: 'ScoreInsert',
+			data:{
+				middlescore: middlescore,
+				finalscore: finalscore,
+				attendancescore: attendancescore,
+				sid : students_code,
+				opennum : open_num
+			},
+			type: 'POST',
+			success: function(result){
+					location.href = "ScoreCheckLectureStudent?opennum=" + open_num
+			}
+		})
+}
+
+ $(function(){
+	/*  $('#updateBtn').click(function (){
+		 console.log($(this).val()); */
+		 /* $.ajax({
+				url: 'ScoreInsert',
+				data:{
+					middlescore: mcore,
+					finalscore: fcore,
+					attendancescore: acore
+				},
+				type: 'POST',
+				contentType: 'application/json',
+				success: function(result){
+							console.log(result);
+				}
+			}) */
+	 //})
+}) 
+
 
 </script>
 

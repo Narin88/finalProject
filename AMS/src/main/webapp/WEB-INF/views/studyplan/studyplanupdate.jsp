@@ -7,7 +7,10 @@ uri="http://www.springframework.org/security/tags" prefix="sec"%>
     href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"
     rel="stylesheet"
   />
+  
   <head>
+  <script src="textarea_MaxCharacterLimit.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
       type="text/javascript"
       src="http://code.jquery.com/jquery-latest.min.js"
@@ -58,22 +61,12 @@ uri="http://www.springframework.org/security/tags" prefix="sec"%>
         alert("정상등록 되었습니다");
       }
     </script>
-    <script>
-      $(document).ready(function () {
-        $("#limit").on("keyup", function () {
-          $("#limit_cnt").html("(" + $(this).val().length + " / 150)");
 
-          if ($(this).val().length > 150) {
-            $(this).val($(this).val().substring(0, 150));
-            $("#limit_cnt").html("(150 / 150)");
-          }
-        });
-      });
-    </script>
     <meta charset="UTF-8" />
     <title>강의 계획서 수정 :: No.M University</title>
   </head>
   <body>
+   
     <button id="createpdf">pdf 생성</button>
 
     <div class="content-page" id="pdfwrap">
@@ -188,6 +181,7 @@ uri="http://www.springframework.org/security/tags" prefix="sec"%>
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.content}</textarea
                   >
@@ -214,6 +208,7 @@ ${spList.content}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                    maxlength="300"
                   >
 ${spList.w1 }</textarea
                   >
@@ -233,6 +228,7 @@ ${spList.w1 }</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w2}</textarea
                   >
@@ -254,6 +250,7 @@ ${spList.w2}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w3}</textarea
                   >
@@ -272,6 +269,7 @@ ${spList.w3}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w4}</textarea
                   >
@@ -290,6 +288,7 @@ ${spList.w4}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w5}</textarea
                   >
@@ -308,6 +307,7 @@ ${spList.w5}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w6}</textarea
                   >
@@ -326,6 +326,7 @@ ${spList.w6}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w7}</textarea
                   >
@@ -345,6 +346,7 @@ ${spList.w7}</textarea
                     id="limit"
                     rows="3"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w8}</textarea
                   >
@@ -363,6 +365,7 @@ ${spList.w8}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w9}</textarea
                   >
@@ -381,6 +384,7 @@ ${spList.w9}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w10}</textarea
                   >
@@ -399,6 +403,7 @@ ${spList.w10}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                   maxlength="300"
                   >
 ${spList.w11}</textarea
                   >
@@ -417,6 +422,7 @@ ${spList.w11}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w12}</textarea
                   >
@@ -435,6 +441,7 @@ ${spList.w12}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w13}</textarea
                   >
@@ -453,6 +460,7 @@ ${spList.w13}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w14}</textarea
                   >
@@ -471,6 +479,7 @@ ${spList.w14}</textarea
                     rows="3"
                     id="limit"
                     style="resize: none; width: 99%"
+                     maxlength="300"
                   >
 ${spList.w15}</textarea
                   >
@@ -490,6 +499,7 @@ ${spList.w15}</textarea
                     id="limit"
                     style="resize: none; width: 99%"
                     placeholder="기말고사 기간"
+                     maxlength="300"
                   >
 ${spList.w16}</textarea
                   >
@@ -548,4 +558,5 @@ ${spList.w16}</textarea
       });
     });
   </script>
+ 
 </html>

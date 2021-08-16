@@ -16,7 +16,7 @@
 				width:100%;
 				height: 80px;
 			    padding: 1em;
-			    margin-left: -40px;
+			    margin-left: 240px;
 				}
 				.menu01 ul li{
 					list-style-type:none;
@@ -48,10 +48,11 @@
 				</ul>
 			
 				
-				</div>			
-			<h6> 'lecture datastatus '수강중'인 강의들의 제출한 과제전체 리스트</h6>
-			
-			<div id="grid" ></div>
+				</div>		
+			<div style="margin-left:260px;">	
+				<h6> 'lecture datastatus '수강중'인 강의들의 제출한 과제전체 리스트</h6>
+			</div>	
+			<div id="grid" style="margin-left:240px;" ></div>
 	
 			<script>
 			

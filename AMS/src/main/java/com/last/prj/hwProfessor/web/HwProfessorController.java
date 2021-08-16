@@ -277,4 +277,30 @@ public class HwProfessorController {
 	}
 	
 
+	//평균처리페이지 
+	@RequestMapping("hwPfScoreAvg")
+	public String hwPfScoreAvg(HwProfessorVO vo,HttpSession session,Model model) {
+		
+		vo.setPid((String)session.getAttribute("id"));
+		// 해당교수 과제 목록
+		List<Map<String, Object>> result = service.hwPfInsertSelect(vo);
+		System.out.println(result);
+		model.addAttribute("result",result);
+		
+		
+		return "hw_professor/hwPfScoreAvg.tiles";
+	}
+	
+	
+	// 평균처리페이지 강의 학생조회
+		@RequestMapping("referAvgList")
+		@ResponseBody
+		public List<Map<String, Object>> referAvgList(HttpServletRequest req,Model model,HwProfessorVO vo,HttpSession session) {
+			
+			vo.setPid((String)session.getAttribute("id"));
+			List<Map<String, Object>> referAvgList = service.hwAvgList(vo);
+			model.addAttribute("referAvgList",referAvgList);
+			System.out.println(referAvgList);
+			return  referAvgList;
+		}
 }

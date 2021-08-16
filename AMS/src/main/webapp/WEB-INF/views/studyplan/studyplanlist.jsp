@@ -22,28 +22,29 @@
 	text-align: center;
 	align-content: center;
 }
-	.HwSearch23{
-			padding: 1em;
-		    border-radius: 3em;
-		    width: 570px;
-			border:1px solid gray;
-		}
+
+.form-control{
+	display: inline;
+	width: 100px;
+}
+.btn15 {
+  height: 15px;
+}
 </style>
 <title>강의 목록 :: No.M University</title>
 </head>
 <body>
 <div class="content-page">
-			
+	<div class="card-body">
 			<!-- TEST -->
-			<h3> 강의 계획서</h3>	
+			<h3 align="center"> 강의 계획서</h3>	
 			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
-			<div class="HwSearch23">		
+			<div align="right">		
 				<form id="frm" name="frm"  method="post">
 				<sec:csrfInput/>
-				
-						<label>년도:</label>						
-							<select name="lyear" id="lyear">		
+						<label for = "lyear">년도:</label>						
+							<select name="lyear" id="lyear" class="form-control">		
 									<option value="0">선택 </option>			  
 								<c:forEach items="${ySelect}" var="ySelect">
 									  <option value="${ySelect.lyear }"  <c:if test="${ySelect.lyear}"> selected="selected"</c:if> >${ySelect.lyear }</option>
@@ -51,7 +52,7 @@
 							</select>
 								
 					<label for="term">강의학기:</label>
-							<select name="term" id="term">
+							<select name="term" id="term" class="form-control">
 							  <option value="0">선택</option>	
 							 <option value="1" >1학기</option>
 							  <option value="2">2학기</option> 
@@ -60,28 +61,18 @@
 						
 		 				<span> 
 						
-							<button type="button" onclick="selectSubmit();">검색</button>
-							<button type="button" onclick="resetFunction();">초기화</button>
+							<button type="button" onclick="selectSubmit();" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">검색</button>
+							<button type="button" onclick="resetFunction();" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">초기화</button>
 						</span> 
 				 </form>
-			 </div>	
-			 			<script>
-			 				function selectSubmit(){
-			 					frm.submit();
-			 				}
-			 				
-			 			</script>
-					
-						<div>
-							
-				 		</div>
-				<br>
-						
-				 			
-				 			
-	<div></div>
+			 </div>
 	<div id="grid"></div>
+	</div>
+</div>
 	<script> 
+	function selectSubmit(){
+		frm.submit();
+	}
 		var Btn = $('<button>');
 		var clsData = [
 			<c:forEach items="${spList }" var="s">
@@ -91,7 +82,7 @@
 							lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}-${s.dividenum}', pname: '${s.pname}',
 							mname:'${s.mname}',dname: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 							division: '${s.division}', credit: '${s.credit}', 
-							Btn: '<button  onclick=location.href="studyPlanInsertPage?opennum=${s.opennum}">등록</button>'
+							Btn: '<button  onclick=location.href="studyPlanInsertPage?opennum=${s.opennum}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">등록</button>'
 						},
 					</c:when>
 					<c:otherwise>
@@ -99,7 +90,7 @@
 								lyear:'${s.lyear}', term:'${s.term}', lname: '${s.lname}', lnum: '${s.lnum}-${s.dividenum}', pname: '${s.pname}',
 								mname:'${s.mname}',dname: '${s.dname}', grade: '${s.grade}', 학점: '${s.credit}',
 								division: '${s.division}', credit: '${s.credit}', 
-								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}">수정</button>'
+								Btn: '<button onclick=location.href="studyPlanUpdatePage?opennum=${s.opennum}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">수정</button>'
 										
 						},
 					</c:otherwise>
@@ -136,6 +127,6 @@
 	</script>
 	
 <!-- <button onclick=location.href="readOnly2?opennum=${s.opennum}">읽기전용</button> -->
-</div>
+
 </body>
 </html>

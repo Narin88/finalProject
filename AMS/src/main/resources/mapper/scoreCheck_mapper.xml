@@ -40,11 +40,10 @@
 	<!-- 등록 업데이트 -->
 	<update id="ScoreInsert" parameterType="ScoreManaVO">
 			update SCORE_MANA
-			set middlescore = #{middlescore},
-            	finalscore = #{finalscore},
-            	homework = #{homework},
-            	attendancescore = #{attendancescore}
-            where opennum = #{opennum}
-            and sid = #{sid}
+			set MIDDLESCORE = #{middlescore},
+            	FINALSCORE = #{finalscore},
+            	ATTENDANCESCORE = #{attendancescore}
+            WHERE OPENNUM = #{opennum}
+            AND SID = #{sid}
 	</update>
 </mapper>

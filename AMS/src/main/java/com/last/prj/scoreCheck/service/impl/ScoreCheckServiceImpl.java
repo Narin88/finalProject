@@ -16,13 +16,7 @@ public class ScoreCheckServiceImpl implements ScoreCheckService{
 
 	@Override
 	public int ScoreInsert(ScoreManaVO vo) {
-		int count =0;
-		for(int i=0; i<vo.getUpdatedRows().size();i++) {
-			map.ScoreInsert(vo.getUpdatedRows().get(i));
-			count++;
-		}
-		return count;
-		
+		return map.ScoreInsert(vo);
 	}
 
 	@Override

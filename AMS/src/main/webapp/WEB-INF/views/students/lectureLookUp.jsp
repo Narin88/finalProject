@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 
 해결 과제
 	1. 모달창
 		- 스크롤 내린 뒤 닫고 새 모달창을 열면 닫은 시점에서 열림
+			~> 모달창 스크롤 위치 초기화 ( 포기 )
 	
 	2. 그리드
 		- 강의 평가 버튼
 	
 	3. 검색창
-		- css 통일 문제
+		- css 통일 문제 ( 지노 씨가 해 준다 하셨음 )
  -->
 
 <style>
@@ -61,6 +61,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		text-align: center;
 		padding: 10px;
 		width: 150px;
+	}
+	
+	td[data-column-name="lnum"] {
+		color : skyblue;
 	}
 	
 	td[data-column-name="pname"] {
@@ -205,7 +209,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 본체 끝 -->
 
 
-<!-- 모달 뷰-->
+<!-- 모달 뷰 _ 교수 정보 보기 -->
 <div id="my_offer" align="center">
 	<a class="modal_close_btn">닫기</a>
 	<div class="modal-body">
@@ -224,16 +228,25 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 </div>
 <!-- 모달 끝 -->
 
+<!-- 모달3 _ 강의 평가 보기 -->
+<div class="modal_evaluation" id = "modal_evaluation" align = "center">
+	<a class = "modal_close_btn">닫기</a>
+	<div class = "modal-body">
+		
+	</div>
+</div>
 
-<!-- 모달 뷰2 -->
+
+<!-- 모달 뷰2 _ 강의 계획서 보기 -->
 <div class="modal_offer" id = "modal_offer" align = "center">
 	<a class = "modal_close_btn">닫기</a>
 	<div class = "modal-body">
+	
 		<button id="createpdf" style= "float : right;">pdf 생성</button>
+		
 		<div class="container23" id="pdfwrap">
 			<h1 align="center" class="ns23">강 의 계 획 서</h1>
 			<p id = "plan_term"></p>
-			<!-- ${spList.lyear}년도 ${spList.term} 학기 -->
 			<div class="innercontainer23">
 				<table style = "align: center; background-color: #d2d2d2; width: 100%;"  class="ns23">
 					<tr style= "width: 200px; height: 100%">
@@ -265,7 +278,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 				</table>
 			</div>
 			<br>
-			<%-- <input type="hidden" name="opennum" value="${spList.opennum}"> --%>
 			<table style = "width: 100%;  align: center; background-color: #d2d2d2;" class="ns23">						
 				<tr>					
 					<th><p align="left"> &nbsp; 1. 교과목 개요</p></th>
@@ -391,12 +403,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 				</tr>					
 			</table>
 		</div>
+		
 	</div>
 </div>
 
 
 <script>
-	 
+	
 	// boolean
 	let isEmpty = 0;
 	
@@ -474,8 +487,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			{header: '교수', name: 'pname'},
 			{header: '강의시간', name: 'timetable'},
 			{header: '강의실', name: 'lrname'},
-			{header: '수강정원', name: 'limitcount'},
-			{header:'강의평가',name:'evaluation'}
+			{header: '수강정원', name: 'limitcount'}
+			//{header:'강의평가',name:'evaluation'}
 		] //컬럼갯수
 	});
 	// grid.readData(1, lec, true);
@@ -496,6 +509,19 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		
 		var data = grid.getRow(ev.rowKey);
 		const isHeader = ev.targetType === "columnHeader";
+
+		if (ev.columnName == "lnum" && !isHeader) {
+			
+			evaluationData(data);
+			
+			if (isEmpty == -1) {
+				alert('신설된 강의입니다. 평가 내용이 없습니다.');
+				isEmpty = 0;
+			} else if (isEmpty == 1) {
+				modal('evaluation');
+				isEmpty = 0;
+			}
+		}
 		
 		if (ev.columnName == "pname" && !isHeader) {
 			showOffer(data);
@@ -508,11 +534,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			if (isEmpty == -1) {
 				alert('강의 계획서가 작성되어 있지 않은 강의입니다.');
 				isEmpty = 0;
-			} else if (isEmpty == 1){
+			} else if (isEmpty == 1) {
 				modal('modal_offer');
 				isEmpty = 0;
 			}
 		}
+		
 	});
 	
 	// 아이디가 searchBtn인 버튼을 누르면 searchLecture function을 실행한다.
@@ -583,7 +610,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		</c:forEach>
 	]; */
 	
-
+	// 강의 계획서 정보 불러오기
 	function planData(data) {
 		
 		// 비동기로 쓸 받은 값
@@ -633,6 +660,32 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		});
 	}
 	
+	// 강의 평가 정보 불러오기
+	function evaluationData(data) {
+		
+		opennum = data.opennum;
+		
+		$.ajax({
+			url: '',
+			async:false,
+			data: {opennum : opennum},
+			success: function(result){
+				if (result.content != null){
+					isEmpty = 1;
+					// 데이터 변수들 담기
+					
+				} else {
+					isEmpty = -1;
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	}
+	
+	
+	// 교수 정보 불러오고 모달 띄우기
 	function showOffer(data) {
 		
 		modal('my_offer');

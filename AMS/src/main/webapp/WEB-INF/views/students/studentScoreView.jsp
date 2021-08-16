@@ -20,7 +20,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
 ></script>
 
-<title>학생 성적 확인</title>
+<title>성적 확인 :: No.M University</title>
 
 <button id="createpdf">pdf 생성</button>
 <div>
@@ -28,7 +28,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   &nbsp
 </div>
 <div align="center" id="pdfwrap">
-  <title>성적 확인 :: No.M University</title>
   <div class="content-page">
     <div align="center">
       <h2>학생 성적 확인</h2>

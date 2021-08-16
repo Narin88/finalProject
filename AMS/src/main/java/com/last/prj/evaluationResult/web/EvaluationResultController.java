@@ -1,6 +1,7 @@
 package com.last.prj.evaluationResult.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.evaluationResult.service.EvaluationResultService;
@@ -38,11 +38,10 @@ public class EvaluationResultController {
 		return "redirect:scoreView";
 	}
 	
+	@ResponseBody
 	@RequestMapping("EresultSt")//학생 결과 확인 페이지
-	public String EresultSt(Model model, HttpSession session, EvaluationResultVO vo) {
-		/* model.addAttribute("lnum", vo.getLnum()); */
-		model.addAttribute("st", dao.EresultSt(vo));
-		return "evaluation/evaluation_Result_st.tiles";
+	public List<EvaluationResultVO> EresultSt(EvaluationResultVO vo) {
+		return dao.EresultSt(vo);
 	}
 	
 	@RequestMapping("Eresultpro")//교수 결과 확인 페이지

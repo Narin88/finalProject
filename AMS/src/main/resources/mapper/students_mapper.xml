@@ -53,7 +53,7 @@
         	AND L.lyear = #{lyear}
         	AND L.term = #{term}
         </if>
-		ORDER BY L.LYEAR, L.TERM DESC
+		ORDER BY L.LYEAR DESC, L.TERM DESC
 	</select>
 	
 	<!-- 학생 본인 수강 신청 과목 조회 -->

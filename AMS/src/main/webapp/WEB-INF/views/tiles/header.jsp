@@ -8,7 +8,7 @@
         <!-- Top Bar Start -->
         <div class="topbar" align="center">
             <nav class="navbar-custom">
-                <a href="index.html" class="logo">
+                <a href="home2" class="logo">
                     <img src="${pageContext.request.contextPath }/resources/assets/images/nom_logo.png" alt="" class="logo-large">
                 </a>
                 <div class="clearfix"></div>

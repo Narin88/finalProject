@@ -14,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,8 +80,8 @@ public class HomeController {
 	public String forgetPwdAut(@RequestParam("email") String email, @RequestParam("sname") String sname,
 							   @RequestParam("sid") String sid, Model model) {
 		Random random = new Random();
-		String user = "dlrjatk2@gmail.com";
-		String pwd = "!xotn71202703!";
+		String user = "@gmail.com";
+		String pwd = "!!";
 
 		int num = random.nextInt(999999);
 		String toEmail = email;

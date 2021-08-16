@@ -76,7 +76,7 @@ uri="http://www.springframework.org/security/tags" prefix = "sec" %>
   <body>
     <button id="createpdf">pdf 생성</button>
 
-    <div class="content-page">
+    <div class="content-page" id="pdfwrap">
       <div class="container23">
         <h1 align="center" class="ns23">강 의 계 획 서</h1>
 

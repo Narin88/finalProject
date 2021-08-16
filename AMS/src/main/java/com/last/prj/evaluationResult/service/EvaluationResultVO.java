@@ -16,4 +16,11 @@ public class EvaluationResultVO {
 	private String a7;//7
 	private String a8;//8
 	private String cnt;//값
+	private String lnum;//강의번호
+	private String lyear;
+	private String term;
+	private String dividenum;
+	private String pname;
+	private String lname;
+	
 }                  

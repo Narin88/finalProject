@@ -40,4 +40,7 @@ public interface HwProfessorService {
 	int hwUpdate(HwProfessorVO vo);
 	//교수 등록할 과제조회
 	List<Map<String, Object>> hwPfInsertSelect(HwProfessorVO vo);
+	
+	//평균처리 해당강의 학생리스트
+	List<Map<String, Object>> hwAvgList(HwProfessorVO vo);
 }

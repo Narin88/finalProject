@@ -37,6 +37,7 @@
 		.box1{
 		padding:1em;
 		height:700px;
+		margin-left:280px;
 		}
 		.hwTable1{
 		margin-top:70px;
@@ -59,7 +60,7 @@
 			.menu01 {
 				height: 30px;
 			    padding: 1em;
-			    margin-left: -40px;
+			    margin-left: 200px;
 				}
 				.menu01 ul li{
 					list-style-type:none;
@@ -182,7 +183,7 @@
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
-					
+					<li><a class="modalBtn" href="hwPfScoreAvg" >평균처리 페이지</a></li>
 				</ul>
 			<!--  -->
 									<c:forEach items="${list }" var="data">

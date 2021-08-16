@@ -55,9 +55,11 @@
 			
 				
 				</div>
-		<h4> * 현재 수강중인 강의 *</h4>
-		<h6> 'lecture datastatus '수강중'인 목록만</h6>
-		<br>
+		<div style="margin-left:20px;">
+			<h4> * 현재 수강중인 강의 *</h4>
+			<h6> 'lecture datastatus '수강중'인 목록만</h6>
+			<br>
+		</div>
 		<div id="grid" ></div>
 			<script>
 			

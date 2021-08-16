@@ -28,18 +28,19 @@
 	border: none;
     width: 690px;
 }
-			.menu01 {
-				height: 30px;
-			    padding: 1em;
-			    margin-left: -40px;
-				}
-					.HwSearch{
+.HwSearch{
 			margin-top:50px;
 			padding: 1em;
 		    border-radius: 3em;
 		    width: 570px;
 			border:1px solid gray;
 		}
+			.menu01 {
+				height: 30px;
+			    padding: 1em;
+			    margin-left: -40px;
+				}
+					
 				.menu01 ul li{
 					list-style-type:none;
 					float:left;			
@@ -58,8 +59,10 @@
 		    border: none;
 		}
 		div #grid{
-		margin-top: 40px;
-		width: 1150px;
+		    margin-top: 70px;
+		    width: 1150px;
+		    margin-left: 30px;
+		
 		}
 		.leftContainer{
 			width:700px;
@@ -84,6 +87,7 @@
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
+					<li><a class="modalBtn" href="hwPfScoreAvg" >평균처리 페이지</a></li>
 					
 				</ul>	
 				

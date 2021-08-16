@@ -116,4 +116,12 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 	
 		return map.hwUpdate(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> hwAvgList(HwProfessorVO vo) {
+		
+		return map.hwAvgList(vo);
+	}
+	
+	
 }

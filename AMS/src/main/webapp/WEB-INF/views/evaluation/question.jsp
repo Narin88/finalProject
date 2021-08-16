@@ -109,7 +109,7 @@ tr td th{
 </script>
 <head>
 <meta charset="UTF-8">
-<title>설문조사지</title>
+<title>강의 만족도 조사 :: No.M University</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>

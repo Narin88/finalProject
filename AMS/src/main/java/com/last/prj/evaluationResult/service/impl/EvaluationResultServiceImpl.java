@@ -30,6 +30,11 @@ public class EvaluationResultServiceImpl implements EvaluationResultService {
 		return map.EvaluationQ7Result(vo);
 	}
 
+	@Override
+	public List<EvaluationResultVO> EresultSt(EvaluationResultVO vo) {
+		return map.EresultSt(vo);
+	}
+
 
 
 }

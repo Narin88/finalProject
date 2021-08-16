@@ -40,14 +40,15 @@ public class EvaluationResultController {
 	
 	@RequestMapping("EresultSt")//학생 결과 확인 페이지
 	public String EresultSt(Model model, HttpSession session, EvaluationResultVO vo) {
-
+		/* model.addAttribute("lnum", vo.getLnum()); */
+		model.addAttribute("st", dao.EresultSt(vo));
 		return "evaluation/evaluation_Result_st.tiles";
 	}
 	
 	@RequestMapping("Eresultpro")//교수 결과 확인 페이지
 	public String EvaluationResultpr(Model model, EvaluationResultVO vo) {
 		model.addAttribute("num",vo.getOpennum());
-		model.addAttribute(dao.EvaluationQ7Result(vo));
+		model.addAttribute("st",dao.EvaluationQ7Result(vo));
 		System.out.println(dao.EvaluationQ7Result(vo));
 		
 		return "evaluation/evaluation_Result_pro.tiles";

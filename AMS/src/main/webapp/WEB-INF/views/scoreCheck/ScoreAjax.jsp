@@ -48,115 +48,58 @@
 	<div id="grid"></div>
 
 </div>
-
-	<script> 
-
-
-	// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
-	Element.prototype.setStyle = function(styles) {
-	    for (var k in styles) this.style[k] = styles[k];
-	    return this;
-	};
+<form action="">
+<table>
+	<thead>
+			<tr>
+					<th width: 130>강의등록번호</th>
+					<th width: 150>학번</th>
+					<th width: 200>학생이름</th>
+					<th width: 130>강의번호</th>
+					<th width: 130>강의이름</th>
+					<th width: 130>중간고사</th>
+					<th width: 130>기말고사</th>
+					<th width: 130>출석점수</th>
+					<th width: 130>과제</th>
+					<th width: 130>총점</th>
+					<th width: 130>등급</th>
+			</tr>
+	</thead>
+	<tbody>
 	
-
-	
-
-//grid start
-
-var clsData = [
-	<c:forEach items="${lectures }" var="lec">{
-		opennum: '${lec.opennum}',sid: '${lec.sid}', sname: '${lec.sname}', lnum: '${lec.lnum}', lname: '${lec.lname}', 
-		middlescore: '${lec.middlescore}', finalscore: '${lec.finalscore}', attendancescore: '${lec.attendancescore}', 
-		homework: '${lec.homework}', total: '${lec.total}', rank: '${lec.rank}'
-	}
-	<c:if test='${!empty lec.opennum}'>
-		
-	,
-	</c:if>
-	</c:forEach>
-	]; 
-
-
-//grid api-source
-	const dataSource = {
-	  withCredentials: false,  
-	  initialRequest: false,
-	  contentType: 'application/json',
-	  api: {
-		readData: {},
-	    updateData: {
-	      url: 'ScoreInsert', //업데이트 url
-	      method: 'PUT' //funtion 메서드
-	    }
-	    
-	  }
-	};
-		
-		
-       // GRID 를 보여준다.
-	var grid = new tui.Grid( {
-		el: document.getElementById('grid'),
-		data: dataSource,
-		rowHeaders: ['checkbox'],
-		pagination: true,   //페이징 처리
-	    pageOptions: {
-	    	useClient: true,   //페이징 처리
-	    	perPage: 50   //페이징 갯수
-	    }
-		,
-		columns: [
-			{header: '강의등록번호',name: 'opennum', width: 130},
-			{header: '학번',name: 'sid', width: 130}, 
-			{header: '학생이름',name: 'sname',width: 130}, 
-			{header: '강의번호',name: 'lnum',width: 150}, 
-			{header: '강의이름',name: 'lname',width: 200}, 
-			{header: '중간고사',name: 'middlescore',width: 130, editor: 'text'},
-			{header: '기말고사',name: 'finalscore',width: 130, editor: 'text'},
-			{header: '출석점수',name: 'attendancescore',width: 130, editor: 'text'},
-			{header: '과제',name: 'homework',width: 130, editor: 'text'},
-			{header: '총점',name: 'total',width: 130},
-			{header: '등급',name: 'rank',width: 130},
-		
-		] //컬럼갯수
-
-	} );
-//grid end
-grid.resetData(clsData) //그리드를 그려놓고 데이터를 새로 넣음 (기존datasource -> clsData)
-
-
-
-
-//업데이트 버튼 누를때 lectureUpdate 함수 실행
-document.getElementById('updateBtn').addEventListener('click', ScoreInsert);
-//작업중인 행들을 저장해줌
-	function ScoreInsert(){
-		const { rowKey, columnName } = grid.getFocusedCell();
-	
-		  if (rowKey && columnName) {
-		    grid.finishEditing(rowKey, columnName);
-		  }
-	
-		  grid.request('updateData', {
-		    checkedOnly: false
-		  });
-		  
-		  
-
-	}
-// 업데이트 실행 이벤트
-	grid.on('response', ev => {
-		  var {response} = ev.xhr;
-		  var responseObj = JSON.parse(response);
+		<c:forEach items="${lectures }" var="lec">
+			<tr>
+					<th>${lec.opennum}</th>
+					<th>${lec.sid}</th>
+					<th>${lec.sname}</th>
+					<th>${lec.lnum}</th>
+					<th>${lec.lname}</th>
+					<th><input type="text" id="middle" name="middle">${lec.middlescore}</th>
+					<th><input type="text" id="final" name="final">${lec.finalscore}</th>
+					<th><input type="text" id="attend" name="attend">${lec.attendancescore}</th>
+					<th>${lec.homework}</th>
+					<th>${lec.total}</th>
+					<th>${lec.rank}</th>
+			</tr>
+				</c:forEach>
 			
-		  
-		  
-		  console.log('result : ', responseObj.result);
-		  console.log('data : ', responseObj.data);
+	</tbody>
+</table>
+	</form>
+<script>
+$(function(){
+	$.ajax({
+		url: 'ScoreInsert',
+		data:{middlescore: middlescore, finalscore: finalscore, attendancescore: attendancescore}
+		type: 'POST',
+		success: function(result){
+			
+		}
+	})
+})
 
-		});
-
-	
 </script>
+
 <script>
 $('#createpdf').click(function() {
 	  //pdf_wrap을 canvas객체로 변환

@@ -41,102 +41,19 @@
 		WHERE opennum = #{opennum}
 	</select>
 
-	<!-- <select id="EvaluationResultpra2"
-		resultType="EvaluationResultVO">
-		select a.a2, nvl(b.cnt,0)
-		from ( select a2, count(a2) as cnt
-		from EVALUATIONRESULT
-		where opennum = 14
-		group by A2) b,
-		(select level as a2,0 as cnt
-		from dual
-		connect by level  <![CDATA[<=]]>5)
-		a
-		where a.a2 = b.a2(+)
-		order by A2;
+	<select id="EresultSt" resultType="EvaluationResultVO">
+		select a.lyear, a.term, a.lnum, a.dividenum,
+						b.lname,
+						c.pname,
+						d.a1
+
+		from lecture a, lecture_info b, professor c, evaluationresult d
+		where a.opennum = d.opennum
+		and  a.lnum = 30001
+		and  a.pid = b.pid
+		and  a.pid = c.pid
+		and  b.pid = c.pid
 	</select>
-
-	<select id="EvaluationResultpra3"
-		resultType="EvaluationResultVO">
-		select a.a3, nvl(b.cnt,0)
-		from ( select a3, count(a3) as cnt
-		from EVALUATIONRESULT
-		where opennum = 14
-		group by A3) b,
-		(select level as a3,0 as cnt
-		from dual
-		connect by level  <![CDATA[<=]]>5)
-		a
-		where a.a3 = b.a3(+)
-		order by A3;
-	</select>
-
-	<select id="EvaluationResultpra4"
-		resultType="EvaluationResultVO">
-		select a.a4, nvl(b.cnt,0)
-		from ( select a4, count(a4) as cnt
-		from EVALUATIONRESULT
-		where opennum = 14
-		group by A4) b,
-		(select level as a4,0 as cnt
-		from dual
-		connect by level  <![CDATA[<=]]>5)
-		a
-		where a.a4 = b.a4(+)
-		order by A4;
-
-	</select>
-
-
-	<select id="EvaluationResultpra5"
-		resultType="EvaluationResultVO">
-		select a.a5, nvl(b.cnt,0)
-		from ( select a5, count(a5) as cnt
-		from EVALUATIONRESULT
-		where opennum = 14
-		group by A5) b,
-		(select level as a5,0 as cnt
-		from dual
-		connect by level  <![CDATA[<=]]>5)
-		a
-		where a.a5 = b.a5(+)
-		order by A5;
-
-	</select>
-
-
-
-	<select id="EvaluationResultpra6"
-		resultType="EvaluationResultVO">
-		select a.a6, nvl(b.cnt,0)
-		from ( select a6, count(a6) as cnt
-		from EVALUATIONRESULT
-		where opennum = 14
-		group by A6) b,
-		(select level as a6,0 as cnt
-		from dual
-		connect by level  <![CDATA[<=]]>5)
-		a
-		where a.a6 = b.a6(+)
-		order by A6;
-	</select>
-
-	<select id="EvaluationResultpra7"
-		resultType="EvaluationResultVO">
-		select a.a7, nvl(b.cnt,0)
-		from ( select a7, count(a7) as cnt
-		from EVALUATIONRESULT
-		where opennum = 14
-		group by A7) b,
-		(select level as a7,0 as cnt
-		from dual
-		connect by level  <![CDATA[<=]]>5)
-		a
-		where a.a7 = b.a7(+)
-		order by A7;
-	</select>
- -->
-
 
 
 </mapper>

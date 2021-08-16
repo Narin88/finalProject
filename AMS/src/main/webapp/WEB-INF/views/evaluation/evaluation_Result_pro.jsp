@@ -61,7 +61,7 @@ input[type="number"] {
 </style>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>강의 만족도 평가 :: No.M University</title>
 </head>
 
 <body>

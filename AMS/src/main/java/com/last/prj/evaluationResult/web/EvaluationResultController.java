@@ -41,6 +41,7 @@ public class EvaluationResultController {
 	@ResponseBody
 	@RequestMapping("EresultSt")//학생 결과 확인 페이지
 	public List<EvaluationResultVO> EresultSt(EvaluationResultVO vo) {
+		System.out.println("\n" + dao.EresultSt(vo) + "\n");
 		return dao.EresultSt(vo);
 	}
 	

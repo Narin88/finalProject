@@ -614,7 +614,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   	<h1>강의 만족도 결과 공개</h1>
 	<table class = "table table-borderd" border="1" style = "align: center">
 		<thead>
-		<tr>
+		<tr id = colLength>
 			<th>년도/학기</th> 
 			<th>강의번호</th>
 			<th>강의 명</th>
@@ -622,7 +622,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			<th>평점</th>
 		</tr>
 		</thead>
-		<tbody>
+		<tbody id = "resultBody">
 		<%-- <c:forEach items="${st }" var="st">
 			<tr>
 				<th>${st.lyear} - ${st.term}</th>
@@ -742,9 +742,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     // 강의 평가 보기
     if (ev.columnName == "lnum" && !isHeader) {
-    	console.log("함수 시작 전");
       evaluationData(data);
-		console.log("함수 끝");
       if (isEmpty == -1) {
         alert("신설된 강의입니다. 평가 내용이 없습니다.");
         isEmpty = 0;
@@ -887,32 +885,50 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       },
     });
   }
-
+	
   // 강의 평가 정보 불러오기
   function evaluationData(data) {
-    
+    let rBody = document.getElementById('resultBody');
 	  lnum = data.lnum.substring(0,5);
-	console.log('함수 통과');
     $.ajax({
       url: "EresultSt",
       async: false,
       data: {lnum : lnum},
       success: function (result) {
-        if (result.a1 != null) {
+        // if (result.a1 != null) {
+        	//console.log('반복문 바깥 : ' + result[1].lyear);
+        	//console.log(result.length);
+        	//console.log(result);
+        	console.log('테이블 대가리의 th 길이 : ' + $(`.table-borderd > thead th`).length);
           isEmpty = 1;
           // 데이터 변수들 담기
-         /*  $(".table table-borderd tbody").empty();
-          $("<tr>")
-          for (let i = 0; result.length; i++) {
-        	  .append($("<td>").html(result.lyear));
-        	  .append($("<td>").html(result.lnum));
-        	  .append($("<td>").html(result.lname));
-        	  .append($("<td>").html(result.a1)); 
-          }*/
-          
-        } else {
-          isEmpty = -1;
-        }
+			$(".table table-borderd tbody").empty();
+          for (let i = 0; i < result.length; i++) {
+          	let tr = $(`<tr>`);
+          	//console.log(tr);
+           for (let j = 0; j < $(`.table-borderd > thead th`).length; j++) {
+        	   try {
+        		   
+	        	   console.log('result lyear : ' + result[j].lyear);
+	        	   console.log('result lyear - result.term : ' + result[i].lyear +  '-' + result[i].term);
+	        	   console.log('result lnum : ' + result[j].lnum);
+	        	   console.log('result dividenum : ' + result[j].dividenum);
+	        	   console.log('result lname : ' + result[j].lname);
+	        	   console.log('result a1 : ' + result[j].a1);
+	        	  tr.append($(`<td>`).html(result[i].lyear - result[i].term));
+	        	  tr.append($(`<td>`).html(result[i].lnum - result[i].dividenum));
+	        	  tr.append($(`<td>`).html(result[i].lname));
+	        	  tr.append($(`<td>`).html(result[i].a1)); 
+        	   } catch (e) {
+        		   console.log('배보다 배꼽이 크다!');
+        	   }
+          }
+         rBody.append(tr);
+         
+         }
+        //} else {
+         // isEmpty = -1;
+        //}
       },
       error: function (err) {
         console.log(err);

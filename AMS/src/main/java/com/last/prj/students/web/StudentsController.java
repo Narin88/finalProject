@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.common.ImageUpload;
-import com.last.prj.evaluation.service.EvaluationService;
 import com.last.prj.preenrolment.service.PreEnrolmentService;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
@@ -42,9 +41,6 @@ public class StudentsController {
 	@Autowired
 	private StudyplanService planService;
 	
-	@Autowired
-	private EvaluationService evalService;
-
 	////////////////////////////////////////////////////////////
 
 	@RequestMapping("/studentInfo")
@@ -238,14 +234,6 @@ public class StudentsController {
 		return data;
 	}
 	
-//	// 강의 평가 정보 불러오기
-//	@ResponseBody
-//	@RequestMapping("evalList")
-//	public List<EvaluationResultVO> evalList(EvaluationResultVO vo) {
-//		
-//		System.out.println("\nVO가 받은 lnum 값 : " + vo.getLnum() + "\n");
-//		return evalService.EresultSt(vo);
-//	}
 	
 	// 사진변경
 	@RequestMapping("updatePic")

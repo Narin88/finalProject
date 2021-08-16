@@ -87,7 +87,6 @@
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
-					<li><a class="modalBtn" href="hwPfScoreAvg" >평균처리 페이지</a></li>
 					
 				</ul>	
 				

@@ -183,7 +183,6 @@
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
-					<li><a class="modalBtn" href="hwPfScoreAvg" >평균처리 페이지</a></li>
 				</ul>
 			<!--  -->
 									<c:forEach items="${list }" var="data">
@@ -301,7 +300,7 @@
 							
    								  <div id="select-box" style="width: 200px"></div>
    								  <button style="float:right;margin-top: -5px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
-   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn" onclick="scoreBtn();">점수정정</button>
+   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn"">점수정정</button>
 								<div id="grid2"></div>
 								
 								<!-- submit_SID값으로 학생정보 가져오기 -->
@@ -320,11 +319,11 @@
 		    	
 		    
 		    <!--테이블 페이징 -->
-		    <script>
+<!-- 		    <script>
 		    function scoreBtn(){
 		    	console.log("ㅎ냥ㅎㄴㅇㅎ");
 		    }
-		    </script>
+		    </script> -->
 		    
 		    
 		    
@@ -429,6 +428,7 @@
 						.appendTo('.noSubmit');		
 						//$('</form>')*/
 						$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4>').appendTo('.noSubmit');
+						$('<h6 style="color:gray; float:left;margin-left:30px;"> 점수를 정정하면 성적에 반영됩니다. </h6>').appendTo('.noSubmit');
 					
 						
 						
@@ -482,6 +482,7 @@
 					  				{header: '제출파일',name: 'submit_file',width:130},
 					  				{header: '제출날짜',name: 'submit_date',width:140},
 					  				{header: '학생코멘트',name: 's_comment'},
+					  				{header: '강의번호',name: 'opennum'},
 					  				{header: '점수',name: 'score',width:70,editor:'text'},
 	
 					  			], //컬럼갯수

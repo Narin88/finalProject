@@ -93,11 +93,13 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 	
 	@Override
 	public int hwScoreIn(HwProfessorVO vo) {
+		int count = 0;
 		for(int i=0;i<vo.getUpdatedRows().size();i++) {
 			map.hwScoreIn(vo.getUpdatedRows().get(i));
+			count++;
 		}
 		
-		return 0;
+		return count;
 	}
 	@Override
 	public int submitDelAll(HwProfessorVO vo) {
@@ -117,11 +119,19 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 		return map.hwUpdate(vo);
 	}
 
+
+
 	@Override
-	public List<Map<String, Object>> hwAvgList(HwProfessorVO vo) {
+	public int hwAvgUpdate(HwProfessorVO vo) {
+		int count =0;
+		for(int i=0;i<vo.getUpdatedRows().size();i++) {
+			map.hwAvgUpdate(vo.getUpdatedRows().get(i));
+			count++;
+		}
 		
-		return map.hwAvgList(vo);
+		return count;
 	}
+
 	
 	
 }

@@ -65,7 +65,7 @@
 <link rel="stylesheet" href="resources/css/studentsInfo.css" />
 
 <title>수강 확인 :: No.M University</title>
-<body>
+
 <div class="content-page">
 
 <div align="center">
@@ -96,6 +96,7 @@
 	</div>
 </div>
 <!-- 모달 끝 -->
+</div>
 
 <!-- 히든 -->
 <%-- <div id = "hiddenData">
@@ -377,5 +378,3 @@
 	}
 	
 </script>
-</div>
-</body>

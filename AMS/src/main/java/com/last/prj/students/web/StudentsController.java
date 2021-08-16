@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.common.ImageUpload;
-import com.last.prj.common.PasswordEncrypt;
+import com.last.prj.evaluation.service.EvaluationService;
 import com.last.prj.preenrolment.service.PreEnrolmentService;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
@@ -41,6 +41,9 @@ public class StudentsController {
 	
 	@Autowired
 	private StudyplanService planService;
+	
+	@Autowired
+	private EvaluationService evalService;
 
 	////////////////////////////////////////////////////////////
 
@@ -190,14 +193,14 @@ public class StudentsController {
 	// 학과명으로 전공코드 및 전공명 조회
 	@ResponseBody
 	@GetMapping("customDcode")
-	List<StudentsVO> customDcode(StudentsVO vo) {
+	public List<StudentsVO> customDcode(StudentsVO vo) {
 		return stService.customDcode(vo);
 	}
 	
 	// 강의 계획서 조회
 	@ResponseBody
 	@GetMapping("planView")
-	StudyplanJoinVO planView(StudyplanJoinVO vo) {
+	public StudyplanJoinVO planView(StudyplanJoinVO vo) {
 		
 		System.out.println("\n" + planService.selectresult(vo) + "\n");
 		return planService.selectresult(vo);
@@ -205,7 +208,7 @@ public class StudentsController {
 
 	// 강의 정보 조회
 	@ResponseBody
-	@RequestMapping("/wantLectureList")
+	@RequestMapping("wantLectureList")
 	public Map<String, Object> wantLectureList(
 			HttpSession session,
 			@RequestBody Map<String, String> map,
@@ -234,6 +237,15 @@ public class StudentsController {
 		
 		return data;
 	}
+	
+//	// 강의 평가 정보 불러오기
+//	@ResponseBody
+//	@RequestMapping("evalList")
+//	public List<EvaluationResultVO> evalList(EvaluationResultVO vo) {
+//		
+//		System.out.println("\nVO가 받은 lnum 값 : " + vo.getLnum() + "\n");
+//		return evalService.EresultSt(vo);
+//	}
 	
 	// 사진변경
 	@RequestMapping("updatePic")

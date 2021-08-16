@@ -229,11 +229,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 </div>
 <!-- 모달 끝 -->
 
-<!-- 모달3 _ 강의 평가 보기 -->
-<div class="modal_evaluation" id="modal_evaluation" align="center">
-  <a class="modal_close_btn">닫기</a>
-  <div class="modal-body"></div>
-</div>
 
 <!-- 모달 뷰2 _ 강의 계획서 보기 -->
 <div class="modal_offer" id="modal_offer" align="center">
@@ -611,10 +606,44 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </div>
 </div>
 
+
+<!-- 모달3 _ 강의 평가 보기 -->
+<div class="modal_evaluation" id="modal_evaluation" align="center">
+  <a class="modal_close_btn">닫기</a>
+  <div class="modal-body">
+  	<h1>강의 만족도 결과 공개</h1>
+	<table class = "table table-borderd" border="1" style = "align: center">
+		<thead>
+		<tr>
+			<th>년도/학기</th> 
+			<th>강의번호</th>
+			<th>강의 명</th>
+			<th>담당교수</th>
+			<th>평점</th>
+		</tr>
+		</thead>
+		<tbody>
+		<%-- <c:forEach items="${st }" var="st">
+			<tr>
+				<th>${st.lyear} - ${st.term}</th>
+				<th>${st.lnum } - ${st.dividenum }</th>
+				<th>${st.lname }</th>
+				<th>${st.pname }</th>	
+				<th>${st.a1 }</th>
+			</tr>
+		</c:forEach> --%>
+		</tbody>
+	</table>
+  </div>
+</div>
+
 <script>
   // boolean
   let isEmpty = 0;
-
+  
+  // 강의 평가에 필요한 값
+	let lnum;
+  
   // 강의 계획서 모달에 필요한 값
   let pid;
   let opennum;
@@ -711,22 +740,26 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     var data = grid.getRow(ev.rowKey);
     const isHeader = ev.targetType === "columnHeader";
 
+    // 강의 평가 보기
     if (ev.columnName == "lnum" && !isHeader) {
+    	console.log("함수 시작 전");
       evaluationData(data);
-
+		console.log("함수 끝");
       if (isEmpty == -1) {
         alert("신설된 강의입니다. 평가 내용이 없습니다.");
         isEmpty = 0;
       } else if (isEmpty == 1) {
-        modal("evaluation");
+        modal("modal_evaluation");
         isEmpty = 0;
       }
     }
 
+    // 교수 정보 보기
     if (ev.columnName == "pname" && !isHeader) {
       showOffer(data);
     }
 
+    // 강의 계획서 보기
     if (ev.columnName == "lname" && !isHeader) {
       planData(data);
 
@@ -857,16 +890,26 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
   // 강의 평가 정보 불러오기
   function evaluationData(data) {
-    opennum = data.opennum;
-
+    
+	  lnum = data.lnum.substring(0,5);
+	console.log('함수 통과');
     $.ajax({
-      url: "",
+      url: "EresultSt",
       async: false,
-      data: { opennum: opennum },
+      data: {lnum : lnum},
       success: function (result) {
-        if (result.content != null) {
+        if (result.a1 != null) {
           isEmpty = 1;
           // 데이터 변수들 담기
+         /*  $(".table table-borderd tbody").empty();
+          $("<tr>")
+          for (let i = 0; result.length; i++) {
+        	  .append($("<td>").html(result.lyear));
+        	  .append($("<td>").html(result.lnum));
+        	  .append($("<td>").html(result.lname));
+        	  .append($("<td>").html(result.a1)); 
+          }*/
+          
         } else {
           isEmpty = -1;
         }
@@ -894,15 +937,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   }
 
   function modal(mm) {
-    console.log($(".modal_offer").scrollTop());
-    console.log($(".modal-body").scrollTop());
-    console.log($(".container23").scrollTop());
-    console.log($(".innercontainer23").scrollTop());
-
-    console.log($(".modal_offer").scrollLeft());
-    console.log($(".modal-body").scrollLeft());
-    console.log($(".container23").scrollLeft());
-    console.log($(".innercontainer23").scrollLeft());
 
     var zIndex = 9999;
     var modal = document.getElementById(mm);
@@ -935,10 +969,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       });
 
     // 스크롤 초기화 씨발
-    $("#modal_offer").on("shown", function () {
+    /* $("#modal_offer").on("shown", function () {
       $(".modal-body").scrollTop(0);
       // $('#modal_offer').scrollTop(0);
-    });
+    }); */
 
     modal.setStyle({
       position: "fixed",

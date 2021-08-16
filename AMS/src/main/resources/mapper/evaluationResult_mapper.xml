@@ -42,17 +42,18 @@
 	</select>
 
 	<select id="EresultSt" resultType="EvaluationResultVO">
-		select a.lyear, a.term, a.lnum, a.dividenum,
+		select a.lyear, a.term, b.lnum, a.dividenum,
 						b.lname,
 						c.pname,
 						d.a1
 
 		from lecture a, lecture_info b, professor c, evaluationresult d
 		where a.opennum = d.opennum
-		and  a.lnum = 30001
+		and  b.lnum = #{lnum}
 		and  a.pid = b.pid
 		and  a.pid = c.pid
 		and  b.pid = c.pid
+		ORDER BY A.LYEAR DESC, A.TERM DESC
 	</select>
 
 

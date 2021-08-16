@@ -130,7 +130,6 @@
 		SELECT SNAME, PWD
 		FROM STUDENTS
 		WHERE SID = #{sid}
-		AND PWD = #{pwd}
 	</select>
 	
 	

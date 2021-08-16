@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.common.ImageUpload;
+import com.last.prj.common.PasswordEncrypt;
 import com.last.prj.preenrolment.service.PreEnrolmentService;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
@@ -98,9 +100,13 @@ public class StudentsController {
 
 		String path = null;
 		String realID = (String) session.getAttribute("id");
+		vo.setSid(realID);
+		
 		StudentsVO result = stService.selfAuthentication(vo);
+		
+		Boolean chk = BCrypt.checkpw(vo.getPwd(), result.getPwd());
 
-		if (result == null || !realID.equals(vo.getSid())) {
+		if (chk == false) {
 			// 조회 결과가 없거나, 세션 아이디와 받은 아이디 값이 다를 경우
 
 			path = "students/infoConfirm";
@@ -225,7 +231,7 @@ public class StudentsController {
 		data.put("result", true);
 		datas.put("contents", stService.lectureLookUp(vo));
 		data.put("data", datas);
-
+		
 		return data;
 	}
 	

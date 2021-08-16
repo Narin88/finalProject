@@ -455,7 +455,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 					url: "wantLectureList", method: "POST" 
 				},
 			},
-			contentType: "application/json"
+			contentType: "application/json",
+			headers: { 'x-custom-header': 'custom-header' },
 		},
 		//rowHeaders: ['checkbox'],
 		pagination: true,		//페이징 처리
@@ -475,7 +476,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			{header: '강의시간', name: 'timetable'},
 			{header: '강의실', name: 'lrname'},
 			{header: '수강정원', name: 'limitcount'},
-			{header:'강의평가',name:'evaluation'}
+			{header:'강의평가', contents:'<button type="button">222</button>"'}
 		] //컬럼갯수
 	});
 	// grid.readData(1, lec, true);
@@ -652,9 +653,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 				
 	function modal(mm) {
 		
+		console.log($(".modal_offer").scrollTop());
+		console.log($(".modal-body").scrollTop());
+		console.log($(".container23").scrollTop());
+		console.log($(".innercontainer23").scrollTop());
+
+		console.log($(".modal_offer").scrollLeft());
+		console.log($(".modal-body").scrollLeft());
+		console.log($(".container23").scrollLeft());
+		console.log($(".innercontainer23").scrollLeft());
+		
 	    var zIndex = 9999;
 	    var modal = document.getElementById(mm);
-
 	    // 모달 div 뒤에 희끄무레한 레이어
 	    var bg = document.createElement('div');
 	    bg.setStyle({

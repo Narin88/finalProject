@@ -1,6 +1,5 @@
 package com.last.prj.common;
 
-import static org.junit.Assert.assertTrue;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

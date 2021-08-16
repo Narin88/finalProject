@@ -104,7 +104,12 @@ public class HwProfessorController {
 	public int scoreIn(@RequestBody HwProfessorVO vo){
 		System.out.println(vo.getSubmitSid());
 		System.out.println(vo.getScore());
-		service.hwScoreIn(vo);
+		int r=service.hwScoreIn(vo);
+		System.out.println("============================="+r);
+		if(r==1) {
+			int n = service.hwAvgUpdate(vo);
+			System.out.println(n);
+		}
 		return 0;
 	}
 	
@@ -266,41 +271,10 @@ public class HwProfessorController {
 		} // while
 		vo.setRegisterFile(sysFileName); //파일명저장
 		
-		
-
-	
-		
-
-		
 		int r=service.hwUpdate(vo);
 		return "redirect:hwList";
 	}
 	
 
-	//평균처리페이지 
-	@RequestMapping("hwPfScoreAvg")
-	public String hwPfScoreAvg(HwProfessorVO vo,HttpSession session,Model model) {
-		
-		vo.setPid((String)session.getAttribute("id"));
-		// 해당교수 과제 목록
-		List<Map<String, Object>> result = service.hwPfInsertSelect(vo);
-		System.out.println(result);
-		model.addAttribute("result",result);
-		
-		
-		return "hw_professor/hwPfScoreAvg.tiles";
-	}
 	
-	
-	// 평균처리페이지 강의 학생조회
-		@RequestMapping("referAvgList")
-		@ResponseBody
-		public List<Map<String, Object>> referAvgList(HttpServletRequest req,Model model,HwProfessorVO vo,HttpSession session) {
-			
-			vo.setPid((String)session.getAttribute("id"));
-			List<Map<String, Object>> referAvgList = service.hwAvgList(vo);
-			model.addAttribute("referAvgList",referAvgList);
-			System.out.println(referAvgList);
-			return  referAvgList;
-		}
 }

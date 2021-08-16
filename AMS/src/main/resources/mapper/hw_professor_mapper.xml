@@ -53,6 +53,7 @@ LEFT OUTER JOIN hw_professor p
 	 		,se.scomment "s_comment"
 	 		,se.score "score" 
 	 		,se.register_id "registerId"
+	 		,fir.opennum "opennum"
 	   FROM
 			   		(select * from score_mana where opennum=#{opennum}
      					 )
@@ -103,11 +104,17 @@ fir LEFT OUTER JOIN
      
      <!-- 점수 IN -->
      <update id="hwScoreIn">
-     	UPDATE 
-     			hw_student 
-     	   SET  score=#{score} 
-     	 WHERE  submit_sid=#{submitSid}
-     	   AND  register_id=#{registerId}
+	     	UPDATE  hw_student 
+	     	   SET  score=#{score} 
+	     	 WHERE  submit_sid=#{submitSid}
+	     	   AND  register_id=#{registerId}
+     </update>
+     <!-- score_mana Update -->
+     <update id="hwAvgUpdate">
+	        UPDATE	score_mana
+		  	   SET  homework=autoscore(#{submitSid},#{opennum}) 
+		     WHERE  sid=#{submitSid} 
+		       AND opennum=#{opennum}
      </update>
      
      <!-- 제출학생 파일 삭제 -->
@@ -175,17 +182,6 @@ fir LEFT OUTER JOIN
 	</update>
 	
 	
-	<!-- 평균처리 강의 학생목록 -->
-	<select id="hwAvgList" resultType="map">
-	 SELECT id.ID  "sid"
-	 		,id.NAME "name"
-	   FROM lecture l
-	   		,SCORE_MANA sm
-       JOIN id_name id
-    	 ON id.id=sm.sid
-      WHERE l.OPENNUM=sm.OPENNUM
-        AND l.PID=#{pid}
-        AND sm.opennum=#{opennum}		
-	</select>
+
 	
 </mapper>

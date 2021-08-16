@@ -46,4 +46,8 @@ public interface HwProfessorMap {
 	
 	//평균처리 해당강의 학생리스트
 		List<Map<String, Object>> hwAvgList(HwProfessorVO vo);
+		
+		
+	//성적처리 테이블 평균 처리
+	int hwAvgUpdate(HwProfessorVO vo);
 }

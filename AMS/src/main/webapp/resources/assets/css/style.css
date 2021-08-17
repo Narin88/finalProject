@@ -2418,7 +2418,6 @@ File: Menu
   position: relative;
   width: 240px;
   z-index: 1;
-  background-color: #ffffff;
 }
 
 .logo {
@@ -2426,13 +2425,12 @@ File: Menu
 }
 
 .logo-large {
-  height: 120px;
-  width: 800px;
+  height: 100px;
+  width: 600px;
 }
 
 .left .topbar-left {
-  background-color: #283179;
-  height: 150px;
+  height: 150px;  
 }
 
 .has_sub.nav-active i.mdi-chevron-right:before {
@@ -2440,7 +2438,6 @@ File: Menu
 }
 
 .navbar-custom {
-  background-color: #283179;
   border: none;
   height: 150px;
   margin: -20px -25px 0 -25px;

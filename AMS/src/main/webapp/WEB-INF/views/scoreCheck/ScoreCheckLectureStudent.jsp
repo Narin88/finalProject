@@ -40,14 +40,14 @@
 			<div align="center">
 				<h2>수강생 리스트</h2>
 			</div>
-		<div align="right">
-			<button id="updateBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수정하기</button>
+			<div align="right">
+				<button id="updateBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수정하기</button>
+			</div>
+			<div id="grid"></div>
 		</div>
-		<div id="grid"></div>
 	</div>
 </div>
-
-	<script> 
+<script> 
 
 
 	// Element 에 style 한번에 오브젝트로 설정하는 함수 추가

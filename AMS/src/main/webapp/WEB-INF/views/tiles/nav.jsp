@@ -3,6 +3,14 @@ pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="stinfo" value="stinfo" />
+<style>
+.logo-img{
+	height: 130px;
+}
+.topbar-left{
+	background-size: 100%;
+}
+</style>
 <body class="fixed-left">
 <!-- Loader -->
 <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
@@ -14,8 +22,10 @@ pageEncoding="UTF-8" %>
      </button>
 
      <!-- LOGO -->
-     <div class="topbar-left">
-
+     <div class="topbar-left" align="center" style="background-image: url(${pageContext.request.contextPath }/resources/assets/images/back01.png)">
+		<a href="home2" class="logo">
+			<img src="${pageContext.request.contextPath }/resources/assets/images/noM_logo1.png" alt="" class="logo-img">
+		</a>
      </div>
 
      <div class="sidebar-inner niceScrollleft">

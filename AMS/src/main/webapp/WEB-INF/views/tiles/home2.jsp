@@ -5,15 +5,11 @@
 <html>
 <meta charset="utf-8">
 <head>
-
 	<title>Home</title>
 </head>
 <body>
 <div class="content-page">
-	<a href="#"><img
-					src="${pageContext.request.contextPath }/resources/loginpicture/loginicon.jpg"
-					onclick="goHome()"></a>
-					
+	<img src="${pageContext.request.contextPath }/resources/assets/images/noM_logo5.png" style="height: 817px; width: ">
 </div>
 </body>
 </html>

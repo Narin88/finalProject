@@ -7,6 +7,14 @@
 .tui-grid-cell .tui-grid-cell-content {
 	text-align: center;
 }
+.table-bordered{
+	vertical-align: middle;
+}
+.container23 {
+	width: 1400px;
+	margin: 40px auto;
+	padding: 30px;
+}
 </style>
 <!-- Toast grid -->
 <link rel="stylesheet"
@@ -31,64 +39,53 @@
 <title>성적 관리 :: No.M University</title>
 </head>
 <body>
-
-<button id="createpdf">
-  pdf 생성
-</button>
-<div id="pdfwrap">
 <div class="content-page">
-	<div align="center">
-		<h2>수강생 리스트</h2>
+	<div class="card-body">
+		<button id="createpdf" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light"> pdf 생성</button>
+		<div class="container23" id="pdfwrap">
+			<h2 align="center">수강생 리스트</h2>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>강의번호</th>
+						<th>학번</th>
+						<th>학생이름</th>
+						<th>강의번호</th>
+						<th>강의이름</th>
+						<th>중간고사</th>
+						<th>기말고사</th>
+						<th>출석점수</th>
+						<th>과제</th>
+						<th>총점</th>
+						<th>등급</th>
+						<th>비고</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${lectures }" var="lec">
+						<input type="hidden" id="hiddenOpenNum" value="${lec.opennum }">
+						<tr>
+							<th>${lec.opennum}</th>
+							<th>${lec.sid}</th>
+							<th>${lec.sname}</th>
+							<th>${lec.lnum}</th>
+							<th>${lec.lname}</th>
+							<th><input type="text" class="form-control" id="middlescore${lec.sid }"value="${lec.middlescore}"> </th>
+							<th><input type="text" class="form-control" id="finalscore${lec.sid }" value="${lec.finalscore}"></th>
+							<th><input type="text" class="form-control" id="attendancescore${lec.sid }" value="${lec.attendancescore}"></th>
+							<th>${lec.homework}</th>
+							<th>${lec.total}</th>
+							<th>${lec.rank}</th> 
+							<th>
+								<button id="updateBtn" onclick="update('${lec.sid}', ${lec.opennum })" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수정</button>
+							</th>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
-
-	<div align="right">
-		
-	</div>
-
-	<div id="grid"></div>
-
 </div>
-<table align="center" border="1">
-	<thead>
-			<tr>
-					<th style="width:130px" >강의등록번호</th>
-					<th style="width:150px">학번</th>
-					<th style="width:150px">학생이름</th>
-					<th style="width:150px">강의번호</th>
-					<th style="width:200px">강의이름</th>
-					<th style="width:130px">중간고사</th>
-					<th style="width:130px">기말고사</th>
-					<th style="width:130px">출석점수</th>
-					<th style="width:130px">과제</th>
-					<th style="width:130px">총점</th>
-					<th style="width:130px">등급</th>
-					<th></th>
-			</tr>
-	</thead>
-	<tbody>
-	
-		<c:forEach items="${lectures }" var="lec">
-			<input type="hidden" id="hiddenOpenNum" value="${lec.opennum }">
-			<tr>
-					<th>${lec.opennum}</th>
-					<th>${lec.sid}</th>
-					<th>${lec.sname}</th>
-					<th>${lec.lnum}</th>
-					<th>${lec.lname}</th>
-					<th><input type="text" id="middlescore${lec.sid }"value="${lec.middlescore}"> </th>
-					<th><input type="text" id="finalscore${lec.sid }" value="${lec.finalscore}"></th>
-					<th><input type="text" id="attendancescore${lec.sid }" value="${lec.attendancescore}"></th>
-					<th>${lec.homework}</th>
-					<th>${lec.total}</th>
-					<th>${lec.rank}</th> 
-					<th>
-						<button id="updateBtn" onclick="update('${lec.sid}', ${lec.opennum })">수정하기</button>
-					</th>
-			</tr>
-				</c:forEach>
-			
-	</tbody>
-</table>
 <script>
 
 
@@ -163,10 +160,6 @@ $('#createpdf').click(function() {
 	});
 	
 </script>
-<script>
 
-
-</script>
-</div>
 </body>
 </html>

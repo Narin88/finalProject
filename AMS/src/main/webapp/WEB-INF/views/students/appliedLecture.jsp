@@ -25,20 +25,6 @@
 		font-size: 10pt;
 	}
 	
-	.professorInfo { -
-		-bs-table-bg: transparent; -
-		-bs-table-striped-color: #212529; -
-		-bs-table-striped-bg: rgba(0, 0, 0, 0.05); -
-		-bs-table-active-color: #212529; -
-		-bs-table-active-bg: rgba(0, 0, 0, 0.1); -
-		-bs-table-hover-color: #212529; -
-		-bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-		width: 100%;
-		color: #212529;
-		vertical-align: top;
-		border-color: #dee2e6;
-	}
-	
 	.tui-grid-cell .tui-grid-cell-content {
 		text-align: center;
 	}
@@ -63,7 +49,6 @@
 	/* 강의 계획서 모달에 쓰이는 스타일 */
 	.container23{
 		width: 1200px;
-		border: 1px solid black;
 		margin: 40px;
 		padding: 30px;
 	}
@@ -72,26 +57,21 @@
 		align : center;
 		width: 100%;
 	}
-	
-	.ns23{
-		font-family: 'Noto Sans KR', sans-serif;
-		align: center;
-	}
-	
-	textarea{
-		word-break: break-all;
-	}
-	
-	.inbox{
-		width: 180px;
-		text-align: center;
-		height:25px;
-	}
-	
-	.schedulebox{
-		width: 99%;
-		text-align: center;
-		height:25px;
+	.longform-control{
+		height: 30px;
+		width: 100%;
+	    font-size: 14px;
+	    display: block;
+	    padding: .375rem .75rem;
+	    font-size: 1rem;
+	    font-weight: 400;
+	    line-height: 1.5;
+	    color: #495057;
+	    background-color: #fff;
+	    background-clip: padding-box;
+	    border: 1px solid #ced4da;
+	    border-radius: .25rem;
+	    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	}
 	
 	/* 모달창 강의 계획서 */
@@ -111,7 +91,7 @@
 		/* overflow-y: initial !important; */
 	 	display: none;
 		width: 80%;
-		height: 80%;
+		height: 30%;
 		padding: 30px 60px;
 		background-color: #fefefe;
 		border: 1px solid #888;
@@ -158,13 +138,13 @@
 	<a class="modal_close_btn">닫기</a>
 	<div class="modal-body">
 		<h2>교수 정보</h2>
-		<table class="table table-bordered" id="professorInfo">
+		<table class="table table-bordered" id="professorInfo" border="1">
 			<thead>
-				<tr>
-					<th>교수명</th>
-					<th>연락처</th>
-					<th>이메일</th>
-				</tr>
+			<tr>
+				<th>교수</th>
+				<th>연락처</th>
+				<th>이메일</th>
+			</tr>
 			</thead>
 			<tbody></tbody>
 		</table>
@@ -178,247 +158,172 @@
 <div class="modal_offer" id="modal_offer" align="center">
 	<a class="modal_close_btn">닫기</a>
 	<div class="modal-body">
-		<button id="createpdf" style="float: right">pdf 생성</button>
+		<button id="createpdf" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" style="float: right">PDF 생성</button>
 		
 		<div class="container23" id="pdfwrap">
 			<h1 align="center" class="ns23">강 의 계 획 서</h1>
 			<p id="plan_term"></p>
 			<div class="innercontainer23">
-				<table style="align: center; background-color: #d2d2d2; width: 100%" class="ns23">
-					<tr style="width: 200px; height: 100%">
-						<th style="width: 200px"><font size="3">강의명</font></th>
-						<th>
-							<input type="text" name="plan_lname" class="inbox" readonly />
-						</th>
-						<th><font size="3">교수</font></th>
-						<th>
-							<input type="text" name="plan_pname" class="inbox" readonly />
-						</th>
-						<th><font size="3">이메일</font></th>
-						<th>
-							<input type="text" name="plan_email" class="inbox" readonly />
-						</th>
-						<th><font size="3">교수 연락처</font></th>
-						<th>
-							<input type="text" name="plan_pphone" class="inbox" readonly style="width: 200px"/>
-						</th>
-					</tr>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td><b>교과목</b></td>		<td><input type="text" name="plan_lname" class="form-control" readonly></td>
+							<td><b>교수명</b></td>		<td><input type="text" name="plan_pname" class="form-control" readonly></td>
+							<td><b>이메일</b></td>		<td><input type="text" name="plan_email" class="form-control" readonly></td>
+							<td><b>연락처</b></td>		<td><input type="text" name="plan_pphone" class="form-control" readonly></td>
+						</tr>
+					</tbody>
 				</table>
-				<br />
-				<table style="align: center; background-color: #d2d2d2; width: 100%" class="ns23">
-					<tr>
-						<th style="width: 200px"><font size="3">학과</font></th>
-						<th>
-							<input type="text" name="plan_mname" class="inbox" readonly />
-						</th>
-						<th><font size="3">학부</font></th>
-						<th>
-							<input type="text" name="plan_dname" class="inbox" readonly />
-						</th>
-						<th><font size="3">강의실</font></th>
-						<th>
-							<input type="text" name="plan_lrname" class="inbox" readonly />
-						</th>
-						<th><font size="3">교재</font></th>
-						<th>
-							<input type="text" name="plan_book" class="schedulebox" readonly style="width: 200px"/>
-						</th>
-					</tr>
-					<tr>
-						<th>강의 코드</th>
-						<td>
-							<input type="text" name="plan_lnum" class="inbox" readonly />
-						</td>
-						<th>-</th>
-						<td>
-							<input type="text" name="plan_dividenum" class="inbox" readonly />
-						</td>
-						<th style="width: 200px">강의 시간</th>
-						<td colspan="3">
-							<input type="text" name="plan_schedule" class="schedulebox" readonly />
-						</td>
-					</tr>
-					<tr>
-						<th><font size="3">학점</font></th>
-						<th>
-							<input type="text" name="plan_credit" class="inbox" readonly />
-						</th>
-						<th><font size="3">대상학년</font></th>
-						<th>
-							<input type="text" name="plan_grade" class="inbox" readonly />
-						</th>
-						<th><font size="3">정원</font></th>
-						<th>
-							<input type="text" name="plan_newlimitcount" class="inbox" readonly />
-						</th>
-						<th><font size="3">이수구분</font></th>
-						<th>
-							<input type="text" name="plan_division" class="schedulebox" readonly />
-						</th>
-					</tr>
+
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td><b>수강학과</b></td>		<td><input type="text" class="form-control" name="plan_mname" readonly></td>
+							<td><b>수강학부</b></td>		<td><input type="text" class="form-control" name="plan_dname" readonly></td>
+							<td><b>강의실</b></td>		<td><input type="text" class="form-control" name="plan_lrname" readonly></td>
+							<td><b>교재</b></td> 		<td><input type="text" class="form-control" name="plan_book" readonly></td>
+						</tr>
+						<tr>
+							<td><b>강의코드</b></td> 		<td colspan="3"><input type="text" class="longform-control" name="plan_lnum" readonly></td>
+							<td><b>강의시간</b></td>		<td colspan="3"><input type="text" class="longform-control" name="plan_schedule" readonly>
+						</tr>
+						<tr>
+							<td><b>학점</b></td>			<td><input type="text" name="plan_credit"	class="form-control" readonly></td>
+							<td><b>대상학년</b></td> 		<td><input type="text" name="plan_grade" class="form-control" readonly></td>
+							<td><b>정원</b></td> 			<td><input type="text" name="plan_newlimitcount" class="form-control" readonly></td>
+							<td><b>이수구분</b></td> 		<td><input type="text" name="plan_division" class="form-control" readonly></td>
+						</tr>
+					</tbody>
+				</table>
+					<div class="col-sm-6 col-md-4 col-lg-3">
+						<h5><i class="ion-compose"></i>과목개요</h5>
+					</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td><b>1. 교과목 개요</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><textarea name="plan_content" id="limit" rows="3" required class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+					</tbody>
+				</table>
+
+					<br />
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td><b font-size="14px">2. 주차별 강의 진행 과정</b><span style="color: #aaa;"> (최대 300자) </span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align: left">1주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w1" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+								<td style="text-align: left">2주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w2" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">3주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w3" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">4주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w4" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">5주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w5" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">6주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w6" id="limit" rows="3"	class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">7주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w7" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">8주차 강의</td>
+						</tr>
+
+						<tr>
+							<td><textarea name="w8" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+					</table>
+					<br><br><br><br><br>
+					<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td style="text-align: left">9주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w9" rows="3" id="limit"	class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">10주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w10" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">11주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w11" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">12주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w12" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">13주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w13" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">14주차 강의</td>
+						</tr>
+						<tr>
+							<td><textarea name="w14" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">15주차 강의</td>
+						</tr>
+
+						<tr>
+							<td><textarea name="w15" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" readonly></textarea></td>
+						</tr>
+						<tr>
+							<td style="text-align: left">16주차 강의</td>
+						</tr>
+						<tr height="20">
+							<td><textarea name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" readonly>}</textarea></td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
-      		<br>
-			<table style="width: 100%; align: center; background-color: #d2d2d2" class="ns23">
-				<tr>
-					<th><p align="left">&nbsp; 1. 교과목 개요</p></th>
-				</tr>
-		        <tr height="20">
-					<td>
-						<textarea name="plan_content" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					<td>
-				</tr>
-			</table>
-			<br>
-			<label class="ns23">3. 주차별 강의 진행 과정
-				<span style="color: #aaa"> (최대 300자) </span>
-			</label>
-			<table style="width: 100%; background-color: #d2d2d2" class="ns23">
-				<tr>
-					<th><p align="left">&nbsp; 1주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w1" rows="3" style="resize: none; width: 99%" wrap="hard" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 2주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w2" rows="3" style="resize: none; width: 99%" wrap="hard" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 3주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w3" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 4주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w4" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 5주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w5" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 6주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w6" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 7주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w7" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 8주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea placeholder="중간고사 기간" name="w8" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 9주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w9" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 10주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w10" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 11주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w11" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 12주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w12" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 13주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w13" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 14주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w14" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 15주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-				    	<textarea name="w15" rows="3" style="resize: none; width: 99%" readonly></textarea>
-					</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<th><p align="left">&nbsp; 16주차 강의</p></th>
-				</tr>
-				<tr height="20">
-					<td>
-						<textarea name="w16" rows="3" style="resize: none; width: 99%" placeholder="기말고사 기간" readonly></textarea>
-					</td>
-				</tr>
-			</table>
 		</div>
 	</div>
 </div>
@@ -430,7 +335,7 @@
 	<a class="modal_close_btn">닫기</a>
 	<div class="modal-body">
 		<h1>강의 만족도 결과 공개</h1>
-		<table class = "table table-borderd" border="1" style = "align: center">
+		<table class = "table table-bordered">
 			<thead>
 			<tr>
 				<th>년도/학기</th> 
@@ -485,7 +390,6 @@
 	let p_lrname = document.getElementsByName("plan_lrname")[0];
 	let p_book = document.getElementsByName("plan_book")[0];
 	let p_lnum = document.getElementsByName("plan_lnum")[0];
-	let p_dividenum = document.getElementsByName("plan_dividenum")[0];
 	let p_schedule = document.getElementsByName("plan_schedule")[0];
 	let p_credit = document.getElementsByName("plan_credit")[0];
 	let p_grade = document.getElementsByName("plan_grade")[0];
@@ -547,7 +451,7 @@
 			pphone		: '${st.pphone}',
 			pid			: '${st.pid}',
 			opennum		: '${st.opennum}',
-			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(${st.opennum})" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">확인</button>'
+			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(${st.opennum})" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
 				
 		}
 		<c:if test='${!empty st.lnum}'>
@@ -711,8 +615,7 @@
 					p_dname.value = result.dname;
 					p_lrname.value = result.lrname;
 					p_book.value = result.book;
-					p_lnum.value = result.lnum;
-					p_dividenum.value = result.dividenum;
+					p_lnum.value = result.lnum+'-'+result.dividenum;
 					p_schedule.value = result.schedule;
 					p_credit.value = result.credit;
 					p_grade.value = result.grade;

@@ -67,7 +67,7 @@
 									, lyear: '${list.lyear}'
 									, term : '${list.term}'
 									,pcomment: '<div class="underline">${list.pcomment}</div>'
-									,pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/><c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									,pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/><c:if test="${list.hwstatus > 0 }"><span style="color:red;margin-left:20px;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}">&nbsp;&nbsp;<span style="color:blue;margin-left:20px;">마감</span></c:if>'
 									,score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if><c:if test="${list.score ne null}">${list.score } / 20</c:if>'
 									,registerId: '${list.registerId}'
 									,alterBtn:'<c:if test="${list.hwstatus > 0 }" ><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><span style="color:brown;">수정불가</span></c:if>'

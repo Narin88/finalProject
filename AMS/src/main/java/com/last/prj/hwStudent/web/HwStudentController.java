@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,9 @@ public class HwStudentController {
 	HwStudentService service;
 	
 	@RequestMapping("hwStudent")
-	public String hwStudent(Model model,HwStudentVO vo,HttpSession session) {
+	public String hwStudent(Model model,HwStudentVO vo,HttpSession session,HttpServletRequest request) {
+		//String pathSet=request.getSession().getServletContext().getRealPath("resources/upload/");
+		//System.out.println(pathSet);
 		vo.setSid((String) session.getAttribute("id"));
 
 		List<Map<String, Object>> result =service.hwSLectureList(vo);
@@ -69,7 +72,11 @@ public class HwStudentController {
 		vo.setSubmitSid((String) session.getAttribute("id"));
 		vo.setSid((String) session.getAttribute("id"));
 		//파일업로드
-		String rootUploadDir = "C:\\Users\\User\\git\\finalProject\\AMS\\src\\main\\webapp\\resources\\upload\\hw_professor"; // 업로드 주소
+		
+		//aws 업로드 폴더 경로 업데이트 보류
+		String rootUploadDir =request.getSession().getServletContext().getRealPath("resources/upload/hw_student/");
+		
+				//"C:\\Users\\User\\git\\finalProject\\AMS\\src\\main\\webapp\\resources\\upload\\hw_student"; // 업로드 주소
 		File dir = new File(rootUploadDir);
 
 		if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성

@@ -57,7 +57,7 @@
 	</select>
 	
 	
-	<select id="division" resultType="StudentsVO">
+	<select id="divisionList" resultType="StudentsVO">
 		select DISTINCT l.lyear, l.term, nvl(sum((select sum(li.credit) from dual where li.DCODE='001')),0) as JP,
 																		nvl(sum((select sum(li.credit) from dual where li.DCODE='002')),0)as JS,
 																		nvl(sum((select sum(li.credit) from dual where li.DCODE='003')),0)as NK,

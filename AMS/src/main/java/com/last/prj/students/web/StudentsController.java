@@ -125,7 +125,9 @@ public class StudentsController {
 
 		vo.setSid((String) session.getAttribute("id"));
 		model.addAttribute("st", stService.scoreView(vo));
-
+		model.addAttribute("tt", stService.divisionList(vo));
+		
+		
 		return "students/studentScoreView.tiles";
 	}
 

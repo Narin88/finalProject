@@ -44,7 +44,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 </body>
   <script>
 
-    // 그리드
+    // 첫번쨰 그리드
 
     	var scrData = [
 
@@ -110,9 +110,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     // 그리드2
 
-    	var scrData = [
+    	var scrData2 = [
 
-    		<c:forEach items = "${st}" var = "st">{
+    		<c:forEach items = "${tt}" var = "st">{
 
     			lyear 		: '${st.lyear}',
     			term 		: '${st.term}',
@@ -129,7 +129,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     // 그리드 api-source
 
-    	const dataSource = {
+    	const dataSource2 = {
 
     		withCredentials	: false,
     		initialRequest	: false,
@@ -150,7 +150,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     	var grid2 = new tui.Grid({
 
     		el: document.getElementById('grid'),
-    		data: scrData,
+    		data: scrData2,
     		columns: [
     			{header: '년도', name: 'lyear'},
     			{header: '학기', name: 'term'},	<!-- 년도랑 학기가 같은 값일 때, 강의 개수 만큼 묶어서 출력해야 하는데. 어떡해야 하지? -->
@@ -164,7 +164,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     	});
 
-    	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
+    	grid.resetData(scrData2) //그리드를 그려놓고 데이터를 넣음
 
     // 그리드 끝
   </script>

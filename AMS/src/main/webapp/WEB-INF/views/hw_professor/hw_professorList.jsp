@@ -9,203 +9,18 @@
 <META charset="UTF-8">
 <head> 
 	<title>(교수)과제</title>
-	<style>
-	.noSubmit2{ 
-		text-align:center;
-		margin:auto;
-		background-color:aliceblue;
- 		 border-collapse: collapse;
-		  border-radius: 10px;
- 		border-style: hidden;
-  		box-shadow: 0 0 0 0.1px #000;
-    border: none;
-		
-	}
-	.noSubmit2 th{					
-	}
-	.noSubmit3{
-		text-align:center;
-		margin:auto;
-	}
-	.noSubmit3 th{
-		color:red;
-	}
-	.tui-grid-border-line-top {
-    border: none;
-    }
-		
-		.box1{
-		padding:1em;
-		height:700px;
-		margin-left:280px;
-		}
-		.hwTable1{
-		margin-top:70px;
-		width:100%;
-		height:300px;
-		}
 
-		.hwContainer{
-
-		}
-		.HwSearch{
-			padding: 1em;
-		    border-radius: 3em;
-		    width: 700px;
-			border:1px solid gray;
-		}
-		.tui-grid-cell .tui-grid-cell-content {
-    text-align: center;
-}
-			.menu01 {
-				height: 30px;
-			    padding: 1em;
-			    margin-left: 200px;
-				}
-				.menu01 ul li{
-					list-style-type:none;
-					float:left;			
-					margin-left:20px;
-					font-weight:bold;		
-				}
-		 .trC{
-		 background-color:white;
-		 }
-		 .modalBtn{ 
-		  border-radius: 1em;
-		    background-color: lightpink;
-		    color: white;
-		    padding-left: 2em;
-		    padding-right: 2em;
-		    padding-top: 8px;
-		    padding-bottom: 5px;
-		    font-size: 20px;
-		    border: none;
-	     	}	
-		  .modalBtn2{ 
-		    border-radius: 1em;
-		    background-color: lightpink;
-		    color: white;
-		    padding-left: 2em;
-		    padding-right: 2em;
-		    padding-top: 8px;
-		    padding-bottom: 5px;
-		    font-size: 20px;
-		    border: none;
-		}
-		
-		 /* The Modal (background) */
-        .modalEE {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 70%;
-    		height: 700px; /* Could be more or less, depending on screen size */                          
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-         /* The Modal (background) */
-        .modal2 {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content2 {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-    		height: 300px; /* Could be more or less, depending on screen size */                          
-         }
-         .close2 {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close2:hover,
-        .close2:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-	</style>
-<!-- Toast grid -->
-	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-	<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-	<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
-	<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwList.css"/>
 <body>
 
 			<div class="menu01">	
 				<ul>
 					<li><a class="modalBtn" href="hwList">과제 페이지</a></li>
 					<li><a class="modalBtn" href="hwPfInsert" >등록 페이지</a></li>
-				</ul>
-			<!--  -->
-									<c:forEach items="${list }" var="data">
-										${data }
-									
-									</c:forEach>
-				
+				</ul>		
 			</div>
-			<div>
-			<button type="button" id="download">버튼</button>					
 			
-			</div>
-			<script>
-			$("#download").click(function(){
-	            
-			    var filePath = "C:/tmp/test.txt";
-			    var fileName = "test.txt";
-			                
-			    location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
-			    
-			});
-
-			</script>
 		<div class="box1">				
 		<br>
 			<h5> ' ' 교수님 과제조회</h5>	
@@ -279,70 +94,36 @@
 				 		</div>
 				<br>
 			
+			<!-- 과제 조회 END -->
 			
 			<div class="hwTable1">
-	 		<div id="grid" ></div>
-		    <!-- The Modal -->
-		    <div id="myModal" class="modalEE">
-		 
-		      <!-- Modal content -->
-		      <div class="modal-content">                                                             
-			<div class="hwContainer">
-							 <span class="close">&times;</span>  
-								<div class="noSubmit">
-
-									<!-- select option  -->
-									<script>
-										function check(e){
-										if(e.value=="submitAll"){
-											
-												$('.unsubmit').show();
-												$('.submit').show();
-											}else if(e.value=="submit"){
-											var a=	$('#grid2').data('column-name');
-											console.log(a);
-												$('.submit').show();
-												$('.unsubmit').hide();
-											}else if(e.value=="noSubmit"){
-												$('.submit').hide();
-												$('.unsubmit').show();
-											}
-										}
-									</script>
-								</div>
-								
-								
+									<!-- gird 첫번째 -->
+	 										<div id="grid" ></div>
+					 <!-- The Modal -->
+						<div id="myModal" class="modalEE">
+					 
+					      <!-- Modal content -->
+					      <div class="modal-content">                                                             
+						  		<div class="hwContainer">
+									<span class="close">&times;</span>  
+											<!-- 조회눌렀을때  모달창안에 들어갈 내용들 -->
+											<div class="noSubmit">
 							
-   								  <div id="select-box" style="width: 200px"></div>
-   								  <button style="float:right;margin-top: -5px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
-   								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn"">점수정정</button>
-								<div id="grid2"></div>
-								
-								<!-- submit_SID값으로 학생정보 가져오기 -->
-								 <br>
-													
+																		
+											</div>
+ 								  <button style="float:right;margin-top: -5px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
+ 								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn"">점수정정</button>
 														
-														<br>
-														<!-- <button type="button" id="delete" style="margin-left: 480px;">선택삭제</button> -->
-								</div>
-		       	
-		      </div>
-		 
-		    </div>
-		    
-		
-		    	
-		    
-		    <!--테이블 페이징 -->
-<!-- 		    <script>
-		    function scoreBtn(){
-		    	console.log("ㅎ냥ㅎㄴㅇㅎ");
-		    }
-		    </script> -->
-		    
-		    
-		    
-			<!-- MODAL HTML END-->
+										<!-- gird 두번째 -->
+												<div id="grid2"></div>
+										 		<br><br>
+									</div>
+					       	
+					 	  </div>
+					 
+					    </div>
+						<!-- MODAL HTML END-->
+					    
 			
 			
 			<!-- The Modal -->
@@ -350,25 +131,24 @@
 		 
 		      <!-- Modal content -->
 		      <div class="modal-content2">      
-		      <span class="close2">&times;</span>                                                         
-			<div class="hwContainer">
-								<div class="" style="border-radius:10px;">
-									<h4 align="center">과제변경전</h4>
-									<table border="1" class="noSubmit2" >
-									</table>
-								</div>
+		     		 <span class="close2">&times;</span>                                                         
+							<div class="hwContainer">
+									<div class="" style="border-radius:10px;">
+										<h4 align="center">과제변경전</h4>
+											<table border="1" class="noSubmit2" >
+											</table>
+										</div>
+								<!-- 변경 눌렀을때 실행되는 form -->		
 								<form action="hwUpdate" id="udFrm" name="udFrm" method="post" enctype="multipart/form-data" >
 								<sec:csrfInput/>
 								<input type="hidden" id="pperiod" name="pperiod">
 								<input type="hidden" id="pcomment" name="pcomment">
 								<input type="hidden" id="registerId" name="registerId">
-								<div class="" style="    margin-top: 60px;">
-									<table border="1" class="noSubmit3" >
-						
-									</table>
-									
-									
-								</div>
+									<div class="" style="    margin-top: 60px;">
+										<table border="1" class="noSubmit3" >
+							
+										</table>
+									</div>
 								</form>
 							</div>
 		       	
@@ -376,27 +156,29 @@
 		 
 		    </div>
 			<!-- MODAL HTML END-->
-			
-		
-			<script>
-			    
+
+	</div>
+	
+</div>
+				<!-- 삭제버튼을 클릭했을때  -->
+			<script>    
 			$(".hwTable1").on("click","#hwDelete",function(){
-			var a=	$(this).data('id');
-			var b= $(this).data('num');
-				console.log(a);
+				var a=	$(this).data('id');
+				var b= $(this).data('num');
+				
 				hwPfDeleteFrm.registerId.value=a;
 				
-				if(confirm(' * '+b+' '+' * ' + '삭제 하시겠습니까 ?')==true){
-					alert("삭제가 완료되었습니다.");
-					hwPfDeleteFrm.submit();
-				}else{
-					
-					return false;
-				}
+					if(confirm(' * '+b+' '+' * ' + '삭제 하시겠습니까 ?')==true){
+						alert("삭제가 완료되었습니다.");
+						hwPfDeleteFrm.submit();
+					}else{
+						
+						return false;
+					}
 				
 				
-			});
-			
+				});
+				
 			
 			
 			
@@ -410,18 +192,19 @@
 	        var span = document.getElementsByClassName("close")[0];                                          
 	 
 	        // When the user clicks on the button, open the modal 
-	       // btn.onclick = function() {
+	       
+	        	// 조회 버튼을 클릭했을때 
 	        	$(".hwTable1").on("click","#inquiry",function(){
-	            modal.style.display = "block";
-	            $(this).data('id'); //
-				var a= $(this).data('id');
-				var b= $(this).data('num');
+	           		 modal.style.display = "block";
+	          		  $(this).data('id'); //
+							var a= $(this).data('id');
+							var b= $(this).data('num');
+							
+							var count=$(this).data('count');
+						
 				
-				var count=$(this).data('count');
-				console.log(count);
+							var checkVal=0;
 				
-				
-				var checkVal=0;
 				$.ajax({
 					type:"post",
 					url:"inquiry",
@@ -434,24 +217,14 @@
 						$("#grid2").empty();
 						$("tfoot").empty();		
 						$(".noSubmit").empty();
-						//$('<form name="selectFrm" id="selectFrm">')
-					/*	$('<select name="submitList" id="submitList" onChange="check(this);" style="width: 100px;height:30px;margin-left: 25px;">')
-						.append($('<option value="submitAll">전체보기</option>'))
-						.append($(' <option value="submit">제출자</option>'))
-						.append($('<option value="noSubmit">미제출자</option>">'))
-						.append($('</select>>'))		
-						.appendTo('.noSubmit');		
-						//$('</form>')*/
 						$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4>').appendTo('.noSubmit');
-						$('<h6 style="color:gray; float:left;margin-left:30px;"> 점수를 정정하면 성적에 반영됩니다. </h6>').appendTo('.noSubmit');
+						$('<h6 style="color:gray; float:left;margin-left:30px;"> 점수를 정정하면 성적에 자동 반영됩니다. </h6>').appendTo('.noSubmit');
 					
 						
 						
 					
 					
-					
-					//grid start
-			  					
+						//grid start 조회했을때 모달창에서 뜨는 그리드
 					
 							//제출한 학생과제 삭제 delete & 점수 수정 update
 							//grid api-source
@@ -510,20 +283,18 @@
 			  		
 			  			grid.resetData(data)
 			  			
+			  			
+			  			//그리드가 실행된후 eachTest 0.5초후 함수 실행 " 과제 미제출자 구분 "
 			  			setInterval(eachTest , 500);
-							
+								
 						function eachTest(){	
-				  			$('[data-column-name="submit_file"]').each(function(index, item){
-				  				if($(this).text()==""){
-				  			
+				  			$('[data-column-name="submit_file"]').each(function(i, item){	
+				  				
+				  				 if($(this).text()==""){
 				  					$(this).html("<p align='center' style='color:red;'>과제 미제출자</p>");
-				  				}if($(this).text()=="제출파일"){
-				  					$(this).html("<p align='center' style='color:red;'>과제 미제자</p>");
-				  				}else{
-				  					$(this).html("<p align='center' style='color:red;'>과제 자</p>");
+				  					console.log($(this).text());
 				  				}
 				  				
-				  					
 				  			});			  			
 						}	
 						
@@ -569,61 +340,42 @@
 	  						  console.log('data : ', data);
 	  					});
 				
-				
-			  		  
-			  		  
-			  		  
-			  		  
-			  		  
+			  		  		
 						
-							/*for(var i of data){
-							var a="";
-							var c="";
-							var d="";
-							var e="";
-							var f="";
-							//제출자일때 checkval 증가변수 
-							if(i.registerId){
-								checkVal++;
-							}
-							//과제 미제출자일때 조건
-							if(! i.registerId  ){
-								a=' class="unsubmit"';
-								b=' style="visibility:hidden;"';
-								c=' colspan="7" style="color:red;"';
-								d=' style="display:none;"'
-								e=' 과제 미제출자';
-							}else{								
-									a=' class="submit"';	
-									f=' style="background-color: lavender;"'
-							}
-							//submit_file undefined hide
-							if(! i.submit_file ){
-								i.submit_file="";
-							}
-							$('<tr id="tr1"'+a+' data-tr_value="'+checkVal+'">')
-							//.append($('<td><input '+d+' type="checkbox" name="checkRow" value="'+checkVal+'"></td>'))
-							.append($('<td>').html(i.submitSid))		
-							.append($('<td '+f+'>').html(i.name))
-							.append($('<td id="tdN"'+c+'>').html(i.submit_file+e))
-							.append($('<td'+d+'>').html(i.submit_date))
-							.append($('<td'+d+'>').html(i.s_comment))
-							.append($('<td'+d+'>').html(i.score))
-							.append($('<td id="sc"'+d+'>').html())	
-							.append($('<td id="scIn"'+d+'>').html('<input type="hidden" id="setRid" value="'+i.registerId+'"><input type="number" maxlength="2" oninput="maxLengthCheck(this)"'+b+'style="width:80px;"><button type="button"'+b+'class="scoreBtn" onclick="scoreIn();">IN</button>'))										
-							.append($('<td'+d+'>').html('<button type="button" onclick="hwDeleteFunc('+i.submitId+');">삭제</button>'))
-							.appendTo('tfoot');
-
-							
-						}*/
+			  		  	//파일명이 저장된 값이 있는 것은 다운되고 없는것은 파일없다는 alert경고창
+	  					grid.on('dblclick', ev => {
+	  						
+		        			
+			        		var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
+			        		const isHeader= ev.targetType==="columnHeader";
+	  						var a=data.submit_file;
+		        			var b=data.name;
+			        		
+			        		//console.log(data);
+			        		//console.log(b);
+			        		if(ev.columnName =="submit_file" && !isHeader && a != null){
+					        			if(confirm(b+ '님 파일 다운로드 !')==true){
+					        				var filePath = "C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a
+						        			var fileName = a;
+			    			                
+					        			    location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
+											}else{
+												
+												return false;
+											}	
+				        			
+								}
+			        		if(a==null){
+			        			alert("제출한 파일이 없습니다");
+		        						}
+	  						})
 					},
 					error: function(error){
 						alert("error");
 					}
-				});
 	        });
 	 
-	        	
+	      	});	
 	        	
 	        	
 	        	
@@ -641,11 +393,9 @@
 	        }
 			
 	        
+
 	        
-	        
-	        
-	        
-			//과제제출 학생 삭제 FUNCTION
+			//제출한 학생의 과제삭제 FUNCTION
 			function hwDeleteFunc(a){
 				$.ajax({
 				type:"post",
@@ -675,14 +425,8 @@
 			
 			
 			</script>
-			
-		
-			
-			
-			
-			</div>
 			<script>
-			
+						//과제페이지 grid
 					  		//grid start
 					  		
 					  				var clsData = [
@@ -741,12 +485,8 @@
 					        	//	console.log(data); 	
 					        	});
 								
-					  			</script>
-				<script>
-				
-
-		
-
+			
+				//과제페이지 변경버튼눌렀을때 모달창 
 					$(".hwTable1").on("click","#updateBtn",function(){
 						// Get the modal
 						var a=$(this).data('id');
@@ -910,43 +650,8 @@
 							}
 					}
 				}
-					
-					/*점수IN
-					function scoreIn(){	
-					    	//$(".scoreBtn").on("click", function(){
-					       		//var a=$(this).prev().val();
-					       		var a=$(event.target).prev().val();	
-					       		if(a>20){
-					       			alert('20점미만 입력가능');
-					       		}else{
-						       		frmScoreIn.score.value=a;
-						       			var b=$(event.target).closest('tr').find('td').eq(0).html();
-						       			var d=$(event.target).closest('tr').find('td').eq(1).html();
-									frmScoreIn.submitSid.value=b;
-										var c=$(event.target).prev().prev().val();
-									frmScoreIn.registerId.value=c;
-									if(confirm('* '+d+' *'+" 학생 \n 점수 :      [ "+a+" ]  점 "+"입력하시겠습니까?")==true){
-										frmScoreIn.submit();
-									}else{
-										return false;
-									}
-								
-					       		}
-					    //});
-							
-					}
-						*/	
-							//var b=$('#scoreIn').val();`
-							//var c=$('.scoreIn').val();
-							//var a=$(event.target).closest('tr').find('td').eq(0).html();
 						
-			
-					
-					</script>
-						
-			
-			</div>
-		</div>
+			</script>
 		<!-- 교수 등록한 과제 삭제 -->
 		<form id="hwPfDeleteFrm" name="hwPfDeleteFrm"  method="post" action="hwPfDelete">
 			<input type="hidden" id="registerId" name="registerId">

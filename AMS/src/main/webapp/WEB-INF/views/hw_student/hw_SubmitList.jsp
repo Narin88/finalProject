@@ -63,9 +63,9 @@
 				term : '${list.term}',
 				pcomment: '<div class="underline">${list.pcomment}</div>',
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/>',
-				status: '<c:if test="${list.hwstatus > 0 }"> <span style="color:red;"> 진행중</span></c:if> <c:if test="${list.hwstatus <= 0}"><span style="color:blue;"> 마감</span></c:if>',
+				status: '<c:if test="${list.hwstatus >= 0 }"> <span style="color:red;"> 진행중</span></c:if> <c:if test="${list.hwstatus < 0}"><span style="color:blue;"> 마감</span></c:if>',
 				score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if><c:if test="${list.score ne null}">${list.score } / 20</c:if>',
-				alterBtn:'<c:if test="${list.hwstatus > 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><span style="color:brown;">수정불가</span></c:if>'
+				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><span style="color:brown;">수정불가</span></c:if>'
 			},
 			</c:forEach>
 		]; //컬럼DATA	
@@ -85,7 +85,7 @@
 				{header: '학기',name: 'term',width:90}, //년도+학기
 				{header: '과제제목',name: 'pcomment',width:350},
 				{header: '제출기간',name: 'pperiod'},
-				{header: '제출상태',name: 'status'},
+				{header: '진행상태',name: 'status'},
 				{header: '점수',name: 'score',width:140},
 				{header: '수정',name: 'alterBtn',width:120},
 			], //컬럼갯수
@@ -124,7 +124,7 @@
 		deleteHwSFrm.registerId.value=a;
 		deleteHwSFrm.opennum.value=b;
 		
-		if(c <= 0){
+		if(c < 0){
 			alert("수정이 불가능합니다.");
 		}else{
 			if(confirm("수정을 하게되면 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){

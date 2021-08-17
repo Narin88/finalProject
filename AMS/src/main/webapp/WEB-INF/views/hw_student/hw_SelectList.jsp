@@ -37,7 +37,7 @@ text-align: center;
 		<div align="center">
 			<h2> 과제 목록</h2>
 			<div class="box">
-				<b style="font-weight: bold;"># 제출기한이 지나면 수정이 <font color="red">불가능</font>합니다. <br># 과제는 <font color="red">더블클릭</font>해야 제출 가능합니다.</b>
+				<b style="font-weight: bold;"># 제출기한이 지나면 등록이 <font color="red">불가능</font>합니다. <br># 과제는 <font color="red">더블클릭</font>해야 제출 가능합니다.</b>
 				<div class="movebox">
 					<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick=history.back()>과제 리스트</button>
 				</div>	

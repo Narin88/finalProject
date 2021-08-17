@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>No.M University</title>
+<title>과제 리스트::No.M University</title>
 <style>
 
 .tui-grid-cell .tui-grid-cell-content {
@@ -38,7 +38,7 @@
 <div class="content-page">
 	<div class="card-body">
 		<div align="center">		
-			<h2 style="display: inline;"> 수강중인 강의 </h2>
+			<h2 style="display: inline;"> 강의 과제리스트</h2>
 			<div class="movebox">
 				<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='submitList'">제출한 과제</button>
 			</div>

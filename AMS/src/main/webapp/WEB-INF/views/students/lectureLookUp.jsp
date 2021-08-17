@@ -56,13 +56,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		border-color: #dee2e6;
 	}
 
-	th, td {
+	th{
 		border: 1;
 		border-color: inherit;
 		border-style: solid;
 		/*border-width: 0;*/
 		text-align: center;
-		padding: 10px;
 		width: 150px;
 	}
 	
@@ -149,77 +148,85 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	.tui-grid-layer-selection {
 		display: none;
 	}
+	.table{
+		width: 80%;
+	}
 </style>
 
 <title>수정 :: No.M University</title>
 
 <!-- 본체 -->
 <div class="content-page">
-	<div align="center">
-	<h2>강의 조회 페이지</h2>
-		<div class="selectArea">
-			<font>학과 : </font>
-			<select name="dname" id="dname">
-				<option value="">전체</option>
-				<c:forEach items="${depart }" var="depart">
-					<option value="${depart.dname }">${depart.dname }</option>
-				</c:forEach>
-			</select>
-			<font>전공 : </font>
-			<select name="mcode" id="mcode">
-				<option value="">전체</option>
-			</select>
-			<div class="lecture_division">
-				<font>구분 : </font>
-				<input type="radio" name="division" value="교양" />교양
-				<input type="radio" name="division" value="전공" />전공
-				<input type="radio" name="division" value="대학원" />대학원 <!-- 없음 -->
-				<input type="radio" name="division" value="" checked />전체
+	<div class="card-body">
+		<div align="center">
+		<h2>전체 강의 조회</h2>
+			<div class="selectArea">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>학과</th>		<td><select name="dname" id="dname" class="form-control">
+																<option value="">전체</option>
+																<c:forEach items="${depart }" var="depart">
+																	<option value="${depart.dname }">${depart.dname }</option>
+																</c:forEach>
+															</select>
+														</td>
+						<th>전공</th>		<td><select name="mcode" id="mcode" class="form-control">
+																<option value="">전체</option>
+															</select>
+														</td>
+						<th>전공</th>		<td><input type="radio" name="division" value="교양" />교양
+															<input type="radio" name="division" value="전공" />전공
+															<input type="radio" name="division" value="대학원" />대학원 <!-- 없음 -->
+															<input type="radio" name="division" value="" checked />전체
+														</td>
+					</tr>
+				</tbody>
+			</table>
+				<font>위치 : </font>
+				<select name="location">
+					<option value="">전체</option>
+					<c:forEach items="${room }" var="room">
+						<option value="${room.location }">${room.location }</option>
+					</c:forEach>
+				</select>
+				<br>
+				<font>학년 : </font>
+				<select name="grade">
+					<option value="">전체</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+				<br>
+				<font>요일 : </font>
+				<select name="day">
+					<option value="">전체</option>
+					<option value="월">월</option>
+					<option value="화">화</option>
+					<option value="수">수</option>
+					<option value="목">목</option>
+					<option value="금">금</option>
+				</select>
+				<font>교시 : </font>
+				<select name="time">
+					<option value="">전체</option>
+					<option value="1">1교시</option>
+					<option value="2">2교시</option>
+					<option value="3">3교시</option>
+					<option value="4">4교시</option>
+					<option value="5">5교시</option>
+					<option value="6">6교시</option>
+					<option value="7">7교시</option>
+					<option value="8">8교시</option>
+					<option value="9">9교시</option>
+				</select>
+				<button id="searchBtn">검색</button>
 			</div>
-			<font>위치 : </font>
-			<select name="location">
-				<option value="">전체</option>
-				<c:forEach items="${room }" var="room">
-					<option value="${room.location }">${room.location }</option>
-				</c:forEach>
-			</select>
-			<br>
-			<font>학년 : </font>
-			<select name="grade">
-				<option value="">전체</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-			</select>
-			<br>
-			<font>요일 : </font>
-			<select name="day">
-				<option value="">전체</option>
-				<option value="월">월</option>
-				<option value="화">화</option>
-				<option value="수">수</option>
-				<option value="목">목</option>
-				<option value="금">금</option>
-			</select>
-			<font>교시 : </font>
-			<select name="time">
-				<option value="">전체</option>
-				<option value="1">1교시</option>
-				<option value="2">2교시</option>
-				<option value="3">3교시</option>
-				<option value="4">4교시</option>
-				<option value="5">5교시</option>
-				<option value="6">6교시</option>
-				<option value="7">7교시</option>
-				<option value="8">8교시</option>
-				<option value="9">9교시</option>
-			</select>
-			<button id="searchBtn">검색</button>
+			<div id="grid"></div>
 		</div>
-		<div id="grid"></div>
 	</div>
-</div>
 <!-- 본체 끝 -->
 
 <!-- 모달 뷰 _ 교수 정보 보기 -->
@@ -521,7 +528,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		</table>
 	</div>
 </div>
-
+</div>
 <script>
 	// boolean
 	let isEmpty = 0;

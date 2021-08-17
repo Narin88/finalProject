@@ -191,6 +191,21 @@
 									</c:forEach>
 				
 			</div>
+			<div>
+			<button type="button" id="download">버튼</button>					
+			
+			</div>
+			<script>
+			$("#download").click(function(){
+	            
+			    var filePath = "C:/tmp/test.txt";
+			    var fileName = "test.txt";
+			                
+			    location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
+			    
+			});
+
+			</script>
 		<div class="box1">				
 		<br>
 			<h5> ' ' 교수님 과제조회</h5>	
@@ -479,10 +494,10 @@
 					  			columns: [
 					  				{header: '학생학번',name: 'submitSid',width:100},
 					  				{header: '학생이름',name: 'name',width:100},
-					  				{header: '제출파일',name: 'submit_file',width:130},
+					  				{header: '제출파일',name: 'submit_file',width:280},
 					  				{header: '제출날짜',name: 'submit_date',width:140},
 					  				{header: '학생코멘트',name: 's_comment'},
-					  				{header: '강의번호',name: 'opennum'},
+					  			//	{header: '강의번호',name: 'opennum'},
 					  				{header: '점수',name: 'score',width:70,editor:'text'},
 	
 					  			], //컬럼갯수
@@ -502,7 +517,12 @@
 				  				if($(this).text()==""){
 				  			
 				  					$(this).html("<p align='center' style='color:red;'>과제 미제출자</p>");
-				  				};
+				  				}if($(this).text()=="제출파일"){
+				  					$(this).html("<p align='center' style='color:red;'>과제 미제자</p>");
+				  				}else{
+				  					$(this).html("<p align='center' style='color:red;'>과제 자</p>");
+				  				}
+				  				
 				  					
 				  			});			  			
 						}	
@@ -670,7 +690,7 @@
 								{
 									lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
 									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
-									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지 <c:if test="${list.hwstatus > 0 }"><br><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus <= 0}"><br><span style="color:blue;">마감</span></c:if>'
+									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지<c:if test="${list.hwstatus > 0 }"><span style="color:red;margin-left:20px;">진행중</span></c:if><c:if test="${list.hwstatus <= 0}"><span style="color:blue;margin-left:20px;">마감</span></c:if>'
 									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
 									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
 									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'

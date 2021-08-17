@@ -70,27 +70,26 @@
 							<th width="130px;">제출 기간</th>	 <td><fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/></td>
 						</tr>
 						<tr>
-							<th> 과제제출양식<br> (첨부파일) </th> 	<td onclick="downloadFile('${list.registerFile}')">${list.registerFile }</td>
+							<th> 과제제출양식<br> (첨부파일) </th> 	<td><span style="text-decoration-line: underline;">${list.registerFile }</span><img  id="download" data-id="${list.registerFile }" src="${pageContext.request.contextPath}/resources/upload/downImg.png" width="30px" style="margin-left:20px;cursor:pointer;"></img></td>
 						</tr>
 					
 				</table>
 			</div>
-			<a href="C:\\Users\\User\\git\\finalProject67\\AMS\\src\\main\\webapp\\upload\\hw_professor/as34.TXT" download>download</a>
 			<!-- 파일다운로드 자바스크립트 -->
 			<script>
-			function downloadFile(filename){
-			    const encFileName = encodeURI(filename);
-			    $.ajax({
-			        method:"GET",
-			        url : `fileDownLoad`,
-			        success : function(data) {
-			            window.location =`fileDownLoad.do?FileName=${encFileName}`;
-			        },
-			        error:function(request,status){
-			            alert("오류가 발생했습니다.");
-			        }
-			    });
-			}
+			$("#download").dblclick(function(){
+				var a=$(this).data('id');
+				console.log(a);
+			
+	            
+			    var filePath = "C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_professor/"+a;
+			    
+			    console.log(filePath);
+			    var fileName = a;
+			                
+			    location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
+			    
+			});
 
 			</script>
 			<div  style="width:800px;    margin: auto;">

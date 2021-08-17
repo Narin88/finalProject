@@ -20,6 +20,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		text-align: center;
 	}
 
+	/* 교수 정보 모달 */
 	#my_offer {
 		display: none;
 		width: 80%;
@@ -113,7 +114,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		height:25px;
 	}
 
-/* 모달창 강의 계획서 */
+	/* 모달창 강의 계획서 */
 	#modal_offer {
 		/* overflow-y: initial !important; */
 		display: none;
@@ -124,6 +125,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		border: 1px solid #888;
 		border-radius: 3px;
 	}
+	
 	/* 모달창 강의 평가 */
 	#modal_evaluation {
 		/* overflow-y: initial !important; */
@@ -527,7 +529,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	let isEmpty = 0;
 	
 	// 강의 평가에 필요한 값
-		let lnum;
+	let lnum;
 	
 	// 강의 계획서 모달에 필요한 값
 	let pid;

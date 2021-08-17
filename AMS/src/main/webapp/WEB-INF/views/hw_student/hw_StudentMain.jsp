@@ -98,7 +98,7 @@
 	      		
 	      	});
 		*/
-	$(".hwSMain").on("click","#hwClick",function(){
+	$(".card-body").on("click","#hwClick",function(){
 		var a=$(this).data('id');
 		console.log(a);
 		hwStFrm.opennum.value=a;

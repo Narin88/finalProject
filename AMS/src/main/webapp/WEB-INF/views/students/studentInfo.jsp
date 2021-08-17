@@ -73,12 +73,19 @@ align: right;
 			</div>
 		</div>
 		<%-- <sec:authorize access="hasRole('ROLE_PRO')"> --%>
-			<div align="left" style="margin-left: 120px; margin-top: 10px">
+		<div>
+			<div align="left" style="margin-left: 113px; margin-top: 10px; display: flex; width: 100%;">
 				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
-	   				 <button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" id="changeImg" name="pic">사진변경</button>
-	   				 <button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="changeBtn()">확인</button>
+					<label class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">
+	   					 <input type="file" style="display:none;" id="changeImg" name="pic">사진변경</button>
+	   				 </label>
+	   				 <button type="button" class="btn btn-facebook m-b-10 waves-effect waves-light" onclick="changeBtn()">확인</button>
 	   			</form>
 			</div>
+	   		<div>
+	   			<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">비밀번호변경 버튼으로 바뀔예정</button>
+	   		</div>
+		</div>
 		<%-- </sec:authorize> --%>
 		<br /> <br />
 		<div class="bigDiv2">

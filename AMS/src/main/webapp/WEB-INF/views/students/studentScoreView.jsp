@@ -37,6 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		<div id="pdfwrap" class ="pdfwrap">
 			<h2>학생 성적 확인</h2>
 			<div id="grid"></div>
+			<div id="gird2"></div>
 		</div>
 	</div>
 </div>
@@ -95,6 +96,69 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     			{header: '학점', name: 'credit'},
     			{header: '총점', name: 'total'},
     			{header: '등급', name: 'rank'}
+
+    		] //컬럼갯수
+
+    	});
+
+    	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
+
+    // 그리드 끝
+  </script>
+  
+   <script>
+
+    // 그리드2
+
+    	var scrData = [
+
+    		<c:forEach items = "${st}" var = "st">{
+
+    			lyear 		: '${st.lyear}',
+    			term 		: '${st.term}',
+    			jp 		: '${st.jp}',
+    			js 	: '${st.js}',
+    			nk 		: '${st.nk}',
+    			pk 		: '${st.pk}',
+    		}
+    		<c:if test='${!empty st.lyear}'>
+    		,
+    		</c:if>
+    		</c:forEach>
+    	];
+
+    // 그리드 api-source
+
+    	const dataSource = {
+
+    		withCredentials	: false,
+    		initialRequest	: false,
+    		contentType		: 'application/json',
+    		api : {
+
+    			readData	: {},
+    			updateData	: {
+
+    				url		: '',
+    				method	: ''
+    			}
+    		}
+
+    	};
+
+    // 그리드를 보여준다
+    	var grid2 = new tui.Grid({
+
+    		el: document.getElementById('grid'),
+    		data: scrData,
+    		columns: [
+    			{header: '년도', name: 'lyear'},
+    			{header: '학기', name: 'term'},	<!-- 년도랑 학기가 같은 값일 때, 강의 개수 만큼 묶어서 출력해야 하는데. 어떡해야 하지? -->
+    			{header: '전공필수', name: 'jp'},
+    			{header: '전공선택', name: 'js'},
+    			{header: '일반교양', name: 'nk'},
+    			{header: '선택교양', name: 'pk'},
+    			
 
     		] //컬럼갯수
 

@@ -38,4 +38,9 @@ public class ScoreCheckServiceImpl implements ScoreCheckService{
 	public LectureVO collectresult(LectureVO vo) {
 		return null;
 	}
+
+	@Override
+	public ScoreManaVO AvgChcek(ScoreManaVO vo) {
+		return null;
+	}
 }

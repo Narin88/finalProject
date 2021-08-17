@@ -14,4 +14,6 @@ public interface ScoreCheckService {
 
 	List<ScoreManaVO>ScoreCheckLectureStudent(ScoreManaVO vo);//수강 학생 리스트
 	public LectureVO collectresult(LectureVO vo);// 값 하나 받아오기
+	
+	public ScoreManaVO AvgChcek(ScoreManaVO vo); // 과제 점수 
 }

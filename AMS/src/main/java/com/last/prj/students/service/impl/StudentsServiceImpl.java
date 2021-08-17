@@ -97,4 +97,10 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.customDcode(vo);
 	}
 
+
+	@Override
+	public List<StudentsVO> divisionList(StudentsVO vo) {
+		return map.divisionList(vo);
+	}
+
 }

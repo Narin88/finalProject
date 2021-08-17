@@ -22,4 +22,5 @@ public interface StudentsMapper {
 	
 	List<StudentsVO> whereRoom();					// 강의실 정보 불러오기
 	List<StudentsVO> customDcode(StudentsVO vo);	// 학과명을 통해 전공코드 및 전공명 불러오기
+	List<StudentsVO> divisionList(StudentsVO vo);//영구성적 조회 
 }

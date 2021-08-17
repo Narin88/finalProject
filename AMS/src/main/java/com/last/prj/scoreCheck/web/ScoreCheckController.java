@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +43,15 @@ public String selectresult(Model model, LectureVO vo,HttpSession session) {
 	
 	return "scoreCheck/scoreCheckLectureList.tiles";
 }
+
+//과제 점수 가져오기
+@RequestMapping("AvgChcek")
+public String AvgChcek(Model model, ScoreManaVO vo, HttpSession session) {
+	model.addAttribute("avg", dao.AvgChcek(vo));
+	return null;
+}
+
+
 
 //과목별 학생 리스트 출력
 @RequestMapping("ScoreCheckLectureStudent")

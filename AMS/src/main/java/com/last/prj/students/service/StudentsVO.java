@@ -71,5 +71,9 @@ public class StudentsVO {
 	private String pname;		// 교수명
 	private String pphone;		// 교수 연락처
 
-	
+	//영구성적조회 (학생)
+	private int js;
+	private int jp;
+	private int nk;
+	private int pk;
 }

@@ -75,9 +75,9 @@
 					<th>${lec.sname}</th>
 					<th>${lec.lnum}</th>
 					<th>${lec.lname}</th>
-					<th><input type="text" id="middlescore${lec.sid }" name="middle" value="${lec.middlescore}"> </th>
-					<th><input type="text" id="finalscore${lec.sid }" name="final" value="${lec.finalscore}"></th>
-					<th><input type="text" id="attendancescore${lec.sid }" name="attend" value="${lec.attendancescore}"></th>
+					<th><input type="text" id="middlescore${lec.sid }"value="${lec.middlescore}"> </th>
+					<th><input type="text" id="finalscore${lec.sid }" value="${lec.finalscore}"></th>
+					<th><input type="text" id="attendancescore${lec.sid }" value="${lec.attendancescore}"></th>
 					<th>${lec.homework}</th>
 					<th>${lec.total}</th>
 					<th>${lec.rank}</th> 

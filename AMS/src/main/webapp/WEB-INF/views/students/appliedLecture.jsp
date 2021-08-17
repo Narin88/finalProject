@@ -49,7 +49,7 @@
 		color : skyblue;
 	}
 	.btn15 {
-        height: 15px;
+       height: 15px;
       }
 </style>
 
@@ -70,7 +70,7 @@
 			</div>
 		</div>
 
-<!-- 모달 뷰-->
+<!-- 모달 뷰 : 교수 정보-->
 	<div id="my_offer" align="center">
 		<a class="modal_close_btn">닫기</a>
 			<div class="modal-body">
@@ -89,8 +89,12 @@
 		</div>
 	</div>
 </div>
-<!-- 모달 끝 -->
+<!-- 모달 뷰 끝 -->
 
+
+<!-- 모달 뷰2 : 강의 계획서 -->
+
+<!-- 모달 뷰2 끝 -->
 <!-- 히든 -->
 <%-- <div id = "hiddenData">
 	<c:forEach items = "${st }" var = "hi" varStatus = "seq">

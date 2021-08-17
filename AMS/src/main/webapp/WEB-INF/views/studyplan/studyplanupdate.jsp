@@ -141,7 +141,7 @@ font-weight: bold;
 							</thead>
 							<tbody>
 								<tr>
-									<td><textarea name="content" id="limit" rows="3" required class="form-control" style="resize: none; width: 100%;">${spList.content}</textarea></td>
+									<td><textarea name="content" id="limit" rows="3" required class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.content}</textarea></td>
 								</tr>
 							</tbody>
 						</table>
@@ -158,50 +158,50 @@ font-weight: bold;
 									<td style="text-align: left">1주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w1" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w1 }</textarea></td>
+									<td><textarea name="w1" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w1 }</textarea></td>
 								</tr>
 								<tr>
 										<td style="text-align: left">2주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w2" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w2 }</textarea></td>
+									<td><textarea name="w2" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w2 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">3주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w3" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w3 }</textarea></td>
+									<td><textarea name="w3" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w3 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">4주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w4" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w4 }</textarea></td>
+									<td><textarea name="w4" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w4 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">5주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w5" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w5 }</textarea></td>
+									<td><textarea name="w5" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w5 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">6주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w6" id="limit" rows="3"	class="form-control" style="resize: none; width: 100%;">${spList.w6 }</textarea></td>
+									<td><textarea name="w6" id="limit" rows="3"	class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w6 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">7주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w7" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w7 }</textarea></td>
+									<td><textarea name="w7" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w7 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">8주차 강의</td>
 								</tr>
 
 								<tr>
-									<td><textarea name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w8 }</textarea></td>
+									<td><textarea name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w8 }</textarea></td>
 								</tr>
 							</table>
 							<br><br><br>
@@ -211,50 +211,50 @@ font-weight: bold;
 									<td style="text-align: left">9주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w9" rows="3" id="limit"	class="form-control" style="resize: none; width: 100%;">${spList.w9 }</textarea></td>
+									<td><textarea name="w9" rows="3" id="limit"	class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w9 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">10주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w10" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;">${spList.w10 }</textarea></td>
+									<td><textarea name="w10" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w10 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">11주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w11" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;">${spList.w11 }</textarea></td>
+									<td><textarea name="w11" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w11 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">12주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w12" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;">${spList.w12 }</textarea></td>
+									<td><textarea name="w12" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w12 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">13주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w13" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;">${spList.w13 }</textarea></td>
+									<td><textarea name="w13" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w13 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">14주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea name="w14" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;">${spList.w14 }</textarea></td>
+									<td><textarea name="w14" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w14 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">15주차 강의</td>
 								</tr>
 	
 								<tr>
-									<td><textarea name="w15" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;">${spList.w15 }</textarea></td>
+									<td><textarea name="w15" rows="3" id="limit" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w15 }</textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">16주차 강의</td>
 								</tr>
 								<tr height="20">
-									<td><textarea name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;">${spList.w16 }</textarea></td>
+									<td><textarea name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w16 }</textarea></td>
 								</tr>
 							</tbody>
 						</table>

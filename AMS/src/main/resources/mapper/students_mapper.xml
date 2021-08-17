@@ -56,6 +56,23 @@
 		ORDER BY L.LYEAR DESC, L.TERM DESC
 	</select>
 	
+	
+	<select id="division" resultType="StudentsVO">
+		select DISTINCT l.lyear, l.term, nvl(sum((select sum(li.credit) from dual where li.DCODE='001')),0) as JP,
+																		nvl(sum((select sum(li.credit) from dual where li.DCODE='002')),0)as JS,
+																		nvl(sum((select sum(li.credit) from dual where li.DCODE='003')),0)as NK,
+																		nvl(sum((select sum(li.credit) from dual where li.DCODE='004')),0) as PK
+		from lecture l, lecture_info li, score_mana s
+		where l.lnum = li.lnum
+		and l.opennum = s.opennum
+		and s.sid=#{sid}
+		group by l.lyear, l.term
+		order by 1
+	
+	</select>
+	
+	
+	
 	<!-- 학생 본인 수강 신청 과목 조회 -->
 	<select id="appliedLecture" resultType = "StudentsVO">
 		SELECT

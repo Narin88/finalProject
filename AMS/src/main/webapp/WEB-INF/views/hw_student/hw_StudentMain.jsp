@@ -37,7 +37,7 @@
 <body>
 <div class="content-page">
 	<div class="card-body">
-		<div align="center">		
+		<div align="center" style="margin-top: 10px;">		
 			<h2 style="display: inline;"> 강의 과제리스트</h2>
 			<div class="movebox">
 				<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='submitList'">제출한 과제</button>

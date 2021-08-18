@@ -10,8 +10,7 @@
 			      ,l.schedule "schedule"
 			      ,l.lrcode "lrcode" 
 			      ,p.pname "pname"
-			      ,l.opennum "opennum"
-			      
+			      ,l.opennum "opennum"		      
 		  FROM	  score_mana sc 
 	 LEFT JOIN	  lecture l 
 	 		ON 	  sc.opennum=l.opennum 
@@ -37,7 +36,7 @@
 					,hw.register_date	"registerDate"
 					,hw.register_id		"registerId"
 					,l.opennum			"opennum"
-					, to_date(to_char(hw.pperiod,'yyyymmdd'))-trunc(sysdate)  "hwstatus"
+					,trunc(hw.pperiod)-trunc(sysdate)  "hwstatus"
 					,(select count(*) from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "submitCheck"
 					,(select hs.score from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "score"
 		  FROM 		lecture l 

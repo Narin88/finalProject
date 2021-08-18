@@ -91,6 +91,7 @@
 		and l.LNUM = li.LNUM
 		and l.lrcode = lr.lrcode
 		and li.mcode = mv.mcode
+		and l.lyear = to_char(sysdate,'RRRR')		
 		and sc.sid = #{sid}
 	</select>
 	

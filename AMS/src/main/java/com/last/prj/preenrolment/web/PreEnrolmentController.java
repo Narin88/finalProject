@@ -41,6 +41,7 @@ public class PreEnrolmentController {
 		StudentsVO svo = Pdao.PreStudentSelect(sid);
 		svo.setMcode(maps.get("mcode"));
 		svo.setDcode(maps.get("dcode"));
+		System.out.println(svo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
 		map.put("result", true);

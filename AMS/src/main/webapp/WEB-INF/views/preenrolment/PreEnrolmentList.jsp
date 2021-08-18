@@ -43,6 +43,7 @@
 				 	<c:forEach items="${depart }" var="dvo">	
 				 		<option value="${dvo.dcode }">${dvo.dname }</option>
 				 	</c:forEach>
+				 		<option value="gyo">교양</option>
 				 </select>
 				 전공 : <select id="major" name="major" class="form-control">
 				 	<option value="defaultV">선택</option>
@@ -62,6 +63,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 //첫 번쨰 그리드
 $(document).ready(function() {
@@ -169,6 +171,10 @@ $("#depart").change(function(){
 	if(depart == 'defaultV'){
 		$("select[name='major'] option").remove();
 		major += '<option value="defaultV">선택</option>';
+		$('#major').append(major);
+	}else if(depart == 'gyo'){
+		$("select[name='major'] option").remove();
+			major += '<option value="gyo">교양</option>';
 		$('#major').append(major);
 	}else{
 		$("select[name='major'] option").remove();

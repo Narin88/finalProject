@@ -105,8 +105,8 @@
 				<button type="button" id="deleteBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수강 취소</button>
 			</div>
 		</div>
+		
   <!-- model -->
-
 		<div id="showmodal" align="center">
 			<a class="modal_close_btn">닫기</a>
 			<div class="modal-body" id="pdfwrap">
@@ -271,7 +271,16 @@ $(function(){
 							if(result=='001'){ //insert
 								var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
 								if(con){
-									location.href='AjaxEnrolmentInsert?opennum='+opennum
+									$.ajax({
+										url: 'AjaxEnrolmentInsert',
+										data:{opennum: opennum},
+										type:'POST',
+										success: function(result){
+											if(result>0){
+												location.href='ScoreManaPage';
+											}
+										}
+									})
 								}else{
 									return false;
 									}
@@ -279,7 +288,16 @@ $(function(){
 							else{ //insert
 								var con = confirm('강의번호 '+opennum+'의 과목 '+lname+' 신청하시겠습니까?')
 								if(con){
-									location.href='AjaxEnrolmentInsert?opennum='+opennum
+									$.ajax({
+										url: 'AjaxEnrolmentInsert',
+										data:{opennum: opennum},
+										type:'POST',
+										success: function(result){
+											if(result>0){
+												location.href='ScoreManaPage';
+											}
+										}
+									})
 								}else{
 									return false;
 									}
@@ -299,7 +317,7 @@ $('#preEnrolList').click(function(){
 	preEnrolmentList();
 })
 
-//모달 start
+//수강 꾸러미 모달
 function preEnrolmentList() {
 	modal('showmodal');
 	$.ajax({
@@ -326,6 +344,7 @@ function preEnrolmentList() {
 function preinsert(num){
 	var remain = $('#credit').html();
 	var opennum = num;
+	console.log(opennum);
 	$.ajax({
 		url:'oneselectLecture',
 		data:{opennum: opennum},
@@ -348,8 +367,16 @@ function preinsert(num){
 				if(result=='001'){ //insert
 					var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
 					if(con){
-						location.href='AjaxEnrolmentInsert?opennum='+opennum;
-						location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+						$.ajax({
+							url: 'AjaxEnrolmentInsert',
+							data:{opennum: opennum},
+							type:'POST',
+							success: function(result){
+								if(result>0){
+									location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+								}
+							}
+						})
 					}else{
 						return false;
 						}
@@ -357,8 +384,16 @@ function preinsert(num){
 				else{ //insert
 					var con = confirm('수강신청 하시겠습니까?')
 					if(con){
-						location.href='AjaxEnrolmentInsert?opennum='+opennum;
-						location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+						$.ajax({
+							url: 'AjaxEnrolmentInsert',
+							data:{opennum: opennum},
+							type:'POST',
+							success: function(result){
+								if(result>0){
+									location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+								}
+							}
+						})
 					}else{
 						return false;
 					}

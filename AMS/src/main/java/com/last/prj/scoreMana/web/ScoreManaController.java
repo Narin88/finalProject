@@ -83,13 +83,17 @@ public class ScoreManaController {
 	 */
 	//수강신청(insert)
 	@RequestMapping("AjaxEnrolmentInsert")
-	public String AjaxEnrolmentInsert(@RequestParam("opennum") String opennum, HttpSession session) {
+	@ResponseBody
+	public int AjaxEnrolmentInsert(@RequestParam("opennum") String opennum, HttpSession session) {
 		String sid = (String) session.getAttribute("id");
 		ScoreManaVO vo = new ScoreManaVO();
+		int result= 100;
 		vo.setSid(sid);
 		vo.setOpennum(opennum);
-		SMdao.AjaxEnrolmentInsert(vo);
-		return "redirect:ScoreManaPage";
+		System.out.println("============================="+vo.toString());
+		result = SMdao.AjaxEnrolmentInsert(vo);
+		System.out.println("==============================="+result);
+		return result;
 	}
 	
 	//재이수 확인
@@ -162,6 +166,7 @@ public class ScoreManaController {
 	@RequestMapping("AjaxPreEnrolmentdelete")
 	public String AjaxPreEnrolmentdelete(LectureVO vo,HttpSession session) {
 		 vo.setSid((String)session.getAttribute("id"));
+		 System.out.println("delete ======================="+vo);
 		 SMdao.AjaxPreEnrolmentdelete(vo);
 		return "redirect:ScoreManaPage";
 	}

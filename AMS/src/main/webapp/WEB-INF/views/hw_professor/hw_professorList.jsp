@@ -12,6 +12,9 @@
 
 </head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwList.css"/>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <body>
 
 			<div class="menu01">	
@@ -89,14 +92,15 @@
 				 				</c:choose>
 				 			</h4>
 						</div>
-						<div>
-							
-				 		</div>
 				<br>
 			
 			<!-- 과제 조회 END -->
 			
 			<div class="hwTable1">
+				<div class="box">
+						<b style="font-weight: bold;float:right;"># 제출학생이 있으면 삭제가 <font color="red">불가능</font>합니다. <br># 조회를 <font color="red">누를 시</font> 제출정보를 확인할 수 있습니다.</b>
+				
+				</div>
 									<!-- gird 첫번째 -->
 	 										<div id="grid" ></div>
 					 <!-- The Modal -->
@@ -111,8 +115,8 @@
 							
 																		
 											</div>
- 								  <button style="float:right;margin-top: -5px; margin-right: 30px;"type="button" id="selectDelBtn">삭제</button>
- 								  <button style="clear:both;float:right;margin-right: 100px;margin-top: -42px;" id="selectScoreBtn"">점수정정</button>
+ 								  <button style="float:right;  margin-top: -40px; margin-right: -120px;;"type="button" id="selectDelBtn">삭제</button>
+ 								  <button style="clear:both;float:right;    margin-right: 50px; margin-top: -82px;" id="selectScoreBtn">점수정정</button>
 														
 										<!-- gird 두번째 -->
 												<div id="grid2"></div>
@@ -219,7 +223,7 @@
 						$(".noSubmit").empty();
 						$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4>').appendTo('.noSubmit');
 						$('<h6 style="color:gray; float:left;margin-left:30px;"> 점수를 정정하면 성적에 자동 반영됩니다. </h6>').appendTo('.noSubmit');
-					
+						$('<br><br><b style="font-weight: bold;float:right;"># 제출파일은 <font color="red">더블클릭시</font> 다운로드 가능합니다. <br># 점수는  <font color="red">최대 20점</font> 으로 기입바랍니다.</b>').appendTo('.noSubmit');
 						
 						
 					
@@ -638,10 +642,13 @@
 					var b=$("#pcoId").val();
 					udFrm.pcomment.value=b;
 					var filen=$('#file').val();
+					var pperiod=$('#startDate').val();
 					console.log(filen);
 					if(filen == ""){
 						alert("파일을 입력해주세요");
-					}else{
+					}else if(pperiod=="" || b ==""){
+						alert("제출기간 및 과제제목을 설정해 주세요.");
+						}else{
 							if(confirm(' 입력값으로 변경하시겠습니까 ? ')==true){
 								alert("변경이 완료되었습니다");
 								udFrm.submit();

@@ -245,15 +245,15 @@
 				.append($('</tr>'))
 				.appendTo("#hwInsertTb tbody");			
 				$('<tr>')
-				.append($('<th width="180px;">').html('<span style="color:white;font-weight:bold;font-size:18px;">과제제목</span>'))
+				.append($('<th width="180px;">').html('<span style="font-weight:bold;font-size:18px;">과제제목</span>'))
 				.append($('<td class="areaTr" width="420px" height="140px" style="padding:0;" >').html('<textarea id="area" name="area" cols="75" rows="8"></textarea>'))
 						.appendTo("#hwInsertTb tbody");
 				$('<tr>')
-				.append($('<th width="120px;">').html('<span style="color:white;font-weight:bold;font-size:18px;">양식파일</span>'))
+				.append($('<th width="120px;">').html('<span style="font-weight:bold;font-size:18px;">양식파일</span>'))
 				.append($('<td  height="80px" >').html('<input type="file"  style="margin-left:30px;" id="file" name="file">'))
 						.appendTo("#hwInsertTb tbody");
 				$('<tr>')
-				.append($('<th width="120px;">').html('<span style="color:white;font-weight:bold;font-size:18px;">날짜설정</span>'))
+				.append($('<th width="120px;">').html('<span style="font-weight:bold;font-size:18px;">날짜설정</span>'))
 				.append($('<td height="80px" >').html('<input type="text" style="margin-left:30px;" id="startDate" value="${today }" disabled><span style="margin-left:30px;">~<span> <input type="text" style="margin-left:30px;" id="endDate">'))
 						.appendTo("#hwInsertTb tbody");
 				$('<button type="button" onclick="hwInsertSubmit();" >등록하기</button><button type="reset">취소</button>')
@@ -282,22 +282,25 @@
 					var resultDate=year+'-'+month+'-'+day;
 					var bbb=$('#area').val();
 					var date= new Date(resultDate);
+					var file=$('#file').val();
 					console.log(date);
 					console.log(bbb);
-					if(a =="" || bbb==""){
-						alert("날짜 또는 제목을 입력해주세요");
-					}else{
-						hwInsertFrm.pperiod.value=date;
-						hwInsertFrm.pcomment.value=bbb;
-						if(confirm(' 등록하시겠습니까 ?')==true){
-							alert("등록이 완료되었습니다.");
-							hwInsertFrm.submit();
-						}else{
+							if(a =="" || bbb==""){
+								alert("날짜 또는 제목을 입력해주세요");
+								}else if(file==""){
+									alert("파일을 입력해주세요!");
+									}else{
+									hwInsertFrm.pperiod.value=date;
+									hwInsertFrm.pcomment.value=bbb;
+										if(confirm(' 등록하시겠습니까 ?')==true){
+											alert("등록이 완료되었습니다.");
+											hwInsertFrm.submit();
+										}else{
+											
+											return false;
+										}
 							
-							return false;
-						}
-				
-					}
+							}
 				}
 				</script>
 	</div>
@@ -306,7 +309,6 @@
 	</div>
 	<script type="text/javascript">
 	$(".leftContainer").on("click","#hwInsert",function(){
-		$('.rightContainer').css("visibility","visible");
             $.datepicker.setDefaults($.datepicker.regional['ko']); 
             $( "#startDate" ).datepicker({
                 // changeMonth: true, 

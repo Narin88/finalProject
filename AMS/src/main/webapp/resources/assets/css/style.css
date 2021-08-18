@@ -3485,17 +3485,17 @@ label {
   Account Pages
 ===================*/
 .accountbg {
-  background: url("../images/bg-account.png");
-  background-repeat: repeat-x;
+/*   background: url("../images/bg-account.png");
+  background-repeat: repeat-x; */
   position: absolute;
-  height: 50%;
+  height: 73.7%;
   width: 100%;
-  top: 50%;
+  /* top: 50%; */
 }
 
 .wrapper-page {
-  margin: 7.5% auto;
-  max-width: 460px;
+  margin: 14.5% auto;
+  max-width: 410px;
   position: relative;
 }
 

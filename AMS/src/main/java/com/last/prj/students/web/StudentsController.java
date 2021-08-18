@@ -43,7 +43,7 @@ public class StudentsController {
 	
 	////////////////////////////////////////////////////////////
 
-	@RequestMapping("/studentInfo")
+	@RequestMapping("studentInfo")
 	public String studentInfo(StudentsVO svo, Model model, HttpSession session, ProfessorVO pvo) {
 		// 학생 정보 조회 페이지로 이동 및 한 학생 정보 조회
 
@@ -59,7 +59,7 @@ public class StudentsController {
 		// 지도교수 강의정보
 		model.addAttribute("al", stService.proLectureList(svo));
 		
-		String realPath = session.getServletContext().getRealPath("/resources/img/students");
+		String realPath = session.getServletContext().getRealPath("/resources/img/students/");
 		System.out.println(realPath);
 		
 		return "students/studentInfo.tiles";

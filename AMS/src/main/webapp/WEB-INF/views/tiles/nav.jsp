@@ -35,7 +35,7 @@ pageEncoding="UTF-8" %>
                  <li class="menu-title">학생</li>
 
                  <li>
-                     <a href="<%=request.getContextPath() %>/studentInfo" class="waves-effect">
+                     <a href="studentInfo" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
                          <span> 학적관리 </span>
                      </a>

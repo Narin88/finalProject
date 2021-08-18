@@ -24,9 +24,10 @@ pageEncoding="UTF-8"%>
         <!-- Icon -->
         <div class="fadeIn first">
           <img
-            src="resources/loginpicture/logo.png"
+            src="resources/assets/images/noM_logo2.png"
             id="icon"
             alt="No.M mark"
+            style="width: 130px; height: 130px;"
           />
         </div>
 

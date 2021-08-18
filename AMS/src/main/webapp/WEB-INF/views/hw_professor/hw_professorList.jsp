@@ -354,7 +354,7 @@
 			        		//console.log(data);
 			        		//console.log(b);
 			        		if(ev.columnName =="submit_file" && !isHeader && a != null){
-					        			if(confirm(b+ '님 파일 다운로드 !')==true){
+					        			if(confirm(b+ '학생 과제파일')==true){
 					        				var filePath = "C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a
 						        			var fileName = a;
 			    			                
@@ -434,7 +434,7 @@
 								{
 									lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
 									lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
-									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지<c:if test="${list.hwstatus > 0 }"><span style="color:red;margin-left:20px;">진행중</span></c:if><c:if test="${list.hwstatus <= 0}"><span style="color:blue;margin-left:20px;">마감</span></c:if>'
+									pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지',status:'<c:if test="${list.hwstatus > 0 }"><span style="color:red;">진행중</span></c:if><c:if test="${list.hwstatus <= 0}"><span style="color:blue;">마감</span></c:if>'
 									, register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>'
 									,inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}"">조회</button> '
 									,deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>'
@@ -457,7 +457,7 @@
 								    }
 									,
 					  			columns: [
-					  				{header: '강의번호',name: 'opennum',width:70},
+					  				//{header: '강의번호',name: 'opennum',width:70},
 					  				{header: '강의년도',name: 'lyear',width:70},
 					  				{header: '학기',name: 'lterm',width:60}, //강의번호+분반
 					  				{header: '강의명',name: 'lname',width:90}, //년도+학기
@@ -465,6 +465,7 @@
 					  				{header: '과제제목',name: 'pcomment',width:200},
 					  				{header: '등록날짜',name: 'register_date',width:140},
 					  				{header: '과제기간',name: 'pperiod',width:180},
+					  				{header: '진행상태',name: 'status',width:100},
 					  				{header: '양식파일',name: 'register_file',width:150},
 					  				{header: '제출현황',name: 'submitCount',width:100},
 					  				{header: '조회',name: 'inquiryBtn',width:100},

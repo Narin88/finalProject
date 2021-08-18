@@ -42,6 +42,9 @@
 		</div>
 		<h2> 제출 과제 리스트</h6>
 	</div>	
+	<div class="gridTb1">
+			<div id="grid" ></div>
+		</div>
 	<div id="grid"></div>
 	</div>
 </div>
@@ -84,8 +87,8 @@
 				{header: '년도',name: 'lyear',width:60}, //강의번호+분반
 				{header: '학기',name: 'term',width:90}, //년도+학기
 				{header: '과제제목',name: 'pcomment',width:350},
-				{header: '제출기간',name: 'pperiod'},
-				{header: '진행상태',name: 'status'},
+				{header: '제출기간',name: 'pperiod',width:200},
+				{header: '진행상태',name: 'status',width:100},
 				{header: '점수',name: 'score',width:140},
 				{header: '수정',name: 'alterBtn',width:120},
 			], //컬럼갯수

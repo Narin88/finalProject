@@ -275,10 +275,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 			});		  	  
 		}
 			  		    
-		// 업데이트 실행 이벤트
-	  	grid.on('response', data => {
-	  		console.log('data : ', data);
-	  	});
+	
 						
 		//파일명이 저장된 값이 있는 것은 다운되고 없는것은 파일없다는 alert경고창
 	  	grid.on('dblclick', ev => {

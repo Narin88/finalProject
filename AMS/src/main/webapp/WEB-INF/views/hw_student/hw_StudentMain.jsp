@@ -38,12 +38,14 @@
 <div class="content-page">
 	<div class="card-body">
 		<div align="center" style="margin-top: 10px;">		
-			<h2 style="display: inline;"> 강의 과제리스트</h2>
+			<h2 style="display: inline;"> 수강중인 강의목록</h2>
 			<div class="movebox">
 				<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='submitList'">제출한 과제</button>
 			</div>
 		</div>
-		<div id="grid" ></div>
+		<div class="gridTb1">
+			<div id="grid" ></div>
+		</div>
 		<form id="hwStFrm" name="hwStFrm" action="hwSelect" method="post">
 			<sec:csrfInput/>
 			<input type="hidden" id="opennum" name="opennum">

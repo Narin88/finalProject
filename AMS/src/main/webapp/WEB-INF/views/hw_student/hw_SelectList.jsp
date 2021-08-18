@@ -67,7 +67,7 @@ text-align: center;
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><span style="color:blue;">마감</span></c:if>',
 				score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if> ${list.score}',
-				submitCheck: '<c:if test="${list.submitCheck > 0 }"><button class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">제출완료</button></c:if> <c:if test="${list.submitCheck == 0 }"><button class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">미제출</button></c:if>',
+				submitCheck: '<c:if test="${list.submitCheck > 0 }"><span style="color:red;">진행중</span></c:if> <c:if test="${list.submitCheck == 0 }"><span style="color:blue;">마감</span></c:if>',
 				registerId: '${list.registerId}',
 				opennum:'${list.opennum}',
 				hwstatus:'${list.hwstatus}',
@@ -91,8 +91,8 @@ text-align: center;
 			{header: '년도',name: 'lyear'}, //강의번호+분반
 			{header: '학기',name: 'term'}, //년도+학기
 			{header: '과제제목',name: 'pcomment'},
-			{header: '제출기간',name: 'pperiod'},
-			{header: '제출상태',name: 'status'},
+			{header: '제출기간',name: 'pperiod',width:200},
+			{header: '진행상태',name: 'status'},
 			{header: '점수',name: 'score'},
 			{header: '제출여부',name: 'submitCheck'},
 		], //컬럼갯수
@@ -108,7 +108,7 @@ text-align: center;
 		var c=data.submitCheckVal;
 		var d=data.hwstatus;
 		console.log(d);
-		if(d<=0){
+		if(d<0){
  			alert("마감되었습니다");
 		}else{
 			if(c>0){

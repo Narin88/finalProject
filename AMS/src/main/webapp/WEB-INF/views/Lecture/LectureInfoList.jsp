@@ -96,7 +96,7 @@ uri="http://www.springframework.org/security/tags" %>
                     <th>정원</th>
                     <th>교재</th>
                     <th>시간표</th>
-                    <th>강의실 코드</th>
+                    <th>강의실</th>
                   </tr>
                 </thead>
 

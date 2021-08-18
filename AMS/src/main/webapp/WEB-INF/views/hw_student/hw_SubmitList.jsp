@@ -26,7 +26,7 @@
 }
 .movebox{
 	display: inline;
-	float: left;
+	float: right;
 }
 .btn15 {
 	height: 15px;
@@ -38,7 +38,7 @@
 	<div class="card-body">
 	<div align="center" style="display: inline;">
 		<div class="movebox">
-			<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick=history.back()>과제 리스트</button>
+			<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light"onclick=history.back()>과제 리스트</button>
 		</div>
 		<h2> 제출 과제 리스트</h6>
 	</div>	
@@ -64,7 +64,7 @@
 				pcomment: '<div class="underline">${list.pcomment}</div>',
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"> <span style="color:red;"> 진행중</span></c:if> <c:if test="${list.hwstatus < 0}"><span style="color:blue;"> 마감</span></c:if>',
-				score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if><c:if test="${list.score ne null}">${list.score } / 20</c:if>',
+				score: '<c:if test="${list.score == 0}">등록된 점수없음</c:if><c:if test="${list.score != 0}">${list.score } / 20</c:if>',
 				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><span style="color:brown;">수정불가</span></c:if>'
 			},
 			</c:forEach>

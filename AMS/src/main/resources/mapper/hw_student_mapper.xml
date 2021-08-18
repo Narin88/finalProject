@@ -70,6 +70,7 @@
 		  		         ,submit_file
 		  				 ,submit_date
 		  				 ,scomment
+		  				 ,score
 		  				 ) 
        	VALUES (    #{registerId}
        			    ,submit_seq.nextval
@@ -77,6 +78,7 @@
        		 	    ,#{submitFile}
        			    ,sysdate
        			    ,#{scomment}
+       			    ,0
        			    )
 	</insert>
 	

@@ -31,4 +31,7 @@ public interface HwStudentMap {
 		
 		//(학생) 수강중인 강의의 제출한 과제 전체리스트
 		List<Map<String, Object>> hwSAllList(HwStudentVO vo);
+		
+		//과제개수 count
+		public String hwCount(HwStudentVO vo);
 }

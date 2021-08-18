@@ -36,6 +36,7 @@
 					,hw.register_date	"registerDate"
 					,hw.register_id		"registerId"
 					,l.opennum			"opennum"
+					,l.pid "pid"
 					,trunc(hw.pperiod)-trunc(sysdate)  "hwstatus"
 					,(select count(*) from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "submitCheck"
 					,(select hs.score from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "score"
@@ -47,6 +48,12 @@
 		 WHERE      l.opennum=#{opennum}
 	</select>
 	
+	<!-- 과제 개수  -->
+	<select id="hwCount" resultType="string">
+		SELECT count(*) 
+		  FROM hw_professor 
+		 WHERE opennum=#{opennum} 
+	</select>
 	<!-- 학생이 해당 강의의 과제들중 하나의 과제 select-->
 	<select id="hwSOneSelect" resultType="map">
 		SELECT  register_file "registerFile"

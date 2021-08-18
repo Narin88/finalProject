@@ -29,18 +29,40 @@ text-align: center;
 	float: left;
 	width: 100%
 }
+.btn-hover.color-9 {
+border-radius: 2em;
+    font-size: 12px;
+    border: none;
+    color: white;
+    padding: 2px 1.5em;
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+.btn-hover:focus {
+    outline: none;
+}
+.btn-hover.color-11 {
+border-radius: 2em;
+    font-size: 12px;
+    border: none;
+    color: white;
+    padding: 2px 1.5em;
+       background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+}
 </style>
 </head>
 <body>
 <div class="content-page">
 	<div class="card-body">
 		<div align="center">
-			<h2> 과제 목록</h2>
-			<div class="box">
-				<b style="font-weight: bold;"># 제출기한이 지나면 등록이 <font color="red">불가능</font>합니다. <br># 과제는 <font color="red">더블클릭</font>해야 제출 가능합니다.</b>
-				<div class="movebox">
-					<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick=history.back()>과제 리스트</button>
+			<h2><span style="color:cornflowerblue;">${lname }</span> 과제 목록 (${count })</h2>
+			<div class="box">			
+				<div class="movebox"style=" width:100%;">
+					<button style="float:right;"class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick=history.back()>과제 리스트</button>
 				</div>	
+				<div>
+					<b style="font-weight: bold;float:right;"># 제출기한이 지나면 등록이 <font color="red">불가능</font>합니다. <br># 과제는 <font color="red">더블클릭</font>해야 제출 가능합니다.</b>
+				</div>
 			</div>
 		</div>
 
@@ -66,8 +88,8 @@ text-align: center;
 				pcomment: '<div class="underline">${list.pcomment}</div>',
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><span style="color:blue;">마감</span></c:if>',
-				score: '<c:if test="${list.score eq null}">등록된 점수없음</c:if> ${list.score}',
-				submitCheck: '<c:if test="${list.submitCheck > 0 }"><span style="color:red;">진행중</span></c:if> <c:if test="${list.submitCheck == 0 }"><span style="color:blue;">마감</span></c:if>',
+				score: '<c:if test="${list.score == 0 || list.score eq null}">등록된 점수없음</c:if><c:if test="${list.score > 0}">${list.score } / 20</c:if>',
+				submitCheck: '<c:if test="${list.submitCheck > 0 }"><button class="btn-hover color-9">제출완료</button></c:if><c:if test="${list.submitCheck == 0 }"><button class="btn-hover color-11">미제출</button></c:if>',
 				registerId: '${list.registerId}',
 				opennum:'${list.opennum}',
 				hwstatus:'${list.hwstatus}',

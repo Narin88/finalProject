@@ -94,7 +94,7 @@
 	<div id="card" class="card-body">
 		<div class="gridC">
 			<div id="grid" >
-				<h2 align="center">등록가능한 과제 목록</h2>
+				<h2 align="center">과제 등록가능한 강의 목록</h2>
 			</div>
 		</div>	
 <!-- The Modal -->

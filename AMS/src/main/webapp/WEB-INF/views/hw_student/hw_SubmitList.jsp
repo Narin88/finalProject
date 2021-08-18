@@ -22,7 +22,7 @@
 	padding-top: 8px;
 	padding-bottom: 5px;
 	font-size: 20px;
-	border: none;
+	border:none;
 }
 .movebox{
 	display: inline;
@@ -37,11 +37,16 @@
 <div class="content-page">
 	<div class="card-body">
 	<div align="center" style="display: inline;">
-		<div class="movebox">
-			<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light"onclick=history.back()>과제 리스트</button>
-		</div>
-		<h2> 제출 과제 리스트</h6>
+		<h2> 제출 과제 리스트</h2>
 	</div>	
+				<div class="box">			
+				<div class="movebox"style=" width:100%;">
+					<button style="float:right;"class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick=history.back()>과제 리스트</button>
+				</div>	
+				<div>
+					<b style="font-weight: bold;float:right;"># 수정버튼 클릭시 등록한 과제는 <font color="red">삭제</font> 됩니다. <br># 제출기간이 지난 과제는 수정이 <font color="red">불가능 </font> 합니다.</b>
+				</div>
+			</div>
 	<div class="gridTb1">
 			<div id="grid" ></div>
 		</div>
@@ -68,7 +73,7 @@
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"> <span style="color:red;"> 진행중</span></c:if> <c:if test="${list.hwstatus < 0}"><span style="color:blue;"> 마감</span></c:if>',
 				score: '<c:if test="${list.score == 0}">등록된 점수없음</c:if><c:if test="${list.score != 0}">${list.score } / 20</c:if>',
-				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><span style="color:brown;">수정불가</span></c:if>'
+				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><button type="button" id="alterNBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if>'
 			},
 			</c:forEach>
 		]; //컬럼DATA	
@@ -83,14 +88,14 @@
 		perPage: 6  //페이징 갯수
 		},
 			columns: [
-				{header: '강의명',name: 'lname',width:100},
-				{header: '년도',name: 'lyear',width:60}, //강의번호+분반
-				{header: '학기',name: 'term',width:90}, //년도+학기
+				{header: '강의명',name: 'lname',width:150},
+				{header: '년도',name: 'lyear',width:150}, //강의번호+분반
+				{header: '학기',name: 'term',width:120}, //년도+학기
 				{header: '과제제목',name: 'pcomment',width:350},
 				{header: '제출기간',name: 'pperiod',width:200},
 				{header: '진행상태',name: 'status',width:100},
 				{header: '점수',name: 'score',width:140},
-				{header: '수정',name: 'alterBtn',width:120},
+				{header: '수정',name: 'alterBtn'},
 			], //컬럼갯수
 		data: clsData
 	});
@@ -138,6 +143,27 @@
 					return false;
 				}
 		}
+		});
+		$("#grid").on("click","#alterNBtn",function(){
+			var a=$(this).data('id');
+			var b=$(this).data('id2');
+			var c=$(this).data('id3');
+			var d=$(this).data('id4');			
+			
+			deleteHwSFrm.registerId.value=a;
+			deleteHwSFrm.opennum.value=b;
+			
+			if(c < 0){
+				alert("수정이 불가능합니다.");
+			}else{
+				if(confirm("수정을 하게되면 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){
+					alert("작성페이지로 이동합니다.")		
+					deleteHwSFrm.submit();
+					}else{
+						alert("취소되었습니다");
+						return false;
+					}
+			}
 	});
 </script>
 </body>

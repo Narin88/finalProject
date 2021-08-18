@@ -32,16 +32,22 @@
 	display: inline;
 	float: right;
 }
+
 </style>
 </head>
 <body>
 <div class="content-page">
 	<div class="card-body">
-		<div align="center" style="margin-top: 10px;">		
-			<h2 style="display: inline;"> 수강중인 강의목록</h2>
-			<div class="movebox">
-				<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='submitList'">제출한 과제</button>
+		<div align="center" style="margin-top: 10px;">	
+			
+			<h2 style="display: inline;"> 수강중인 강의목록</h2>		
+			<div class="movebox"style=" width:100%;">
+				<button style="float:right;" type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='submitList'">제출한 과제</button>
+				
 			</div>
+			<div>		
+				<b style="font-weight: bold;float:right;"># 과제버튼을 클릭시 해당강의 <font color="red">과제목록이</font> 출력됩니다. <br># 제출한 과제 클릭시 <font color="red">제출한 과제목록이</font> 출력됩니다.</b>
+			</div>	
 		</div>
 		<div class="gridTb1">
 			<div id="grid" ></div>
@@ -49,6 +55,8 @@
 		<form id="hwStFrm" name="hwStFrm" action="hwSelect" method="post">
 			<sec:csrfInput/>
 			<input type="hidden" id="opennum" name="opennum">
+			<!-- 히든값 -->
+			<input type="hidden" id="lname" name="lname">
 		</form>
 	</div>
 </div>
@@ -60,7 +68,7 @@
 		{
 			mname: '${list.mname}', lname: '${list.lname}', lyear : '${list.lyear}',
 			term: '${list.term}', lrcode: '${list.lrcode}', pname: '${list.pname}',schedule: '${list.schedule}',
-			hwBtn:'<button type="button" id="hwClick" data-id="${list.opennum}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">과제</button>'
+			hwBtn:'<button type="button" id="hwClick" data-id="${list.opennum}" data-name="${list.lname}"class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">과제</button>'
 			,opennum:'${list.opennum}'
 		},
 		</c:forEach>
@@ -102,7 +110,9 @@
 		*/
 	$(".card-body").on("click","#hwClick",function(){
 		var a=$(this).data('id');
+		var b=$(this).data('name');
 		console.log(a);
+		hwStFrm.lname.value=b;
 		hwStFrm.opennum.value=a;
 		hwStFrm.submit()
 	});

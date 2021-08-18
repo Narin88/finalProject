@@ -148,7 +148,7 @@ fir LEFT OUTER JOIN
 		       JOIN     lecture_info i
 		         ON     l.lnum=i.LNUM
 		      WHERE l.pid=#{pid}
-		       AND l.lyear='2021'
+		         AND  l.datestatus='수강중'
 	</select>
 	<!-- 교수 과제 등록 -->
 	<insert id="hwPfInsert">

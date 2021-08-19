@@ -79,8 +79,8 @@ public class HomeController {
 	public String forgetPwdAut(@RequestParam("email") String email, @RequestParam("sname") String sname,
 							   @RequestParam("sid") String sid, Model model) {
 		Random random = new Random();
-		String user = "@gmail.com";
-		String pwd = "!!";
+		String user = "dlrjatk2@gmail.com";
+		String pwd = "!xotn71202703!";
 
 		int num = random.nextInt(999999);
 		String toEmail = email;
@@ -91,6 +91,8 @@ public class HomeController {
 
 		// SMTP 서버 정보를 설정
 		Properties prop = new Properties();
+		prop.put("mail.smtp.trust", "smtp.gmail.com");
+		prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", 465);
 		prop.put("mail.smtp.auth", "true");

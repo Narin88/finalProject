@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class ImageUpload {
 	public static Map<String, String> uploadTest(MultipartHttpServletRequest request) {
 		// 업로드 주소
-		String rootUploadDir = request.getSession().getServletContext().getRealPath("/resources/img/students/");
+		String rootUploadDir = request.getSession().getServletContext().getRealPath("/resources/img/students");
 
 		File dir = new File(rootUploadDir);
 
@@ -48,8 +48,7 @@ public class ImageUpload {
 
 				try {
 					System.out.println("try 진입");
-					mFile.transferTo(new File(dir + File.separator + orgFileName)); // C:/Upload/orgFileName
-					map.put("orgName", orgFileName);
+					mFile.transferTo(new File(dir + File.separator + orgFileName)); // 업로드경로/파일이름
 					map.put("sysName", sysFileName);
 
 				} catch (Exception e) {

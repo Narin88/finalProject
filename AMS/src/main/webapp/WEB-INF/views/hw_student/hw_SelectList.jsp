@@ -89,11 +89,12 @@ border-radius: 2em;
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"><span style="color:red;">진행중</span> </c:if><c:if test="${list.hwstatus < 0}"><span style="color:blue;">마감</span></c:if>',
 				score: '<c:if test="${list.score == 0 || list.score eq null}">등록된 점수없음</c:if><c:if test="${list.score > 0}">${list.score } / 20</c:if>',
-				submitCheck: '<c:if test="${list.submitCheck > 0 }"><button class="btn-hover color-9">제출완료</button></c:if><c:if test="${list.submitCheck == 0 }"><button class="btn-hover color-11">미제출</button></c:if>',
+				submitCheck: '<c:if test="${list.submitCheck > 0 }"><span style="color:blue;"> 제출완료 </span></c:if><c:if test="${list.submitCheck == 0 }"><span style="color:red;"> 미제출 </span></c:if>',
 				registerId: '${list.registerId}',
 				opennum:'${list.opennum}',
 				hwstatus:'${list.hwstatus}',
-				submitCheckVal:'${list.submitCheck}'
+				submitCheckVal:'${list.submitCheck}',
+				lnum:'${list.lnum}'
 			},
 		</c:forEach>
 		]; //컬럼DATA	
@@ -109,14 +110,14 @@ border-radius: 2em;
 			perPage: 6  //페이징 갯수
 		},
 		columns: [
-			{header: '강의명',name: 'lname'},
-			{header: '년도',name: 'lyear'}, //강의번호+분반
-			{header: '학기',name: 'term'}, //년도+학기
+			{header: '과제등록번호',name: 'registerId',width:150},
+			{header: '강의등록번호',name: 'opennum',width:150},
+			{header: '강의번호',name: 'lnum',width:150},
 			{header: '과제제목',name: 'pcomment'},
 			{header: '제출기간',name: 'pperiod',width:200},
-			{header: '진행상태',name: 'status'},
-			{header: '점수',name: 'score'},
-			{header: '제출여부',name: 'submitCheck'},
+			{header: '진행상태',name: 'status',width:200},
+			{header: '점수',name: 'score',width:200},
+			{header: '제출여부',name: 'submitCheck',width:200},
 		], //컬럼갯수
 		data: clsData
 	});

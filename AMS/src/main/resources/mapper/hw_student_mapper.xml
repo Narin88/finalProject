@@ -10,7 +10,10 @@
 			      ,l.schedule "schedule"
 			      ,l.lrcode "lrcode" 
 			      ,p.pname "pname"
-			      ,l.opennum "opennum"		      
+			      ,l.opennum "opennum"	
+			      ,l.lnum "lnum"
+			      ,l.book "book"
+			      ,l.dividenum "dividenum"
 		  FROM	  score_mana sc 
 	 LEFT JOIN	  lecture l 
 	 		ON 	  sc.opennum=l.opennum 
@@ -37,6 +40,7 @@
 					,hw.register_id		"registerId"
 					,l.opennum			"opennum"
 					,l.pid "pid"
+					,l.lnum "lnum"
 					,trunc(hw.pperiod)-trunc(sysdate)  "hwstatus"
 					,(select count(*) from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "submitCheck"
 					,(select hs.score from hw_student hs where hs.register_id=hw.register_id and submit_sid=#{sid}) "score"
@@ -103,19 +107,27 @@
        		 fir.lname	"lname"
        		,fir.lyear	"lyear"
             ,fir.term	"term"
+            ,l.lnum "lnum"
             ,hp.pcomment  	"pcomment"
             ,hp.pperiod		"pperiod"
             ,hs.score		"score"
             ,hp.register_id	"registerId"
             ,hs.submit_sid	"submitSid"
+            ,l.dividenum "dividenum"
             ,hp.opennum	"opennum"
             ,trunc(hp.pperiod)-trunc(sysdate)  "hwstatus"
             ,hp.register_date	"registerDate"
+            ,hs.submit_file "submitFile"
+            ,p.pname "pname"
 	  FROM  hw_professor hp	
       JOIN  hw_student hs
         ON  hp.register_id=hs.register_id
       JOIN  (select * from lecture lc JOIN lecture_info lf on lc.lnum=lf.lnum) fir
         ON  hp.opennum=fir.opennum
+      JOIN  lecture l
+        ON  hp.opennum=l.opennum
+      JOIN  professor p
+        ON  p.pid=l.pid
       WHERE hs.submit_sid =#{sid}
         and fir.datestatus='수강중'
 	</select>

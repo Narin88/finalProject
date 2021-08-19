@@ -12,6 +12,9 @@
        			,i.lnum "lnum"
        			,p.opennum "opennum"
        			,p.PCOMMENT "pcomment"
+       			 ,l.dividenum "dividenum"
+                ,l.book "book"
+                ,l.datestatus "datastatus"
        			,(select count(*) from hw_student where register_id=p.register_id) "submitCount"
 				,( select count(*)from score_mana	sm where sm.opennum=p.opennum)	"newlimitcount" 
 				,p.REGISTER_DATE	"register_date"
@@ -26,6 +29,8 @@ LEFT OUTER JOIN hw_professor p
          ON      p.OPENNUM=l.OPENNUM
        JOIN     lecture_info i
          ON     l.lnum=i.LNUM
+       JOIN    lecture_room lr
+         ON    l.lrcode=lr.lrcode
       WHERE l.pid=#{pid}
        and not 	register_id IS null
        	<if test="lyear==null and lyear!=''">
@@ -40,7 +45,7 @@ LEFT OUTER JOIN hw_professor p
       	 <if test="lnum!=null and lnum!=''">
       	 	and l.lnum=#{lnum}
       	 </if>
-      	 ORDER BY p.pperiod desc
+      	 ORDER BY p.register_date desc
 	</select>
 	<!-- 과제제출한 학생목록 -->
 	<select id="hw_submitList" resultType="map">
@@ -136,19 +141,22 @@ fir LEFT OUTER JOIN
 	<select id="hwPfInsertSelect" resultType="map">
 		 SELECT  
           		distinct l.lyear  "lyear"
-				,l.term	  "term"
-       			,i.lname "lname"
-       			,l.lrcode "lrcode"
-       			,i.lnum "lnum"
-       			,p.opennum "opennum"
-				,l.pid 				"pid"
-			   FROM     lecture  l
-		LEFT OUTER JOIN hw_professor p
-		         ON      p.OPENNUM=l.OPENNUM
-		       JOIN     lecture_info i
-		         ON     l.lnum=i.LNUM
-		      WHERE l.pid=#{pid}
-		         AND  l.datestatus='수강중'
+				         ,l.term "term"
+       			         ,i.lname "lname"
+       			         ,l.book "book"
+       			         ,l.lrcode "lrcode"
+       			         ,i.lnum "lnum"
+                		 ,l.opennum "opennum"
+                		 ,l.dividenum "dividenum"
+                		 ,lr.location "location"
+         			     ,lr.lrname "lrname"
+			   FROM      lecture  l
+		       JOIN      lecture_info i
+		         ON      l.lnum=i.LNUM
+		       JOIN 	 lecture_room lr
+                 ON 	 l.lrcode=lr.lrcode
+		      WHERE		 l.pid='99003013'
+		        AND 	 l.datestatus='수강중'
 	</select>
 	<!-- 교수 과제 등록 -->
 	<insert id="hwPfInsert">

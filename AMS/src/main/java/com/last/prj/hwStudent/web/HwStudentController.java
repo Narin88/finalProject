@@ -78,7 +78,7 @@ public class HwStudentController {
 		
 		//aws 업로드 폴더 경로 업데이트 보류
 		String rootUploadDir =request.getSession().getServletContext().getRealPath("resources/upload/hw_student/");
-		
+			
 				//"C:\\Users\\User\\git\\finalProject\\AMS\\src\\main\\webapp\\resources\\upload\\hw_student"; // 업로드 주소
 		File dir = new File(rootUploadDir);
 
@@ -109,7 +109,7 @@ public class HwStudentController {
 				System.out.println("if문 진입");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
 				Calendar calendar = Calendar.getInstance();
-				sysFileName =vo.getRegisterId()+'_'+orgFileName; // sysFileName: 날짜-fileLoop번호
+				sysFileName =orgFileName; // sysFileName: 날짜-fileLoop번호
 				try {
 					System.out.println("try 진입");
 					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/sysFileName

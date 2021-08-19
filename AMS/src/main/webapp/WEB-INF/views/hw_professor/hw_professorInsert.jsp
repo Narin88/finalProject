@@ -187,8 +187,8 @@
 	var clsData = [
 		<c:forEach items="${result }" var="list">
 		{
-			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
-			lrcode: '${list.lrcode}', lnum: '${list.lnum}', pid: '${list.pid}',
+			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',lrname:'${list.lrname}',
+			opennum:'${list.opennum}', lnum: '${list.lnum}', book:'${list.book}', dividenum:'${list.dividenum}',
 			insertBtn:'<button type="button" id="hwInsert" data-id="${list.register_id}" data-num="${list.opennum }" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">등록</button> '
 		},
 		</c:forEach>
@@ -203,12 +203,14 @@
     	perPage: 5   //페이징 갯수
     },
 	columns: [
-		{header: '강의년도',name: 'lyear'},
-		{header: '학기',name: 'lterm'}, //강의번호+분반
+		{header: '강의등록번호',name: 'opennum',width:100},
+		{header: '강의번호',name: 'lnum',width:100},
+		{header: '강의년도',name: 'lyear',width:120},
+		{header: '학기',name: 'lterm',width:120}, //강의번호+분반
 		{header: '강의명',name: 'lname'}, //년도+학기
-		{header: '강의실',name: 'lrcode'},
-		{header: '과목번호',name: 'lnum'},
-		{header: '교수번호',name: 'pid'},
+		{header: '강의실 이름',name: 'lrname'},
+		{header: '교재',name: 'book'},
+		{header: '분반',name: 'dividenum'},
 		{header: '등록하기',name: 'insertBtn'}
 	], //컬럼갯수
 		data: clsData
@@ -238,7 +240,7 @@
 			$("#hwInsertTb tbody").empty();
 			$('<tr>')
 				.append($('<td>">').html('과제제목'))
-				.append($('<td>').html('<input type="text" id="area" name="area" class="form-control">'))
+				.append($('<td>').html('<input type="text" id="area" name="area" class="form-control" maxlength="30" placeholder="최대 30자이하 입력이 가능합니다.">'))
 			.appendTo("#hwInsertTb tbody");
 			$('<tr>')
 				.append($('<td>').html('양식파일'))
@@ -250,7 +252,16 @@
 			.appendTo("#hwInsertTb tbody");
 		}
 		
-		
+		 $(document).ready(function(){
+			 $('#area').keyup(function(){
+				 if ($(this).val().length > $(this).attr('maxlength')) {
+					 alert('제한길이 초과');
+					$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+					} 
+				 });
+			 }); 
+
+	
 		
 		  function modal(mm) {
     		    var zIndex = 9999;
@@ -260,7 +271,7 @@
     		    var bg = document.createElement('div');
     		    bg.setStyle({
     		        position: 'fixed',
-    		        zIndex: zIndex,
+    		        zIndex: zIndex,	
     		        left: '0px',
     		        top: '0px',
     		        width: '100%',
@@ -312,16 +323,22 @@
 		var resultDate=year+'-'+month+'-'+day;
 		var bbb=$('#area').val();
 		var date= new Date(resultDate);
-		if(a =="" || bbb==""){
-			alert("날짜 또는 제목을 입력해주세요");
+		
+		var c=$('#file').val();
+		if(c ==""){
+			alert("파일을 입력해주세요!");
 		}else{
-			hwInsertFrm.pperiod.value=date;
-			hwInsertFrm.pcomment.value=bbb;
-			if(confirm(' 등록하시겠습니까 ?')==true){
-				alert("등록이 완료되었습니다.");
-				hwInsertFrm.submit();
+			if(a =="" || bbb==""){
+				alert("날짜 또는 제목을 입력해주세요");
 			}else{
-				return false;
+				hwInsertFrm.pperiod.value=date;
+				hwInsertFrm.pcomment.value=bbb;
+				if(confirm(' 등록하시겠습니까 ?')==true){
+					alert("등록이 완료되었습니다.");
+					hwInsertFrm.submit();
+				}else{
+					return false;
+				}
 			}
 		}
 	}

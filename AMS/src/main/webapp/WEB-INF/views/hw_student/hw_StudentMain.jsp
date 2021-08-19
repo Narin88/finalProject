@@ -40,13 +40,14 @@
 	<div class="card-body">
 		<div align="center" style="margin-top: 10px;">	
 			
-			<h2 style="display: inline;"> 수강중인 강의목록</h2>		
+			<h2 style="display: inline;"> 현재 수강중인 강의목록</h2>		
 			<div class="movebox"style=" width:100%;">
 				<button style="float:right;" type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='submitList'">제출한 과제</button>
 				
 			</div>
 			<div>		
-				<b style="font-weight: bold;float:right;"># 과제버튼을 클릭시 해당강의 <font color="red">과제목록이</font> 출력됩니다. <br># 제출한 과제 클릭시 <font color="red">제출한 과제목록이</font> 출력됩니다.</b>
+				<b style="font-weight: bold;float:right;"># 과제버튼을 클릭시 해당강의 <font color="red">과제목록이</font> 출력됩니다. <br># 제출한 과제 클릭시 <font color="red">제출한 과제목록이</font> 출력됩니다.
+				</b>
 			</div>	
 		</div>
 		<div class="gridTb1">
@@ -67,9 +68,9 @@
 		<c:forEach items="${result }" var="list">
 		{
 			mname: '${list.mname}', lname: '${list.lname}', lyear : '${list.lyear}',
-			term: '${list.term}', lrcode: '${list.lrcode}', pname: '${list.pname}',schedule: '${list.schedule}',
+			term: '${list.term}', pname: '${list.pname}',schedule: '${list.schedule}',
 			hwBtn:'<button type="button" id="hwClick" data-id="${list.opennum}" data-name="${list.lname}"class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">과제</button>'
-			,opennum:'${list.opennum}'
+			,opennum:'${list.opennum}',lnum:'${list.lnum}',book:'${list.book}',dividenum:'${list.dividenum}'
 		},
 		</c:forEach>
 	]; //컬럼DATA	
@@ -85,11 +86,14 @@
 			perPage: 5   //페이징 갯수
 		},
 	columns: [
+		{header: '강의등록번호',name: 'opennum',width:100},
+		{header: '강의번호',name: 'lnum',width:80},
 		{header: '전공이름',name: 'mname',width:150},
-		{header: '과목명',name: 'lname',width:130}, //강의번호+분반
+		{header: '강의이름',name: 'lname',width:130}, //강의번호+분반
+		{header: '교재',name: 'book',width:130}, //강의번호+분반
 		{header: '강의년도',name: 'lyear',width:90}, //년도+학기
 		{header: '학기',name: 'term',width:80},
-		{header: '강의실',name: 'lrcode',width:100},
+		{header: '분반',name: 'dividenum',width:80},
 		{header: '교수명',name: 'pname',width:140},
 		{header: '시간표',name: 'schedule'},
 		{header: '과제',name: 'hwBtn',width:120},

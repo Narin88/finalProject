@@ -37,7 +37,7 @@
 <div class="content-page">
 	<div class="card-body">
 	<div align="center" style="display: inline;">
-		<h2> 제출 과제 리스트</h2>
+		<h2><span style="color:cornflowerblue;"> ' 현재 수강중인 강의 '</span> 의 제출한 과제목록</h2>
 	</div>	
 				<div class="box">			
 				<div class="movebox"style=" width:100%;">
@@ -69,15 +69,18 @@
 				lname: '${list.lname}',
 				lyear: '${list.lyear}',
 				term : '${list.term}',
+				opennum:'${list.opennum}',
+				dividenum:'${list.dividenum}',
+				registerId:'${list.registerId}',
 				pcomment: '<div class="underline">${list.pcomment}</div>',
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"> <span style="color:red;"> 진행중</span></c:if> <c:if test="${list.hwstatus < 0}"><span style="color:blue;"> 마감</span></c:if>',
 				score: '<c:if test="${list.score == 0}">등록된 점수없음</c:if><c:if test="${list.score != 0}">${list.score } / 20</c:if>',
-				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><button type="button" id="alterNBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if>'
+				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><button type="button" id="alterNBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if>',
+				lnum:'${list.lnum}',pname:'${list.pname}',submitFile:'<i id="download" data-id="${list.submitFile}" class="mdi mdi-file-import" style="cursor:pointer;">${list.submitFile}</i>'
 			},
 			</c:forEach>
 		]; //컬럼DATA	
-
 // GRID 를 보여준다.
 	var grid = new tui.Grid( {
 		bodyHeight:265,
@@ -88,41 +91,33 @@
 		perPage: 6  //페이징 갯수
 		},
 			columns: [
-				{header: '강의명',name: 'lname',width:150},
-				{header: '년도',name: 'lyear',width:150}, //강의번호+분반
-				{header: '학기',name: 'term',width:120}, //년도+학기
-				{header: '과제제목',name: 'pcomment',width:350},
+				{header: '강의등록번호',name: 'opennum',width:100}, 
+				{header: '강의번호',name: 'lnum',width:100}, 
+				{header: '강의명',name: 'lname',width:120},
+				{header: '년도',name: 'lyear',width:100}, //강의번호+분반
+				{header: '학기',name: 'term',width:70}, //년도+학기
+				{header: '분반',name: 'dividenum',width:70}, 
+				{header: '교수명',name: 'pname',width:120}, 
+				{header: '과제제목',name: 'pcomment'},
 				{header: '제출기간',name: 'pperiod',width:200},
 				{header: '진행상태',name: 'status',width:100},
+				{header: '제출파일',name: 'submitFile',width:150},
 				{header: '점수',name: 'score',width:140},
-				{header: '수정',name: 'alterBtn'},
+				{header: '수정',name: 'alterBtn',width:80},
 			], //컬럼갯수
 		data: clsData
 	});
 
-/*
-		grid.on('dblclick', ev => {	
-     		//console.log('더블클릭!', ev.rowKey);
-     		var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
-     		var a=data.registerId;
-     		var b=data.opennum;
-	var c=data.submitCheckVal;
-	var d=data.hwstatus;
-	console.log(d);
-	if(d<=0){
-	 alert("마감되었습니다");
-	}else{
-			if(c>0){
-				alert("제출한 과제입니다.")
-			}else{
-				hwSInsertFrm.registerId.value=a;
-       			hwSInsertFrm.opennum.value=b;
-       			hwSInsertFrm.submit();
-			}
-	 }
-	
-     	});
-*/
+	$("#download").click(function(){
+		var a=$(this).data('id');
+		console.log(a);
+		var filePath ="C:/Users/User/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload/hw_student/"+a;
+			//"C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a;
+		console.log(filePath);
+		var fileName = a;
+		location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
+	});
+		
 	$("#grid").on("click","#alterBtn",function(){
 		var a=$(this).data('id');
 		var b=$(this).data('id2');
@@ -165,6 +160,8 @@
 					}
 			}
 	});
+		
+		
 </script>
 </body>
 </html>

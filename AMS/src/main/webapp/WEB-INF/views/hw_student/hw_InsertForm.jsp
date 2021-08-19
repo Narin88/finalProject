@@ -94,7 +94,8 @@
 $("#download").click(function(){
 	var a=$(this).data('id');
 	console.log(a);
-	var filePath = "C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_professor/"+a;
+	var filePath ="C:/Users/User/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload/hw_professor/"+a;
+		//"C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a;
 	console.log(filePath);
 	var fileName = a;
 	location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;

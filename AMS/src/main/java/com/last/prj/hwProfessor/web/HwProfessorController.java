@@ -144,8 +144,9 @@ public class HwProfessorController {
 		//파일업로드
 				String rootUploadDir = request.getSession().getServletContext().getRealPath("resources/upload/hw_professor/");
 						//"C:\\Users\\User\\git\\finalProject\\AMS\\src\\main\\webapp\\resources\\upload\\hw_professor"; // 업로드 주소
+				System.out.println(rootUploadDir);
 				File dir = new File(rootUploadDir);
-
+					
 				if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성
 					dir.mkdirs();
 				}
@@ -188,7 +189,7 @@ public class HwProfessorController {
 	
 	
 				service.hwPfInsert(vo);
-		return "redirect:hwPfInsert";
+		return "redirect:hwList";
 	}
 	
 	@RequestMapping(value="hwSubmitDel", method=RequestMethod.PUT)

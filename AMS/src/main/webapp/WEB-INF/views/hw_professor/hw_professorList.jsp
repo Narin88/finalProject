@@ -97,9 +97,12 @@
 			          <a class="modal_close_btn">닫기</a>
 			          <div class="modal-body">
 			              <div class="noSubmit"></div>
-			              <div align="center">
-			                <button style="float:right; margin-right: 10px" type="button" id="selectDelBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
+			              <div align="center" >
+			              	<div style="width:100%; float:right;">
+			                			<button style="float:right; margin-right: 10px" type="button" id="selectDelBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
 										<button style="float:right;" id="selectScoreBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">점수정정</button>
+			             	<b style="width:100%;font-weight: bold;float:right;text-align:right;margin-bottom:5px;"># 과제를 미제출한 학생은 점수입력이 <font color="red">불가능</font>합니다.<br># 제출파일은 클릭시 다운로드가 <font color="red"> 가능 </font>합니다.</b>
+			             	</div>	
 			             		<!-- gird 두번째 -->
 									<div id="grid2"></div>
 			              </div>
@@ -249,8 +252,10 @@ $(".hwTable1").on("click","#inquiry",function(){
 			$("#grid2").empty();
 			$("tfoot").empty();		
 			$(".noSubmit").empty();
+			$(".noSubmitSub").empty();
 			$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4>').appendTo('.noSubmit');
 			$('<h6 style="color:gray; float:left;margin-left:30px;"> 점수를 정정하면 성적에 자동 반영됩니다. </h6>').appendTo('.noSubmit');
+			
 					
 /* grid start 조회했을때 모달창에서 뜨는 그리드
 ** 제출한 학생과제 삭제 delete & 점수 수정 update
@@ -333,22 +338,25 @@ $(".hwTable1").on("click","#inquiry",function(){
 		
 						
 		//파일명이 저장된 값이 있는 것은 다운되고 없는것은 파일없다는 alert경고창
-	  	grid.on('dblclick', ev => {
+	  	grid.on('click', ev => {
 			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 			const isHeader= ev.targetType==="columnHeader";
 	  		var a=data.submit_file;
 		    var b=data.name;
+		    console.log(a);
+		    console.log(b);
 			if(ev.columnName =="submit_file" && !isHeader && a != null){
 				if(confirm(b+ '학생 과제파일')==true){
-					var filePath = "C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a
+					var filePath ="C:/Users/User/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload/hw_student/"+a;
+							//"C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a
 					var fileName = a;
 					location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
 				}else{
 					return false;
 				}	
 			}
-			if(a==null){
-				alert("제출한 파일이 없습니다");
+			if(ev.columnName =="submit_file" && a==null){
+				alert("제출파일이 없습니다");
 	  		}
 	  	})
 	  	
@@ -438,14 +446,14 @@ $(".hwTable1").on("click","#inquiry",function(){
 	var clsData = [
 		<c:forEach items="${result }" var="list">
 		{
-			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
+			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',lnum:'${list.lnum}',
 			lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
 			pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지',status:'<c:if test="${list.hwstatus >= 0 }"><span style="color:red;">진행중</span></c:if><c:if test="${list.hwstatus < 0}"><span style="color:blue;">마감</span></c:if>',
 			register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>',
 			inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"">조회</button> ',
 			deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><button type="button" id="hwNDelete" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if>',
 			updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="<fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/>" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">변경</button>',
-			opennum:'${list.opennum}'
+			opennum:'${list.opennum}',dividenum:'${list.dividenum}',datastatus:'${list.datastatus}'
 		},
 		</c:forEach>
 	]; //컬럼DATA	
@@ -460,20 +468,22 @@ $(".hwTable1").on("click","#inquiry",function(){
 			perPage: 5   //페이징 갯수
 		},
 		columns: [
-			//{header: '강의번호',name: 'opennum',width:70},
+			{header: '강의등록번호',name: 'opennum',width:100},
+			{header: '강의번호',name: 'lnum',width:80},
 			{header: '강의년도',name: 'lyear',width:70},
 			{header: '학기',name: 'lterm',width:60}, //강의번호+분반
+			{header: '분반',name: 'dividenum',width:60}, //강의번호+분반
 			{header: '강의명',name: 'lname',width:90}, //년도+학기
-			{header: '강의실',name: 'lrcode',width:80},
+			{header: '수강상태',name: 'datastatus',width:60}, //강의번호+분반
 			{header: '과제제목',name: 'pcomment'},
 			{header: '등록날짜',name: 'register_date',width:140},
 			{header: '과제기간',name: 'pperiod',width:180},
 			{header: '진행상태',name: 'status',width:100},
-			{header: '양식파일',name: 'register_file'},
-			{header: '제출현황',name: 'submitCount',width:100},
-			{header: '조회',name: 'inquiryBtn',width:100},
-			{header: '삭제',name: 'deleteBtn',width:100},
-			{header: '변경',name: 'updateBtn',width:100}
+			{header: '양식파일',name: 'register_file',width:100},
+			{header: '제출현황',name: 'submitCount',width:70},
+			{header: '조회',name: 'inquiryBtn',width:75},
+			{header: '삭제',name: 'deleteBtn',width:75},
+			{header: '변경',name: 'updateBtn',width:75}
 		], //컬럼갯수
 		data: clsData
 	});

@@ -70,9 +70,9 @@
 							<th>${lec.sname}</th>
 							<th>${lec.lnum}</th>
 							<th>${lec.lname}</th>
-							<th><input type="text" class="form-control" id="middlescore${lec.sid }"value="${lec.middlescore}"> </th>
-							<th><input type="text" class="form-control" id="finalscore${lec.sid }" value="${lec.finalscore}"></th>
-							<th><input type="text" class="form-control" id="attendancescore${lec.sid }" value="${lec.attendancescore}"></th>
+							<th><input type="number" class="form-control" id="middlescore${lec.sid }"value="${lec.middlescore}"> </th>
+							<th><input type="number" class="form-control" id="finalscore${lec.sid }" value="${lec.finalscore}"></th>
+							<th><input type="number" class="form-control" id="attendancescore${lec.sid }" value="${lec.attendancescore}"></th>
 							<th>${lec.homework}</th>
 							<th>${lec.total}</th>
 							<th>${lec.rank}</th> 

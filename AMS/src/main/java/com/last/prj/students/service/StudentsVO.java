@@ -76,4 +76,5 @@ public class StudentsVO {
 	private int jp;
 	private int nk;
 	private int pk;
+	private String evalcheck;
 }

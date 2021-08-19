@@ -11,7 +11,7 @@ public class PwEncrypt {
 	@Test
 	public void bcryTest() {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String result = encoder.encode("1234");
+		String result = encoder.encode("aA123!");
 		
 		System.out.println(result);
 		

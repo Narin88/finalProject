@@ -237,29 +237,4 @@ public class StudentsController {
 		return data;
 	}
 	
-	
-	// 사진변경
-	@RequestMapping("updatePic")
-	public String updatePic(MultipartHttpServletRequest req, StudentsVO vo, HttpSession session) {
-		Map<String, String> map = ImageUpload.uploadTest(req);
-		
-		vo.setSid((String)session.getAttribute("id"));
-		
-		StudentsVO vo2 = stService.studentInfo(vo);
-		
-		if (vo2.getPicture() != null || vo2.getPicture() != "") {
-			File file = new File(map.get("path") + File.separator + vo2.getPicture());
-			file.delete();
-		}
-				
-		vo.setPicture(map.get("orgName"));
-		
-				
-		stService.studentPicUpdate(vo);
-		
-		return "redirect:studentInfo";
-	}
-	
-	
-	
 }

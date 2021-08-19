@@ -29,7 +29,6 @@ align: right;
 <div class="content-page">
 	<div class="card-body">
 		<div>
-
 		<div class="bigDiv">
 			<div>
 				<img src="resources/image/students/${st.picture }" alt="증명사진" class="infoImg" id="infoImg" />
@@ -75,9 +74,9 @@ align: right;
 		<%-- <sec:authorize access="hasRole('ROLE_PRO')"> --%>
 		<div>
 			<div align="left" style="margin-left: 113px; margin-top: 10px; display: flex; width: 100%;">
-				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updatePic">
+				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="imgUpload">
 					<label class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">
-	   					 <input type="file" style="display:none;" id="changeImg" name="pic">사진변경</button>
+	   					 <input type="file" style="display:none;" id="changeImg" name="pic" multiple="multiple">사진변경</button>
 	   				 </label>
 	   				 <button type="button" class="btn btn-facebook m-b-10 waves-effect waves-light" onclick="changeBtn()">확인</button>
 	   			</form>

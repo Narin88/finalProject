@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class FileUpload {
 	public static Map<String, String> uploadTest(MultipartHttpServletRequest request) {
-		String rootUploadDir = request.getSession().getServletContext().getRealPath("/resources/img/students/"); // 업로드 주소
+		String rootUploadDir = ""; // 업로드 주소
 
 		File dir = new File(rootUploadDir);
 

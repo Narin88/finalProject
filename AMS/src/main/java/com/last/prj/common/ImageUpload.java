@@ -12,9 +12,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class ImageUpload {
 	public static Map<String, String> uploadTest(MultipartHttpServletRequest request) {
-		String rootUploadDir = "C:" + File.separator + "git" + File.separator + "finalProject" + File.separator +
-								"AMS" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" +
-								 File.separator + "resources"  + File.separator + "image"  + File.separator + "students"; // 업로드 주소
+		// 업로드 주소
+		String rootUploadDir = request.getSession().getServletContext().getRealPath("/resources/img/students/");
 
 		File dir = new File(rootUploadDir);
 
@@ -60,8 +59,9 @@ public class ImageUpload {
 		} // while
 
 		if (map.get("error") == null || map.get("error") == "") {
-			System.out.println("원본이름: " + map.get("orgName") + " 시스템이름: " + map.get("sysName"));
-			System.out.println("경로: " + rootUploadDir);
+			System.out.println("원본이름=========== " + map.get("orgName"));
+			System.out.println("시스템이름========== " + map.get("sysName"));
+			System.out.println("경로============== " + rootUploadDir);
 		}
 		map.put("path", rootUploadDir);
 		

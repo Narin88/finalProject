@@ -33,6 +33,12 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
+    />
 <body>
 <div class="content-page">
 	<div class="card-body">
@@ -84,33 +90,80 @@
 			<div class="hwTable1">
 				<!-- gird 첫번째 -->
 				<div id="grid" ></div>
-					<!-- The Modal -->
-					<div id="myModal" class="modalEE">
-						<!-- Modal content -->
-						<div class="modal-content">                                                             
-							<div class="hwContainer">
-								<span class="close">&times;</span>  
-								<!-- 조회눌렀을때  모달창안에 들어갈 내용들 -->
-									<div class="noSubmit"></div>
-										<button style="float:right; margin-right: 10px" type="button" id="selectDelBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
+					<!-- model -->
+
+			        <div id="my_offer" align="center">
+			        		
+			          <a class="modal_close_btn">닫기</a>
+			          <div class="modal-body">
+			              <div class="noSubmit"></div>
+			              <div align="center">
+			                <button style="float:right; margin-right: 10px" type="button" id="selectDelBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
 										<button style="float:right;" id="selectScoreBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">점수정정</button>
-								<!-- gird 두번째 -->
+			             		<!-- gird 두번째 -->
 									<div id="grid2"></div>
+			              </div>
+			          </div>
+			        </div>
+			        <!-- model end -->
+					
+					<!-- model2 -->
+
+			        <div id="my_offer2" align="center">
+			        
+			
+			          <a class="modal_close_btn" style="float:right;">닫기</a>
+			          <div class="modal-body">
+			          	<div class="" style="border-radius:10px;">
+			           		 <h4 align="center">과제변경전</h4>
+			           				<table border="1" id="noSubmit2" class="table table-bordered">
+										<thead>
+											<tr>
+												<th>강의년도</th>
+												<th>학기</th>
+												<th>강의명</th>
+												<th>제출기간</th>
+												<th>과제제목</th>
+												<th>양식파일</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+						</div>
+			              <!-- 변경 눌렀을때 실행되는 form -->		
+								<form action="hwUpdate" id="udFrm" name="udFrm" method="post" enctype="multipart/form-data" >
+								<sec:csrfInput/>
+									<input type="hidden" id="pperiod" name="pperiod">
+									<input type="hidden" id="pcomment" name="pcomment">
+									<input type="hidden" id="registerId" name="registerId">
+										<br><br>
+										<table border="1" id="noSubmit3" class="table table-bordered">
+											<thead>
+												<tr>
+													<th>제출기간</th>
+													<th>과제제목</th>
+													<th>양식파일</th>
+													<th>비고</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+								</form>
 							</div>
 						</div>
 					</div>
-					<!-- MODAL HTML END-->
+			        <!-- model end -->
 					    
 
-					<!-- The Modal -->
+				<%-- 	<!-- The Modal -->
 					<div id="myModal2" class="modal2">
 							 
 						<!-- Modal content -->
 						 <div class="modal-content2">      
 							<span class="close2">&times;</span>                                                         
 							<div class="hwContainer">
-								<div class="" style="border-radius:10px;">
-									<h4 align="center">과제변경전</h4>
+								
+									
 									<table border="1" id="noSubmit2" class="table table-bordered">
 										<thead>
 											<tr>
@@ -147,10 +200,9 @@
 							</div>
 						</div>
 					</div>
-<!-- MODAL HTML END-->
+<!-- MODAL HTML END--> --%>
 				</div>
 			</div>
-		</div>
 		<form id="hwPfDeleteFrm" name="hwPfDeleteFrm"  method="post" action="hwPfDelete">
 			<input type="hidden" id="registerId" name="registerId">
 		</form>
@@ -176,31 +228,24 @@
 		alert("제출학생이 있어 삭제가 불가능합니다.");
 	});			
 
-// Get the modal
-	var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];                                          
-
-// When the user clicks on the button, open the modal 
 	       
 	        	// 조회 버튼을 클릭했을때 
 $(".hwTable1").on("click","#inquiry",function(){
-	modal.style.display = "block";
 	$(this).data('id'); //
 	var a= $(this).data('id');
 	var b= $(this).data('num');
 	var count=$(this).data('count');
 	var checkVal=0;
+	
+	
 	$.ajax({
 		type:"post",
 		url:"inquiry",
 		data:{ registerId :a, opennum :b},
 		dataType:"json",
 		success: function(data){	
+			modal('my_offer');
 			$("#grid2").empty();
 			$("tfoot").empty();		
 			$(".noSubmit").empty();
@@ -211,6 +256,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 ** 제출한 학생과제 삭제 delete & 점수 수정 update
 ** grid api-source 
 */
+
 		const dataSource = {
 		  withCredentials: false,  
 		  initialRequest: false,
@@ -227,6 +273,8 @@ $(".hwTable1").on("click","#inquiry",function(){
 		    }
 		  }
 		};
+		
+		
 		 // GRID 를 보여준다.
 		var grid = new tui.Grid( {
 			data:dataSource,
@@ -282,7 +330,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 			});		  	  
 		}
 			  		    
-	
+		
 						
 		//파일명이 저장된 값이 있는 것은 다운되고 없는것은 파일없다는 alert경고창
 	  	grid.on('dblclick', ev => {
@@ -303,24 +351,69 @@ $(".hwTable1").on("click","#inquiry",function(){
 				alert("제출한 파일이 없습니다");
 	  		}
 	  	})
+	  	
+	  	
+	  	
+	  
+	  	
 		},
 		error: function(error){
 			alert("error");
 		}
 	});
-});	
-	        	
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-	    modal.style.display = "none";
+	
+	function modal(mm) {
+	    var zIndex = 9999;
+	    var modal = document.getElementById(mm);
+
+	    // 모달 div 뒤에 희끄무레한 레이어
+	    var bg = document.createElement('div');
+	    bg.setStyle({
+	        position: 'fixed',
+	        zIndex: zIndex,
+	        left: '0px',
+	        top: '0px',
+	        width: '100%',
+	        height: '100%',
+	        overflow: 'auto',
+	        // 레이어 색갈은 여기서 바꾸면 됨
+	        backgroundColor: 'rgba(0,0,0,0.4)'
+	    });
+	    document.body.append(bg);
+
+	    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+	    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+	        bg.remove();
+	        modal.style.display = 'none';
+	    });
+
+	    modal.setStyle({
+	        position: 'fixed',
+	        display: 'block',
+	        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+	        // 시꺼먼 레이어 보다 한칸 위에 보이기
+	        zIndex: zIndex + 1,
+
+	        // div center 정렬
+	        top: '50%',
+	        left: '50%',
+	        transform: 'translate(-50%, -50%)',
+	        msTransform: 'translate(-50%, -50%)',
+	        webkitTransform: 'translate(-50%, -50%)'
+	    });
 	}
 
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
-	}
+	// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+	Element.prototype.setStyle = function(styles) {
+	    for (var k in styles) this.style[k] = styles[k];
+	    return this;
+	};
+	
+});	
+
+
+	        
 	        
 	//제출한 학생의 과제삭제 FUNCTION
 	function hwDeleteFunc(a){
@@ -392,6 +485,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 	//과제페이지 변경버튼눌렀을때 모달창 
 	$(".hwTable1").on("click","#updateBtn",function(){
 		// Get the modal
+		
 		var a=$(this).data('id');
 		var b=$(this).data('id2');
 		var c=$(this).data('id3');
@@ -405,23 +499,8 @@ $(".hwTable1").on("click","#inquiry",function(){
 		var month=dateStr.substring(5,7);
 		var day=dateStr.substring(8,10);
 		var resultDate=year+month+day;	
-		var modal = document.getElementById('myModal2');
 		
-		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn2");
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close2")[0];  
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-		modal.style.display = "block";
+		modal('my_offer2');
 		$('#noSubmit2 tbody').empty();
 		$('<tr>')
 			.append($('<td>'+e+'</td>'))
@@ -446,7 +525,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 			$('#startDate').attr("value",null);
 		});
 		
-		$('.pcommentTd').on("click", function(){
+		$('.pcommentTd').on("dblclick", function(){
 			$('#pcoId').attr("disabled",false);
 			$('#pcoId').attr("value",null);
 		});
@@ -458,6 +537,9 @@ $(".hwTable1").on("click","#inquiry",function(){
 			$('#pcoId').attr("value",c);
 		});
 						
+		
+		
+		
 		$.datepicker.setDefaults($.datepicker.regional['ko']); 
 		$( "#startDate" ).datepicker({
 			// changeMonth: true, 
@@ -477,6 +559,10 @@ $(".hwTable1").on("click","#inquiry",function(){
 				$("#endDate").datepicker( "option", "minDate", selectedDate);
 			}    
 		});
+		
+		
+	
+		
 	});
 	
 	function updateSubmit(){
@@ -521,6 +607,54 @@ $(".hwTable1").on("click","#inquiry",function(){
 		$("#lnum option:eq(0)").prop("selected",true);
 		frmHw.submit();
 	}
+	
+	function modal(mm) {
+	    var zIndex = 9999;
+	    var modal = document.getElementById(mm);
+
+	    // 모달 div 뒤에 희끄무레한 레이어
+	    var bg = document.createElement('div');
+	    bg.setStyle({
+	        position: 'fixed',
+	        zIndex: zIndex,
+	        left: '0px',
+	        top: '0px',
+	        width: '100%',
+	        height: '100%',
+	        overflow: 'auto',
+	        // 레이어 색갈은 여기서 바꾸면 됨
+	        backgroundColor: 'rgba(0,0,0,0.4)'
+	    });
+	    document.body.append(bg);
+
+	    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+	    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+	        bg.remove();
+	        modal.style.display = 'none';
+	    });
+
+	    modal.setStyle({
+	        position: 'fixed',
+	        display: 'block',
+	        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+	        // 시꺼먼 레이어 보다 한칸 위에 보이기
+	        zIndex: zIndex + 1,
+
+	        // div center 정렬
+	        top: '50%',
+	        left: '50%',
+	        transform: 'translate(-50%, -10%)',
+	        msTransform: 'translate(-50%, -50%)',
+	        webkitTransform: 'translate(-50%, -50%)'
+	    });
+	}
+
+	// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+	Element.prototype.setStyle = function(styles) {
+	    for (var k in styles) this.style[k] = styles[k];
+	    return this;
+	};
 </script>
 </body>
 </html>

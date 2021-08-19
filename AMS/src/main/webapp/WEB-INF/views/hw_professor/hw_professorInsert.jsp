@@ -13,7 +13,30 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
+    />
 <style>	
+	#my_offer {
+        display: none;
+        width: 80%;
+        height: 70%;
+        padding: 30px 60px;
+        background-color: #fefefe;
+        border: 1px solid #888;
+        border-radius: 3px;
+      }
+      #my_offer .modal_close_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .modal-body {
+        font-size: 10pt;
+      }
 	.tui-grid-cell .tui-grid-cell-content {
     text-align: center;
 }
@@ -97,15 +120,43 @@
 				<h2 align="center">과제 등록가능한 강의 목록</h2>
 			</div>
 		</div>	
-<!-- The Modal -->
+		 <!-- model -->
+
+        <div id="my_offer" align="center">
+        
+
+          <a class="modal_close_btn">닫기</a>
+          <div class="modal-body">
+            <h2>과제 등록</h2>
+           			<form method="post" enctype="multipart/form-data" action="hwInsertForm" id="hwInsertFrm" name="hwInsertFrm" >
+              <sec:csrfInput/>
+						<input type="hidden" id="opennum" name="opennum">
+						<input type="hidden" id="pperiod" name="pperiod">
+						<input type="hidden" id="pcomment" name="pcomment">
+							<table id="hwInsertTb" class="table table-bordered">
+                <thead>
+     
+                </thead>
+
+                <tbody></tbody>
+              </table>
+              <div align="center">
+                <button type="button" onclick="hwInsertSubmit();" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">등록하기</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- model end -->
+		
+<!-- The Modal
 		<div id="myModal" class="modalEE">
-		<!-- Modal content -->
+		<!-- Modal content
 			 <div class="modal-content">                                                             
 				<div class="hwContainer">
 				<span class="close">&times;</span>  
-						<!-- 조회눌렀을때  모달창안에 들어갈 내용들 -->
+						<!-- 조회눌렀을때  모달창안에 들어갈 내용들
 					<div class="noSubmit">
-					<!-- 과제등록 정보 폼 -->
+					<!-- 과제등록 정보 폼 
 						<form method="post" enctype="multipart/form-data" action="hwInsertForm" id="hwInsertFrm" name="hwInsertFrm" >
 						<sec:csrfInput/>
 						<input type="hidden" id="opennum" name="opennum">
@@ -163,16 +214,7 @@
 		data: clsData
 	});
 	
-	// Get the modal
-	var modal = document.getElementById('myModal');
-	 
-	// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
-	 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];                                          
-	 
-	// When the user clicks on the button, open the modal 
+
 	
 	$(".gridC").on("click","#hwInsert",function(){
 		var a= $(this).data('num'); //
@@ -180,6 +222,7 @@
         grid.on('click', ev => {
 			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 			ClickData(data,a);
+			modal('my_offer');
 		});
 		
 		//클릭한 행의 값
@@ -189,8 +232,9 @@
 			var lname=data.lname;
 			var lrcode=data.lrcode;
 			hwInsertFrm.opennum.value=a;
-			modal.style.display = "block";
-				
+
+			//modal.style.display = "block";
+			
 			$("#hwInsertTb tbody").empty();
 			$('<tr>')
 				.append($('<td>">').html('과제제목'))
@@ -205,17 +249,60 @@
 				.append($('<td style="text-align: left;">').html('<input type="text" id="startDate" value="${today }" disabled class="dateform-control"> ~ <input type="text" id="endDate" class="dateform-control">'))
 			.appendTo("#hwInsertTb tbody");
 		}
+		
+		
+		
+		  function modal(mm) {
+    		    var zIndex = 9999;
+    		    var modal = document.getElementById(mm);
+
+    		    // 모달 div 뒤에 희끄무레한 레이어
+    		    var bg = document.createElement('div');
+    		    bg.setStyle({
+    		        position: 'fixed',
+    		        zIndex: zIndex,
+    		        left: '0px',
+    		        top: '0px',
+    		        width: '100%',
+    		        height: '100%',
+    		        overflow: 'auto',
+    		        // 레이어 색갈은 여기서 바꾸면 됨
+    		        backgroundColor: 'rgba(0,0,0,0.4)'
+    		    });
+    		    document.body.append(bg);
+
+    		    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+    		    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+    		        bg.remove();
+    		        modal.style.display = 'none';
+    		    });
+
+    		    modal.setStyle({
+    		        position: 'fixed',
+    		        display: 'block',
+    		        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+    		        // 시꺼먼 레이어 보다 한칸 위에 보이기
+    		        zIndex: zIndex + 1,
+
+    		        // div center 정렬
+    		        top: '50%',
+    		        left: '50%',
+    		        transform: 'translate(-50%, -50%)',
+    		        msTransform: 'translate(-50%, -50%)',
+    		        webkitTransform: 'translate(-50%, -50%)'
+    		    });
+    		}
+
+    		// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+    		Element.prototype.setStyle = function(styles) {
+    		    for (var k in styles) this.style[k] = styles[k];
+    		    return this;
+    		};
+		
+		
 	});
-    span.onclick = function() {
-    	modal.style.display = "none";
-    }
  
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
-	}
 	
 	function hwInsertSubmit(){
 		var a=$('#endDate').val();
@@ -277,7 +364,10 @@
                      $("#startDate").datepicker( "option", "maxDate", selectedDate );
                  }    
  
-            });    
+            });   
+            
+            
+          
     });
 </script>
 </body>

@@ -24,14 +24,15 @@
 		and opennum not in (select opennum from preenrolment where sid = #{sid})
 		<if test="dcode != 'defaultV' and dcode != null">
 			<choose>
+				<when test="mcode != 'defaultV' and mcode == 'gyo'">
+					 and li.DCODE IN ('003','004')
+				</when>
 				<when test="mcode != 'defaultV' and mcode != null">
 					and mv.dcode = #{dcode}
 					and mv.mcode = #{mcode}
 					and li.DCODE NOT IN ('003','004')
 				</when>
-				<when test='dcode =="gyo"'>
-					 and li.DCODE IN ('003','004')
-				</when>
+
 				<otherwise>
 					and mv.dcode = #{dcode}
 					and li.DCODE NOT IN ('003','004')

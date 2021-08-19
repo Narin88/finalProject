@@ -451,7 +451,7 @@
 			pphone		: '${st.pphone}',
 			pid			: '${st.pid}',
 			opennum		: '${st.opennum}',
-			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(${st.opennum})" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
+			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(`${st.opennum}`,`${st.evalcheck}`)" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
 				
 		}
 		<c:if test='${!empty st.lnum}'>
@@ -786,10 +786,21 @@
 	});
 	
 	
-	function openpage(data){
+	function openpage(data, evalcheck){
+console.log(data);
 		var opennum = data;
-		location.href="Evaluation?opennum="+opennum
-	}
+				if (evalcheck == "N") {
+							
+					location.href="Evaluation?opennum="+opennum
+				}
+					if (evalcheck == "Y") {
+								alert("이미 참여한 강의입니다.");
+								return false;
+					} 
+		} 
+		/* var opennum = data;
+		location.href="Evaluation?opennum="+opennum */
+	
 	
 	
 	// pdf 다운로드

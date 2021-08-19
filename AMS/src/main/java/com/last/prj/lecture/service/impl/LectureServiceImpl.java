@@ -47,4 +47,9 @@ public class LectureServiceImpl implements LectureService{
 		return Lmap.ScoreStudentList(opennum);
 	}
 
+	@Override
+	public List<LectureVO> LectureListed(String id) {
+		return Lmap.LectureListed(id);
+	}
+
 }

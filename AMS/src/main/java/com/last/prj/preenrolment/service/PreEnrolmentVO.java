@@ -24,4 +24,6 @@ public class PreEnrolmentVO {
 	private String dcode; //학과번호
 	private String mname; //전공명
 	private String dname; //학과명
+	
+	private String time;
 }

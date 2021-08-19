@@ -109,7 +109,7 @@
             ,hp.register_id	"registerId"
             ,hs.submit_sid	"submitSid"
             ,hp.opennum	"opennum"
-            ,to_date(to_char(hp.pperiod,'yyyymmdd'))-trunc(sysdate)  "hwstatus"
+            ,trunc(hp.pperiod)-trunc(sysdate)  "hwstatus"
             ,hp.register_date	"registerDate"
 	  FROM  hw_professor hp	
       JOIN  hw_student hs

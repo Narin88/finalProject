@@ -74,4 +74,5 @@
 	<delete id="preEnrolmentdelete" parameterType="PreEnrolmentVO">
 		delete from preenrolment where sid = #{sid} and opennum = #{opennum}
 	</delete>
+	
 </mapper>

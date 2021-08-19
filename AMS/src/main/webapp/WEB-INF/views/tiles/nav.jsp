@@ -97,9 +97,9 @@ pageEncoding="UTF-8" %>
                      </a>
                  </li>
                  <li>
-                     <a href="<%=request.getContextPath() %>/ProfessorLectureList" class="waves-effect">
+                     <a href="<%=request.getContextPath() %>/ProfessorLectureListed" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
-                         <span> 나의 강의 확인 </span>
+                         <span> 나의 강의내역 확인 </span>
                      </a>
                  </li>
                  <li>

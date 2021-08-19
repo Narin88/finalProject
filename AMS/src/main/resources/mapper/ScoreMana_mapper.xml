@@ -105,7 +105,7 @@
 	<!-- 내 수강꾸러미 목록 -->
 	<select id="getpreenrolment" resultType="PreEnrolmentVO">
 		select l.LNUM||'-'||l.dividenum as lnum, li.lname,li.credit,
-				find_code_name(100,li.dcode) as division, l.TIMETABLE||' / '||lr.LRNAME as timetable, 
+				find_code_name(100,li.dcode) as division, l.TIMETABLE||' / '||lr.LRNAME as timetable, l.timetable as time,
 				case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
 					 when retake_Check(#{sid},l.opennum) = '002' then 'N'
 				end as retake,l.opennum

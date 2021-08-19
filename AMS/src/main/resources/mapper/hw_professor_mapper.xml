@@ -17,7 +17,7 @@
 				,p.REGISTER_DATE	"register_date"
 				,p.PPERIOD			"pperiod"
 				,p.register_id "register_id"
-				, to_date(to_char(p.pperiod,'yyyymmdd'))-trunc(sysdate)  "hwstatus"
+				,trunc(p.pperiod)-trunc(sysdate)  "hwstatus"
 				,p.REGISTER_FILE	"register_file"
 				,p.PCOMMENT	   	 	"pcomment"
 				,l.pid 				"pid"

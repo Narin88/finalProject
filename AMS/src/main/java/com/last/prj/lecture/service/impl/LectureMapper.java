@@ -11,4 +11,5 @@ public interface LectureMapper {
 	int LectureUpdate(LectureVO vo);
 	int LectureDelete(LectureVO vo);
 	List<ScoreManaVO> ScoreStudentList(String opennum);
+	List<LectureVO> LectureListed(String id);
 }

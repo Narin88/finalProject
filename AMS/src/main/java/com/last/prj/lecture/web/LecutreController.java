@@ -38,8 +38,14 @@ public class LecutreController {
 	public String lectureList(Model model, HttpSession session) {
 		String pId = (String) session.getAttribute("id");
 		model.addAttribute("lectures",Ldao.LectureList(pId));
-		model.addAttribute("lroom",LRdao.getLectureRoom());
 		return "Lecture/ProfessorLectureList.tiles";
+	}
+	
+	@RequestMapping("ProfessorLectureListed")
+	public String lectureListed(Model model, HttpSession session) {
+		String pId = (String) session.getAttribute("id");
+		model.addAttribute("lectures",Ldao.LectureListed(pId));
+		return "Lecture/ProfessorLectureListed.tiles";
 	}
 	
 	@ResponseBody

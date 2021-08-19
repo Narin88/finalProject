@@ -14,4 +14,5 @@ public interface PreEnrolmentMapper {
 	int preEnrolmentlimitCheck(String sid);
 	int preEnrolmentinsert(PreEnrolmentVO preEnrolmentVO);
 	int preEnrolmentdelete(PreEnrolmentVO preEnrolmentVO);
+	
 }

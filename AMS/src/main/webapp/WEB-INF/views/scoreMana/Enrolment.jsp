@@ -331,7 +331,7 @@ function preEnrolmentList() {
       			$.each(result,function(i){
      				row += '<td>'+result[i].opennum+'</td><td>'+result[i].lnum+'</td><td>'+result[i].lname+'</td><td>'+result[i].credit+
      				'</td><td>'+result[i].division+'</td><td>'+result[i].timetable+'</td><td>'+result[i].retake+'</td><td>'+
-     				'<button id = \'preinsertbtn'+result[i].opennum+'\' onclick=\'preinsert('+result[i].opennum+')\' class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">신청</button></td></tr>';
+     				'<button id = \'preinsertbtn'+result[i].opennum+'\' onclick=\'preinsert('+result[i].opennum+')\' class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">신청</button><input id="time'+result[i].opennum+'" type="hidden" value="'+result[i].time+'"</td></tr>';
      			})
 
      			$("#preEnroltbl tbody").empty();
@@ -343,65 +343,76 @@ function preEnrolmentList() {
 
 function preinsert(num){
 	var remain = $('#credit').html();
+	var timetable = $('#time'+num).val();
 	var opennum = num;
-	console.log(opennum);
 	$.ajax({
-		url:'oneselectLecture',
-		data:{opennum: opennum},
+		url:'timetablecheck',
 		type: 'POST',
-		success: function(one){
-			console.log(one);
-			if(one.encount>=one.newlimitcount){ //정원 초과시
-				alert("수강정원이 마감되었습니다."); 
+		data: {timetable: timetable, opennum: opennum},
+		success: function(result){
+			if(result>0){
+				alert('같은 시간에 등록된 수업이 있습니다.');
 				return false;
-			}
-			if(remain-one.credit<0){ //20학점 초과검사
-				alert('20학점을 초과하였습니다.');
-				return false;
-			}
-			$.ajax({
-				url: 'AjaxRetakeChek',
-				type: 'POST',
-				data: {opennum: opennum},
-				success: function(result){
-				if(result=='001'){ //insert
-					var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
-					if(con){
-						$.ajax({
-							url: 'AjaxEnrolmentInsert',
-							data:{opennum: opennum},
-							type:'POST',
-							success: function(result){
-								if(result>0){
-									location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
-								}
-							}
-						})
-					}else{
-						return false;
+			}else{$.ajax({
+					url:'oneselectLecture',
+					data:{opennum: opennum},
+					type: 'POST',
+					success: function(one){
+						console.log(one);
+						if(one.encount>=one.newlimitcount){ //정원 초과시
+							alert("수강정원이 마감되었습니다."); 
+							return false;
 						}
-					}
-				else{ //insert
-					var con = confirm('수강신청 하시겠습니까?')
-					if(con){
+						if(remain-one.credit<0){ //20학점 초과검사
+							alert('20학점을 초과하였습니다.');
+							return false;
+						}
 						$.ajax({
-							url: 'AjaxEnrolmentInsert',
-							data:{opennum: opennum},
-							type:'POST',
+							url: 'AjaxRetakeChek',
+							type: 'POST',
+							data: {opennum: opennum},
 							success: function(result){
-								if(result>0){
-									location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+							if(result=='001'){ //insert
+								var con = confirm('재수강 과목입니다. 재수강 할 경우 최종점수 B학점 입니다.')
+								if(con){
+									$.ajax({
+										url: 'AjaxEnrolmentInsert',
+										data:{opennum: opennum},
+										type:'POST',
+										success: function(result){
+											if(result>0){
+												location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+											}
+										}
+									})
+								}else{
+									return false;
+									}
+								}
+							else{ //insert
+								var con = confirm('수강신청 하시겠습니까?')
+								if(con){
+									$.ajax({
+										url: 'AjaxEnrolmentInsert',
+										data:{opennum: opennum},
+										type:'POST',
+										success: function(result){
+											if(result>0){
+												location.href='AjaxPreEnrolmentdelete?opennum='+opennum;
+											}
+										}
+									})
+								}else{
+									return false;
 								}
 							}
+						}
 						})
-					}else{
-						return false;
 					}
-				}
+					
+				})
 			}
-			})
 		}
-		
 	})
 }
 

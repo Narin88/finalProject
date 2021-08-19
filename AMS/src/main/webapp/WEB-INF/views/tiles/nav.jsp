@@ -55,7 +55,7 @@ pageEncoding="UTF-8" %>
                  <li>
                      <a href="<%=request.getContextPath() %>/lectureLookUp" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
-                         <span> 전체 강의 시간표 조회 </span>
+                         <span> 강의 조회 </span>
                      </a>
                  </li>
                  <li>

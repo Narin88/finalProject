@@ -133,7 +133,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content-page">
 	<div class="card-body">
 		<div align="center">
-		<h2>전체 강의 조회</h2>
+		<h2>강의 조회</h2>
 			<table class="table table-bordered" style="vertical-align: middle;">
 				<tbody>
 					<tr>
@@ -172,7 +172,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 										</td>
 					</tr>
 					<tr>
-						<th>위치</th>		<td><select name="location" class="form-control">
+						<th>강의실</th>		<td><select name="location" class="form-control">
 												<option value="">전체</option>
 												<c:forEach items="${room }" var="room">
 													<option value="${room.location }">${room.location }</option>
@@ -254,7 +254,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 							<td><b>수강학과</b></td>		<td><input type="text" class="form-control" name="plan_mname" readonly></td>
 							<td><b>수강학부</b></td>		<td><input type="text" class="form-control" name="plan_dname" readonly></td>
 							<td><b>강의실</b></td>		<td><input type="text" class="form-control" name="plan_lrname" readonly></td>
-							<td><b>교재</b></td> 		<td><input type="text" class="form-control" name="plan_book" readonly></td>
+							<td><b>교재</b></td> 			<td><input type="text" class="form-control" name="plan_book" readonly></td>
 						</tr>
 						<tr>
 							<td><b>강의코드</b></td> 		<td colspan="3"><input type="text" class="longform-control" name="plan_lnum" readonly></td>
@@ -288,7 +288,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<td><b font-size="14px">2. 주차별 강의 진행 과정</b><span style="color: #aaa;"> (최대 300자) </span></td>
+								<td><b style = "font-size:14px">2. 주차별 강의 진행 과정</b><span style="color: #aaa;"> (최대 300자) </span></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -505,6 +505,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			//{header: ' ', name: 'seq'},
 			{ header: "강의코드", name: "lnum" },
 			{ header: "강의명", name: "lname" },
+			{ header: "학과", name: "dname" },
+			{ header: "전공", name: "mname" },
 			{ header: "이수구분", name: "division" },
 			{ header: "학점", name: "credit" },
 			{ header: "대상학년", name: "target" },

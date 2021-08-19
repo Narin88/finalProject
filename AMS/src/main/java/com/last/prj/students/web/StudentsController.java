@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -168,20 +169,20 @@ public class StudentsController {
 
 		String path = null;
 		vo.setSid((String) session.getAttribute("id"));
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String securePwd = encoder.encode(vo.getPwd());
+		vo.setPwd(securePwd);
+		
+		// boolean isRealPwd = BCrypt.checkpw(vo.getPwd(), securePwd);
 		int result = stService.studentUpdate(vo);
 
 		if (result != 0) {
-
 			System.out.println("비밀번호 변경됨.");
-
-			stService.studentUpdate(vo);
-
 			model.addAttribute("st", stService.studentInfo(vo));
 			path = "students/studentInfo.tiles";
 		} else {
-
 			System.out.println("비밀번호 변경 안 됨.");
-
 			path = "students/infoModify.tiles";
 		}
 

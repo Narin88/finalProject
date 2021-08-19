@@ -74,6 +74,12 @@ public class HwStudentServiceImpl implements HwStudentService{
 	
 		return map.hwSAllList(vo);
 	}
+
+	@Override
+	public String hwCount(HwStudentVO vo) {
+		
+		return map.hwCount(vo);
+	}
 	
 	
 }

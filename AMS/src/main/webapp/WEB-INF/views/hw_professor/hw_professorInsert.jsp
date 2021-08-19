@@ -91,11 +91,12 @@
 </head>
 <body>
 <div class="content-page">
-	<div class="card-body">
-		<div id="grid" >
-			<h2 align="center">등록가능한 과제 목록</h2>
-		</div>
-
+	<div id="card" class="card-body">
+		<div class="gridC">
+			<div id="grid" >
+				<h2 align="center">과제 등록가능한 강의 목록</h2>
+			</div>
+		</div>	
 <!-- The Modal -->
 		<div id="myModal" class="modalEE">
 		<!-- Modal content -->
@@ -173,8 +174,9 @@
 	 
 	// When the user clicks on the button, open the modal 
 	
-	$(".card-body").on("click","#hwInsert",function(){
+	$(".gridC").on("click","#hwInsert",function(){
 		var a= $(this).data('num'); //
+		console.log(a);
         grid.on('click', ev => {
 			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 			ClickData(data,a);

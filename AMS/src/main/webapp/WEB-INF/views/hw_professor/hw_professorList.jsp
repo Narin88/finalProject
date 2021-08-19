@@ -38,7 +38,7 @@
 	<div class="card-body">
 		<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
 		<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
-		<h4 align="center">과제 목록</h4>
+		<h4 align="center">등록한 과제 목록</h4>
 		<div class="mbox">
 		<form id="frmHw" name="frmHw"  method="post">
 		<sec:csrfInput/>
@@ -72,6 +72,11 @@
 						<div class="movbox">
 							<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='hwPfInsert'">과제 등록</button>
 						</div>
+					<div>
+						<b style="font-weight: bold;float:right;"># 제출학생이 한명이라도 있으면 삭제가 <font color="red">불가능</font>합니다.
+						 <br># 검색의 기본값은 <font color="red">2021년 </font>입니다.
+						 </b>
+					</div>
 			 </form>
 			</div>
 			<!-- 과제 조회 END -->
@@ -160,14 +165,16 @@
 		var a=	$(this).data('id');
 		var b= $(this).data('num');
 		hwPfDeleteFrm.registerId.value=a;
-		if(confirm(' * '+b+' '+' * ' + '삭제 하시겠습니까 ?')==true){
+		if(confirm('제목 :  "'  + b + '"  을 삭제 하시겠습니까 ?')==true){
 			alert("삭제가 완료되었습니다.");
 			hwPfDeleteFrm.submit();
 		}else{
 			return false;
 		}
 	});
-				
+	$(".hwTable1").on("click","#hwNDelete",function(){
+		alert("제출학생이 있어 삭제가 불가능합니다.");
+	});			
 
 // Get the modal
 	var modal = document.getElementById('myModal');
@@ -275,10 +282,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 			});		  	  
 		}
 			  		    
-		// 업데이트 실행 이벤트
-	  	grid.on('response', data => {
-	  		console.log('data : ', data);
-	  	});
+	
 						
 		//파일명이 저장된 값이 있는 것은 다운되고 없는것은 파일없다는 alert경고창
 	  	grid.on('dblclick', ev => {
@@ -343,11 +347,11 @@ $(".hwTable1").on("click","#inquiry",function(){
 		{
 			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',
 			lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
-			pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지',status:'<c:if test="${list.hwstatus > 0 }"><span style="color:red;">진행중</span></c:if><c:if test="${list.hwstatus <= 0}"><span style="color:blue;">마감</span></c:if>',
+			pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지',status:'<c:if test="${list.hwstatus >= 0 }"><span style="color:red;">진행중</span></c:if><c:if test="${list.hwstatus < 0}"><span style="color:blue;">마감</span></c:if>',
 			register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>',
 			inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"">조회</button> ',
-			deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><span style="color: crimson;">삭제불가</span></c:if>',
-			updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="${list.pperiod}" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">변경</button>',
+			deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><button type="button" id="hwNDelete" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if>',
+			updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="<fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/>" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">변경</button>',
 			opennum:'${list.opennum}'
 		},
 		</c:forEach>
@@ -430,10 +434,11 @@ $(".hwTable1").on("click","#inquiry",function(){
 						
 		$('#noSubmit3 tbody').empty();
 		$('<tr>')	
-			.append($('<td><input class="form-control" type="text" id="startDate"  value="'+resultDate+'" disabled></td>'))	
-			.append($('<td><input class="form-control" tpye="text" id="pcoId" value="'+c+'" disabled></td>'))
+			.append($('<td class="dateTd"><input class="form-control" type="text" id="startDate"  value="'+resultDate+'" disabled></td>'))	
+			.append($('<td class="pcommentTd"><input class="form-control" tpye="text" id="pcoId" value="'+c+'" disabled></td>'))
 			.append($('<td><input type="file" id="file" name="file"></td>'))
-			.append($('<td><button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="updateSubmit();">변경</button></td>'))
+			.append($('<td><button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="updateSubmit();">변경</button><button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" id="updateReset">취소</button></td></td>'))
+			.append($('<td>'))
 			.appendTo('#noSubmit3 tbody');		
 		            
 		$('.dateTd').on("click", function(){
@@ -441,12 +446,12 @@ $(".hwTable1").on("click","#inquiry",function(){
 			$('#startDate').attr("value",null);
 		});
 		
-		$('.pcommentTd').on("dblclick", function(){
+		$('.pcommentTd').on("click", function(){
 			$('#pcoId').attr("disabled",false);
 			$('#pcoId').attr("value",null);
 		});
 						
-		$('.updateReset').on("click", function(){
+		$('#updateReset').on("click", function(){
 			$('#startDate').attr("disabled",true);
 			$('#startDate').attr("value",resultDate);
 			$('#pcoId').attr("disabled",true);
@@ -487,14 +492,18 @@ $(".hwTable1").on("click","#inquiry",function(){
 		var b=$("#pcoId").val();
 		udFrm.pcomment.value=b;
 		var filen=$('#file').val();
-		if(filen == ""){
-			alert("파일을 입력해주세요");
+		if(a=="" || b==""){
+			alert("제출기간 및 과제제목 확인");
 		}else{
-			if(confirm(' 입력값으로 변경하시겠습니까 ? ')==true){
-				alert("변경이 완료되었습니다");
-				udFrm.submit();
+			if(filen == ""){
+				alert("파일을 입력해주세요");
 			}else{
-				return false;
+				if(confirm(' 입력값으로 변경하시겠습니까 ? ')==true){
+					alert("변경이 완료되었습니다");
+					udFrm.submit();
+				}else{
+					return false;
+				}
 			}
 		}
 	}

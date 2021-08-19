@@ -41,14 +41,17 @@ public class HwStudentController {
 	}
 	
 	@RequestMapping("hwSelect")
-	public String hwSelectList(Model model,HwStudentVO vo,HttpSession session) {
+	public String hwSelectList(Model model,HwStudentVO vo,HttpSession session,HttpServletRequest req) {
 		vo.setSid((String) session.getAttribute("id"));
-
+		String lname=req.getParameter("lname");
 		
-	
+		model.addAttribute("lname",lname);
 		//해당강의 과제조회
 		List<Map<String, Object>> result =service.hwsSelectList(vo);
 		model.addAttribute("result",result);
+		
+		String count=service.hwCount(vo);
+		model.addAttribute("count",count);
 		return "hw_student/hw_SelectList.tiles";
 	}
 	

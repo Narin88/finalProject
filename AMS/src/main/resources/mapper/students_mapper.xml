@@ -37,7 +37,7 @@
 		AND P.PID = S.PID
 		AND S.SID = #{sid}
 	</select>
-	
+	<!-- 총점트리거 -->
 	<!-- 학생 본인 성적 조회 -->	
 	<select id="scoreView" resultType="StudentsVO">
 		SELECT M.*, 

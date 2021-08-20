@@ -37,6 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		<div id="pdfwrap" class ="pdfwrap">
 			<h2>학생 성적 확인</h2>
 			<div id="grid"></div>
+			<h2>이수구분별 취득 학점</h2>
 			<div id="gird2"></div>
 		</div>
 	</div>

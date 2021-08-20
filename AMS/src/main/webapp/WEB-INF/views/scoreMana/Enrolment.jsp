@@ -89,7 +89,7 @@
 			</div>
 		</div>
 		<div id="grid" class="grid">
-			<h2 align="center"> 수강신청 리스트 </h2>
+			<h2 align="center"> 전체 강의 리스트 </h2>
 			<div class="seachbox" align="right">
 				<select id="seachgubun" class="form-control">
 					<option value="lname">과목명</option>
@@ -100,7 +100,7 @@
 			</div>
 		</div>
 		<div id="scoreList" class="scoreList">
-			<h3 align="center"> 나의 수강 목록</h3>
+			<h3 align="center"> 수강신청 내역</h3>
 			<div align="right">
 				<button type="button" id="deleteBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">수강 취소</button>
 			</div>
@@ -110,7 +110,7 @@
 		<div id="showmodal" align="center">
 			<a class="modal_close_btn">닫기</a>
 			<div class="modal-body">
-			<h2>수강 등록</h2>
+			<h2>수강 꾸러미 내역</h2>
 			<sec:csrfInput />
 				<table class="table table-bordered" id="preEnroltbl">
 					<thead>

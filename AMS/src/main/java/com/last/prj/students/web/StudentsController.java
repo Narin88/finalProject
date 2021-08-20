@@ -1,6 +1,7 @@
 package com.last.prj.students.web;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.last.prj.common.ImageUpload;
 import com.last.prj.preenrolment.service.PreEnrolmentService;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
@@ -59,9 +61,6 @@ public class StudentsController {
 
 		// 지도교수 강의정보
 		model.addAttribute("al", stService.proLectureList(svo));
-		
-		String realPath = session.getServletContext().getRealPath("/resources/img/students/");
-		System.out.println(realPath);
 		
 		return "students/studentInfo.tiles";
 	}
@@ -235,6 +234,33 @@ public class StudentsController {
 		data.put("data", datas);
 		
 		return data;
+	}
+	
+	@RequestMapping("imageUpload")
+	public String imgUpload(@RequestParam("pic") MultipartFile file, Model model, HttpSession session, StudentsVO vo) throws IllegalStateException, IOException {
+		String path = session.getServletContext().getRealPath("resources/image/students");
+		
+		String sid = (String)session.getAttribute("id");
+		vo.setSid(sid);
+		vo = stService.studentInfo(vo);
+		
+		if (vo.getPicture() != null && !vo.getPicture().isEmpty()) {
+			File orgFile = new File(path + File.separator + vo.getPicture());
+			orgFile.delete();
+			System.out.println("파일삭제 성공~~~~~~~~~~~~~~~~~~~~~~~~~");
+		}
+		
+		if(!file.getOriginalFilename().isEmpty()) {
+			file.transferTo(new File(path, file.getOriginalFilename()));
+			System.out.println("경로 ==== " + path);
+			System.out.println("파일이름 === " + file.getOriginalFilename());
+			System.out.println("성공!!!!!!!!!!!!!!!!!!!!!");
+			
+			vo.setPicture(file.getOriginalFilename());
+			stService.studentPicUpdate(vo);
+		}
+		
+		return "redirect:studentInfo";
 	}
 	
 }

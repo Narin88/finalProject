@@ -74,7 +74,7 @@ align: right;
 		<%-- <sec:authorize access="hasRole('ROLE_PRO')"> --%>
 		<div>
 			<div align="left" style="margin-left: 113px; margin-top: 10px; display: flex; width: 100%;">
-				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="imgUpload">
+				<form id="frm" name="frm" method="post" encType="multipart/form-data" action="imageUpload">
 					<label class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">
 	   					 <input type="file" style="display:none;" id="changeImg" name="pic" multiple="multiple">사진변경</button>
 	   				 </label>

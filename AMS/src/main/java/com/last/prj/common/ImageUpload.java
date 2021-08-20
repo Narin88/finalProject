@@ -20,7 +20,7 @@ public class ImageUpload extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 업로드 경로
-		String uploadPath = getServletContext().getRealPath("/resources/img") + File.separator + UPLOAD_DIR;
+		String uploadPath = getServletContext().getRealPath("/resources/image") + File.separator + UPLOAD_DIR;
 		// getServlet().getRealPath("") 단점
 		// - 애플리케이션 배포하다가 기존 서버를 clean하면 업로드폴더가 싹 날라감
 		// - 절대경로로 지정해서 업로드하는게 안전함

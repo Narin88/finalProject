@@ -47,7 +47,7 @@ LEFT OUTER JOIN hw_professor p
       	 </if>
       	 ORDER BY p.register_date desc
 	</select>
-	<!-- 과제제출한 학생목록 -->
+	<!-- 과제제출한 학생목록 
 	<select id="hw_submitList" resultType="map">
 	 SELECT 
 	 		 idn.id "submitSid"
@@ -72,6 +72,42 @@ fir LEFT OUTER JOIN
  	  WHERE fir.sid = idn.id
    ORDER BY se.submit_date asc
 	</select>
+	-->
+	
+	<!-- 과제제출한 학생목록 수정버전 -->
+	<select id="hw_submitList" resultType="map">
+		SELECT 
+				 idn.ID "submitSid"
+		        ,idn.NAME "name"
+		        ,s.SUBMIT_FILE "submit_file"
+		        ,to_char(s.submit_date,'yyyy.mm.dd hh24:mi') "submit_date"
+		        ,s.SCOMMENT "s_comment"
+		        ,s.score "score"
+		        ,s.register_id "registerId"
+		        ,p.opennum "opennum"
+			   FROM hw_student s
+		     JOIN hw_professor p
+		      on s.REGISTER_ID= p.REGISTER_ID
+		     JOIN id_name idn
+		       on  s.SUBMIT_SID=idn.ID
+		     WHERE s.REGISTER_ID=#{registerId}
+		   ORDER BY s.submit_date asc
+	</select>
+	
+	
+	<!--과제미제출자  수정버전--> 
+	<select id="hw_submitNList" resultType="map">
+   SELECT 	idn.id "submitSid"
+   		    ,idn.name "name"
+     FROM  	score_mana sm
+  	 LEFT 	outer join hw_student s 
+ 	   ON	sm.SID=s.SUBMIT_SID
+ 	 JOIN  id_name idn
+ 	   ON  idn.id=sm.sid
+    WHERE   sm.opennum=#{opennum}
+      AND   s.SUBMIT_SID is null
+	</select>
+	
 	
 	<!-- 강의년도 select -->
 	<select id="hw_ySelect" resultType="map">
@@ -130,13 +166,7 @@ fir LEFT OUTER JOIN
           	
      </delete>
 	
-	<!-- 제출학생 파일 전체삭제 -->
-	<delete id="submitDelAll" >
-		DELETE
-		  FROM	hw_student
-		 WHERE register_id=#{registerId}
-		  
-	</delete>
+
 	<!-- 등록페이지/ 과제등록가능한 교수 강의목록 default 2021년-->
 	<select id="hwPfInsertSelect" resultType="map">
 		 SELECT  

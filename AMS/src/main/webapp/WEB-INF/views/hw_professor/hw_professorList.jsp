@@ -1,164 +1,200 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE HTML>
 <html>
 <head>
 <META charset="UTF-8">
-<head> 
-	<title>과제 리스트 :: No.M University</title>
+<head>
+<title>과제 리스트 :: No.M University</title>
 <style>
-.form-control{
+.form-control {
 	display: inline;
 	width: 150px;
 }
-.mbox{
-	margin-top: 20px; 
+
+.mbox {
+	margin-top: 20px;
 }
-.form-control:disabled, .form-control[readonly]{
+
+.form-control:disabled, .form-control[readonly] {
 	background-color: white;
 }
+
 .btn15 {
-  height: 15px;
+	height: 15px;
 }
-.movbox{
+
+.movbox {
 	display: inline;
 	float: right;
 }
 </style>
 </head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwList.css"/>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hwList.css" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+	type="text/css" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
-    />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <body>
-<div class="content-page">
-	<div class="card-body">
-		<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
-		<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
-		<h4 align="center">등록한 과제 목록</h4>
-		<div class="mbox">
-		<form id="frmHw" name="frmHw"  method="post">
-		<sec:csrfInput/>
-			<input type="hidden" id="ye" name="ye">
-			<input type="hidden" id="te" name="te">
-			<input type="hidden" id="ln" name="ln">  
-				<label for="lyear">강의년도:</label>						
-				<select name="lyear" id="lyear" class="form-control">			
-						<option value="2021" selected="selected">2021</option>  
+	<div class="content-page">
+		<div class="card-body">
+			<!-- 강의년도 / 강의학기  설정하면 해당하는 강의명만 나오도록 -->
+			<!-- 년도,학기,강의명 별,진행중,마감 select 설정 -->
+			<h4 align="center">등록한 과제 목록</h4>
+			<div class="mbox">
+				<form id="frmHw" name="frmHw" method="post">
+					<sec:csrfInput />
+					<input type="hidden" id="ye" name="ye"> <input
+						type="hidden" id="te" name="te"> <input type="hidden"
+						id="ln" name="ln"> <label for="lyear">강의년도:</label> <select
+						name="lyear" id="lyear" class="form-control">
+						<option value="2021" selected="selected">2021</option>
 						<c:forEach items="${ySelect}" var="ySelect">
-							<option value="${ySelect.lyear }" <c:if test="${ySelect.lyear==param.lyear }"> selected="selected"</c:if>>${ySelect.lyear }</option>
-					 </c:forEach>	 
-				</select>
-							
-				<label for="term">강의학기:</label>
-				<select name="term" id="term" class="form-control">
-				  <option value="">선택</option>	
-				  <option value="1" <c:if test="${param.term==1 }"> selected="selected"</c:if>>1학기</option>
-				  <option value="2" <c:if test="${param.term==2 }"> selected="selected"</c:if>>2학기</option>
-				</select>
-						
-				<label for="lnum">강의명:</label>
-					<select name="lnum" id="lnum" class="form-control">
-					<option value="">선택</option>	
-					  <c:forEach items="${lName}" var="lName">
-						  <option value="${lName.lnum }" <c:if test="${lName.lnum==param.lnum }"> selected="selected"</c:if>> ${lName.lname } </option>	
-							 </c:forEach>	 
-						</select>
-						<button type="button" onclick="selectSubmit();" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">검색</button>
-						<button type="button" onclick="resetFunction();" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">초기화</button>
-						<div class="movbox">
-							<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="location.href='hwPfInsert'">과제 등록</button>
-						</div>
-					<div>
-						<b style="font-weight: bold;float:right;"># 제출학생이 한명이라도 있으면 삭제가 <font color="red">불가능</font>합니다.
-						 <br># 검색의 기본값은 <font color="red">2021년 </font>입니다.
-						 </b>
+							<option value="${ySelect.lyear }"
+								<c:if test="${ySelect.lyear==param.lyear }"> selected="selected"</c:if>>${ySelect.lyear }</option>
+						</c:forEach>
+					</select> <label for="term">강의학기:</label> <select name="term" id="term"
+						class="form-control">
+						<option value="">선택</option>
+						<option value="1"
+							<c:if test="${param.term==1 }"> selected="selected"</c:if>>1학기</option>
+						<option value="2"
+							<c:if test="${param.term==2 }"> selected="selected"</c:if>>2학기</option>
+					</select> <label for="lnum">강의명:</label> <select name="lnum" id="lnum"
+						class="form-control">
+						<option value="">선택</option>
+						<c:forEach items="${lName}" var="lName">
+							<option value="${lName.lnum }"
+								<c:if test="${lName.lnum==param.lnum }"> selected="selected"</c:if>>
+								${lName.lname }</option>
+						</c:forEach>
+					</select>
+					<button style="margin-top: 5px;" type="button"
+						onclick="selectSubmit();"
+						class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">검색</button>
+					<button style="margin-top: 5px;" type="button"
+						onclick="resetFunction();"
+						class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">초기화</button>
+					<div class="movbox">
+
+						<button type="button"
+							class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light"
+							onclick="location.href='hwPfInsert'">과제 등록</button>
 					</div>
-			 </form>
+					<div>
+						<b style="font-weight: bold; float: right;"># 제출학생이 한명이라도 있으면
+							삭제가 <font color="red">불가능</font>합니다. <br># 양식파일을 클릭하면 다운로드가
+							<font color="red">가능 </font>합니다. <br># 검색의 기본값은 <font
+							color="red">2021년 </font>입니다. <br>
+						</b>
+					</div>
+				</form>
 			</div>
 			<!-- 과제 조회 END -->
-			
+
 			<div class="hwTable1">
 				<!-- gird 첫번째 -->
-				<div id="grid" ></div>
-					<!-- model -->
+				<div id="grid"></div>
+				<!-- model -->
 
-			        <div id="my_offer" align="center">
-			        		
-			          <a class="modal_close_btn">닫기</a>
-			          <div class="modal-body">
-			              <div class="noSubmit"></div>
-			              <div align="center" >
-			              	<div style="width:100%; float:right;">
-			                			<button style="float:right; margin-right: 10px" type="button" id="selectDelBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
-										<button style="float:right;" id="selectScoreBtn" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">점수정정</button>
-			             	<b style="width:100%;font-weight: bold;float:right;text-align:right;margin-bottom:5px;"># 과제를 미제출한 학생은 점수입력이 <font color="red">불가능</font>합니다.<br># 제출파일은 클릭시 다운로드가 <font color="red"> 가능 </font>합니다.</b>
-			             	</div>	
-			             		<!-- gird 두번째 -->
-									<div id="grid2"></div>
-			              </div>
-			          </div>
-			        </div>
-			        <!-- model end -->
-					
-					<!-- model2 -->
+				<div id="my_offer" align="center">
 
-			        <div id="my_offer2" align="center">
-			        
-			
-			          <a class="modal_close_btn" style="float:right;">닫기</a>
-			          <div class="modal-body">
-			          	<div class="" style="border-radius:10px;">
-			           		 <h4 align="center">과제변경전</h4>
-			           				<table border="1" id="noSubmit2" class="table table-bordered">
-										<thead>
-											<tr>
-												<th>강의년도</th>
-												<th>학기</th>
-												<th>강의명</th>
-												<th>제출기간</th>
-												<th>과제제목</th>
-												<th>양식파일</th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-						</div>
-			              <!-- 변경 눌렀을때 실행되는 form -->		
-								<form action="hwUpdate" id="udFrm" name="udFrm" method="post" enctype="multipart/form-data" >
-								<sec:csrfInput/>
-									<input type="hidden" id="pperiod" name="pperiod">
-									<input type="hidden" id="pcomment" name="pcomment">
-									<input type="hidden" id="registerId" name="registerId">
-										<br><br>
-										<table border="1" id="noSubmit3" class="table table-bordered">
-											<thead>
-												<tr>
-													<th>제출기간</th>
-													<th>과제제목</th>
-													<th>양식파일</th>
-													<th>비고</th>
-												</tr>
-											</thead>
-											<tbody></tbody>
-										</table>
-								</form>
+					<a class="modal_close_btn">닫기</a>
+					<div class="modal-body">
+						<div class="noSubmit"></div>
+						<div align="center">
+							<div style="width: 100%; float: right;">
+								<button
+									style="float: right; margin-top: -40px; "
+									type="button" id="selectDelBtn"
+									class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
+								<button style="float: right; margin-top: -40px;"
+									id="selectScoreBtn"
+									class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">점수정정</button>
+								<b
+									style="width: 100%; font-weight: bold; float: right; text-align: right; margin-bottom: 5px;">
+									 <font color="gray"> 점수를 정정하면 성적에 자동 반영됩니다. </font><br>
+									# 점수는 <u>최대 20점</u> <font color="red"> 입력 </font> 해주시기 바랍니다.<br>#
+									제출파일은 클릭시 다운로드가 <font color="red"> 가능 </font>합니다.
+									 <br>
+								</b>
+							</div>
+							<!-- gird 두번째 -->
+							<div style="margin-top:15px;float:left;margin-left:50px;width:400px;">
+								<div id="grid3">
+								</div>
+							</div>
+							<!-- gird 두번째 -->
+							<div style="margin-top:15px;float:right; width:720px;">
+								<div id="grid2"></div>
 							</div>
 						</div>
 					</div>
-			        <!-- model end -->
-					    
+				</div>
+				<!-- model end -->
 
-				<%-- 	<!-- The Modal -->
+				<!-- model2 -->
+
+				<div id="my_offer2" align="center">
+
+
+					<a class="modal_close_btn" style="float: right;">닫기</a>
+					<div class="modal-body">
+						<div class="" style="border-radius: 10px;">
+							<h4 align="center">과제변경전</h4>
+							<table border="1" id="noSubmit2" class="table table-bordered">
+								<thead>
+									<tr>
+										<th>강의년도</th>
+										<th>학기</th>
+										<th>강의명</th>
+										<th>제출기간</th>
+										<th>과제제목</th>
+										<th>양식파일</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+						<!-- 변경 눌렀을때 실행되는 form -->
+						<form action="hwUpdate" id="udFrm" name="udFrm" method="post"
+							enctype="multipart/form-data">
+							<sec:csrfInput />
+							<input type="hidden" id="pperiod" name="pperiod"> <input
+								type="hidden" id="pcomment" name="pcomment"> <input
+								type="hidden" id="registerId" name="registerId"> <br>
+							<br>
+							<table border="1" id="noSubmit3" class="table table-bordered">
+								<thead>
+									<tr>
+										<th>제출기간</th>
+										<th>과제제목</th>
+										<th>양식파일</th>
+										<th>비고</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- model end -->
+
+
+			<%-- 	<!-- The Modal -->
 					<div id="myModal2" class="modal2">
 							 
 						<!-- Modal content -->
@@ -204,12 +240,13 @@
 						</div>
 					</div>
 <!-- MODAL HTML END--> --%>
-				</div>
-			</div>
-		<form id="hwPfDeleteFrm" name="hwPfDeleteFrm"  method="post" action="hwPfDelete">
-			<input type="hidden" id="registerId" name="registerId">
-		</form>
-<script>
+		</div>
+	</div>
+	<form id="hwPfDeleteFrm" name="hwPfDeleteFrm" method="post"
+		action="hwPfDelete">
+		<input type="hidden" id="registerId" name="registerId">
+	</form>
+	<script>
 	function selectSubmit(){
 		var a=$("#lnum option:checked").text();	
 		frmHw.ln.value=a;
@@ -231,7 +268,7 @@
 		alert("제출학생이 있어 삭제가 불가능합니다.");
 	});			
 
-
+		
 	       
 	        	// 조회 버튼을 클릭했을때 
 $(".hwTable1").on("click","#inquiry",function(){
@@ -240,6 +277,9 @@ $(".hwTable1").on("click","#inquiry",function(){
 	var b= $(this).data('num');
 	var count=$(this).data('count');
 	var checkVal=0;
+	
+	
+	
 	
 	
 	$.ajax({
@@ -253,9 +293,10 @@ $(".hwTable1").on("click","#inquiry",function(){
 			$("tfoot").empty();		
 			$(".noSubmit").empty();
 			$(".noSubmitSub").empty();
-			$('<h4 style="color:brown; float:left;"> 제출학생 리스트 </h4>').appendTo('.noSubmit');
-			$('<h6 style="color:gray; float:left;margin-left:30px;"> 점수를 정정하면 성적에 자동 반영됩니다. </h6>').appendTo('.noSubmit');
+			$('<h4 style="margin-left:80px;color:brown; text-align:center;"> 제출학생 리스트</h4>').appendTo('.noSubmit');
 			
+			
+	
 					
 /* grid start 조회했을때 모달창에서 뜨는 그리드
 ** 제출한 학생과제 삭제 delete & 점수 수정 update
@@ -284,17 +325,17 @@ $(".hwTable1").on("click","#inquiry",function(){
 		var grid = new tui.Grid( {
 			data:dataSource,
 			rowHeaders: ['checkbox'],	
-			bodyHeight:430,
+			bodyHeight:320,
 			el: document.getElementById('grid2'),
 			pagination: true,   //페이징 처리
 			pageOptions: {
 				useClient: true,   //페이징 처리
-				perPage: 10   //페이징 갯수
+				perPage: 8   //페이징 갯수
 			},
 			columns: [
-				{header: '학생학번',name: 'submitSid',width:100},
-				{header: '학생이름',name: 'name',width:100},
-				{header: '제출파일',name: 'submit_file',width:280},
+				{header: '학생학번',name: 'submitSid',width:90},
+				{header: '학생이름',name: 'name',width:90},
+				{header: '제출파일',name: 'submit_file',width:150},
 				{header: '제출날짜',name: 'submit_date',width:140},
 				{header: '학생코멘트',name: 's_comment'},
 				//	{header: '강의번호',name: 'opennum'},
@@ -305,14 +346,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 
 		grid.resetData(data)
 		//그리드가 실행된후 eachTest 0.5초후 함수 실행 " 과제 미제출자 구분 "
-		setInterval(eachTest , 500);
-		function eachTest(){	
-			$('[data-column-name="submit_file"]').each(function(i, item){	
-				if($(this).text()==""){
-					$(this).html("<p align='center' style='color:red;'>과제 미제출자</p>");
-				  	}
-		  		});			  			
-			}	
+		
 		//삭제 버튼 누를때  함수 실행
 		document.getElementById('selectDelBtn').addEventListener('click', hwSubmitDel);
 		//점수정정 버튼 누를때 함수 실행
@@ -334,11 +368,22 @@ $(".hwTable1").on("click","#inquiry",function(){
 				checkedOnly: false
 			});		  	  
 		}
-			  		    
+		 // 업데이트 실행 이벤트
+      	grid.on('response', ev => {
+      		  var {response} = ev.xhr;
+      		  var responseObj = JSON.parse(response);
+
+      		  console.log('result : ', responseObj.result);
+      		  console.log('data : ', responseObj.data);
+      		});
+		
+		
+		
+	
 		
 						
 		//파일명이 저장된 값이 있는 것은 다운되고 없는것은 파일없다는 alert경고창
-	  	grid.on('click', ev => {
+	  	grid.on('dblclick', ev => {
 			var data = grid.getRow(ev.rowKey); //그리드 한 행의 전체값
 			const isHeader= ev.targetType==="columnHeader";
 	  		var a=data.submit_file;
@@ -347,7 +392,8 @@ $(".hwTable1").on("click","#inquiry",function(){
 		    console.log(b);
 			if(ev.columnName =="submit_file" && !isHeader && a != null){
 				if(confirm(b+ '학생 과제파일')==true){
-					var filePath ="C:/Users/User/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload/hw_student/"+a;
+					var filePath ="/usr/local/apache-tomcat-9.0.52/webapps/AMS/resources/upload/hw_student/"+a;
+						//"C:/Users/User/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload/hw_student/"+a;
 							//"C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a
 					var fileName = a;
 					location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
@@ -361,6 +407,14 @@ $(".hwTable1").on("click","#inquiry",function(){
 	  	})
 	  	
 	  	
+	 
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
 	  	
 	  
 	  	
@@ -369,6 +423,55 @@ $(".hwTable1").on("click","#inquiry",function(){
 			alert("error");
 		}
 	});
+	
+	$.ajax({
+		type:"post",
+		url:"inquiry2",
+		data:{ registerId :a, opennum :b},
+		dataType:"json",
+		success: function(data){	
+			$("#grid3").empty();
+/* 			 //과제페이지 grid3
+			//grid3 start
+			var clsData3 = [
+				<c:forEach items="${nSubmit}" var="nSubmit">
+				{
+					id: '${nSubmit.submitSid}', name: '${nSubmit.name}'
+				},
+				</c:forEach> 
+			]; //컬럼DATA	
+				console.log(clsData3);	*/
+			// GRID 를 보여준다.
+			var grid3 = new tui.Grid( {
+				bodyHeight:320,
+				el: document.getElementById('grid3'),
+				pagination: true,   //페이징 처리
+				pageOptions: {
+					useClient: true,   //페이징 처리
+					perPage: 8   //페이징 갯수
+				},
+				columns: [
+					{header: '학생번호',name: 'submitSid',width:90},
+					{header: '이름',name: 'name',width:70}, //강의번호+분반
+					{header: '제출상태', name:'nSubmit',width:200}
+				], //컬럼갯수
+				data:data
+			});
+				
+			setInterval(eachTest , 500);
+			function eachTest(){	
+				$('[data-column-name="nSubmit"]').each(function(i, item){	
+					if($(this).text()==""){
+						$(this).html("<p align='center' style='color:red;'>과제 미제출자</p>");
+					  	}
+			  		});			  			
+				}	
+				
+				
+				
+			
+		}
+		})
 	
 	function modal(mm) {
 	    var zIndex = 9999;
@@ -441,15 +544,18 @@ $(".hwTable1").on("click","#inquiry",function(){
 		}
 		});
 	}
+	
+	
 	//과제페이지 grid
 	//grid start
 	var clsData = [
 		<c:forEach items="${result }" var="list">
 		{
-			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',lnum:'${list.lnum}',
+			lyear: '${list.lyear}', lterm: '${list.term}', lname : '${list.lname}',lnum:'${list.lnum}',register_id:'${list.register_id}',
 			lrcode: '${list.lrcode}', pcomment: '${list.pcomment}', register_date: '<fmt:formatDate value="${list.register_date }" pattern="yy.MM.dd HH:mm" /> ',
 			pperiod: '<fmt:formatDate value="${list.pperiod }" pattern="yy년MM월dd일"/>까지',status:'<c:if test="${list.hwstatus >= 0 }"><span style="color:red;">진행중</span></c:if><c:if test="${list.hwstatus < 0}"><span style="color:blue;">마감</span></c:if>',
-			register_file: '${list.register_file}' ,submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>',
+			register_file: '<i id="download2" data-id="${list.register_file }" class="mdi mdi-file-import" style="cursor:pointer;">${list.register_file }</i>' ,
+			submitCount:'<span style="color:red;">${list.submitCount }</span>&nbsp;/&nbsp;<span style="font-weight:bold;">${list.newlimitcount }</span>',
 			inquiryBtn:'<button type="button" id="inquiry" data-id="${list.register_id}" data-num="${list.opennum }" data-count="${list.submitCount}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"">조회</button> ',
 			deleteBtn:'<c:if test="${list.submitCount == 0}"><button type="button" id="hwDelete" data-id="${list.register_id}" data-num="${list.pcomment}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if> <c:if test="${list.submitCount > 0}"><button type="button" id="hwNDelete" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">삭제</button></c:if>',
 			updateBtn:'<button type="button" id="updateBtn" data-id="${list.register_id}" data-id2="<fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-dd"/>" data-id3="${list.pcomment}" data-id4="${list.register_file}" data-id5="${list.lyear}" data-id6="${list.term}" data-id7="${list.lname}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">변경</button>',
@@ -460,19 +566,20 @@ $(".hwTable1").on("click","#inquiry",function(){
 					  		
 	// GRID 를 보여준다.
 	var grid = new tui.Grid( {
-		bodyHeight:250,
+		bodyHeight:330,
 		el: document.getElementById('grid'),
 		pagination: true,   //페이징 처리
 		pageOptions: {
 			useClient: true,   //페이징 처리
-			perPage: 5   //페이징 갯수
+			perPage: 8   //페이징 갯수
 		},
 		columns: [
 			{header: '강의등록번호',name: 'opennum',width:100},
+			{header: '과제등록번호',name: 'register_id',width:100},
 			{header: '강의번호',name: 'lnum',width:80},
 			{header: '강의년도',name: 'lyear',width:70},
-			{header: '학기',name: 'lterm',width:60}, //강의번호+분반
-			{header: '분반',name: 'dividenum',width:60}, //강의번호+분반
+			{header: '학기',name: 'lterm',width:40}, //강의번호+분반
+			{header: '분반',name: 'dividenum',width:40}, //강의번호+분반
 			{header: '강의명',name: 'lname',width:90}, //년도+학기
 			{header: '수강상태',name: 'datastatus',width:60}, //강의번호+분반
 			{header: '과제제목',name: 'pcomment'},
@@ -574,6 +681,20 @@ $(".hwTable1").on("click","#inquiry",function(){
 	
 		
 	});
+	
+	$("#download2").click(function(){
+		var a=$(this).data('id');
+		console.log(a);
+		var filePath ="/usr/local/apache-tomcat-9.0.52/webapps/AMS/resources/upload/hw_professor/"+a;
+			//"C:/Users/User/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload/hw_professor/"+a;
+			//"C:/Users/User/git/finalProject/AMS/src/main/webapp/resources/upload/hw_student/"+a;
+		console.log(filePath);
+		var fileName = a;
+		location.href = "fileDownload?filePath="+filePath+"&fileName="+fileName;
+	});
+	
+	
+	
 	
 	function updateSubmit(){
 		var a=$('#startDate').val();	

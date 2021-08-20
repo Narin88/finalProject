@@ -50,4 +50,7 @@ public interface HwProfessorMap {
 		
 	//성적처리 테이블 평균 처리
 	int hwAvgUpdate(HwProfessorVO vo);
+	
+	//(교수)등록한과제 미제출한 학생목록 조회
+	List<Map<String, Object>> hw_submitNList(HwProfessorVO vo);
 }

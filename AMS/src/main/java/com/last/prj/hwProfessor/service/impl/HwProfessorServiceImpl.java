@@ -132,6 +132,12 @@ public class HwProfessorServiceImpl implements HwProfessorService{
 		return count;
 	}
 
+	@Override
+	public List<Map<String, Object>> hw_submitNList(HwProfessorVO vo) {
+	
+		return map.hw_submitNList(vo);
+	}
+
 	
 	
 }

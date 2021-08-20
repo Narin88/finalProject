@@ -92,11 +92,35 @@ public class HwProfessorController {
 						//	System.out.println(register_id);
 					//List<Map<String, Object>> submitResult = service.hw_submitList(vo);
 					//model.addAttribute("submitList", submitResult);
+		//과제 제출자 조회리스트
 		List<Map<String, Object>> inquiry = service.hw_submitList(vo);
 		model.addAttribute("inquiry",inquiry);
 		System.out.println(inquiry);
-		return  inquiry;
+		//미제출자 조회리스트
+		List<Map<String, Object>> nSubmit = service.hw_submitNList(vo);
+		model.addAttribute("nSubmit",nSubmit);
+		System.out.println("=============" +nSubmit);
+		return inquiry;
+	
 	}
+	
+	@RequestMapping("inquiry2")
+	@ResponseBody
+	public List<Map<String, Object>> inquiry2(HttpServletRequest req,Model model,HwProfessorVO vo) {
+		
+					//String register_id=req.getParameter("register_id");
+					//vo.setRegisterId(register_id);
+						//	System.out.println(register_id);
+					//List<Map<String, Object>> submitResult = service.hw_submitList(vo);
+					//model.addAttribute("submitList", submitResult);
+		//미제출자 조회리스트
+		List<Map<String, Object>> nSubmit = service.hw_submitNList(vo);
+		model.addAttribute("nSubmit",nSubmit);
+		System.out.println("=============" +nSubmit);
+		return nSubmit;
+	
+	}
+	
 	//교수 점수 기능
 	
 	@RequestMapping(value="scoreIn",method=RequestMethod.PUT)

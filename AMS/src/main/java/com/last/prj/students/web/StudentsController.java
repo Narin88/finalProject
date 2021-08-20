@@ -135,13 +135,13 @@ public class StudentsController {
 		// 수강 신청한(했던) 과목 조회
 
 		// select
-		vo.setLyear("2021");
 		vo.setTerm(1);
 
 		// session
 		vo.setSid((String) session.getAttribute("id"));
 
 		model.addAttribute("st", stService.appliedLecture(vo));
+		model.addAttribute("st1", stService.confirmEvalCheck(vo));
 
 		return "students/appliedLecture.tiles";
 	}

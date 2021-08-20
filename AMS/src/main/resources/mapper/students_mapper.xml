@@ -76,19 +76,15 @@
 	<!-- 학생 본인 수강 신청 과목 조회 -->
 	<select id="appliedLecture" resultType = "StudentsVO">
 		SELECT
-		 I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT, l.lyear,l.term,
+		 	I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT,
             L.TIMETABLE, L.DIVIDENUM, L.OPENNUM,
    			P.PNAME, P.EMAIL, P.PID,
    			(SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4)) PPHONE,
-   			R.LRNAME, ER.EVALCHECK
-        ,er.sid
+   			R.LRNAME
 		FROM STUDENTS S, SCORE_MANA M, PROFESSOR P,
-		    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R, EvaluationResult er
-		WHERE S.SID = M.SID
-		and er.opennum = m.opennum				
-		and er.opennum = l.opennum		
+		    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R
+		WHERE S.SID = M.SID	
 		AND P.PID = L.PID
-    and er.sid = s.sid
 		AND L.PID = I.PID
 		AND L.LRCODE = R.LRCODE
 		AND M.OPENNUM = L.OPENNUM
@@ -97,6 +93,32 @@
 		AND L.TERM = #{term}
 		AND S.SID = #{sid}
 		ORDER BY I.CREDIT DESC
+	</select>
+	
+	<!-- 강의 평가 불러오기용 -->
+	<select id = "confirmEvalCheck" resultType = "StudentsVO">
+		SELECT Q.OPENNUM, ER.EVALCHECK
+		FROM (SELECT
+				 	I.LNUM, I.LNAME, FIND_CODE_NAME(100, I.DCODE) DIVISION, I.CREDIT, S.SID,
+		            L.TIMETABLE, L.DIVIDENUM, L.OPENNUM,
+		   			P.PNAME, P.EMAIL, P.PID,
+		   			(SUBSTR(PPHONE, 1, 3) || '-' || SUBSTR(PPHONE, 4, 4) || '-' || SUBSTR(PPHONE, 7, 4)) PPHONE,
+		   			R.LRNAME
+				FROM STUDENTS S, SCORE_MANA M, PROFESSOR P,
+				    LECTURE_INFO I, LECTURE L, LECTURE_ROOM R
+				WHERE S.SID = M.SID	
+				AND P.PID = L.PID
+				AND L.PID = I.PID
+				AND L.LRCODE = R.LRCODE
+				AND M.OPENNUM = L.OPENNUM
+				AND I.LNUM = L.LNUM
+				AND L.LYEAR = TO_CHAR(SYSDATE,'RRRR')
+				AND L.TERM = #{term}
+				AND S.SID = #{sid}
+				ORDER BY I.CREDIT DESC)
+		 Q, EVALUATIONRESULT ER
+        WHERE Q.OPENNUM = ER.OPENNUM
+        AND Q.SID = ER.SID
 	</select>
 	
 	<!-- 강의 시간표들 조회 -->

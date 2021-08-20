@@ -13,8 +13,6 @@ public class EvaluationResultVO {
 	private String a4;//4
 	private String a5;//5
 	private String a6;//6
-	private String a7;//7
-	private String a8;//8
 	private String cnt;//값
 	private String lnum;//강의번호
 	private String lyear;

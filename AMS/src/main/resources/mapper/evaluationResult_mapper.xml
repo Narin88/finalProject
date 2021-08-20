@@ -4,21 +4,22 @@
 	namespace="com.last.prj.evaluationResult.service.impl.EvaluationResultMapper">
 
 
+	<insert id="afterLectureApplied">
+		INSERT INTO EVALUATIONRESULT (OPENNUM, SID) 
+		VALUES (#{opennum}, #{sid})
+	</insert>
+
 	<update id="EvaluationInsert" parameterType="EvaluationResultVO">
 		update
 		EVALUATIONRESULT
 		set a1 = #{a1},
-		a2= #{a2},
-		a3 = #{a3},
-		a4 = #{a4},
-		a5 =
-		#{a5},
-		a6 = #{a6},
-		a7 = #{a7},
-		evalcheck ='Y'
-		where
-		opennum =
-		#{opennum}
+			a2 = #{a2},
+			a3 = #{a3},
+			a4 = #{a4},
+			a5 = #{a5},
+			a6 = #{a6},
+			evalcheck ='Y'
+		where opennum = #{opennum}
 		and sid = #{sid}
 	</update>
 
@@ -35,8 +36,8 @@
 		order by a.${a2}
 	</select>
 	
-	<select id="EvaluationQ7Result" resultType="EvaluationResultVO">
-		SELECT a7
+	<select id="EvaluationQ6Result" resultType="EvaluationResultVO">
+		SELECT a6
 		FROM evaluationresult
 		WHERE opennum = #{opennum}
 	</select>

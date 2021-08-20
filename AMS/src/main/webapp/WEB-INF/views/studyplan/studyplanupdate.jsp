@@ -299,7 +299,6 @@ font-weight: bold;
           heightLeft -= pageHeight;
         }
         doc.save(filename);
-        alert("클릭됨");
       });
     });
   </script>

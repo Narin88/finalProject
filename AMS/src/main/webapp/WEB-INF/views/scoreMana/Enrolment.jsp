@@ -109,7 +109,7 @@
   <!-- model -->
 		<div id="showmodal" align="center">
 			<a class="modal_close_btn">닫기</a>
-			<div class="modal-body" id="pdfwrap">
+			<div class="modal-body">
 			<h2>수강 등록</h2>
 			<sec:csrfInput />
 				<table class="table table-bordered" id="preEnroltbl">

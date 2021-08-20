@@ -221,7 +221,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       	var grid = new tui.Grid( {
       		el: document.getElementById('grid'),
       		data: dataSource,
-      		rowHeaders: ['checkbox'],
       		pagination: true,   //페이징 처리
       	    pageOptions: {
       	    	useClient: true,   //페이징 처리

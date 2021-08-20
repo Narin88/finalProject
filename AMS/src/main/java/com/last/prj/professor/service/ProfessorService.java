@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.last.prj.students.service.StudentsVO;
 import com.last.prj.studyplan.service.StudyplanJoinVO;
 
 public interface ProfessorService {
@@ -13,11 +14,8 @@ public interface ProfessorService {
 	int professorInsert(ProfessorVO vo);
 	int professorUpdate(ProfessorVO vo);
 	int professorDelete(ProfessorVO vo);
-	
-	
 	List<ProfessorLectureVO> lectureList();
 	
-	
-	
-	
+	ProfessorVO professorInfo(ProfessorVO vo);
+	List<StudentsVO> guidanceStudent(String pid);
 }

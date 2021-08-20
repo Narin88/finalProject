@@ -24,4 +24,17 @@
 		and l.PID = #{pid}
 	</select>	
 	
+	<select id="professorInfo" parameterType="ProfessorVO" resultType="ProfessorVO">
+		select p.pid, p.pname,FIND_CODE_NAME(210,p.PSTATUS)as pstatus, p.EMAIL, p.PPHONE, p.PBIRTH, p.PGENDER,
+				mv.DNAME, mv.MNAME, FIND_CODE_NAME(220,p.position) as position
+		FROM PROFESSOR P, MAJOR_VIEW MV
+		WHERE P.MCODE = MV.MCODE
+		AND P.PID = #{pid}
+	</select>
+	
+	<select id="guidanceStudent" resultType="StudentsVO">
+		select sid, sname,SPHONE, GRADE, SGENDER, DISABLED,FIND_CODE_NAME(300,SSTATUS)as sstatus, SBIRTH
+		from students
+		where pid = #{pid}
+	</select>
 </mapper>

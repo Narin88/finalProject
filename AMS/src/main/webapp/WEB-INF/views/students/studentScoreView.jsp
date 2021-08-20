@@ -180,7 +180,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	  }); */
 
       html2canvas($("#pdfwrap")[0]).then(function (canvas) {
-        var filename = "LecturePlan_" + Date.now() + ".pdf";
+        var filename = "성적_" + Date.now() + ".pdf";
         var doc = new jsPDF("p", "mm", "a4");
         var imgData = canvas.toDataURL("image/png");
         var imgWidth = 210;
@@ -197,7 +197,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           heightLeft -= pageHeight;
         }
         doc.save(filename);
-        alert("클릭됨");
       });
     });
   </script>

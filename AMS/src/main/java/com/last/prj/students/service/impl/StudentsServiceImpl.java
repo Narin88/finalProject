@@ -103,4 +103,11 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.divisionList(vo);
 	}
 
+
+	@Override
+	public List<StudentsVO> confirmEvalCheck(StudentsVO vo) {
+		// 체크 여부로 강의 평가 부르기
+		return map.confirmEvalCheck(vo);
+	}
+
 }

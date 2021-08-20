@@ -16,19 +16,18 @@
 <table border="1" align="center">
 
 		<tr>	
-				<th>	년도/학기	</th> 
-				<th>강의번호</th>
-				<th>강의 명</th>
-				<th>담당교수</th>
-				<th>평점</th>
+			<th>년도/학기</th> 
+			<th>강의번호</th>
+			<th>강의 명</th>
+			<th>담당교수</th>
+			<th>평점</th>
 		</tr>
 <c:forEach items="${st }" var="st">
 		<tr>
-				<th>${st.lyear} - ${st.term}</th>
-				<th>	${st.lnum } - ${st.dividenum }</th>
-				<th>${st.lname }</th>
-				<th>${st.pname }</th>	
-				<th>				</th>	 
+			<th>${st.lyear} - ${st.term}</th>
+			<th>${st.lnum } - ${st.dividenum }</th>
+			<th>${st.lname }</th>
+			<th>${st.pname }</th>	
 		</tr>
 </c:forEach>
 </table>

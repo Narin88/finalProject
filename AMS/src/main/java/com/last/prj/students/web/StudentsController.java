@@ -1,6 +1,5 @@
 package com.last.prj.students.web;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.last.prj.common.ImageUpload;
 import com.last.prj.preenrolment.service.PreEnrolmentService;
 import com.last.prj.professor.service.ProfessorService;
 import com.last.prj.professor.service.ProfessorVO;
@@ -137,13 +134,13 @@ public class StudentsController {
 		// 수강 신청한(했던) 과목 조회
 
 		// select
-		vo.setLyear("2021");
 		vo.setTerm(1);
 
 		// session
 		vo.setSid((String) session.getAttribute("id"));
 
 		model.addAttribute("st", stService.appliedLecture(vo));
+		model.addAttribute("st1", stService.confirmEvalCheck(vo));
 
 		return "students/appliedLecture.tiles";
 	}

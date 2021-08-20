@@ -48,8 +48,8 @@ public class EvaluationResultController {
 	@RequestMapping("Eresultpro")//교수 결과 확인 페이지
 	public String EvaluationResultpr(Model model, EvaluationResultVO vo) {
 		model.addAttribute("num",vo.getOpennum());
-		model.addAttribute("st",dao.EvaluationQ7Result(vo));
-		System.out.println(dao.EvaluationQ7Result(vo));
+		model.addAttribute("st",dao.EvaluationQ6Result(vo));
+		System.out.println(dao.EvaluationQ6Result(vo));
 		
 		return "evaluation/evaluation_Result_pro.tiles";
 	}

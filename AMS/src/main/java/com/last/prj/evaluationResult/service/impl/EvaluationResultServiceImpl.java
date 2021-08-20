@@ -26,13 +26,19 @@ public class EvaluationResultServiceImpl implements EvaluationResultService {
 	}
 
 	@Override
-	public List<EvaluationResultVO> EvaluationQ7Result(EvaluationResultVO vo) {
-		return map.EvaluationQ7Result(vo);
+	public List<EvaluationResultVO> EvaluationQ6Result(EvaluationResultVO vo) {
+		return map.EvaluationQ6Result(vo);
 	}
 
 	@Override
 	public List<EvaluationResultVO> EresultSt(EvaluationResultVO vo) {
 		return map.EresultSt(vo);
+	}
+
+	@Override
+	public int afterLectureApplied(EvaluationResultVO vo) {
+		// 수강 신청 후 자동 인서트 (evalCheck 'N')
+		return map.afterLectureApplied(vo);
 	}
 
 

@@ -190,7 +190,7 @@ font-weight: bold;
 									<td style="text-align: left">8주차 강의</td>
 								</tr>
 								<tr>
-									<td><textarea placeholder="중간고사 기간" name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
+									<td><textarea placeholder="중간고사 기간" name="w8" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;"  maxlength="300"></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: left">9주차 강의</td>

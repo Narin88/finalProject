@@ -7,7 +7,6 @@
 	</select>
 	
 	<select id="preLectureList" resultType="PreEnrolmentVO" parameterType="StudentsVO">
-		
 		select l.LNUM||'-'||l.dividenum as lnum, li.lname, li.credit, FIND_CODE_NAME(100, li.dcode) as division,
         l.TIMETABLE||' / '||lr.LRNAME as timeTable,l.opennum,
         case when retake_Check(#{sid},l.opennum) = '001' then 'Y'
@@ -16,15 +15,16 @@
 		from lecture_info li, LECTURE l, lecture_room lr, MAJOR_VIEW mv
 		where li.LNUM = l.LNUM
 		and mv.MCODE = li.MCODE
+ 		and l.lyear = to_char(sysdate,'RRRR')
 		and l.LRCODE = lr.LRCODE
-		and l.lyear = to_char(sysdate,'RRRR')
-		and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM')<![CDATA[<=]]>08  then 1
-		           		else 2 end
-		and li.GRADE = #{grade}
+    	and l.DATESTATUS = '수강중'
+    	and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
+	                 else 2 end
 		and opennum not in (select opennum from preenrolment where sid = #{sid})
+
 		<if test="dcode != 'defaultV' and dcode != null">
 			<choose>
-				<when test="mcode != 'defaultV' and mcode == 'gyo'">
+				<when test="mcode != 'defaultV' and mcode == '307'">
 					 and li.DCODE IN ('003','004')
 				</when>
 				<when test="mcode != 'defaultV' and mcode != null">

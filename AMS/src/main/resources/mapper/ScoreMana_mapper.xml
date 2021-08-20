@@ -26,11 +26,13 @@
 		where l.lnum = li.lnum
     	and mv.MCODE = li.MCODE
 		and l.lrcode = lr.lrcode
-		and l.lyear = to_char(sysdate,'RRRR')
+		and l.DATESTATUS = '수강중'
+   		and l.lyear = to_char(sysdate,'RRRR')
 	    and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
 	                 else 2 end
-		and li.GRADE = #{grade}
-		and l.opennum not in (select opennum from score_mana where sid = #{sid})
+		and l.opennum not in (select sm.opennum from score_mana sm, lecture l where sm.opennum = l.OPENNUM
+                          and l.lyear = to_char(sysdate,'RRRR')
+                          and sm.sid = #{sid})
 		<if test="seach != null and seach != ''">
 			<choose>
 				<when test="seachgubun == 'lnum'">

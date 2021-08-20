@@ -201,7 +201,7 @@ font-weight: bold;
 								</tr>
 
 								<tr>
-									<td><textarea name="w16" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w8 }</textarea></td>
+									<td><textarea name="w8" id="limit" rows="3" class="form-control" style="resize: none; width: 100%;" maxlength="300">${spList.w8 }</textarea></td>
 								</tr>
 							</table>
 							<br><br><br>

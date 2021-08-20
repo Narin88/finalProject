@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.last.prj.lecture.service.LectureVO;
 import com.last.prj.scoreMana.service.ScoreManaVO;
-import com.last.prj.studyplan.service.StudyplanJoinVO;
 
 public interface ScoreCheckService {
 
@@ -16,4 +15,6 @@ public interface ScoreCheckService {
 	public LectureVO collectresult(LectureVO vo);// 값 하나 받아오기
 	
 	public ScoreManaVO AvgChcek(ScoreManaVO vo); // 과제 점수 
+	
+	int finalScoreUpdate(ScoreManaVO vo); // 기말고사 점수 등록
 }

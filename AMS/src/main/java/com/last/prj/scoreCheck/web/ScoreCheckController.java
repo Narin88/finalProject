@@ -66,7 +66,12 @@ public String ScoreCheckLectureStudent(Model model, HttpSession session, ScoreMa
 @RequestMapping(value = "ScoreInsert", method = RequestMethod.POST)
 public String ScoreInsert(ScoreManaVO vo, RedirectAttributes red) {
 	System.out.println(vo);
+	
 	int result = dao.ScoreInsert(vo);
+	
+	if(vo.getFinalscore() > 0) {
+		dao.finalScoreUpdate(vo);
+	}
 	red.addAttribute("opennum", vo.getOpennum());
 	System.out.println("결과====================" +result);
 	return "redirect:ScoreCheckLectureStudent";

@@ -37,7 +37,7 @@
 					<div class="form-group">
 						<label for="email-for-pass">인증번호를 입력해주세요</label> <input
 							class="form-control" name="authNum" type="text" id="authNum"
-							placeholder="인증번호를 입력하세요"/>
+							placeholder="인증번호를 입력하세요" maxlength="6" />
 					</div>
 					<input type="hidden" name="sid" value="${sid }" />
 				</div>

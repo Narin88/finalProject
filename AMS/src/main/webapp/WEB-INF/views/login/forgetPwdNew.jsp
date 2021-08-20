@@ -33,12 +33,12 @@
 				<div class="form-group">
 					<label for="email-for-pass">변경하실 비밀번호를 입력해주세요</label> <input
 						class="form-control" name="pwd" type="password" id="pwd"
-						placeholder="비밀번호" />
+						placeholder="비밀번호" maxlength="15" />
 				</div>
 				<div class="form-group">
 					<label for="email-for-pass">변경하실 비밀번호를 입력해주세요(확인)</label> <input
 						class="form-control" name="pwdChk" type="password" id="pwdChk"
-						placeholder="비밀번호 확인" />
+						placeholder="비밀번호 확인" maxlength="15" />
 				</div>
 			</div>
 			<div class="card-footer">

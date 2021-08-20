@@ -40,6 +40,7 @@ pageEncoding="UTF-8"%>
             class="fadeIn second"
             name="id"
             placeholder="login"
+            maxlength="8"
           />
           <input
             type="password"
@@ -47,6 +48,7 @@ pageEncoding="UTF-8"%>
             class="fadeIn third"
             name="pwd"
             placeholder="password"
+            maxlength="15"
           />
           <input type="submit" class="fadeIn fourth" value="Log In" id="loginBtn" />
         </form>

@@ -43,4 +43,9 @@ public class ScoreCheckServiceImpl implements ScoreCheckService{
 	public ScoreManaVO AvgChcek(ScoreManaVO vo) {
 		return null;
 	}
+
+	@Override
+	public int finalScoreUpdate(ScoreManaVO vo) {
+		return map.finalScoreUpdate(vo);
+	}
 }

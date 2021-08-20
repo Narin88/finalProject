@@ -41,12 +41,17 @@ FROM SCORE_MANA SM, STUDENTS S, LECTURE L, LECTURE_INFO LI
 	<update id="ScoreInsert" parameterType="ScoreManaVO">
 			update SCORE_MANA
 			set MIDDLESCORE = #{middlescore},
-            	FINALSCORE = #{finalscore},
+				FINALSCORE = #{finalscore},
             	ATTENDANCESCORE = #{attendancescore}
             WHERE OPENNUM = #{opennum}
             AND SID = #{sid}
 	</update>
 	
+	<update id="finalScoreUpdate" parameterType="ScoreManaVO">
+		{
+			call update_finalscore(#{sid}, #{opennum}, #{finalscore})
+		}
+	</update>
 	
 	
 	<select id="AvgChcek" parameterType="ScoreManaVO">

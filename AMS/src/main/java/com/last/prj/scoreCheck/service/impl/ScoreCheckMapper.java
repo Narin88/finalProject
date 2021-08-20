@@ -15,4 +15,6 @@ public interface ScoreCheckMapper {
 	public LectureVO collectresult(LectureVO vo);// 값 하나 받아오기
 
 	public ScoreManaVO AvgChcek(ScoreManaVO vo); // 과제 점수 
+
+	int finalScoreUpdate(ScoreManaVO vo); // 기말고사 점수 등록
 }

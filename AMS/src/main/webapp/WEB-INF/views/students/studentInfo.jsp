@@ -80,7 +80,7 @@ align: right;
 	   				 </label>
 	   				 <button type="button" class="btn btn-facebook m-b-10 waves-effect waves-light" onclick="changeBtn()">확인</button>
 	   			</form>
-	   			<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" style="left: 69%;">비밀번호변경</button>
+	   			<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" style="left: 69%;" onclick="location.href='infoConfirmPage'">비밀번호변경</button>
 			</div>
 		</div>
 		<%-- </sec:authorize> --%>

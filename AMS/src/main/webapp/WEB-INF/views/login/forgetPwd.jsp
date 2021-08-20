@@ -43,9 +43,8 @@
 			<form class="card mt-4" action="forgetPwdAut" method="post" id="forgetPwdAuth">
 				<div class="card-body">
 					<div class="form-group">
-						<label for="email-for-pass">학번을 입력해주세요</label> <input
-							class="form-control" name="sid" type="text" id="sid-for-pass"
-							placeholder="12345678"/>
+						<label for="email-for-pass">학번을 입력해주세요</label> 
+						<input class="form-control" name="sid" type="text" id="sid-for-pass" placeholder="12345678" maxlength="8" />
 					</div>
 					<div class="form-group">
 						<label for="email-for-pass">이메일 주소를 입력해 주세요</label> <input

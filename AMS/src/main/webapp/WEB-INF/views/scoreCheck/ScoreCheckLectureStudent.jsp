@@ -176,7 +176,6 @@ $('#createpdf').click(function() {
 		  var heightLeft = imgHeight; 
 		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
 		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
-		  alert('클릭됨');
 	  });
 
 	});

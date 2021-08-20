@@ -145,7 +145,7 @@ $('#createpdf').click(function() {
 	  }); */
 	  
 	  html2canvas($('#pdfwrap')[0]).then(function (canvas) {
-		  var filename = 'LecturePlan_' + Date.now() + '.pdf'; 
+		  var filename = '수강생 성적_' + Date.now() + '.pdf'; 
 		  var doc = new jsPDF('p', 'mm', 'a4'); 
 		  var imgData = canvas.toDataURL('image/png'); 
 		  var imgWidth = 210; 
@@ -154,7 +154,6 @@ $('#createpdf').click(function() {
 		  var heightLeft = imgHeight; 
 		  var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
 		  while (heightLeft >= 0) { position = heightLeft - imgHeight; doc.addPage(); doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } doc.save(filename); 
-		  alert('클릭됨');
 	  });
 
 	});

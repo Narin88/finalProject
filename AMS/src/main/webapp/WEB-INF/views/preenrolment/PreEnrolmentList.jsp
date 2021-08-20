@@ -36,7 +36,7 @@
 <div class="content-page">
 	<div class="card-body">
 		<div id="grid">
-			<h2 align="center">수강 내역</h2>
+			<h2 align="center">전체 시간표 조회</h2>
 			<div class="seachBox">
 				대학 : <select id ="depart" name="depart" class="form-control">
 				 	<option value="defaultV">선택</option>

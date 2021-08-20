@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.professor.service.ProfessorLectureVO;
 import com.last.prj.professor.service.ProfessorService;
+import com.last.prj.professor.service.ProfessorVO;
 
 @Controller
 public class ProfessorController {
@@ -27,5 +28,14 @@ public class ProfessorController {
 		return "professor/lecturelist.tiles";
 	}
 
+	@RequestMapping("professorinfo")
+	public String professorinfo(Model model, HttpSession session) {
+		ProfessorVO vo = new ProfessorVO();
+		String pid = (String)session.getAttribute("id");
+		vo.setPid(pid);
+		model.addAttribute("pro",service.professorInfo(vo));
+		model.addAttribute("guid", service.guidanceStudent(pid));
+		return "professor/professorinfo.tiles";
+	}
 	
 }

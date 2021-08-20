@@ -70,7 +70,7 @@ uri="http://www.springframework.org/security/tags" %>
     <div class="content-page">
       <div class="card-body">
         <div align="center">
-          <h2>수강 등록</h2>
+          <h2>강의 등록</h2>
           <div align="right">
             <a href="ProfessorLectureList" class="pagemove">등록된 수강 목록</a>
           </div>

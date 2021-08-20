@@ -37,6 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		<div id="pdfwrap" class ="pdfwrap">
 			<h2>학생 성적 확인</h2>
 			<div id="grid"></div>
+			<h2>이수구분별 취득 학점</h2>
 			<div id="gird2"></div>
 		</div>
 	</div>
@@ -180,7 +181,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	  }); */
 
       html2canvas($("#pdfwrap")[0]).then(function (canvas) {
-        var filename = "LecturePlan_" + Date.now() + ".pdf";
+        var filename = "성적_" + Date.now() + ".pdf";
         var doc = new jsPDF("p", "mm", "a4");
         var imgData = canvas.toDataURL("image/png");
         var imgWidth = 210;
@@ -197,7 +198,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           heightLeft -= pageHeight;
         }
         doc.save(filename);
-        alert("클릭됨");
       });
     });
   </script>

@@ -169,7 +169,7 @@ fir LEFT OUTER JOIN
 
 	<!-- 등록페이지/ 과제등록가능한 교수 강의목록 default 2021년-->
 	<select id="hwPfInsertSelect" resultType="map">
-		 SELECT  
+		  SELECT  
           		distinct l.lyear  "lyear"
 				         ,l.term "term"
        			         ,i.lname "lname"
@@ -185,7 +185,8 @@ fir LEFT OUTER JOIN
 		         ON      l.lnum=i.LNUM
 		       JOIN 	 lecture_room lr
                  ON 	 l.lrcode=lr.lrcode
-		      WHERE		 l.pid='99003013'
+		      WHERE		 l.pid=#{pid}
+        and l.lyear = TO_CHAR(sysdate,'RRRR')
 		        AND 	 l.datestatus='수강중'
 	</select>
 	<!-- 교수 과제 등록 -->

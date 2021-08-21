@@ -43,7 +43,6 @@
 				 	<c:forEach items="${depart }" var="dvo">	
 				 		<option value="${dvo.dcode }">${dvo.dname }</option>
 				 	</c:forEach>
-				 		<option value="gyo">교양</option>
 				 </select>
 				 전공 : <select id="major" name="major" class="form-control">
 				 	<option value="defaultV">선택</option>

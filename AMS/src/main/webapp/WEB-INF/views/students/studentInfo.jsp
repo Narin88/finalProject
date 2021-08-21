@@ -210,10 +210,10 @@ $('#createpdf').click(function() {
 	    	  contentType: "application/json"
 	      },
 	      pagination: true,   //페이징 처리
-	        /* pageOptions: {
+	          pageOptions: {
 	          useClient: true,   //페이징 처리
-	          perPage: 5   //페이징 갯수
-	        }, */
+	          perPage: 8   //페이징 갯수
+	        },
 	        scrollX: true, // x축 스크롤on
 	        scrollY: true, // y축 스크롤on,
 	      columns: [

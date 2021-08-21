@@ -80,7 +80,7 @@ public class HomeController {
 							   @RequestParam("sid") String sid, Model model) {
 		Random random = new Random();
 		String user = "dlrjatk2@gmail.com";
-		String pwd = "!xotn71202703!";
+		String pwd = "xtuxetghvvfffksd";
 
 		int num = random.nextInt(999999);
 		String toEmail = email;

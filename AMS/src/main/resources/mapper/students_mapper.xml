@@ -8,6 +8,7 @@
 		FROM lecture l, lecture_info li, lecture_room lr
 		WHERE l.lnum = li.lnum
 		AND l.lrcode = lr.lrcode
+		AND l.lyear = TO_CHAR(SYSDATE, 'rrrr')
 		AND l.pid = (SELECT pid
 		FROM students
 		WHERE sid = #{sid})

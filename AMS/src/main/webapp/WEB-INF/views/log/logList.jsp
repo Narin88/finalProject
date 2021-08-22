@@ -42,7 +42,7 @@
         pagination: true,   //페이징 처리
           pageOptions: {
             useClient: true,   //페이징 처리
-            perPage: 15   //페이징 갯수
+            perPage: 19   //페이징 갯수
           },
           scrollX: true,
           scrollY: true,
@@ -53,7 +53,7 @@
           {header: '방문날짜', name: 'visitDate', align: "center", width: 200, filter: {type: "date", showClearBtn: true}},
           {header: '방문시간', name: 'visitTime', align: "center", width: 200},
           {header: '사용브라우저', name: 'visitAgent', align: "center", width: 200},
-          {header: '쿠키값', name: 'visitCookie', align: "center", width: 1200},
+          {header: '쿠키값', name: 'visitCookie', align: "center", width: 1000},
         ], //컬럼갯수
         data: clsData
       });

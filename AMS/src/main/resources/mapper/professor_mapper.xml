@@ -22,7 +22,6 @@
 		and l.LRCODE = r.LRCODE
     	and l.lyear = to_char(sysdate,'YYYY') 
 		and l.PID = #{pid}
-		ORDER BY L.lyear desc
 	</select>	
 	
 	<select id="professorInfo" parameterType="ProfessorVO" resultType="ProfessorVO">

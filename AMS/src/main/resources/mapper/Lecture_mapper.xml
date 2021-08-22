@@ -33,7 +33,7 @@
 		    					where lyear=to_char(sysdate,'RRRR')
 		    					and term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08 then 1 else 2 end
 		    					and pid = #{pId})
-	    order by l.lyear desc
+	    order by 1
 	</select>
 	
 	<update id="LectureUpdate" parameterType="LectureVO">

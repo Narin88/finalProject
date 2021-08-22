@@ -102,7 +102,7 @@ input[type="number"] {
 function pushdata(data){
 	var chartData = [];
 	for(i=0; i<data.length; i++){
-		var opendata = [data[i].a1 , parseInt(data[i].cnt), colors[i], label[data[i].a1] ]; 
+		var opendata = [data[i].a1 , parseInt(data[i].cnt), colors[i], label[data[i].a1] ]; // 잠시만 함 보구요넵
 		chartData.push(opendata);
 	}
 	return chartData;

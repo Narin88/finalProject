@@ -230,7 +230,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       		columns: [
       			{header: '강의등록번호',name: 'opennum'},
       			{header: '강의번호',name: 'lnum'}, //강의번호+분반
-      			{header: '년도/학기',name: 'lyear'}, //년도+학기
+      			{header: '년도',name: 'lyear'}, //년도+학기
       			{header: '학년',name: 'grade'},
       			{header: '과목명',name: 'lname'},
       			{header: '교재',name: 'book'},

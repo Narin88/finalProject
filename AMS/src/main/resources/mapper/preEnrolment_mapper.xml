@@ -21,7 +21,7 @@
     	and l.term = case when to_char(sysdate,'MM') >= 02 and to_char(sysdate,'MM') <![CDATA[ <= ]]> 08  then 1
 	                 else 2 end
 		and opennum not in (select opennum from preenrolment where sid = #{sid})
-
+		
 		<if test="dcode != 'defaultV' and dcode != null">
 			<choose>
 				<when test="mcode != 'defaultV' and mcode == '307'">
@@ -39,6 +39,7 @@
 				</otherwise>
 			</choose>
 		</if>
+		ORDER BY OPENNUM
 	</select>
 	
 	<select id="preDepartments" resultType="PreEnrolmentVO">
@@ -60,6 +61,7 @@
 		AND L.LNUM = LI.LNUM
 		AND L.LRCODE = LR.LRCODE
 		AND P.SID = #{sid}
+		
 	</select>
 	
 	<select id="preEnrolmentlimitCheck" parameterType="string" resultType="int">

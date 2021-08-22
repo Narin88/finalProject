@@ -33,6 +33,7 @@
 		and l.opennum not in (select sm.opennum from score_mana sm, lecture l where sm.opennum = l.OPENNUM
                           and l.lyear = to_char(sysdate,'RRRR')
                           and sm.sid = #{sid})
+        ORDER BY 1
 		<if test="seach != null and seach != ''">
 			<choose>
 				<when test="seachgubun == 'lnum'">
@@ -95,6 +96,7 @@
 		and li.mcode = mv.mcode
 		and l.lyear = to_char(sysdate,'RRRR')		
 		and sc.sid = #{sid}
+		ORDER BY 1
 	</select>
 	
 	<!-- 수강 취소 -->

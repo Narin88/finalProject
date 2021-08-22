@@ -19,6 +19,7 @@
 			and l.pid = p.pid
 			and li.mcode = mv.mcode
 			and l.pid = #{pid}
+			ORDER BY l.lyear desc
 				
 			<choose>
 				<when test="lyear!= 0 and term != 0">

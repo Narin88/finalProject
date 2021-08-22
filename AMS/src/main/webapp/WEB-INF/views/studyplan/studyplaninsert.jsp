@@ -246,13 +246,18 @@ font-weight: bold;
 						<div align="center">
 							<button type="button" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" onclick="sub()">등록</button>
 							<button type="reset" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">취소</button>
-							<button type="button" onClick=history.back() class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">뒤로가기</button>
+							<button type="button" onClick=back() class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">뒤로가기</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
+<script>
+function back(){
+	
+	location.href="studyPlanList"
+}
+</script>
 </body>
 </html>
 

@@ -451,8 +451,8 @@
 			pphone		: '${st.pphone}',
 			pid			: '${st.pid}',
 			opennum		: '${st.opennum}',
-			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(`${st.opennum}`,`${st.evalcheck}`)" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
-			// st1[seq.index]
+			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(`${st.opennum}`,`${st1[seq.index].evalcheck}`)" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
+				
 		}
 		<c:if test='${!empty st.lnum}'>
 		,
@@ -794,9 +794,6 @@
 		
 		if (evalcheck == "Y") {
 			alert("이미 참여한 강의입니다.");
-			return false;
-		} else if (evalcheck == '') {
-			alert('아직 성적처리가 되지 않은 강의입니다.');
 			return false;
 		} else {
 			location.href="Evaluation?opennum="+opennum

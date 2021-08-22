@@ -26,8 +26,7 @@
 
 			<!-- Icon -->
 			<div class="fadeIn first">
-				<!-- <img src="resources/loginpicture/logo.png" id="icon" alt="No.M mark" /> -->
-				<img src="resources/assets/images/noM_logo2.png" id="icon" alt="No.M mark" style="width: 130px; height: 130px;"/>
+				<img src="resources/loginpicture/logo.png" id="icon" alt="No.M mark" />
 			</div>
 
 			<div class="card-body">

@@ -3,20 +3,29 @@ pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-	.tui-grid-cell .tui-grid-cell-content {
-	  text-align: center;
-	}
-	
-	.pdfwrap{
-		text-align: center;
-		width: 1200px;
-		margin: 40px auto;
-		padding: 30px;
-	}
+  .tui-grid-cell .tui-grid-cell-content {
+    text-align: center;
+  }
+ .pdfwrap{
+	text-align: center;
+	width: 1200px;
+	margin: 40px auto;
+	padding: 30px;
+}
+ }
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script
+  type="text/javascript"
+  src="http://code.jquery.com/jquery-latest.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
+></script>
 
 <title>성적 확인 :: No.M University</title>
 <body>
@@ -29,95 +38,138 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			<h2>학생 성적 확인</h2>
 			<div id="grid"></div>
 			<h2>이수구분별 취득 학점</h2>
-			<div id="grid2"></div>
+			<div id="gird2"></div>
 		</div>
 	</div>
 </div>
 </body>
-<script>
-
-    var grid;
-    var scrData = [];
+  <script>
 
     // 첫번쨰 그리드
-   	scrData = [
 
-   		<c:forEach items = "${st}" var = "st">{
+    	var scrData = [
 
-   			lyear 		: '${st.lyear}',
-   			term 		: '${st.term}',
-   			lname 		: '${st.lname}',
-   			division 	: '${st.division}',
-   			credit 		: '${st.credit}',
-   			total 		: '${st.total}',
-   			rank 		: '${st.rank}'
-   		}
-   		<c:if test='${!empty st.lyear}'>
-   		,
-   		</c:if>
-   		</c:forEach>
-   	];
-   
-	// 그리드를 보여준다
-   	grid = new tui.Grid({
+    		<c:forEach items = "${st}" var = "st">{
 
-   		el: document.getElementById('grid'),
-   		data: scrData,
-   		columns: [
-   			{header: '년도', name: 'lyear'},
-   			{header: '학기', name: 'term'},
-   			{header: '강의명', name: 'lname'},
-   			{header: '이수구분', name: 'division'},
-   			{header: '학점', name: 'credit'},
-   			{header: '총점', name: 'total'},
-   			{header: '등급', name: 'rank'}
+    			lyear 		: '${st.lyear}',
+    			term 		: '${st.term}',
+    			lname 		: '${st.lname}',
+    			division 	: '${st.division}',
+    			credit 		: '${st.credit}',
+    			total 		: '${st.total}',
+    			rank 		: '${st.rank}'
+    		}
+    		<c:if test='${!empty st.lyear}'>
+    		,
+    		</c:if>
+    		</c:forEach>
+    	];
 
-   		] //컬럼갯수
+    // 그리드 api-source
 
-   	});
-	
-   	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
-	
-    // 그리드2
-   	scrData = [
+    	const dataSource = {
 
-   		<c:forEach items = "${tt}" var = "tt">{
+    		withCredentials	: false,
+    		initialRequest	: false,
+    		contentType		: 'application/json',
+    		api : {
 
-   			lyear 	: '${tt.lyear}',
-   			term 	: '${tt.term}',
-   			jp 		: '${tt.jp}',
-   			js 		: '${tt.js}',
-   			nk 		: '${tt.nk}',
-   			pk 		: '${tt.pk}',
-   		}
-   		<c:if test='${!empty tt.lyear}'>
-   		,
-   		</c:if>
-   		</c:forEach>
-   	];
+    			readData	: {},
+    			updateData	: {
 
+    				url		: '',
+    				method	: ''
+    			}
+    		}
 
-   // 그리드를 보여준다
-   	grid = new tui.Grid({
+    	};
 
-   		el: document.getElementById('grid2'),
-   		data: scrData,
-   		columns: [
-   			{header: '년도', name: 'lyear'},
-   			{header: '학기', name: 'term'},	<!-- 년도랑 학기가 같은 값일 때, 강의 개수 만큼 묶어서 출력해야 하는데. 어떡해야 하지? -->
-   			{header: '전공필수', name: 'jp'},
-   			{header: '전공선택', name: 'js'},
-   			{header: '일반교양', name: 'nk'},
-   			{header: '선택교양', name: 'pk'},
-   			
+    // 그리드를 보여준다
+    	var grid = new tui.Grid({
 
-   		] //컬럼갯수
+    		el: document.getElementById('grid'),
+    		data: scrData,
+    		columns: [
+    			{header: '년도', name: 'lyear'},
+    			{header: '학기', name: 'term'},	<!-- 년도랑 학기가 같은 값일 때, 강의 개수 만큼 묶어서 출력해야 하는데. 어떡해야 하지? -->
+    			{header: '강의명', name: 'lname'},
+    			{header: '이수구분', name: 'division'},
+    			{header: '학점', name: 'credit'},
+    			{header: '총점', name: 'total'},
+    			{header: '등급', name: 'rank'}
 
-   	});
+    		] //컬럼갯수
 
-   	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
+    	});
+
+    	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
 
     // 그리드 끝
+  </script>
+  
+   <script>
+
+    // 그리드2
+
+    	var scrData2 = [
+
+    		<c:forEach items = "${tt}" var = "st">{
+
+    			lyear 		: '${st.lyear}',
+    			term 		: '${st.term}',
+    			jp 		: '${st.jp}',
+    			js 	: '${st.js}',
+    			nk 		: '${st.nk}',
+    			pk 		: '${st.pk}',
+    		}
+    		<c:if test='${!empty st.lyear}'>
+    		,
+    		</c:if>
+    		</c:forEach>
+    	];
+
+    // 그리드 api-source
+
+    	const dataSource2 = {
+
+    		withCredentials	: false,
+    		initialRequest	: false,
+    		contentType		: 'application/json',
+    		api : {
+
+    			readData	: {},
+    			updateData	: {
+
+    				url		: '',
+    				method	: ''
+    			}
+    		}
+
+    	};
+
+    // 그리드를 보여준다
+    	var grid2 = new tui.Grid({
+
+    		el: document.getElementById('grid'),
+    		data: scrData2,
+    		columns: [
+    			{header: '년도', name: 'lyear'},
+    			{header: '학기', name: 'term'},	<!-- 년도랑 학기가 같은 값일 때, 강의 개수 만큼 묶어서 출력해야 하는데. 어떡해야 하지? -->
+    			{header: '전공필수', name: 'jp'},
+    			{header: '전공선택', name: 'js'},
+    			{header: '일반교양', name: 'nk'},
+    			{header: '선택교양', name: 'pk'},
+    			
+
+    		] //컬럼갯수
+
+    	});
+
+    	grid.resetData(scrData2) //그리드를 그려놓고 데이터를 넣음
+
+    // 그리드 끝
+  </script>
+  <script>
     $("#createpdf").click(function () {
       //pdf_wrap을 canvas객체로 변환
       /* 	  html2canvas($('#pdfwrap')[0]).then(function(canvas) {
@@ -148,5 +200,5 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         doc.save(filename);
       });
     });
-</script>
+  </script>
 

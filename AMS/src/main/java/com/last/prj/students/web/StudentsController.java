@@ -112,7 +112,7 @@ public class StudentsController {
 			// 정보 일치할 경우
 
 			// model.addAttribute("st", result);
-			path = "students/infoModify";
+			path = "students/infoModify.tiles";
 		}
 
 		return path;
@@ -123,9 +123,9 @@ public class StudentsController {
 		// 성적 조회 페이지
 
 		vo.setSid((String) session.getAttribute("id"));
-		vo.setTerm(1);
 		model.addAttribute("st", stService.scoreView(vo));
 		model.addAttribute("tt", stService.divisionList(vo));
+		
 		
 		return "students/studentScoreView.tiles";
 	}
@@ -141,7 +141,7 @@ public class StudentsController {
 		vo.setSid((String) session.getAttribute("id"));
 
 		model.addAttribute("st", stService.appliedLecture(vo));
-		// model.addAttribute("st1", stService.confirmEvalCheck(vo));
+		model.addAttribute("st1", stService.confirmEvalCheck(vo));
 
 		return "students/appliedLecture.tiles";
 	}
@@ -181,7 +181,7 @@ public class StudentsController {
 			path = "students/studentInfo.tiles";
 		} else {
 			System.out.println("비밀번호 변경 안 됨.");
-			path = "students/infoModify";
+			path = "students/infoModify.tiles";
 		}
 
 		return path;

@@ -207,8 +207,8 @@ tr td th{
 						</table>
 						<div>
 							<br>
-							<button type="button" class = 'btn btn-facebook m-l-10 waves-effect waves-light btn15' onclick="insertBtn('${id}')">결과제출</button>
-							<button type="reset" class = 'btn btn-facebook m-l-10 waves-effect waves-light btn15'>취 소</button>
+							<button type="button" onclick="insertBtn('${id}')">결과제출</button>
+							<button type="reset">취 소</button>
 						</div>
 					</div>
 				</form>

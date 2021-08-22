@@ -49,8 +49,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
    			lname 		: '${st.lname}',
    			division 	: '${st.division}',
    			credit 		: '${st.credit}',
-   			total 		: '${st.total}',
-   			rank 		: '${st.rank}'
+   			<c:choose>
+   				<c:when test = "${st.finalscore eq ''}">
+   					total		: '강의평가를 해야',
+   					rank		: '확인 가능합니다.'
+   				</c:when>
+   				<c:otherwise>
+		   			total 		: '${st.total}',
+		   			rank 		: '${st.rank}'
+   				</c:otherwise>
+   			</c:choose>
    		}
    		<c:if test='${!empty st.lyear}'>
    		,

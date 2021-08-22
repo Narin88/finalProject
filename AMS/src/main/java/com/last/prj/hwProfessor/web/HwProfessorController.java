@@ -218,22 +218,12 @@ public class HwProfessorController {
 	
 	@RequestMapping(value="hwSubmitDel", method=RequestMethod.PUT)
 	@ResponseBody
-	public int hwSubmitDel(@RequestBody HwProfessorVO vo) {
+	public String hwSubmitDel(@RequestBody HwProfessorVO vo) {
 		int result=service.hwSubmitDel(vo);
 		System.out.println("결과=========="+result);
-		return 0;
+		return "redirect:hwList";
 	}
 	
-	
-	
-	
-	//학생 제출한과제 전체삭제
-	@RequestMapping("submitDelAll")
-	public String submitDelAll(HwProfessorVO vo) {
-		
-		service.submitDelAll(vo);
-		return "redirect:hwList"; 
-	}
 	
 	
 	

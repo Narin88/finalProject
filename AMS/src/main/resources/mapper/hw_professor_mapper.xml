@@ -78,6 +78,7 @@ fir LEFT OUTER JOIN
 	<select id="hw_submitList" resultType="map">
 		SELECT 
 				 idn.ID "submitSid"
+				,s.submit_id "submitId"
 		        ,idn.NAME "name"
 		        ,s.SUBMIT_FILE "submit_file"
 		        ,to_char(s.submit_date,'yyyy.mm.dd hh24:mi') "submit_date"
@@ -100,12 +101,18 @@ fir LEFT OUTER JOIN
    SELECT 	idn.id "submitSid"
    		    ,idn.name "name"
      FROM  	score_mana sm
-  	 LEFT 	outer join hw_student s 
- 	   ON	sm.SID=s.SUBMIT_SID
+  	 LEFT 	outer join (select * from hw_professor h
+	                    join hw_student s
+	                     on h.register_id=s.register_id 
+	                     where h.opennum=474
+	                     and h.register_id=406) fir
+ 	   ON	sm.SID=fir.SUBMIT_SID
  	 JOIN  id_name idn
  	   ON  idn.id=sm.sid
     WHERE   sm.opennum=#{opennum}
-      AND   s.SUBMIT_SID is null
+      AND   fir.SUBMIT_SID is null
+      
+      
 	</select>
 	
 	
@@ -186,7 +193,7 @@ fir LEFT OUTER JOIN
 		       JOIN 	 lecture_room lr
                  ON 	 l.lrcode=lr.lrcode
 		      WHERE		 l.pid=#{pid}
-        and l.lyear = TO_CHAR(sysdate,'RRRR')
+       			AND      l.lyear = TO_CHAR(sysdate,'RRRR')
 		        AND 	 l.datestatus='수강중'
 	</select>
 	<!-- 교수 과제 등록 -->

@@ -114,33 +114,33 @@
 					<a class="modal_close_btn">닫기</a>
 					<div class="modal-body">
 						<div class="noSubmit"></div>
-						<div align="center">
-							<div style="width: 100%; float: right;">
-								<button
-									style="float: right; margin-top: -40px; "
-									type="button" id="selectDelBtn"
-									class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
-								<button style="float: right; margin-top: -40px;"
-									id="selectScoreBtn"
-									class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">점수정정</button>
+							<div style="width: 100%;height:100px; float: right;">							
 								<b
 									style="width: 100%; font-weight: bold; float: right; text-align: right; margin-bottom: 5px;">
 									 <font color="gray"> 점수를 정정하면 성적에 자동 반영됩니다. </font><br>
-									# 점수는 <u>최대 20점</u> <font color="red"> 입력 </font> 해주시기 바랍니다.<br>#
+									# 점수는 <u>최대 20점</u> <font color="red"> 입력 </font> 가능 합니다.<br>#
 									제출파일은 클릭시 다운로드가 <font color="red"> 가능 </font>합니다.
 									 <br>
 								</b>
+								<span style="font-size:18px;color:brown;margin-top: 15px;float: left;margin-left:50px;">과제 미제출자</span><span style="font-size:18px;color:brown;float: left;margin-top: 15px; margin-left: 330px;">과제 제출자</span>
+								
+								<button
+									style="float: right;  "
+									type="button" id="selectDelBtn"
+									class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">삭제</button>
+								<button style="float: right;"
+									id="selectScoreBtn"
+									class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">점수정정</button>
 							</div>
 							<!-- gird 두번째 -->
 							<div style="margin-top:15px;float:left;margin-left:50px;width:400px;">
 								<div id="grid3">
 								</div>
-							</div>
+							</div> 
 							<!-- gird 두번째 -->
 							<div style="margin-top:15px;float:right; width:720px;">
 								<div id="grid2"></div>
 							</div>
-						</div>
 					</div>
 				</div>
 				<!-- model end -->
@@ -293,7 +293,7 @@ $(".hwTable1").on("click","#inquiry",function(){
 			$("tfoot").empty();		
 			$(".noSubmit").empty();
 			$(".noSubmitSub").empty();
-			$('<h4 style="margin-left:80px;color:brown; text-align:center;"> 제출학생 리스트</h4>').appendTo('.noSubmit');
+			//$('<h4 style="margin-left:80px;color:brown; text-align:center;"> 제출학생 리스트</h4>').appendTo('.noSubmit');
 			
 			
 	
@@ -325,12 +325,12 @@ $(".hwTable1").on("click","#inquiry",function(){
 		var grid = new tui.Grid( {
 			data:dataSource,
 			rowHeaders: ['checkbox'],	
-			bodyHeight:320,
+			bodyHeight:400,
 			el: document.getElementById('grid2'),
 			pagination: true,   //페이징 처리
 			pageOptions: {
 				useClient: true,   //페이징 처리
-				perPage: 8   //페이징 갯수
+				perPage: 10   //페이징 갯수
 			},
 			columns: [
 				{header: '학생학번',name: 'submitSid',width:90},
@@ -339,7 +339,35 @@ $(".hwTable1").on("click","#inquiry",function(){
 				{header: '제출날짜',name: 'submit_date',width:140},
 				{header: '학생코멘트',name: 's_comment'},
 				//	{header: '강의번호',name: 'opennum'},
-				{header: '점수',name: 'score',width:70,editor:'text'},
+				{header: '점수',name: 'score',width:70,editor: {
+												            type: 'select',
+												            options: {
+												              listItems: [
+												            	{ text: '0점', value: '0' },
+												                { text: '1점', value: '1' },
+												                { text: '2점', value: '2' },
+												                { text: '3점', value: '3' },
+												                { text: '4점', value: '4' },
+												                { text: '5점', value: '5' },
+												                { text: '6점', value: '6' },
+												                { text: '7점', value: '7' },
+												                { text: '8점', value: '8' },
+												                { text: '9점', value: '9' },
+												                { text: '10점', value: '10' },
+												                { text: '11점', value: '11' },
+												                { text: '12점', value: '12' },
+												                { text: '13점', value: '13' },
+												                { text: '14점', value: '14' },
+												                { text: '15점', value: '15' },
+												                { text: '16점', value: '16' },
+												                { text: '17점', value: '17' },
+												                { text: '18점', value: '18' },
+												                { text: '19점', value: '19' },
+												                { text: '20점', value: '20' }
+												              ]
+												            }
+												          }
+				},
 			], //컬럼갯수
 		});
 		//grid end
@@ -443,15 +471,15 @@ $(".hwTable1").on("click","#inquiry",function(){
 				console.log(clsData3);	*/
 			// GRID 를 보여준다.
 			var grid3 = new tui.Grid( {
-				bodyHeight:320,
+				bodyHeight:400,
 				el: document.getElementById('grid3'),
 				pagination: true,   //페이징 처리
 				pageOptions: {
 					useClient: true,   //페이징 처리
-					perPage: 8   //페이징 갯수
+					perPage: 10   //페이징 갯수
 				},
 				columns: [
-					{header: '학생번호',name: 'submitSid',width:90},
+					{header: '학생번호',name: 'submitSid',width:130},
 					{header: '이름',name: 'name',width:70}, //강의번호+분반
 					{header: '제출상태', name:'nSubmit',width:200}
 				], //컬럼갯수

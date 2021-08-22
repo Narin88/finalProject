@@ -76,7 +76,7 @@
 				pperiod: '<fmt:formatDate value="${list.registerDate }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${list.pperiod }" pattern="yyyy-MM-d"/>',
 				status: '<c:if test="${list.hwstatus >= 0 }"> <span style="color:red;"> 진행중</span></c:if> <c:if test="${list.hwstatus < 0}"><span style="color:blue;"> 마감</span></c:if>',
 				score: '<c:if test="${list.score == 0}">등록된 점수없음</c:if><c:if test="${list.score != 0}">${list.score } / 20</c:if>',
-				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if><c:if test="${list.hwstatus < 0 }"><button type="button" id="alterNBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 수정 </button></c:if>',
+				alterBtn:'<c:if test="${list.hwstatus >= 0 }"><button type="button" id="alterBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 삭제 </button></c:if><c:if test="${list.hwstatus < 0 }"><button type="button" id="alterNBtn" data-id="${list.registerId}" data-id2="${list.opennum}" data-id3="${list.hwstatus}" data-id4="${list.score}" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15"> 삭제 </button></c:if>',
 				lnum:'${list.lnum}',pname:'${list.pname}',submitFile:'<i id="download" data-id="${list.submitFile}" class="mdi mdi-file-import" style="cursor:pointer;">${list.submitFile}</i>'
 			},
 			</c:forEach>
@@ -103,7 +103,7 @@
 				{header: '진행상태',name: 'status',width:100},
 				{header: '제출파일',name: 'submitFile',width:150},
 				{header: '점수',name: 'score',width:140},
-				{header: '수정',name: 'alterBtn',width:80},
+				{header: '삭제',name: 'alterBtn',width:80},
 			], //컬럼갯수
 		data: clsData
 	});
@@ -131,7 +131,7 @@
 		if(c < 0){
 			alert("수정이 불가능합니다.");
 		}else{
-			if(confirm("수정을 하게되면 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){
+			if(confirm(" 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){
 				alert("작성페이지로 이동합니다.")		
 				deleteHwSFrm.submit();
 				}else{
@@ -152,7 +152,7 @@
 			if(c < 0){
 				alert("수정이 불가능합니다.");
 			}else{
-				if(confirm("수정을 하게되면 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){
+				if(confirm(" 데이터가 삭제됩니다.   삭제 하시겠습니까?")==true){
 					alert("작성페이지로 이동합니다.")		
 					deleteHwSFrm.submit();
 					}else{

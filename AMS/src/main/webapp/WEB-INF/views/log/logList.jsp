@@ -42,7 +42,7 @@
         pagination: true,   //페이징 처리
           pageOptions: {
             useClient: true,   //페이징 처리
-            perPage: 19   //페이징 갯수
+            perPage: 16   //페이징 갯수
           },
           scrollX: true,
           scrollY: true,

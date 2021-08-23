@@ -59,7 +59,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="content-page">
       <div class="card-body">
         <div align="center">
-          <h2>과거 강의 내역</h2>
+          <h2>강의 내역</h2>
         </div>
         
         <div id="grid"></div>

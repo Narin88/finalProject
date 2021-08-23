@@ -49,7 +49,7 @@ pageEncoding="UTF-8" %>
                  <li>
                      <a href="<%=request.getContextPath() %>/appliedLecture" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
-                         <span> 나의 수강 확인</span>
+                         <span> 21-1학기 시간표 조회</span>
                      </a>
                  </li>
                  <li>
@@ -73,7 +73,7 @@ pageEncoding="UTF-8" %>
                  <li>
                      <a href="<%=request.getContextPath() %>/hwStudent" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
-                         <span> 과제 페이지</span>
+                         <span> 과제 관리</span>
                      </a>
                  </li>
                  <li>
@@ -93,13 +93,13 @@ pageEncoding="UTF-8" %>
                  <li>
                      <a href="<%=request.getContextPath() %>/professorinfo" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
-                         <span> 내 정보# </span>
+                         <span> 내 정보 </span>
                      </a>
                  </li>
                  <li>
                      <a href="<%=request.getContextPath() %>/ProfessorLectureListed" class="waves-effect">
                          <i class="mdi mdi-airplay"></i>
-                         <span> 나의 강의내역 확인 </span>
+                         <span> 강의내역 </span>
                      </a>
                  </li>
                  <li>

@@ -121,7 +121,7 @@
 <div class="content-page">
 	<div class="card-body">
 		<div align="center">
-			<h2>수강 신청된 강의 리스트</h2>
+			<h2>2021년 1학기 수강 리스트</h2>
 			<div id="grid"></div>
 			<div class="total">
 				<div class="scheduleTime"></div>

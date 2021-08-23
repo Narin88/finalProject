@@ -451,7 +451,7 @@
 			pphone		: '${st.pphone}',
 			pid			: '${st.pid}',
 			opennum		: '${st.opennum}',
-			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(`${st.opennum}`,`${st.evalcheck}`)" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
+			evaluation: '<button id="openbtn${st.opennum}" onclick="openpage(`${st.opennum}`,`${st.evalcheck}`,`${st.finalscore}`)" class ="btn btn-facebook m-l-10 waves-effect waves-light btn15">평가하기</button>'
 			// st1[seq.index]
 		}
 		<c:if test='${!empty st.lnum}'>
@@ -786,16 +786,20 @@
 	});
 	
 	
-	function openpage(data, evalcheck){
-		console.log(data);
+	function openpage(opennum, evalcheck, finalscore){
+		
+		console.log(opennum);
 		console.log(evalcheck);
+		console.log(finalscore);
 
-		var opennum = data;
+		//var opennum = data;
 		
 		if (evalcheck == "Y") {
 			alert("이미 참여한 강의입니다.");
 			return false;
-		} else if (evalcheck == '') {
+		} 
+		// else if evalcheck == ''
+		if (finalscore == 0) {
 			alert('아직 성적처리가 되지 않은 강의입니다.');
 			return false;
 		} else {

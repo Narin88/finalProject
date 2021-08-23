@@ -32,9 +32,10 @@
 						  />
 		<security:csrf disabled="true" />
 		
-		<security:session-management invalid-session-url="/home2">
+		<!-- 중복로그인시 막는거 -->
+		<!-- <security:session-management invalid-session-url="/home2">
 			<security:concurrency-control max-sessions="1" expired-url="/home2"/>
-		</security:session-management>
+		</security:session-management> -->
 	</security:http>
 	
 	<security:authentication-manager>

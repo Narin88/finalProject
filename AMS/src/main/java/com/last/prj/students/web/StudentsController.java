@@ -128,7 +128,7 @@ public class StudentsController {
 		vo.setTerm(1);
 //		model.addAttribute("st", stService.scoreView(vo));
 		
-		model.addAttribute("st", stService.achievementView(vo));
+		//model.addAttribute("st", stService.achievementView(vo));
 		model.addAttribute("tt", stService.divisionList(vo));
 		
 		return "students/studentScoreView.tiles";

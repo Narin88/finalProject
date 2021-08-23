@@ -169,4 +169,10 @@ public class HomeController {
 		
 		return "log/logList.tiles";
 	}
+	
+	// 슬라이드 html
+	@RequestMapping("showSlide")
+	public String showSlide() {
+		return "popup";
+	}
 }

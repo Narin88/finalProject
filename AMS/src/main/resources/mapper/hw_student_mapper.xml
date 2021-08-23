@@ -7,7 +7,7 @@
 			      ,lf.lname "lname"
 			      ,l.lyear "lyear"
 			      ,l.term "term"
-			      ,l.schedule "schedule"
+			      ,l.timetable "schedule"
 			      ,l.lrcode "lrcode" 
 			      ,p.pname "pname"
 			      ,l.opennum "opennum"	
@@ -25,6 +25,8 @@
             ON    l.pid=p.pid
 	 	 WHERE 	  sc.sid=#{sid}	
 	 	   AND 	  l.datestatus='수강중'
+	 	   AND      l.lyear = TO_CHAR(sysdate,'RRRR')
+	 	 
 	</select>
 	
 	<!-- 학생이 수강중인 강의의 과제개수 -->
@@ -50,6 +52,7 @@
 		  JOIN      hw_professor hw
         	ON      l.opennum=hw.opennum
 		 WHERE      l.opennum=#{opennum}
+	  ORDER BY      hw.register_Id desc
 	</select>
 	
 	<!-- 과제 개수  -->

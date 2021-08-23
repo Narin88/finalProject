@@ -21,4 +21,5 @@ public interface ScoreManaService {
 	int AjaxPreEnrolmentdelete(LectureVO vo);
 	LectureVO oneselectLecture(LectureVO vo);
 	int timetablecheck(LectureVO vo);
+	void autoPreenrol();
 }

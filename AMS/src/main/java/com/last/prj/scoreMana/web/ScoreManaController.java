@@ -179,4 +179,12 @@ public class ScoreManaController {
 		int i = SMdao.timetablecheck(vo);
 		return i;
 	}
+	
+	@PostMapping("autoPreenrol")
+	@ResponseBody
+	public String autoPreenrol() {
+		SMdao.autoPreenrol();
+		return "true";
+	}
+	
 }

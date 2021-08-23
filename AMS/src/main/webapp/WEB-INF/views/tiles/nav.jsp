@@ -141,6 +141,24 @@ pageEncoding="UTF-8" %>
              </ul>
          </div>
          </sec:authorize>
+         <sec:authorize access="hasRole('ROLE_AD')">
+	         <div id="sidebar-menu">
+	         	<ul>
+	         		<li>
+	         			 <a href="logList" class="waves-effect">
+	                         <i class="mdi mdi-airplay"></i>
+	                         <span> 로그 조회 </span>
+                         </a>
+	         		</li>
+	         		<li>
+                    	 <a href="logout" class="waves-effect">
+	                         <i class="mdi mdi-airplay"></i>
+	                         <span> 로그아웃 </span>
+                     	</a>
+             		</li>
+	         	</ul>
+	         </div>
+         </sec:authorize>
          <div class="clearfix"></div>
      </div> <!-- end sidebarinner -->
  </div>

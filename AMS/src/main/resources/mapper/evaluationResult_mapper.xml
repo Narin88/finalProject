@@ -43,7 +43,7 @@
 	</select>
 
 	<select id="EresultSt" resultType="EvaluationResultVO">
-		select a.lyear, a.term, b.lnum, a.dividenum,
+		<!-- select a.lyear, a.term, b.lnum, a.dividenum,
 						b.lname,
 						c.pname,
 						d.a1
@@ -54,6 +54,18 @@
 		and  a.pid = b.pid
 		and  a.pid = c.pid
 		and  b.pid = c.pid
+		ORDER BY A.LYEAR DESC, A.TERM DESC -->
+		SELECT A.LYEAR, A.TERM, B.LNUM, A.DIVIDENUM,
+						B.LNAME,
+						C.PNAME,
+						TRUNC(((A1 + A2 + A3 + A4 + A5 + A6)/6), 1) AS A1
+		FROM LECTURE A, LECTURE_INFO B, PROFESSOR C, EVALUATIONRESULT D
+		WHERE A.OPENNUM = D.OPENNUM
+		AND  B.LNUM = #{lnum}
+		AND  A.PID = B.PID
+		AND  A.PID = C.PID
+		AND  B.PID = C.PID
+        AND NOT A1 IS NULL
 		ORDER BY A.LYEAR DESC, A.TERM DESC
 	</select>
 

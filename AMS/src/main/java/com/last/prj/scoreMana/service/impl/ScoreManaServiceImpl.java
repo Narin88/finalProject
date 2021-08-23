@@ -89,5 +89,10 @@ public class ScoreManaServiceImpl implements ScoreManaService{
 	public int timetablecheck(LectureVO vo) {
 		return SMmap.timetablecheck(vo);
 	}
+
+	@Override
+	public void autoPreenrol() {
+		SMmap.autoPreenrol();
+	}
 	
 }

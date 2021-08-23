@@ -99,7 +99,8 @@
 	}
 	
 	/* 모달 스크롤 */
-	#modal_offer .modal-body{
+	#modal_offer .modal-body,
+	 #modal_evaluation .modal-body{
 	    height: 100%;
 	    overflow-y: auto;
 	}
@@ -641,15 +642,16 @@
 	// 강의 평가 정보 불러오기
 	function evaluationData(data) {
 		//let rBody = document.getElementById('resultBody');
-			  lnum = data.lnum.substring(0,5);
-			  $("#resultBody").empty();
+		lnum = data.lnum.substring(0,5);
+		$("#resultBody").empty();
 			  
 		$.ajax({
 			url: "EresultSt",
 			async: false,
 			data: {lnum : lnum},
 			success: function (result) {
-				if (result.length != 0 && result[0].a1 != null) {
+				// if (result.length != 0 && result[0].a1 != null) {
+				if (result != '') {
 					isEmpty = 1;
 					// 데이터 변수들 담기
 					for (let i = 0; i < result.length; i++) {

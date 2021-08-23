@@ -110,4 +110,11 @@ public class StudentsServiceImpl implements StudentsService {
 		return map.confirmEvalCheck(vo);
 	}
 
+
+	@Override
+	public StudentsVO achievementView(StudentsVO vo) {
+		// 성적조회(4.5만점 버전)
+		return map.achievementView(vo);
+	}
+
 }

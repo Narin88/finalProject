@@ -58,6 +58,17 @@
 	</select>
 	
 	
+	<!-- 학생 성적 조회 (4.5만점 형식) -->
+	<select id="achievementView" resultType = "StudentsVO">
+		SELECT DISTINCT L.LYEAR, L.TERM, ROUND(NVL(SUM(SM.TOTAL)/COUNT(SM.TOTAL)*0.045,0),2) AS TOTAL, EVALCHECKFN(#{sid}, #{lyear}, #{term}) EVALCHECK
+		FROM SCORE_MANA SM, LECTURE L
+		WHERE SM.OPENNUM = L.OPENNUM
+		AND SID = #{sid}
+		AND L.LYEAR = #{lyear}
+		AND L.TERM = #{term}
+		GROUP BY L.LYEAR, L.TERM
+	</select>
+	
 	<select id="divisionList" resultType="StudentsVO">
 		select DISTINCT l.lyear, l.term, nvl(sum((select sum(li.credit) from dual where li.DCODE='001')),0) as JP,
 																		nvl(sum((select sum(li.credit) from dual where li.DCODE='002')),0)as JS,

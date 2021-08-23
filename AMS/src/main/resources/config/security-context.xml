@@ -11,8 +11,9 @@
 	<security:http>
 		<security:intercept-url pattern="/goLogin" access="permitAll()" />
 		<security:intercept-url pattern="/forget*" access="permitAll()" />
-		<security:intercept-url pattern="/studentInfo" access="hasRole('ROLE_STD')" />
-		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_PRO', 'ROLE_STD')" />
+		<security:intercept-url pattern="/studentInfo" access="hasAnyRole('ROLE_STD', 'ROLE_AD')" />
+		<security:intercept-url pattern="/logList" access="hasRole('ROLE_AD')" />
+		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_PRO', 'ROLE_STD', 'ROLE_AD')" />
 		<!-- <security:intercept-url pattern="/WEB-INF/views/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_PRO')" /> -->
 		<security:form-login 
@@ -32,9 +33,10 @@
 						  />
 		<security:csrf disabled="true" />
 		
-		<security:session-management invalid-session-url="/home2">
+		<!-- 중복로그인시 막는거 -->
+		<!-- <security:session-management invalid-session-url="/home2">
 			<security:concurrency-control max-sessions="1" expired-url="/home2"/>
-		</security:session-management>
+		</security:session-management> -->
 	</security:http>
 	
 	<security:authentication-manager>

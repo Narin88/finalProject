@@ -17,12 +17,9 @@
 		margin: 40px auto;
 		padding: 30px;
 	}
-</style>
-
-<style>
 .infoImg{
-	width: 130px;
-	height: 150px;
+	width: 90x;
+	height: 100px;
 }
 </style>
 </head>
@@ -71,18 +68,18 @@
 						<c:if test="${!empty guid}">
 							<c:forEach items="${guid }" var="vo"> 
 								<tr>
-									<th rowspan="2"> <img src="resources/image/students/${st.picture }" alt="증명사진" class="infoImg" id="infoImg" /> </th>
-									<th>학번</th>
-									<th>이름</th>
-									<th>생년월일</th>
-									<th>연락처</th>
-									<th>학년</th>
-									<th>성별</th>
-									<th>장애여부</th>
-									<th>비고</th>
+									<th rowspan="2" width="100px" style="padding: 0"> <img src="resources/image/students/${vo.picture }" alt="증명사진" class="infoImg" id="infoImg" /> </th>
+									<th class="table-secondary" height="50px">학번</th>
+									<th class="table-secondary">이름</th>
+									<th class="table-secondary">생년월일</th>
+									<th class="table-secondary">연락처</th>
+									<th class="table-secondary">학년</th>
+									<th class="table-secondary">성별</th>
+									<th class="table-secondary">장애여부</th>
+									<th class="table-secondary">비고</th>
 								</tr>
 								<tr>
-									<td>${vo.sid }</td>
+									<td height="50px">${vo.sid }</td>
 									<td>${vo.sname }</td>
 									<td>${vo.sbirth }</td>
 									<td>${vo.sphone }</td>

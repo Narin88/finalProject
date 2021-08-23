@@ -8,6 +8,9 @@
 	<title>Home</title>
 </head>
 <body>
+<script>
+	window.open("showSlide", "수강 신청 기간", "width=750, height=700");
+</script>
 <div class="content-page">
 	<img src="${pageContext.request.contextPath }/resources/assets/images/noM_logo5.png" style="height: 817px; width: ">
 </div>

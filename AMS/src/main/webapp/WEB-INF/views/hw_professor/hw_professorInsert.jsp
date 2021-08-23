@@ -22,7 +22,7 @@
 	#my_offer {
         display: none;
         width: 80%;
-        height: 70%;
+        height: 40%;
         padding: 30px 60px;
         background-color: #fefefe;
         border: 1px solid #888;

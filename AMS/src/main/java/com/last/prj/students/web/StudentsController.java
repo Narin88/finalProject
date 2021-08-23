@@ -123,6 +123,7 @@ public class StudentsController {
 		// 성적 조회 페이지
 
 		vo.setSid((String) session.getAttribute("id"));
+		vo.setLyear("2021");
 		vo.setTerm(1);
 		model.addAttribute("st", stService.scoreView(vo));
 		model.addAttribute("tt", stService.divisionList(vo));

@@ -463,11 +463,6 @@ Element.prototype.setStyle = function(styles) {
     for (var k in styles) this.style[k] = styles[k];
     return this;
 };
-
-
-
-
-
 </script>
 </body>
 </html>

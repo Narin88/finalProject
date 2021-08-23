@@ -89,13 +89,13 @@
 		{header: '강의등록번호',name: 'opennum',width:100},
 		{header: '강의번호',name: 'lnum',width:80},
 		{header: '전공이름',name: 'mname',width:150},
-		{header: '강의이름',name: 'lname',width:130}, //강의번호+분반
+		{header: '강의이름',name: 'lname'}, //강의번호+분반
 		{header: '교재',name: 'book',width:130}, //강의번호+분반
 		{header: '강의년도',name: 'lyear',width:90}, //년도+학기
 		{header: '학기',name: 'term',width:80},
 		{header: '분반',name: 'dividenum',width:80},
 		{header: '교수명',name: 'pname',width:140},
-		{header: '시간표',name: 'schedule'},
+		{header: '시간표',name: 'schedule',width:140},
 		{header: '과제',name: 'hwBtn',width:120},
 	], //컬럼갯수
 	data: clsData

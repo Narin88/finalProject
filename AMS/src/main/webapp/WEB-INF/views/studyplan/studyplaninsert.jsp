@@ -88,10 +88,10 @@ font-weight: bold;
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
-								<td width="90px"><b>교과목 명</b></td>		<td><input type="text" value="${spList.lname}" class="form-control"></td>
-								<td width="90px"><b>담당교수</b></td>		<td><input type="text" value="${spList.pname}" class="form-control"></td>
-								<td width="90px"><b>이메일</b></td>		<td><input type="text" value="${spList.email}" class="form-control"></td>
-								<td width="100px"><b>교수 연락처</b></td>	<td><input type="text" value="${spList.pphone}" class="form-control"></td>
+								<td width="90px"><b>교과목 명</b></td>		<td><input type="text" value="${spList.lname}" class="form-control"  readonly></td>
+								<td width="90px"><b>담당교수</b></td>		<td><input type="text" value="${spList.pname}" class="form-control"  readonly></td>
+								<td width="90px"><b>이메일</b></td>		<td><input type="text" value="${spList.email}" class="form-control"  readonly></td>
+								<td width="100px"><b>교수 연락처</b></td>	<td><input type="text" value="${spList.pphone}" class="form-control"  readonly></td>
 							</tr>
 						</tbody>
 					</table>
@@ -99,20 +99,20 @@ font-weight: bold;
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
-								<td width="100px"><b>수강학과</b></td>		<td><input type="text" class="form-control" value="${spList.mname}"></td>
-								<td width="100px"><b>수강학부</b></td>		<td><input type="text" class="form-control" value="${spList.dname}"></td>
-								<td width="90px"><b>강의실</b></td>		<td><input type="text" class="form-control" value="${spList.lrname}"></td>
+								<td width="100px"><b>수강학과</b></td>		<td><input type="text" class="form-control" value="${spList.mname}"  readonly></td>
+								<td width="100px"><b>수강학부</b></td>		<td><input type="text" class="form-control" value="${spList.dname}"  readonly></td>
+								<td width="90px"><b>강의실</b></td>		<td><input type="text" class="form-control" value="${spList.lrname}"  readonly></td>
 								<td width="90px"><b>교재</b></td> 		<td><input type="text" class="form-control" value="${spList.book}"></td>
 							</tr>
 							<tr>
-								<td><b>강의코드</b></td> 		<td colspan="3"><input type="text" class="longform-control" width="500px" value="${spList.lnum }-${spList.dividenum }"></td>
-								<td><b>강의시간</b></td>		<td colspan="3"><input type="text" class="longform-control" value="${spList.schedule }">
+								<td><b>강의코드</b></td> 		<td colspan="3"><input type="text" class="longform-control" width="500px" value="${spList.lnum }-${spList.dividenum }"  readonly></td>
+								<td><b>강의시간</b></td>		<td colspan="3"><input type="text" class="longform-control" value="${spList.schedule }"  readonly>
 							</tr>
 							<tr>
-								<td><b>학점</b></td>			<td><input type="text" value="${spList.credit}"	class="form-control"></td>
-								<td><b>대상학년</b></td> 		<td><input type="text" value="${spList.grade}" class="form-control"></td>
-								<td><b>정원</b></td> 		<td><input type="text" value="${spList.newlimitcount}" class="form-control"></td>
-								<td><b>이수구분</b></td> 		<td><input type="text" value="${spList.division}" class="form-control"></td>
+								<td><b>학점</b></td>			<td><input type="text" value="${spList.credit}"	class="form-control"  readonly></td>
+								<td><b>대상학년</b></td> 		<td><input type="text" value="${spList.grade}" class="form-control"  readonly></td>
+								<td><b>정원</b></td> 		<td><input type="text" value="${spList.newlimitcount}" class="form-control"  readonly></td>
+								<td><b>이수구분</b></td> 		<td><input type="text" value="${spList.division}" class="form-control"  readonly></td>
 							</tr>
 						</tbody>
 					</table>

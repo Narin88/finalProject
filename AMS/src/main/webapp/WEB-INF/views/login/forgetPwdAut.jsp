@@ -31,7 +31,7 @@
 			</div>
 
 			<div class="forgot">
-				<h2>비밀번호찾기</h2>
+				<h2>비밀번호 재설정</h2>
 			</div>
 			<form class="card mt-4" action="forgetPwdNew" method="post" id="forgetPwdNew">
 				<div class="card-body">

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix= "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
 	.tui-grid-cell .tui-grid-cell-content {
@@ -12,6 +12,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		width: 1200px;
 		margin: 40px auto;
 		padding: 30px;
+	}
+	
+	.form-control{
+		width: 100px;
+		display: inline;
+		margin-right: 10px;
 	}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -27,6 +33,30 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	</div>
 		<div id="pdfwrap" class ="pdfwrap">
 			<h2>학생 성적 확인</h2>
+			<c:set var="now" value="<%=new java.util.Date()%>" />
+			<!-- 현재 년도 출력을위한 설정 -->
+			<c:set var="sysYear" >
+				<fmt:formatDate value="${now }" pattern="yyyy" />
+			</c:set>
+			<table class = "table table-bordered" style = "vertical-align: middle;">
+				<tbody>
+					<tr>
+						<td>
+							<input type = "number" name = "year" id = "year" value = "${sysYear }" class = "form-control">년
+						</td>
+						<td>
+							<select name = "term" id ="term" class = "form-control">
+								<option value = "1">1학기</option>
+								<option value = "2">2학기</option>
+							</select>
+						</td>
+						<td>
+							<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="search()">검색</button>
+							<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="cancel()">전체보기</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			<div id="grid"></div>
 			<h2>이수구분별 취득 학점</h2>
 			<div id="grid2"></div>
@@ -38,12 +68,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     var grid;
     var scrData = [];
-
+/* 
     // 첫번쨰 그리드
    	scrData = [
-
    		<c:forEach items = "${st}" var = "st">{
-
    			lyear 		: '${st.lyear}',
    			term 		: '${st.term}',
    			lname 		: '${st.lname}',
@@ -85,12 +113,31 @@ uri="http://java.sun.com/jsp/jstl/core" %>
    	});
 	
    	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
+ */	
 	
+	grid = new tui.Grid({
+		el: document.getElementById('grid'),
+		data: {
+			api: {
+				readData: {
+					url: "achievementView",
+					method: "POST"
+				},
+			},
+			contentType: "application/json",
+			headers: { "x-custom-header": "custom-header" }
+		},
+		columns:[
+			{ header: "년도", name: "lyear" },
+			{ header: "학기", name: "term" },
+			{ header: "총점", name: "total" }
+		]
+	});
+ 
+
     // 그리드2
    	scrData = [
-
    		<c:forEach items = "${tt}" var = "tt">{
-
    			lyear 	: '${tt.lyear}',
    			term 	: '${tt.term}',
    			jp 		: '${tt.jp}',
@@ -156,5 +203,24 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         doc.save(filename);
       });
     });
+   	
+	// 학년학기 검색
+    function search() {
+    	const year = $("#year").val();
+    	const term = $("#term").val();
+    	
+    	const data = {year: year, term: term};
+    	
+    	grid.readData(1, data, true);
+    }
+    
+    // 검색취소
+    function cancel() {
+    	const data = {year: null, term: null};
+    	
+    	grid.readData(1, data, true);
+    }
+   	
+   	
 </script>
 

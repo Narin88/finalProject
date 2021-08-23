@@ -102,7 +102,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		/* overflow-y: initial !important; */
 	 	display: none;
 		width: 80%;
-		height: 30%;
+		height: 50%;
 		padding: 30px 60px;
 		background-color: #fefefe;
 		border: 1px solid #888;
@@ -110,7 +110,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	}
 	
 	/* 모달 스크롤 */
-	#modal_offer .modal-body{
+	#modal_offer .modal-body,
+	 #modal_evaluation .modal-body{
 	    height: 100%;
 	    overflow-y: auto;
 	}
@@ -499,7 +500,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		pagination: true, //페이징 처리
 		pageOptions: {
 			useClient: true, //페이징 처리
-			perPage: 5, //페이징 갯수
+			perPage: 10, //페이징 갯수
 		},
 		columns: [
 			//{header: ' ', name: 'seq'},
@@ -575,6 +576,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	
 	// 검색 기능
 	function searchLecture() {
+		
 		let mc = document.getElementsByName("mcode")[0].value;
 		let dn = document.getElementsByName("dname")[0].value;
 			
@@ -695,7 +697,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			async: false,
 			data: {lnum : lnum},
 			success: function (result) {
-				if (result.length != 0 && result[0].a1 != null) {
+				// console.log(result);
+				// console.log(result[0].a1);
+				if (result != '') {
 					isEmpty = 1;
 					// 데이터 변수들 담기
 					for (let i = 0; i < result.length; i++) {

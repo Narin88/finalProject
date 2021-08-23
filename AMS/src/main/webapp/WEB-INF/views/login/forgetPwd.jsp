@@ -31,7 +31,7 @@
 			</div>
 
 			<div class="forgot">
-				<h2>비밀번호찾기</h2>
+				<h2>비밀번호 재설정</h2>
 				<ol class="list-unstyled">
 					<li><span class="text-primary text-medium">1. </span>자신의 학번과
 						이메일을 입력해주세요.</li>

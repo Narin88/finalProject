@@ -74,7 +74,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr>	
 							<td>${student.lyear }/${student.target }</td>
 							<td>${student.sid }</td>
 							<td>${student.sname }</td>
@@ -82,7 +82,8 @@
 							<td>${student.grade }</td>
 							<td>${(student.grade*2) - (2-student.term) }</td>
 							<td id="credit"></td>
-							<td><button id="preEnrolList" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">내 수강 꾸러미</button> </td>
+							<td><button id="preEnrolList" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">내 수강 꾸러미</button>
+								<button id="autoPreEnrol" class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light">확인</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -315,6 +316,17 @@ $(function(){
 //grid end
 $('#preEnrolList').click(function(){
 	preEnrolmentList();
+})
+
+//수강꾸러미 자동신청 기능
+$('#autoPreEnrol').click(function(){
+	$.ajax({
+		url: 'autoPreenrol',
+		type: 'POST',
+		success: function(result){
+			location.href ='ScoreManaPage';
+		}
+	})
 })
 
 //수강 꾸러미 모달

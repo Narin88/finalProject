@@ -138,4 +138,12 @@
 	<delete id="AjaxPreEnrolmentdelete" parameterType="LectureVO">
 		delete from preEnrolment where sid = #{sid} and opennum = #{opennum}
 	</delete>
+	
+	
+	<!-- 자동수강꾸러미 작동 프로시저 -->
+	<select id="autoPreenrol" statementType="CALLABLE">
+	{
+		call auto_Enrolment()
+	}
+	</select>
 </mapper>

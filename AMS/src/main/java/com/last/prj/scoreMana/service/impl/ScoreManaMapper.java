@@ -24,4 +24,6 @@ public interface ScoreManaMapper {
 	//모달창 처리내역
 	LectureVO oneselectLecture(LectureVO vo); 
 	int AjaxPreEnrolmentdelete(LectureVO vo);
+	
+	void autoPreenrol();
 }

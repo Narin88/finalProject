@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="guidanceStudent" resultType="StudentsVO">
-		select sid, sname,SPHONE, GRADE, SGENDER, DISABLED,FIND_CODE_NAME(300,SSTATUS)as sstatus, SBIRTH
+		select sid, sname,SPHONE, GRADE, SGENDER, DISABLED,FIND_CODE_NAME(300,SSTATUS)as sstatus, SBIRTH, picture
 		from students
 		where pid = #{pid}
 	</select>

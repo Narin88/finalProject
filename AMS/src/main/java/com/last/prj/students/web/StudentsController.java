@@ -123,12 +123,25 @@ public class StudentsController {
 		// 성적 조회 페이지
 
 		vo.setSid((String) session.getAttribute("id"));
+		
 		vo.setLyear("2021");
 		vo.setTerm(1);
-		model.addAttribute("st", stService.scoreView(vo));
+//		model.addAttribute("st", stService.scoreView(vo));
+		
+		model.addAttribute("st", stService.achievementView(vo));
 		model.addAttribute("tt", stService.divisionList(vo));
 		
 		return "students/studentScoreView.tiles";
+	}
+	
+	@ResponseBody
+	@RequestMapping("achievementView")
+	public StudentsVO achievementView(StudentsVO vo, HttpSession session) {
+		System.out.println("\n여기까지 오냐\n");
+		
+		vo.setSid((String) session.getAttribute("id"));
+		
+		return stService.achievementView(vo);
 	}
 
 	@RequestMapping("/appliedLecture")

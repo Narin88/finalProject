@@ -25,4 +25,5 @@ public interface StudentsService {
 	List<StudentsVO> divisionList(StudentsVO vo);	//영구성적 조회
 	
 	List<StudentsVO> confirmEvalCheck(StudentsVO vo);	// 체크 여부로 강의 평가 부르기
+	StudentsVO achievementView(StudentsVO vo);		// 성적조회(4.5만점 버전)
 }

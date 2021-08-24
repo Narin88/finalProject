@@ -72,7 +72,7 @@ uri="http://www.springframework.org/security/tags" %>
         <div align="center">
           <h2>강의 등록</h2>
           <div align="right">
-            <a href="ProfessorLectureList" class="pagemove">등록된 수강 목록</a>
+            <a href="ProfessorLectureList" class="pagemove">등록된 강의 목록</a>
           </div>
         </div>
         <!-- model -->
@@ -82,7 +82,7 @@ uri="http://www.springframework.org/security/tags" %>
 
           <a class="modal_close_btn">닫기</a>
           <div class="modal-body">
-            <h2>수강 등록</h2>
+            <h2>강의 등록</h2>
             <form id="frm" action="LectureInsert">
               <sec:csrfInput />
               <table class="table table-bordered" id="lecutretbl" border="1">
@@ -111,7 +111,7 @@ uri="http://www.springframework.org/security/tags" %>
                     waves-effect waves-light
                   "
                 >
-                  수강 등록하기
+                  강의 등록하기
                 </button>
               </div>
             </form>

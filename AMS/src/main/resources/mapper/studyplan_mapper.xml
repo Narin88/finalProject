@@ -37,7 +37,7 @@
 			 
 			</choose>
 
-ORDER BY l.lyear desc
+ORDER BY l.opennum desc, l.lyear desc, l.term desc 
 				
 	</select>
 

@@ -129,11 +129,11 @@ public class HwProfessorController {
 		System.out.println(vo.getSubmitSid());
 		System.out.println(vo.getScore());
 		int r=service.hwScoreIn(vo);
-		System.out.println("============================="+r);
-		if(r==1) {
+	//	System.out.println("============================="+r);
+	//	if(r==1) {
 			int n = service.hwAvgUpdate(vo);
-			System.out.println(n);
-		}
+	//		System.out.println(n);
+	//	}
 		return 0;
 	}
 	

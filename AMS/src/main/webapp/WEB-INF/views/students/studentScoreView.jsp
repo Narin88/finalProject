@@ -19,6 +19,10 @@
 		display: inline;
 		margin-right: 10px;
 	}
+	
+	#resultBody > th{
+		background-color : #f4f4f4;
+	}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
@@ -38,7 +42,7 @@
 			<c:set var="sysYear" >
 				<fmt:formatDate value="${now }" pattern="yyyy" />
 			</c:set>
-			<table class = "table table-bordered" style = "vertical-align: middle;">
+			<%-- <table class = "table table-bordered" style = "vertical-align: middle;">
 				<tbody>
 					<tr>
 						<td>
@@ -54,6 +58,31 @@
 							<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="search()">검색</button>
 							<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="cancel()">전체보기</button>
 						</td>
+					</tr>
+				</tbody>
+			</table> --%>
+			<table class = "table table-bordered" style = "vertical-align: middle;">
+				<tbody>
+					<tr>
+						<td colspan = "3">
+							<input type = "number" name = "lyear" id = "year" value = "${sysYear }" class = "form-control">년
+							<select name = "term" id ="term" class = "form-control">
+								<option value = "1">1학기</option>
+								<option value = "2">2학기</option>
+							</select>
+							<button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="search()">검색</button>
+							<!-- <button class="btn btn-facebook m-b-10 m-l-10 waves-effect waves-light" type="button" onclick="cancel()">전체보기</button> -->
+						</td>
+					</tr>
+					<tr>
+						<th>년도</th>
+						<th>학기</th>
+						<th>점수</th>
+					</tr>
+					<tr id = "resultBody">
+						<th id = "getLyear">${sc.lyear }</th>
+						<th id = "getTerm">${sc.term }</th>
+						<th id = "getTotal">${sc.total }</th>
 					</tr>
 				</tbody>
 			</table>
@@ -113,7 +142,7 @@
    	});
 	
    	grid.resetData(scrData) //그리드를 그려놓고 데이터를 넣음
- */	
+
 	
 	grid = new tui.Grid({
 		el: document.getElementById('grid'),
@@ -133,7 +162,7 @@
 			{ header: "총점", name: "total" }
 		]
 	});
- 
+*/	 
 
     // 그리드2
    	scrData = [
@@ -205,22 +234,42 @@
     });
    	
 	// 학년학기 검색
-    function search() {
+    /* function search() {
     	const year = $("#year").val();
     	const term = $("#term").val();
     	
     	const data = {year: year, term: term};
     	
     	grid.readData(1, data, true);
+    } */
+    
+    function search() {
+    	
+    	const lyear = document.getElementsByName('lyear')[0].value;
+    	const term 	= document.getElementsByName('term')[0].value;
+    	$('#resultBody').empty();
+    	
+    	$.ajax({
+    		url: 'achievementView',
+    		data: {
+    			lyear : lyear,
+    			term : term
+    		},
+    		success: function(result) {
+    			if (result != '') {
+	    			$('#resultBody').append(
+	    				$("<th>" + result.lyear + '</th>'),
+	    				$("<th>" + result.term + '</th>'),
+	    				$("<th>" + result.total + '</th>')
+	    			);
+    			} 
+    			
+    		},
+    		error: function(err) {
+    			console.log(err);
+    		}
+    	});
     }
     
-    // 검색취소
-    function cancel() {
-    	const data = {year: null, term: null};
-    	
-    	grid.readData(1, data, true);
-    }
-   	
-   	
 </script>
 

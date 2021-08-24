@@ -639,16 +639,29 @@
 		});
 	}
 	
+	/*
+		[Deprecation] Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check
+		 jQuery 가 1.8 버전부터 async 옵션이 폐기
+		 대신에 jqXHR.done(), jqXHR.fail(), jqXHR.always() 을 사용할 수 있다.
+		 반복문과도 연관있는 문제인 듯하다.
+		 https://doogle.link/%EA%B2%BD%EA%B3%A0-%ED%95%B4%EA%B2%B0-deprecation-synchronous-xmlhttprequest-on-the-main-thread-is-deprecated-because-of-its-detrimental-effects-to-the-end-users-experience-for-more-help-check/
+	*/
+	
 	// 강의 평가 정보 불러오기
 	function evaluationData(data) {
 		//let rBody = document.getElementById('resultBody');
 		lnum = data.lnum.substring(0,5);
+		opennum = data.opennum;
+		
 		$("#resultBody").empty();
 			  
 		$.ajax({
 			url: "EresultSt",
 			async: false,
-			data: {lnum : lnum},
+			data: {
+				opennum : opennum,
+				lnum	: lnum
+			},
 			success: function (result) {
 				// if (result.length != 0 && result[0].a1 != null) {
 				if (result != '') {

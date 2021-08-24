@@ -128,7 +128,7 @@ public class StudentsController {
 		vo.setTerm(1);
 //		model.addAttribute("st", stService.scoreView(vo));
 		
-		//model.addAttribute("st", stService.achievementView(vo));
+		model.addAttribute("sc", stService.achievementView(vo));
 		model.addAttribute("tt", stService.divisionList(vo));
 		
 		return "students/studentScoreView.tiles";
@@ -137,7 +137,6 @@ public class StudentsController {
 	@ResponseBody
 	@RequestMapping("achievementView")
 	public StudentsVO achievementView(StudentsVO vo, HttpSession session) {
-		System.out.println("\n여기까지 오냐\n");
 		
 		vo.setSid((String) session.getAttribute("id"));
 		

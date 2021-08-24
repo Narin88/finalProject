@@ -60,7 +60,7 @@
 	
 	<!-- 학생 성적 조회 (4.5만점 형식) -->
 	<select id="achievementView" resultType = "StudentsVO">
-		SELECT DISTINCT L.LYEAR, L.TERM, ROUND(NVL(SUM(SM.TOTAL)/COUNT(SM.TOTAL)*0.045,0),2) AS TOTAL, EVALCHECKFN(#{sid}, #{lyear}, #{term}) EVALCHECK
+		SELECT DISTINCT L.LYEAR, L.TERM, ROUND(NVL(SUM(SM.TOTAL)/COUNT(SM.TOTAL)*0.045,0),2) AS TOTALSCORE, EVALCHECKFN(#{sid}, #{lyear}, #{term}) EVALCHECK
 		FROM SCORE_MANA SM, LECTURE L
 		WHERE SM.OPENNUM = L.OPENNUM
 		AND SID = #{sid}

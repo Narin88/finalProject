@@ -84,7 +84,7 @@
 						<th id = "getTerm">${sc.term }</th>
 						<c:choose>
 							<c:when test = "${sc.evalcheck ne 0}"> 
-								<th id = "getTotal">${sc.total }</th>
+								<th id = "getTotal">${sc.totalscore }</th>
 							</c:when>
 							<c:otherwise>
 								<th id = "getTotal" colspan = "3">강의평가 진행 요망</th>
@@ -275,7 +275,7 @@
 	    			$('#resultBody').append(
 	    				$("<th>" + result.lyear + '</th>'),
 	    				$("<th>" + result.term + '</th>'),
-	    				$("<th>" + result.total + '</th>')
+	    				$("<th>" + result.totalscore + '</th>')
 	    			);
 	    			return false;
     			} else {

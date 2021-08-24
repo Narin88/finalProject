@@ -77,4 +77,5 @@ public class StudentsVO {
 	private int nk;
 	private int pk;
 	private String evalcheck;
+	private double totalscore;
 }

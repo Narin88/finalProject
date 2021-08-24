@@ -10,7 +10,7 @@
 </style>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>수강신청 설명 :: No.M University</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

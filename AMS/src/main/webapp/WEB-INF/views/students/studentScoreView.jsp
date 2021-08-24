@@ -82,7 +82,14 @@
 					<tr id = "resultBody">
 						<th id = "getLyear">${sc.lyear }</th>
 						<th id = "getTerm">${sc.term }</th>
-						<th id = "getTotal">${sc.total }</th>
+						<c:choose>
+							<c:when test = "${sc.evalcheck ne 0}"> 
+								<th id = "getTotal">${sc.total }</th>
+							</c:when>
+							<c:otherwise>
+								<th id = "getTotal" colspan = "3">강의평가 진행 요망</th>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</tbody>
 			</table>
@@ -256,13 +263,27 @@
     			term : term
     		},
     		success: function(result) {
-    			if (result != '') {
+    			
+    			if (result.lyear == undefined) {
+    				$('#resultBody').append(
+       	    			$("<th colspan = '3'>" + '기간이 잘못 설정되었습니다' + '</th>')
+        	    	);
+    				return false;
+    			} 
+    			
+    			if (result != '' && result.evalcheck != 0) {
 	    			$('#resultBody').append(
 	    				$("<th>" + result.lyear + '</th>'),
 	    				$("<th>" + result.term + '</th>'),
 	    				$("<th>" + result.total + '</th>')
 	    			);
-    			} 
+	    			return false;
+    			} else {
+    				$('#resultBody').append(
+   	    				$("<th colspan = '3'>" + '강의평가 진행 요망' + '</th>')
+    	    		);
+    				return false;
+    			}
     			
     		},
     		error: function(err) {

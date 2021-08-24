@@ -188,7 +188,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 												<option value="4">4</option>
 											</select>
 										</td>
-						<th>전공</th>		<td colspan="2">
+						<th>구분</th>		<td colspan="2">
 												<input type="radio" id= "all" name="division" value="" checked />
 													<label for ="all">전체</label>
 												<input type="radio" id="gyo" name="division" value="교양" />
